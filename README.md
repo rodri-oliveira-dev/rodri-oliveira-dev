@@ -12,7 +12,7 @@
 [![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=rodri-oliveira-dev&layout=compact)](https://github.com/anuraghazra/github-readme-stats)
 
 
-- Thanks for visiting. 
+## Thanks for visiting. 
 
 <i>“A bug is never just a mistake. It represents something bigger. An error of thinking that makes you who you are.”
 ― Mr Robot</i>
