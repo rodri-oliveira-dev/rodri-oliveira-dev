@@ -9,7 +9,7 @@
 
 ## :triangular_flag_on_post: Technical skills
 
-[![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=rodri-oliveira-dev&layout=compact)](https://github.com/anuraghazra/github-readme-stats)
+[![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=rodri-oliveira-dev&layout=compact&theme=dark)](https://github.com/anuraghazra/github-readme-stats)
 
 
 ## Thanks for visiting. 
