@@ -1,18 +1,18 @@
 # :pushpin: Welcome!
-## I'm Rodrigo de Oliveira! Let me present a little about myself ✨
+## Meu nome é Rodrigo de Oliveira! Um pouco sobre mim ✨
 
-- Software engineer :robot:
+- Sou engenheiro de Software Senior  :robot:
 
-- I love :smiley_cat:, :coffee: and :books: . 
+- Eu amor :smiley_cat:, :coffee: e :books: . 
 
-- Lover of Technology and coding :heart:
+- Apaixonado por codificação :heart:
 
-## :triangular_flag_on_post: Technical skills
+## :triangular_flag_on_post: Um pouco sobre meus conhecimentos técnicos
 
 [![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=rodri-oliveira-dev&layout=compact&theme=dark)](https://github.com/anuraghazra/github-readme-stats)
 
 
-## Thanks for visiting. 
+## Obrigado pela visita. 
 
 <i>“A bug is never just a mistake. It represents something bigger. An error of thinking that makes you who you are.”
 ― Mr Robot</i>
