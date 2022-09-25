@@ -3,7 +3,7 @@
 
 - Sou engenheiro de Software Senior  :robot:
 
-- Eu amor :smiley_cat:, :coffee: e :books: . 
+- Apaixonado por :smiley_cat:, :coffee: e :books: . 
 
 - Apaixonado por codificação :heart:
 
