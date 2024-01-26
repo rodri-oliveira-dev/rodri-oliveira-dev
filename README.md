@@ -1,23 +1,21 @@
-👋 Olá, pessoal do GitHub! Aqui é um Desenvolvedor Sênior com mais de 20 anos de jornada no fascinante mundo da tecnologia. Adoro criar soluções web criativas, aplicativos móveis e APIs REST que são tão confiáveis quanto seu café da manhã. Minhas ferramentas favoritas? ASP.NET, Angular, React, Django, e claro, muito de C#, Kotlin, NodeJs, TypeScript e Python.
+👋 Hello, GitHub folks! Here's a Senior Developer with over 20 years in the fascinating world of technology. I love creating creative web solutions, mobile apps, and REST APIs that are as reliable as your morning coffee. My favorite tools? ASP.NET, Angular, React, Django, and of course, a lot of C#, Kotlin, NodeJs, TypeScript, and Python.
 
-📚 Além do mundo da tecnologia, sou um estudante de filosofia, sempre explorando as grandes questões do mundo e como elas se entrelaçam com a inovação tecnológica. A filosofia me ajuda a pensar fora da caixa e trazer uma perspectiva única para o desenvolvimento de software.
+📚 Beyond the world of technology, I am a student of philosophy, always exploring the big questions of the world and how they intertwine with technological innovation. Philosophy helps me to think outside the box and bring a unique perspective to software development.
 
-🌐 Na AWS, eu gosto de brincar com a nuvem para fazer soluções que não só escalam bem, mas também são super seguras. Sou um entusiasta de arquitetura de sistemas e sempre em busca de código bem feito e elegante.
+🌐 At AWS, I enjoy playing with the cloud to create solutions that not only scale well but are also super secure. I am an enthusiast of system architecture and always in search of well-made and elegant code.
 
-🤹‍♂️ Sou um veterano dos métodos ágeis e um mestre Scrum. Minha abordagem é sempre resolver problemas com um pensamento crítico e criativo. E claro, não esqueço dos testes - desde unitários até funcionais, para garantir que tudo esteja nos trinques!
+🤹‍♂️ I'm a veteran of agile methods and a Scrum master. My approach is always to solve problems with critical and creative thinking. And of course, I don't forget about testing - from unit to functional, to ensure that everything is top-notch!
 
-☕ Além de tecnologia e filosofia, sou um grande apreciador de café. Acredito que um bom café é o combustível perfeito para a criatividade e as longas sessões de codificação. Seja discutindo ideias ou depurando códigos, você sempre me encontrará com uma xícara de café por perto.
+☕ Besides technology and philosophy, I am a great coffee connoisseur. I believe that a good coffee is the perfect fuel for creativity and long coding sessions. Whether discussing ideas or debugging code, you'll always find me with a cup of coffee nearby.
 
-📈 Com experiência em vários setores, como educação, automotivo e financeiro, estou sempre pronto para novos desafios e aprendizados, mantendo a excelência no que faço. Acredito muito no poder da colaboração e comunicação efetiva para o sucesso do time.
+📈 With experience in various sectors, such as education, automotive, and finance, I am always ready for new challenges and learning, maintaining excellence in what I do. I strongly believe in the power of collaboration and effective communication for the success of the team.
 
-🚀 Sou movido pela paixão em tecnologia e sempre em busca de me aprimorar. Aqui no GitHub, estou sempre pronto para novas aventuras e desafios. Vamos codar!
+🚀 Driven by passion in technology and always in pursuit of improvement, here on GitHub, I'm always ready for new adventures and challenges. Let's code!
 
-## :triangular_flag_on_post: Um pouco sobre meus conhecimentos técnicos
+## :triangular_flag_on_post: A little about my technical knowledge
 
 [![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=rodri-oliveira-dev&layout=compact&theme=dark)](https://github.com/anuraghazra/github-readme-stats)
 
-
-## Obrigado pela visita. 
 
 <i>“A bug is never just a mistake. It represents something bigger. An error of thinking that makes you who you are.”
 ― Mr Robot</i>
