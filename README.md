@@ -1,16 +1,18 @@
-👋 Hello, GitHub folks! Here's a Senior Developer with over 20 years in the fascinating world of technology. I love creating creative web solutions, mobile apps, and REST APIs that are as reliable as your morning coffee. My favorite tools? ASP.NET, Angular, React, Django, and of course, a lot of C#, Kotlin, NodeJs, TypeScript, and Python.
+👋 Olá, pessoal do GitHub! Sou um Desenvolvedor Sênior com mais de 20 anos de experiência no fascinante mundo da tecnologia. Especializo-me em criar soluções web inovadoras, aplicativos móveis e APIs REST tão confiáveis quanto seu café da manhã. Minhas ferramentas de preferência incluem ASP.NET, Angular, React, Django e, naturalmente, C#, Kotlin, NodeJs, TypeScript e Python.
 
-📚 Beyond the world of technology, I am a student of philosophy, always exploring the big questions of the world and how they intertwine with technological innovation. Philosophy helps me to think outside the box and bring a unique perspective to software development.
+💻 Atuo com C# desde 2005 e, assim como a linguagem, amadureci muito ao longo dos anos. Minha jornada com C# me permitiu desenvolver habilidades avançadas e uma profunda compreensão das melhores práticas e padrões de desenvolvimento.
 
-🌐 At AWS, I enjoy playing with the cloud to create solutions that not only scale well but are also super secure. I am an enthusiast of system architecture and always in search of well-made and elegant code.
+📚 Além do universo tecnológico, sou um estudioso de filosofia, sempre explorando as grandes questões do mundo e como elas se entrelaçam com a inovação tecnológica. A filosofia me ajuda a pensar de maneira criativa e trazer uma perspectiva única ao desenvolvimento de software.
 
-🤹‍♂️ I'm a veteran of agile methods and a Scrum master. My approach is always to solve problems with critical and creative thinking. And of course, I don't forget about testing - from unit to functional, to ensure that everything is top-notch!
+🌐 Na AWS, trabalho para criar soluções na nuvem que não só sejam escaláveis, mas também altamente seguras. Tenho grande interesse em arquitetura de sistemas e busco constantemente código de alta qualidade e elegância.
 
-☕ Besides technology and philosophy, I am a great coffee connoisseur. I believe that a good coffee is the perfect fuel for creativity and long coding sessions. Whether discussing ideas or debugging code, you'll always find me with a cup of coffee nearby.
+🤹‍♂️ Sou um praticante experiente de métodos ágeis e Scrum Master. Minha abordagem foca na resolução de problemas com pensamento crítico e criativo. Além disso, valorizo muito a prática de testes, desde unitários até funcionais, para garantir a excelência em nossas entregas.
 
-📈 With experience in various sectors, such as education, automotive, and finance, I am always ready for new challenges and learning, maintaining excellence in what I do. I strongly believe in the power of collaboration and effective communication for the success of the team.
+☕ Além de minha paixão por tecnologia e filosofia, sou um grande apreciador de café. Acredito que um bom café é essencial para alimentar a criatividade e sustentar longas sessões de codificação. Seja discutindo ideias ou depurando código, uma xícara de café está sempre ao meu lado.
 
-🚀 Driven by passion in technology and always in pursuit of improvement, here on GitHub, I'm always ready for new adventures and challenges. Let's code!
+📈 Com experiência em diversos setores, incluindo educação, automotivo e financeiro, estou sempre pronto para enfrentar novos desafios e aprender continuamente, mantendo altos padrões de excelência em meu trabalho. Acredito firmemente no poder da colaboração e da comunicação eficaz para o sucesso da equipe.
+
+🚀 Movido pela paixão pela tecnologia e pela busca contínua por aprimoramento, estou sempre pronto para novas aventuras e desafios aqui no GitHub. Vamos codificar!
 
 ## :triangular_flag_on_post: A little about my technical knowledge
 
