@@ -6,7 +6,7 @@
 
 🌐 Na AWS, trabalho para criar soluções na nuvem que não só sejam escaláveis, mas também altamente seguras. Tenho grande interesse em arquitetura de sistemas e busco constantemente código de alta qualidade e elegância.
 
-🤹‍♂️ Sou um praticante experiente de métodos ágeis e Scrum Master. Minha abordagem foca na resolução de problemas com pensamento crítico e criativo. Além disso, valorizo muito a prática de testes, desde unitários até funcionais, para garantir a excelência em nossas entregas.
+🤹‍♂️ Sou um praticante experiente de métodos ágeis. Minha abordagem foca na resolução de problemas com pensamento crítico e criativo. Além disso, valorizo muito a prática de testes, desde unitários até funcionais, para garantir a excelência em nossas entregas.
 
 ☕ Além de minha paixão por tecnologia e filosofia, sou um grande apreciador de café. Acredito que um bom café é essencial para alimentar a criatividade e sustentar longas sessões de codificação. Seja discutindo ideias ou depurando código, uma xícara de café está sempre ao meu lado.
 
