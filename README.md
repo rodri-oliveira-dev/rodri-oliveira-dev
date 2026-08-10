@@ -29,6 +29,28 @@ operacionais.
 
 ---
 
+### [Dapper.TypedParameters](https://github.com/rodri-oliveira-dev/Dapper.TypedParameters)
+
+Biblioteca .NET para declarar explicitamente os tipos de parâmetros SQL Server
+utilizados pelo Dapper, usando `Microsoft.Data.SqlClient`.
+
+O projeto permite controlar metadados como tipo SQL, tamanho, precisão, escala
+e direção dos parâmetros quando o schema esperado é conhecido, reduzindo a
+dependência da inferência automática feita pelo provider. Inclui suporte a
+strings, tipos numéricos, binários, temporais, parâmetros de saída e
+Table-Valued Parameters (TVPs).
+
+O pacote é distribuído no NuGet como `TypedParameters.Dapper.SqlServer`, com
+suporte a .NET 8 e .NET 10, testes de integração reais com SQL Server,
+validação de compatibilidade da API, SourceLink e publicação protegida por
+Trusted Publishing via GitHub Actions.
+
+**Principais tecnologias e práticas:**  
+`.NET 8` · `.NET 10` · `Dapper` · `Microsoft.Data.SqlClient` · `SQL Server`  
+`NuGet` · `Testcontainers` · `SourceLink` · `GitHub Actions`
+
+---
+
 ### [Dapper FluentMap](https://github.com/rodri-oliveira-dev/Dapper-FluentMap)
 
 Biblioteca para configurar de maneira fluente o mapeamento entre objetos .NET
