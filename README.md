@@ -102,20 +102,6 @@ conforme as necessidades de cada solução.
 `.NET` · `C#` · `Roslyn` · `ASP.NET Core` · `DDD` · `NSubstitute`  
 `FluentAssertions` · `GitVersion` · `GitHub Actions`
 
-## Contribuições Open Source
-
-### [DDD Crew — Welcome to DDD](https://github.com/ddd-crew/welcome-to-ddd/pull/11)
-
-Contribuição de documentação em português brasileiro aceita e incorporada ao
-projeto da DDD Crew, adicionando um README pt-BR e sua navegação a partir da
-documentação principal.
-
-### [DDD Crew — DDD Starter Modelling Process](https://github.com/ddd-crew/ddd-starter-modelling-process/pull/75)
-
-Contribuição de manutenção aceita e incorporada à documentação brasileira já
-existente, sincronizando terminologia e referências com o conteúdo atual do
-projeto.
-
 ## Conteúdo e comunidade
 
 ### [.NET Interview Questions — PT-BR](https://github.com/rodri-oliveira-dev/dotnet_interview_questions_pt_br)
