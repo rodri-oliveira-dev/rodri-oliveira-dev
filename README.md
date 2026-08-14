@@ -29,6 +29,26 @@ operacionais.
 
 ---
 
+### [ComplexityAnalysis.Analyzers](https://github.com/rodri-oliveira-dev/complexity-analyzers/tree/main/analyzer)
+
+Analyzer Roslyn para expor estimativas de complexidade algorítmica de código
+C# durante a compilação e em IDEs, mantendo a análise como uma fronteira de
+pacote independente.
+
+O projeto implementa um modelo de Big-O, análise intra e interprocedural,
+mapeamentos semânticos para operações selecionadas de BCL e LINQ e resolução
+limitada de recorrências e recursão direta. Inclui diagnósticos acionáveis para
+padrões como buscas lineares, materialização e ordenação dentro de iterações,
+chamadas dependentes de entrada em loops e crescimento recursivo exponencial.
+A análise adota uma abordagem conservadora: quando não há evidência suficiente,
+o resultado permanece `Unknown` em vez de assumir uma complexidade incorreta.
+
+**Principais tecnologias e práticas:**  
+`.NET` · `C#` · `Roslyn Analyzers` · `Static Analysis` · `Big-O`  
+`Interprocedural Analysis` · `Master Theorem` · `Akra-Bazzi`
+
+---
+
 ### [Dapper.TypedParameters](https://github.com/rodri-oliveira-dev/Dapper.TypedParameters)
 
 Biblioteca .NET para declarar explicitamente os tipos de parâmetros SQL Server
@@ -93,6 +113,15 @@ Domain-Driven Design, backend, cloud e engenharia de software.
 - [Artigos e publicações](https://linktr.ee/rodri.oliveira.dev)
 - [LinkedIn](https://www.linkedin.com/in/rodri-oliveira-dev)
 
+## Atividade no GitHub
+
+<p align="left">
+  <img
+    src="https://github-stats-extended.vercel.app/api?username=rodri-oliveira-dev&show_icons=true&theme=transparent&locale=pt-br&show=prs_merged,prs_reviewed,reviews&hide_border=true"
+    alt="Estatísticas do GitHub de Rodrigo de Oliveira"
+  />
+</p>
+
 ## Áreas de interesse
 
 - Arquitetura de software e sistemas distribuídos
@@ -101,14 +130,14 @@ Domain-Driven Design, backend, cloud e engenharia de software.
 - Integrações e APIs
 - Observabilidade e resiliência
 - Modernização de aplicações
-- Qualidade e automação de políticas arquiteturais
+- Análise estática, qualidade e automação de políticas arquiteturais
 - Desenvolvimento e manutenção de bibliotecas open source
 
 ## Tecnologias e práticas
 
 `.NET` · `C#` · `GCP` · `AWS` · `Docker` · `Kubernetes` · `Terraform`  
 `PostgreSQL` · `SQL Server` · `Redis` · `BigQuery` · `Kafka` · `Pub/Sub`  
-`DDD` · `Event-Driven Architecture` · `Clean Architecture` · `CI/CD`
+`Roslyn` · `DDD` · `Event-Driven Architecture` · `Clean Architecture` · `CI/CD`
 
 ## Contato
 
