@@ -98,20 +98,6 @@ solution's needs.
 `.NET` · `C#` · `Roslyn` · `ASP.NET Core` · `DDD` · `NSubstitute`  
 `FluentAssertions` · `GitVersion` · `GitHub Actions`
 
-## Open Source Contributions
-
-### [DDD Crew — Welcome to DDD](https://github.com/ddd-crew/welcome-to-ddd/pull/11)
-
-Brazilian Portuguese documentation contribution accepted and merged into the
-DDD Crew project, adding a pt-BR README and linking it from the main
-documentation.
-
-### [DDD Crew — DDD Starter Modelling Process](https://github.com/ddd-crew/ddd-starter-modelling-process/pull/75)
-
-Maintenance contribution accepted and merged into the existing Brazilian
-Portuguese documentation, synchronizing terminology and references with the
-current source material.
-
 ## Content and Community
 
 ### [.NET Interview Questions — PT-BR](https://github.com/rodri-oliveira-dev/dotnet_interview_questions_pt_br)
