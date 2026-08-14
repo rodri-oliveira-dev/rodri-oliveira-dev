@@ -1,3 +1,5 @@
+**Português** | [English](README.en.md)
+
 # Rodrigo de Oliveira
 
 **Software Architect | Distributed Systems | Cloud | .NET | DDD**
@@ -100,6 +102,20 @@ conforme as necessidades de cada solução.
 `.NET` · `C#` · `Roslyn` · `ASP.NET Core` · `DDD` · `NSubstitute`  
 `FluentAssertions` · `GitVersion` · `GitHub Actions`
 
+## Contribuições Open Source
+
+### [DDD Crew — Welcome to DDD](https://github.com/ddd-crew/welcome-to-ddd/pull/11)
+
+Contribuição de documentação em português brasileiro aceita e incorporada ao
+projeto da DDD Crew, adicionando um README pt-BR e sua navegação a partir da
+documentação principal.
+
+### [DDD Crew — DDD Starter Modelling Process](https://github.com/ddd-crew/ddd-starter-modelling-process/pull/75)
+
+Contribuição de manutenção aceita e incorporada à documentação brasileira já
+existente, sincronizando terminologia e referências com o conteúdo atual do
+projeto.
+
 ## Conteúdo e comunidade
 
 ### [.NET Interview Questions — PT-BR](https://github.com/rodri-oliveira-dev/dotnet_interview_questions_pt_br)
@@ -110,8 +126,10 @@ e C#, organizada para apoiar estudos, entrevistas e revisão de fundamentos.
 Também escrevo sobre arquitetura de software, sistemas distribuídos,
 Domain-Driven Design, backend, cloud e engenharia de software.
 
-- [Artigos e publicações](https://linktr.ee/rodri.oliveira.dev)
+- [Medium — artigos técnicos](https://medium.com/@rodrigodotnet)
+- [NuGet — pacotes .NET publicados](https://www.nuget.org/profiles/rodri-oliveira-dev)
 - [LinkedIn](https://www.linkedin.com/in/rodri-oliveira-dev)
+- [Links profissionais](https://linktr.ee/rodri.oliveira.dev)
 
 ## Atividade no GitHub
 
@@ -122,24 +140,17 @@ Domain-Driven Design, backend, cloud e engenharia de software.
   />
 </p>
 
-## Áreas de interesse
+## Foco técnico
 
-- Arquitetura de software e sistemas distribuídos
-- Domain-Driven Design
-- Arquitetura orientada a eventos
-- Integrações e APIs
-- Observabilidade e resiliência
-- Modernização de aplicações
-- Análise estática, qualidade e automação de políticas arquiteturais
-- Desenvolvimento e manutenção de bibliotecas open source
-
-## Tecnologias e práticas
-
-`.NET` · `C#` · `GCP` · `AWS` · `Docker` · `Kubernetes` · `Terraform`  
-`PostgreSQL` · `SQL Server` · `Redis` · `BigQuery` · `Kafka` · `Pub/Sub`  
-`Roslyn` · `DDD` · `Event-Driven Architecture` · `Clean Architecture` · `CI/CD`
+- **Arquitetura:** sistemas distribuídos, Domain-Driven Design, arquitetura orientada a eventos, Clean Architecture, APIs e integrações
+- **Backend & .NET:** C#, ASP.NET Core, Roslyn, analyzers, source generators e bibliotecas reutilizáveis
+- **Cloud & Plataforma:** GCP, AWS, Docker, Kubernetes, Terraform e CI/CD
+- **Dados & Mensageria:** PostgreSQL, SQL Server, Redis, BigQuery, Kafka e Pub/Sub
+- **Engenharia:** observabilidade, resiliência, testes, análise estática e automação de políticas arquiteturais
 
 ## Contato
 
 - [LinkedIn](https://www.linkedin.com/in/rodri-oliveira-dev)
+- [Medium](https://medium.com/@rodrigodotnet)
+- [NuGet](https://www.nuget.org/profiles/rodri-oliveira-dev)
 - [Links profissionais](https://linktr.ee/rodri.oliveira.dev)
