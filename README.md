@@ -117,7 +117,7 @@ Domain-Driven Design, backend, cloud e engenharia de software.
 
 <p align="left">
   <img
-    src="https://github-stats-extended.vercel.app/api?username=rodri-oliveira-dev&show_icons=true&theme=transparent&locale=pt-br&show=prs_merged,prs_reviewed,reviews&hide_border=true"
+    src="https://github-stats-extended.vercel.app/api?username=rodri-oliveira-dev&show_icons=true&theme=transparent&locale=en&show=prs_merged,prs_reviewed,reviews&hide_border=true"
     alt="Estatísticas do GitHub de Rodrigo de Oliveira"
   />
 </p>
