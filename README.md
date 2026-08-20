@@ -31,6 +31,25 @@ operacionais.
 
 ---
 
+### [DotNetRepoInspector](https://github.com/rodri-oliveira-dev/DotNetRepoInspector)
+
+Ferramenta .NET para inspecionar e classificar repositórios .NET a partir de
+metadados avaliados pelo MSBuild, gerando uma visão determinística e legível
+por máquina para CI/CD, automação e governança arquitetural.
+
+O projeto descobre projetos SDK-style, coleta frameworks, SDKs, tipo de saída,
+metadados de testes, referências entre projetos e informações do Git, e
+classifica projetos como Web, Worker, Console, Library, Test ou Unknown sem
+realizar análise do código-fonte. Pode ser utilizado como .NET Tool ou
+Composite GitHub Action e oferece persistência opcional de snapshots via
+HTTP/webhook.
+
+**Principais tecnologias e práticas:**  
+`.NET 10` · `C#` · `MSBuild` · `Git` · `GitHub Actions`  
+`CLI` · `Metadata Analysis` · `Architecture Governance` · `CI/CD`
+
+---
+
 ### [ComplexityAnalysis.Analyzers](https://github.com/rodri-oliveira-dev/complexity-analyzers/tree/main/analyzer)
 
 Analyzer Roslyn para expor estimativas de complexidade algorítmica de código
