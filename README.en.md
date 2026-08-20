@@ -29,6 +29,24 @@ automated tests, ADRs, SDD specifications, and operational runbooks.
 
 ---
 
+### [DotNetRepoInspector](https://github.com/rodri-oliveira-dev/DotNetRepoInspector)
+
+A .NET tool for inspecting and classifying .NET repositories from evaluated
+MSBuild metadata, producing a deterministic, machine-readable view for CI/CD,
+automation, and architecture governance.
+
+The project discovers SDK-style projects, collects frameworks, SDKs, output
+type, test metadata, project references, and Git information, and classifies
+projects as Web, Worker, Console, Library, Test, or Unknown without source-code
+analysis. It can be used as a .NET Tool or Composite GitHub Action and supports
+optional HTTP/webhook snapshot persistence.
+
+**Main technologies and practices:**  
+`.NET 10` · `C#` · `MSBuild` · `Git` · `GitHub Actions`  
+`CLI` · `Metadata Analysis` · `Architecture Governance` · `CI/CD`
+
+---
+
 ### [ComplexityAnalysis.Analyzers](https://github.com/rodri-oliveira-dev/complexity-analyzers/tree/main/analyzer)
 
 A Roslyn analyzer that exposes algorithmic complexity estimates for C# code
