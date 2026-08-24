@@ -2,127 +2,55 @@
 
 # Rodrigo de Oliveira
 
-**Software Architect | Distributed Systems | Cloud | .NET | DDD**
+**Software Architect | .NET | Distributed Systems | Cloud | DDD | Engineering Enablement**
 
 I'm a software architect with more than 20 years of experience building,
 modernizing, and evolving enterprise systems.
 
-I work mainly with distributed systems, backend, cloud, and integrations,
-turning business needs and quality attributes into implementable technical
-decisions. I aim to keep architecture close to the code, operations, and
-engineering teams.
+I work mainly with distributed systems, .NET backend, cloud, and integrations,
+turning business needs, quality attributes, and operational constraints into
+implementable technical decisions.
+
+My view of architecture is pragmatic: an architectural decision needs to hold
+up in code, CI/CD, observability, security, and production operations. That is
+why the projects I maintain here combine executable software, libraries,
+engineering automation, static analysis, architecture documentation, and tools
+that improve the developer experience.
 
 ## Featured Projects
 
-### [POC Arquitetura](https://github.com/rodri-oliveira-dev/poc-arquitetura)
+| Project | Focus |
+| --- | --- |
+| **[POC Arquitetura](https://github.com/rodri-oliveira-dev/poc-arquitetura)** | Educational .NET microservices architecture lab covering DDD, bounded contexts, Kafka, Outbox/Inbox, idempotency, sagas, Keycloak, OpenTelemetry, ADRs, SDD specifications, and operational runbooks. |
+| **[.NET Library Template](https://github.com/rodri-oliveira-dev/dotnet-library-template)** | Opinionated baseline for .NET 10 libraries with reproducible builds, testing, NuGet packaging, quality analysis, CodeQL, Dependency Review, versioning, and automated releases. |
+| **[Brazilian.PrimitivesTypes](https://github.com/rodri-oliveira-dev/brazilian-primitives)** | .NET library of immutable value objects for CPF, CNPJ, CEP, Pix keys, phone numbers, documents, and other Brazilian identifiers, with deterministic normalization and optional EF Core + SQL Server integration. |
+| **[DotNetRepoInspector](https://github.com/rodri-oliveira-dev/DotNetRepoInspector)** | Tool for inspecting .NET repositories from evaluated MSBuild metadata and producing a deterministic view for CI/CD, automation, and architecture governance. |
+| **[Dapper.TypedParameters](https://github.com/rodri-oliveira-dev/Dapper.TypedParameters)** | Library for explicitly declaring SQL Server parameter metadata in Dapper, reducing reliance on provider inference and covering scenarios such as precision, scale, output parameters, and TVPs. |
+| **[ComplexityAnalysis.Analyzers](https://github.com/rodri-oliveira-dev/complexity-analyzers/tree/main/analyzer)** | Roslyn analyzer for estimating algorithmic complexity in C# code, including intra/interprocedural analysis, BCL/LINQ operations, and limited recurrence solving. |
+| **[.NET Copilot Code Review Skills](https://github.com/rodri-oliveira-dev/dotnet-copilot-code-review-skills)** | Reusable instructions and agent skills designed to make .NET pull-request reviews focus on correctness, security, performance, concurrency, persistence, testing, APIs, architecture, MSBuild, and NuGet. |
 
-An educational .NET microservices architecture lab built to demonstrate
-architectural concepts through executable code and documented decisions.
+## Other Projects and Resources
 
-The project covers DDD, Clean Architecture, bounded contexts, Kafka, Outbox,
-Inbox, idempotency, sagas, Keycloak-based security, observability, contracts,
-automated tests, ADRs, SDD specifications, and operational runbooks.
+I also maintain projects focused on libraries, engineering governance, and
+software modeling, including:
 
-**Main technologies and practices:**  
-`.NET` · `PostgreSQL` · `Kafka` · `Docker` · `Keycloak` · `OpenTelemetry`  
-`DDD` · `Outbox` · `Inbox` · `Sagas` · `ADRs` · `SDD`
+- [Dapper FluentMap](https://github.com/rodri-oliveira-dev/Dapper-FluentMap) — evolution of fluent Dapper mapping with conventions, immutable objects, analyzers, and source generators;
+- [CSF.Analyzers](https://github.com/rodri-oliveira-dev/CSF.Analyzers) — Roslyn analyzers that turn contextual engineering policies into automated checks;
+- [Architecture Decision Record](https://github.com/rodri-oliveira-dev/architecture-decision-record) — resources and practices for documenting architectural decisions;
+- [DDD Starter Modelling Process](https://github.com/rodri-oliveira-dev/ddd-starter-modelling-process), [Bounded Context Canvas](https://github.com/rodri-oliveira-dev/bounded-context-canvas), [Context Mapping](https://github.com/rodri-oliveira-dev/context-mapping), and other Domain-Driven Design repositories;
+- [.NET Interview Questions — PT-BR](https://github.com/rodri-oliveira-dev/dotnet_interview_questions_pt_br) — authorized Brazilian Portuguese translation of a collection of 50 .NET and C# questions and answers;
+- [System Design Primer — PT-BR](https://github.com/rodri-oliveira-dev/system-design-primer-pt-br) — Portuguese-language material for studying system design.
 
----
+## Technical Focus
 
-### [DotNetRepoInspector](https://github.com/rodri-oliveira-dev/DotNetRepoInspector)
-
-A .NET tool for inspecting and classifying .NET repositories from evaluated
-MSBuild metadata, producing a deterministic, machine-readable view for CI/CD,
-automation, and architecture governance.
-
-The project discovers SDK-style projects, collects frameworks, SDKs, output
-type, test metadata, project references, and Git information, and classifies
-projects as Web, Worker, Console, Library, Test, or Unknown without source-code
-analysis. It can be used as a .NET Tool or Composite GitHub Action and supports
-optional HTTP/webhook snapshot persistence.
-
-**Main technologies and practices:**  
-`.NET 10` · `C#` · `MSBuild` · `Git` · `GitHub Actions`  
-`CLI` · `Metadata Analysis` · `Architecture Governance` · `CI/CD`
-
----
-
-### [ComplexityAnalysis.Analyzers](https://github.com/rodri-oliveira-dev/complexity-analyzers/tree/main/analyzer)
-
-A Roslyn analyzer that exposes algorithmic complexity estimates for C# code
-during compilation and in IDEs, designed as an independent package boundary.
-
-The project implements a Big-O model, intra- and interprocedural analysis,
-semantic mappings for selected BCL and LINQ operations, and limited recurrence
-and direct-recursion solving. It includes actionable diagnostics for patterns
-such as linear lookups, materialization and ordering inside iterations,
-input-dependent calls inside loops, and exponential recursive growth. The
-analysis is intentionally conservative: when there is not enough evidence, it
-returns `Unknown` rather than assuming an incorrect complexity.
-
-**Main technologies and practices:**  
-`.NET` · `C#` · `Roslyn Analyzers` · `Static Analysis` · `Big-O`  
-`Interprocedural Analysis` · `Master Theorem` · `Akra-Bazzi`
-
----
-
-### [Dapper.TypedParameters](https://github.com/rodri-oliveira-dev/Dapper.TypedParameters)
-
-A .NET library for explicitly declaring SQL Server parameter types used by
-Dapper with `Microsoft.Data.SqlClient`.
-
-The project provides control over metadata such as SQL type, size, precision,
-scale, and parameter direction when the expected schema is known, reducing
-reliance on provider type inference. It supports strings, numeric, binary, and
-temporal types, output parameters, and Table-Valued Parameters (TVPs).
-
-The package is distributed on NuGet as `TypedParameters.Dapper.SqlServer`,
-supporting .NET 8 and .NET 10, with real SQL Server integration tests, API
-compatibility validation, SourceLink, and Trusted Publishing through GitHub
-Actions.
-
-**Main technologies and practices:**  
-`.NET 8` · `.NET 10` · `Dapper` · `Microsoft.Data.SqlClient` · `SQL Server`  
-`NuGet` · `Testcontainers` · `SourceLink` · `GitHub Actions`
-
----
-
-### [Dapper FluentMap](https://github.com/rodri-oliveira-dev/Dapper-FluentMap)
-
-A library for fluently configuring mappings between .NET objects and database
-columns used by Dapper while keeping persistence concerns outside domain
-models.
-
-The project evolves Dapper.FluentMap with support for conventions, naming
-policies, immutable objects, value objects, nested objects, mapping profiles,
-validation, Roslyn analyzers, and source generators.
-
-**Main technologies and practices:**  
-`.NET` · `C#` · `Dapper` · `Roslyn Analyzers` · `Source Generators`  
-`Native AOT` · `NuGet` · `GitHub Actions`
-
----
-
-### [CSF.Analyzers](https://github.com/rodri-oliveira-dev/CSF.Analyzers)
-
-A set of Roslyn analyzers that turns contextual engineering policies into
-automated compile-time checks.
-
-Rules are organized into independent packages for architecture, operational
-reliability, and test quality, allowing gradual adoption according to each
-solution's needs.
-
-**Main technologies and practices:**  
-`.NET` · `C#` · `Roslyn` · `ASP.NET Core` · `DDD` · `NSubstitute`  
-`FluentAssertions` · `GitVersion` · `GitHub Actions`
+- **Architecture:** distributed systems, Domain-Driven Design, event-driven architecture, Clean Architecture, APIs, and integrations;
+- **Backend & .NET:** C#, ASP.NET Core, reusable libraries, Roslyn analyzers, source generators, MSBuild, and NuGet;
+- **Cloud & Platform:** GCP, AWS, Docker, Kubernetes, Terraform, and CI/CD;
+- **Data & Messaging:** PostgreSQL, SQL Server, Redis, BigQuery, Kafka, and Pub/Sub;
+- **Quality & Operations:** observability, resilience, security, testing, static analysis, supply-chain security, and engineering policy automation;
+- **Developer Experience:** templates, repository automation, architecture governance, and pragmatic use of AI in code review and engineering workflows.
 
 ## Content and Community
-
-### [.NET Interview Questions — PT-BR](https://github.com/rodri-oliveira-dev/dotnet_interview_questions_pt_br)
-
-An authorized Brazilian Portuguese translation of a collection of 50 .NET and
-C# questions and answers, organized to support study, interviews, and
-fundamentals review.
 
 I also write about software architecture, distributed systems, Domain-Driven
 Design, backend, cloud, and software engineering.
@@ -140,14 +68,6 @@ Design, backend, cloud, and software engineering.
     alt="Rodrigo de Oliveira's GitHub statistics"
   />
 </p>
-
-## Technical Focus
-
-- **Architecture:** distributed systems, Domain-Driven Design, event-driven architecture, Clean Architecture, APIs, and integrations
-- **Backend & .NET:** C#, ASP.NET Core, Roslyn, analyzers, source generators, and reusable libraries
-- **Cloud & Platform:** GCP, AWS, Docker, Kubernetes, Terraform, and CI/CD
-- **Data & Messaging:** PostgreSQL, SQL Server, Redis, BigQuery, Kafka, and Pub/Sub
-- **Engineering:** observability, resilience, testing, static analysis, and architectural policy automation
 
 ## Contact
 
