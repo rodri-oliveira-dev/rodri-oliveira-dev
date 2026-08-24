@@ -2,134 +2,58 @@
 
 # Rodrigo de Oliveira
 
-**Software Architect | Distributed Systems | Cloud | .NET | DDD**
+**Software Architect | .NET | Distributed Systems | Cloud | DDD | Engineering Enablement**
 
-Sou arquiteto de software com mais de 20 anos de experiência no
-desenvolvimento, modernização e evolução de sistemas corporativos.
+Sou arquiteto de software com mais de 20 anos de experiência no desenvolvimento,
+modernização e evolução de sistemas corporativos.
 
-Atuo principalmente com sistemas distribuídos, backend, cloud e integrações,
-transformando necessidades de negócio e atributos de qualidade em decisões
-técnicas implementáveis. Procuro manter a arquitetura próxima do código,
-da operação e dos times de engenharia.
+Atuo principalmente com sistemas distribuídos, backend .NET, cloud e integrações,
+transformando necessidades de negócio, atributos de qualidade e restrições
+operacionais em decisões técnicas implementáveis.
+
+Minha visão de arquitetura é pragmática: uma decisão arquitetural precisa
+sobreviver ao código, ao CI/CD, à observabilidade, à segurança e à operação.
+Por isso, os projetos que mantenho aqui combinam software executável, bibliotecas,
+automação de engenharia, análise estática, documentação arquitetural e ferramentas
+para melhorar a experiência de desenvolvimento.
 
 ## Projetos em destaque
 
-### [POC Arquitetura](https://github.com/rodri-oliveira-dev/poc-arquitetura)
+| Projeto | Foco |
+| --- | --- |
+| **[POC Arquitetura](https://github.com/rodri-oliveira-dev/poc-arquitetura)** | Laboratório educacional de microserviços em .NET com DDD, bounded contexts, Kafka, Outbox/Inbox, idempotência, sagas, Keycloak, OpenTelemetry, ADRs, especificações SDD e runbooks. |
+| **[.NET Library Template](https://github.com/rodri-oliveira-dev/dotnet-library-template)** | Baseline opinativa para bibliotecas .NET 10 com build reproduzível, testes, empacotamento NuGet, análise de qualidade, CodeQL, Dependency Review, versionamento e release automatizado. |
+| **[Brazilian.PrimitivesTypes](https://github.com/rodri-oliveira-dev/brazilian-primitives)** | Biblioteca .NET de value objects imutáveis para CPF, CNPJ, CEP, Pix, telefones, documentos e outros identificadores brasileiros, com normalização determinística e integração opcional com EF Core + SQL Server. |
+| **[DotNetRepoInspector](https://github.com/rodri-oliveira-dev/DotNetRepoInspector)** | Ferramenta para inspecionar repositórios .NET a partir de metadados avaliados pelo MSBuild e produzir uma visão determinística para CI/CD, automação e governança arquitetural. |
+| **[Dapper.TypedParameters](https://github.com/rodri-oliveira-dev/Dapper.TypedParameters)** | Biblioteca para declarar explicitamente metadados de parâmetros SQL Server no Dapper, reduzindo dependência de inferência do provider e cobrindo cenários como precisão, escala, output parameters e TVPs. |
+| **[ComplexityAnalysis.Analyzers](https://github.com/rodri-oliveira-dev/complexity-analyzers/tree/main/analyzer)** | Analyzer Roslyn para estimar complexidade algorítmica de código C#, incluindo análise intra/interprocedural, operações BCL/LINQ e resolução limitada de recorrências. |
+| **[.NET Copilot Code Review Skills](https://github.com/rodri-oliveira-dev/dotnet-copilot-code-review-skills)** | Instruções e agent skills reutilizáveis para tornar revisões de PRs .NET mais focadas em correção, segurança, performance, concorrência, persistência, testes, APIs, arquitetura, MSBuild e NuGet. |
 
-Laboratório educacional de arquitetura de microserviços em .NET, criado para
-demonstrar conceitos arquiteturais por meio de código executável e decisões
-documentadas.
+## Outros projetos e materiais
 
-O projeto aborda DDD, Clean Architecture, contextos delimitados, Kafka,
-Outbox, Inbox, idempotência, sagas, segurança com Keycloak, observabilidade,
-contratos, testes automatizados, ADRs, especificações SDD e runbooks
-operacionais.
+Também mantenho projetos voltados a bibliotecas, governança técnica e modelagem de
+software, incluindo:
 
-**Principais tecnologias e práticas:**  
-`.NET` · `PostgreSQL` · `Kafka` · `Docker` · `Keycloak` · `OpenTelemetry`  
-`DDD` · `Outbox` · `Inbox` · `Sagas` · `ADRs` · `SDD`
+- [Dapper FluentMap](https://github.com/rodri-oliveira-dev/Dapper-FluentMap) — evolução do mapeamento fluente para Dapper, com convenções, objetos imutáveis, analyzers e source generators;
+- [CSF.Analyzers](https://github.com/rodri-oliveira-dev/CSF.Analyzers) — analyzers Roslyn para transformar políticas contextuais de engenharia em verificações automatizadas;
+- [Architecture Decision Record](https://github.com/rodri-oliveira-dev/architecture-decision-record) — materiais e práticas para registro de decisões arquiteturais;
+- [DDD Starter Modelling Process](https://github.com/rodri-oliveira-dev/ddd-starter-modelling-process), [Bounded Context Canvas](https://github.com/rodri-oliveira-dev/bounded-context-canvas), [Context Mapping](https://github.com/rodri-oliveira-dev/context-mapping) e outros repositórios relacionados a Domain-Driven Design;
+- [.NET Interview Questions — PT-BR](https://github.com/rodri-oliveira-dev/dotnet_interview_questions_pt_br) — tradução autorizada de uma coleção com 50 perguntas e respostas sobre .NET e C#;
+- [System Design Primer — PT-BR](https://github.com/rodri-oliveira-dev/system-design-primer-pt-br) — material em português para estudo de system design.
 
----
+## Foco técnico
 
-### [DotNetRepoInspector](https://github.com/rodri-oliveira-dev/DotNetRepoInspector)
-
-Ferramenta .NET para inspecionar e classificar repositórios .NET a partir de
-metadados avaliados pelo MSBuild, gerando uma visão determinística e legível
-por máquina para CI/CD, automação e governança arquitetural.
-
-O projeto descobre projetos SDK-style, coleta frameworks, SDKs, tipo de saída,
-metadados de testes, referências entre projetos e informações do Git, e
-classifica projetos como Web, Worker, Console, Library, Test ou Unknown sem
-realizar análise do código-fonte. Pode ser utilizado como .NET Tool ou
-Composite GitHub Action e oferece persistência opcional de snapshots via
-HTTP/webhook.
-
-**Principais tecnologias e práticas:**  
-`.NET 10` · `C#` · `MSBuild` · `Git` · `GitHub Actions`  
-`CLI` · `Metadata Analysis` · `Architecture Governance` · `CI/CD`
-
----
-
-### [ComplexityAnalysis.Analyzers](https://github.com/rodri-oliveira-dev/complexity-analyzers/tree/main/analyzer)
-
-Analyzer Roslyn para expor estimativas de complexidade algorítmica de código
-C# durante a compilação e em IDEs, mantendo a análise como uma fronteira de
-pacote independente.
-
-O projeto implementa um modelo de Big-O, análise intra e interprocedural,
-mapeamentos semânticos para operações selecionadas de BCL e LINQ e resolução
-limitada de recorrências e recursão direta. Inclui diagnósticos acionáveis para
-padrões como buscas lineares, materialização e ordenação dentro de iterações,
-chamadas dependentes de entrada em loops e crescimento recursivo exponencial.
-A análise adota uma abordagem conservadora: quando não há evidência suficiente,
-o resultado permanece `Unknown` em vez de assumir uma complexidade incorreta.
-
-**Principais tecnologias e práticas:**  
-`.NET` · `C#` · `Roslyn Analyzers` · `Static Analysis` · `Big-O`  
-`Interprocedural Analysis` · `Master Theorem` · `Akra-Bazzi`
-
----
-
-### [Dapper.TypedParameters](https://github.com/rodri-oliveira-dev/Dapper.TypedParameters)
-
-Biblioteca .NET para declarar explicitamente os tipos de parâmetros SQL Server
-utilizados pelo Dapper, usando `Microsoft.Data.SqlClient`.
-
-O projeto permite controlar metadados como tipo SQL, tamanho, precisão, escala
-e direção dos parâmetros quando o schema esperado é conhecido, reduzindo a
-dependência da inferência automática feita pelo provider. Inclui suporte a
-strings, tipos numéricos, binários, temporais, parâmetros de saída e
-Table-Valued Parameters (TVPs).
-
-O pacote é distribuído no NuGet como `TypedParameters.Dapper.SqlServer`, com
-suporte a .NET 8 e .NET 10, testes de integração reais com SQL Server,
-validação de compatibilidade da API, SourceLink e publicação protegida por
-Trusted Publishing via GitHub Actions.
-
-**Principais tecnologias e práticas:**  
-`.NET 8` · `.NET 10` · `Dapper` · `Microsoft.Data.SqlClient` · `SQL Server`  
-`NuGet` · `Testcontainers` · `SourceLink` · `GitHub Actions`
-
----
-
-### [Dapper FluentMap](https://github.com/rodri-oliveira-dev/Dapper-FluentMap)
-
-Biblioteca para configurar de maneira fluente o mapeamento entre objetos .NET
-e colunas de banco de dados utilizadas pelo Dapper, mantendo preocupações de
-persistência fora dos modelos de domínio.
-
-O projeto evolui o Dapper.FluentMap com suporte a convenções, naming policies,
-objetos imutáveis, value objects, objetos aninhados, perfis de mapeamento,
-validação, analyzers Roslyn e source generators.
-
-**Principais tecnologias e práticas:**  
-`.NET` · `C#` · `Dapper` · `Roslyn Analyzers` · `Source Generators`  
-`Native AOT` · `NuGet` · `GitHub Actions`
-
----
-
-### [CSF.Analyzers](https://github.com/rodri-oliveira-dev/CSF.Analyzers)
-
-Conjunto de analyzers Roslyn para transformar políticas contextuais de
-engenharia em verificações automatizadas durante a compilação.
-
-As regras estão organizadas em pacotes independentes para arquitetura,
-confiabilidade operacional e qualidade de testes, permitindo adoção gradual
-conforme as necessidades de cada solução.
-
-**Principais tecnologias e práticas:**  
-`.NET` · `C#` · `Roslyn` · `ASP.NET Core` · `DDD` · `NSubstitute`  
-`FluentAssertions` · `GitVersion` · `GitHub Actions`
+- **Arquitetura:** sistemas distribuídos, Domain-Driven Design, arquitetura orientada a eventos, Clean Architecture, APIs e integrações;
+- **Backend & .NET:** C#, ASP.NET Core, bibliotecas reutilizáveis, Roslyn analyzers, source generators, MSBuild e NuGet;
+- **Cloud & Plataforma:** GCP, AWS, Docker, Kubernetes, Terraform e CI/CD;
+- **Dados & Mensageria:** PostgreSQL, SQL Server, Redis, BigQuery, Kafka e Pub/Sub;
+- **Qualidade & Operação:** observabilidade, resiliência, segurança, testes, análise estática, supply-chain security e automação de políticas de engenharia;
+- **Developer Experience:** templates, automação de repositórios, governança arquitetural e uso pragmático de IA em code review e workflows de engenharia.
 
 ## Conteúdo e comunidade
 
-### [.NET Interview Questions — PT-BR](https://github.com/rodri-oliveira-dev/dotnet_interview_questions_pt_br)
-
-Tradução autorizada de uma coleção com 50 perguntas e respostas sobre .NET
-e C#, organizada para apoiar estudos, entrevistas e revisão de fundamentos.
-
-Também escrevo sobre arquitetura de software, sistemas distribuídos,
-Domain-Driven Design, backend, cloud e engenharia de software.
+Também escrevo sobre arquitetura de software, sistemas distribuídos, Domain-Driven
+Design, backend, cloud e engenharia de software.
 
 - [Medium — artigos técnicos](https://medium.com/@rodrigodotnet)
 - [NuGet — pacotes .NET publicados](https://www.nuget.org/profiles/rodri-oliveira-dev)
@@ -144,14 +68,6 @@ Domain-Driven Design, backend, cloud e engenharia de software.
     alt="Estatísticas do GitHub de Rodrigo de Oliveira"
   />
 </p>
-
-## Foco técnico
-
-- **Arquitetura:** sistemas distribuídos, Domain-Driven Design, arquitetura orientada a eventos, Clean Architecture, APIs e integrações
-- **Backend & .NET:** C#, ASP.NET Core, Roslyn, analyzers, source generators e bibliotecas reutilizáveis
-- **Cloud & Plataforma:** GCP, AWS, Docker, Kubernetes, Terraform e CI/CD
-- **Dados & Mensageria:** PostgreSQL, SQL Server, Redis, BigQuery, Kafka e Pub/Sub
-- **Engenharia:** observabilidade, resiliência, testes, análise estática e automação de políticas arquiteturais
 
 ## Contato
 
