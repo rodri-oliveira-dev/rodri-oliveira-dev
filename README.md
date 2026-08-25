@@ -66,10 +66,3 @@ Design, backend, cloud e engenharia de software.
     alt="Estatísticas do GitHub de Rodrigo de Oliveira"
   />
 </p>
-
-## Contato
-
-- [LinkedIn](https://www.linkedin.com/in/rodri-oliveira-dev)
-- [Medium](https://medium.com/@rodrigodotnet)
-- [NuGet](https://www.nuget.org/profiles/rodri-oliveira-dev)
-- [Links profissionais](https://linktr.ee/rodri.oliveira.dev)
