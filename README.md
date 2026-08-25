@@ -36,8 +36,6 @@ software, incluindo:
 
 - [Dapper FluentMap](https://github.com/rodri-oliveira-dev/Dapper-FluentMap) — evolução do mapeamento fluente para Dapper, com convenções, objetos imutáveis, analyzers e source generators;
 - [CSF.Analyzers](https://github.com/rodri-oliveira-dev/CSF.Analyzers) — analyzers Roslyn para transformar políticas contextuais de engenharia em verificações automatizadas;
-- [Architecture Decision Record](https://github.com/rodri-oliveira-dev/architecture-decision-record) — materiais e práticas para registro de decisões arquiteturais;
-- [DDD Starter Modelling Process](https://github.com/rodri-oliveira-dev/ddd-starter-modelling-process), [Bounded Context Canvas](https://github.com/rodri-oliveira-dev/bounded-context-canvas), [Context Mapping](https://github.com/rodri-oliveira-dev/context-mapping) e outros repositórios relacionados a Domain-Driven Design;
 - [.NET Interview Questions — PT-BR](https://github.com/rodri-oliveira-dev/dotnet_interview_questions_pt_br) — tradução autorizada de uma coleção com 50 perguntas e respostas sobre .NET e C#;
 - [System Design Primer — PT-BR](https://github.com/rodri-oliveira-dev/system-design-primer-pt-br) — material em português para estudo de system design.
 
