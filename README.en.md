@@ -2,67 +2,65 @@
 
 # Rodrigo de Oliveira
 
-**Software Architect | .NET | Distributed Systems | Cloud | DDD | Engineering Enablement**
+**Software Architect | Distributed Systems | .NET | Cloud | DDD | Engineering Governance**
 
-I'm a software architect with more than 20 years of experience building,
-modernizing, and evolving enterprise systems.
+I'm a Software Architect with more than 20 years of experience building, modernizing, and evolving enterprise software.
 
-I work mainly with distributed systems, .NET backend, cloud, and integrations,
-turning business needs, quality attributes, and operational constraints into
-implementable technical decisions.
+I work at the intersection of **business, architecture, and engineering**, turning needs, quality attributes, and operational constraints into technical decisions that teams can implement, observe, operate, and evolve.
 
-My view of architecture is pragmatic: an architectural decision needs to hold
-up in code, CI/CD, observability, security, and production operations. That is
-why the projects I maintain here combine executable software, libraries,
-engineering automation, static analysis, architecture documentation, and tools
-that improve the developer experience.
+My view of architecture is pragmatic: the value is not in the diagram itself, but in **making decisions explicit, reducing ambiguity, managing trade-offs, and creating systems that remain sustainable in the real world**.
 
-## Featured Projects
+**[Professional portfolio](https://rodri-oliveira-dev.github.io/)** · [LinkedIn](https://www.linkedin.com/in/rodri-oliveira-dev) · [Medium](https://medium.com/@rodrigodotnet) · [NuGet](https://www.nuget.org/profiles/rodri-oliveira-dev)
 
-| Project | Focus |
+---
+
+## Where I work
+
+- **Architecture direction:** decomposing complex problems, defining boundaries, evaluating trade-offs, and guiding technical evolution across teams;
+- **Distributed systems:** messaging, eventual consistency, idempotency, resilience, caching, asynchronous processing, and failure modes;
+- **APIs and integrations:** contracts, versioning, ownership, latency, coupling, and system-to-system integration;
+- **Cloud and production:** GCP, AWS, containers, infrastructure as code, observability, security, and operational readiness;
+- **Domain-Driven Design:** pragmatic domain modeling, bounded contexts, value objects, and ubiquitous language;
+- **Governance and enablement:** ADRs, quality gates, CI/CD, static analysis, templates, automation, and guardrails that increase team autonomy.
+
+---
+
+## Engineering you can inspect
+
+My open-source projects are a way to make part of my engineering thinking observable. They solve different problems, but share the same principles: **explicit contracts, fast feedback, automation, and sustainable technical decisions**.
+
+| Project | What it demonstrates |
 | --- | --- |
-| **[POC Arquitetura](https://github.com/rodri-oliveira-dev/poc-arquitetura)** | Educational .NET microservices architecture lab covering DDD, bounded contexts, Kafka, Outbox/Inbox, idempotency, sagas, Keycloak, OpenTelemetry, ADRs, SDD specifications, and operational runbooks. |
-| **[.NET Library Template](https://github.com/rodri-oliveira-dev/dotnet-library-template)** | Opinionated baseline for .NET 10 libraries with reproducible builds, testing, NuGet packaging, quality analysis, CodeQL, Dependency Review, versioning, and automated releases. |
-| **[Brazilian.PrimitivesTypes](https://github.com/rodri-oliveira-dev/brazilian-primitives)** | .NET library of immutable value objects for CPF, CNPJ, CEP, Pix keys, phone numbers, documents, and other Brazilian identifiers, with deterministic normalization and optional EF Core + SQL Server integration. |
-| **[DotNetRepoInspector](https://github.com/rodri-oliveira-dev/DotNetRepoInspector)** | Tool for inspecting .NET repositories from evaluated MSBuild metadata and producing a deterministic view for CI/CD, automation, and architecture governance. |
-| **[Dapper.TypedParameters](https://github.com/rodri-oliveira-dev/Dapper.TypedParameters)** | Library for explicitly declaring SQL Server parameter metadata in Dapper, reducing reliance on provider inference and covering scenarios such as precision, scale, output parameters, and TVPs. |
-| **[ComplexityAnalysis.Analyzers](https://github.com/rodri-oliveira-dev/complexity-analyzers)** | Roslyn analyzer for C# that estimates algorithmic complexity (Big-O), detects costly patterns, and measures cyclomatic complexity, nesting depth, and method-size metrics, with intra/interprocedural analysis and limited recurrence solving. |
-| **[.NET Copilot Code Review Skills](https://github.com/rodri-oliveira-dev/dotnet-copilot-code-review-skills)** | Reusable instructions and agent skills designed to make .NET pull-request reviews focus on correctness, security, performance, concurrency, persistence, testing, APIs, architecture, MSBuild, and NuGet. |
+| **[POC Arquitetura](https://github.com/rodri-oliveira-dev/poc-arquitetura)** | Distributed .NET architecture with DDD, bounded contexts, Kafka, Outbox/Inbox, idempotency, sagas, Keycloak, OpenTelemetry, ADRs, SDD, and runbooks. |
+| **[DotNetRepoInspector](https://github.com/rodri-oliveira-dev/DotNetRepoInspector)** | Architecture governance and automation based on evaluated MSBuild metadata for deterministic inspection of .NET repositories. |
+| **[ComplexityAnalysis.Analyzers](https://github.com/rodri-oliveira-dev/complexity-analyzers)** | Roslyn static analysis for algorithmic, cyclomatic, cognitive, and structural complexity, including bounded interprocedural analysis. |
+| **[Brazilian Primitives for .NET](https://github.com/rodri-oliveira-dev/brazilian-primitives)** | Domain modeling through strongly typed value objects with optional EF Core and Dapper integrations. |
+| **[Dapper.TypedParameters](https://github.com/rodri-oliveira-dev/Dapper.TypedParameters)** | Explicit database parameter contracts for SQL Server and PostgreSQL, reducing reliance on provider inference. |
 
-## Other Projects and Resources
+[Explore all repositories →](https://github.com/rodri-oliveira-dev?tab=repositories)
 
-I also maintain projects focused on libraries, engineering governance, and
-software modeling, including:
+---
 
-- [Dapper FluentMap](https://github.com/rodri-oliveira-dev/Dapper-FluentMap) — evolution of fluent Dapper mapping with conventions, immutable objects, analyzers, and source generators;
-- [CSF.Analyzers](https://github.com/rodri-oliveira-dev/CSF.Analyzers) — Roslyn analyzers that turn contextual engineering policies into automated checks;
-- [.NET Interview Questions — PT-BR](https://github.com/rodri-oliveira-dev/dotnet_interview_questions_pt_br) — authorized Brazilian Portuguese translation of a collection of 50 .NET and C# questions and answers;
-- [System Design Primer — PT-BR](https://github.com/rodri-oliveira-dev/system-design-primer-pt-br) — Portuguese-language material for studying system design.
+## How I think about architecture
 
-## Technical Focus
+A few principles guide my work:
 
-- **Architecture:** distributed systems, Domain-Driven Design, event-driven architecture, Clean Architecture, APIs, and integrations;
-- **Backend & .NET:** C#, ASP.NET Core, reusable libraries, Roslyn analyzers, source generators, MSBuild, and NuGet;
-- **Cloud & Platform:** GCP, AWS, Docker, Kubernetes, Terraform, and CI/CD;
-- **Data & Messaging:** PostgreSQL, SQL Server, Redis, BigQuery, Kafka, and Pub/Sub;
-- **Quality & Operations:** observability, resilience, security, testing, static analysis, supply-chain security, and engineering policy automation;
-- **Developer Experience:** templates, repository automation, architecture governance, and pragmatic use of AI in code review and engineering workflows.
+- **Start from the problem, not the pattern.**
+- **Treat constraints as part of the design.**
+- **Design for failure and operation from the beginning.**
+- **Prefer guardrails over bureaucracy.**
+- **Stay close enough to the code to validate architectural decisions.**
+- **Automate standards when automation creates useful feedback for teams.**
 
-## Content and Community
+These principles also shape my [professional portfolio](https://rodri-oliveira-dev.github.io/), where I present my work across software architecture, distributed systems, cloud, DDD, and engineering practice in more depth.
 
-I also write about software architecture, distributed systems, Domain-Driven
-Design, backend, cloud, and software engineering.
+---
 
-- [Medium — technical articles](https://medium.com/@rodrigodotnet)
-- [NuGet — published .NET packages](https://www.nuget.org/profiles/rodri-oliveira-dev)
-- [LinkedIn](https://www.linkedin.com/in/rodri-oliveira-dev)
-- [Professional links](https://linktr.ee/rodri.oliveira.dev)
+## Technical content
 
-## GitHub Activity
+I write about software architecture, Domain-Driven Design, distributed systems, backend engineering, software quality, and technical decision-making.
 
-<p align="left">
-  <img
-    src="https://github-stats-extended.vercel.app/api?username=rodri-oliveira-dev&show_icons=true&theme=transparent&locale=en&show=prs_merged,prs_reviewed&hide_border=true&hide_title=true"
-    alt="Rodrigo de Oliveira's GitHub statistics"
-  />
-</p>
+- **[Medium](https://medium.com/@rodrigodotnet)** — technical articles and series;
+- **[NuGet](https://www.nuget.org/profiles/rodri-oliveira-dev)** — published .NET libraries and tools;
+- **[Portfolio](https://rodri-oliveira-dev.github.io/)** — consolidated view of my professional work;
+- **[LinkedIn](https://www.linkedin.com/in/rodri-oliveira-dev)** — career, experience, and professional presence.
