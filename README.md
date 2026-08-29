@@ -2,67 +2,65 @@
 
 # Rodrigo de Oliveira
 
-**Software Architect | .NET | Distributed Systems | Cloud | DDD | Engineering Enablement**
+**Arquiteto de Software | Sistemas Distribuídos | .NET | Cloud | DDD | Governança Técnica**
 
-Sou arquiteto de software com mais de 20 anos de experiência no desenvolvimento,
-modernização e evolução de sistemas corporativos.
+Sou arquiteto de software com mais de 20 anos de experiência construindo, modernizando e evoluindo sistemas corporativos.
 
-Atuo principalmente com sistemas distribuídos, backend .NET, cloud e integrações,
-transformando necessidades de negócio, atributos de qualidade e restrições
-operacionais em decisões técnicas implementáveis.
+Atuo na interseção entre **negócio, arquitetura e engenharia**, transformando necessidades, atributos de qualidade e restrições operacionais em decisões técnicas que os times conseguem implementar, observar, operar e evoluir.
 
-Minha visão de arquitetura é pragmática: uma decisão arquitetural precisa
-sobreviver ao código, ao CI/CD, à observabilidade, à segurança e à operação.
-Por isso, os projetos que mantenho aqui combinam software executável, bibliotecas,
-automação de engenharia, análise estática, documentação arquitetural e ferramentas
-para melhorar a experiência de desenvolvimento.
+Minha visão de arquitetura é pragmática: o valor não está no diagrama em si, mas em **tornar decisões explícitas, reduzir ambiguidade, administrar trade-offs e criar sistemas sustentáveis no mundo real**.
 
-## Projetos em destaque
+**[Portfólio profissional](https://rodri-oliveira-dev.github.io/)** · [LinkedIn](https://www.linkedin.com/in/rodri-oliveira-dev) · [Medium](https://medium.com/@rodrigodotnet) · [NuGet](https://www.nuget.org/profiles/rodri-oliveira-dev)
 
-| Projeto | Foco |
+---
+
+## Onde atuo
+
+- **Direção arquitetural:** decomposição de problemas complexos, definição de fronteiras, trade-offs e evolução técnica entre times;
+- **Sistemas distribuídos:** mensageria, consistência eventual, idempotência, resiliência, cache, processamento assíncrono e modos de falha;
+- **APIs e integrações:** contratos, versionamento, ownership, latência, acoplamento e integração entre sistemas;
+- **Cloud e produção:** GCP, AWS, containers, infraestrutura como código, observabilidade, segurança e prontidão operacional;
+- **Domain-Driven Design:** modelagem de domínio, bounded contexts, value objects e linguagem ubíqua aplicados de forma pragmática;
+- **Governança e enablement:** ADRs, quality gates, CI/CD, análise estática, templates, automação e guardrails que aumentam a autonomia dos times.
+
+---
+
+## Engenharia que pode ser inspecionada
+
+Meus projetos open source são uma forma de tornar parte do meu raciocínio de engenharia observável. Eles representam problemas diferentes, mas seguem a mesma linha: **contratos explícitos, feedback rápido, automação e decisões técnicas sustentáveis**.
+
+| Projeto | O que demonstra |
 | --- | --- |
-| **[POC Arquitetura](https://github.com/rodri-oliveira-dev/poc-arquitetura)** | Laboratório educacional de microserviços em .NET com DDD, bounded contexts, Kafka, Outbox/Inbox, idempotência, sagas, Keycloak, OpenTelemetry, ADRs, especificações SDD e runbooks. |
-| **[.NET Library Template](https://github.com/rodri-oliveira-dev/dotnet-library-template)** | Baseline opinativa para bibliotecas .NET 10 com build reproduzível, testes, empacotamento NuGet, análise de qualidade, CodeQL, Dependency Review, versionamento e release automatizado. |
-| **[Brazilian.PrimitivesTypes](https://github.com/rodri-oliveira-dev/brazilian-primitives)** | Biblioteca .NET de value objects imutáveis para CPF, CNPJ, CEP, Pix, telefones, documentos e outros identificadores brasileiros, com normalização determinística e integração opcional com EF Core + SQL Server. |
-| **[DotNetRepoInspector](https://github.com/rodri-oliveira-dev/DotNetRepoInspector)** | Ferramenta para inspecionar repositórios .NET a partir de metadados avaliados pelo MSBuild e produzir uma visão determinística para CI/CD, automação e governança arquitetural. |
-| **[Dapper.TypedParameters](https://github.com/rodri-oliveira-dev/Dapper.TypedParameters)** | Biblioteca para declarar explicitamente metadados de parâmetros SQL Server no Dapper, reduzindo dependência de inferência do provider e cobrindo cenários como precisão, escala, output parameters e TVPs. |
-| **[ComplexityAnalysis.Analyzers](https://github.com/rodri-oliveira-dev/complexity-analyzers)** | Analyzer Roslyn para C# que estima complexidade algorítmica (Big-O), identifica padrões custosos e mede complexidade ciclomática, profundidade de aninhamento e métricas de tamanho de métodos, com análise intra/interprocedural e suporte limitado à resolução de recorrências. |
-| **[.NET Copilot Code Review Skills](https://github.com/rodri-oliveira-dev/dotnet-copilot-code-review-skills)** | Instruções e agent skills reutilizáveis para tornar revisões de PRs .NET mais focadas em correção, segurança, performance, concorrência, persistência, testes, APIs, arquitetura, MSBuild e NuGet. |
+| **[POC Arquitetura](https://github.com/rodri-oliveira-dev/poc-arquitetura)** | Arquitetura distribuída em .NET com DDD, bounded contexts, Kafka, Outbox/Inbox, idempotência, sagas, Keycloak, OpenTelemetry, ADRs, SDD e runbooks. |
+| **[DotNetRepoInspector](https://github.com/rodri-oliveira-dev/DotNetRepoInspector)** | Governança arquitetural e automação baseada em metadados reais do MSBuild para inspeção determinística de repositórios .NET. |
+| **[ComplexityAnalysis.Analyzers](https://github.com/rodri-oliveira-dev/complexity-analyzers)** | Análise estática com Roslyn para complexidade algorítmica, ciclomática, cognitiva e estrutural, incluindo análise interprocedural limitada. |
+| **[Brazilian Primitives for .NET](https://github.com/rodri-oliveira-dev/brazilian-primitives)** | Modelagem de domínio com value objects fortemente tipados e integrações opcionais com EF Core e Dapper. |
+| **[Dapper.TypedParameters](https://github.com/rodri-oliveira-dev/Dapper.TypedParameters)** | Contratos explícitos de parâmetros de banco para SQL Server e PostgreSQL, reduzindo dependência de inferência do provider. |
 
-## Outros projetos e materiais
+[Ver todos os repositórios →](https://github.com/rodri-oliveira-dev?tab=repositories)
 
-Também mantenho projetos voltados a bibliotecas, governança técnica e modelagem de
-software, incluindo:
+---
 
-- [Dapper FluentMap](https://github.com/rodri-oliveira-dev/Dapper-FluentMap) — evolução do mapeamento fluente para Dapper, com convenções, objetos imutáveis, analyzers e source generators;
-- [CSF.Analyzers](https://github.com/rodri-oliveira-dev/CSF.Analyzers) — analyzers Roslyn para transformar políticas contextuais de engenharia em verificações automatizadas;
-- [.NET Interview Questions — PT-BR](https://github.com/rodri-oliveira-dev/dotnet_interview_questions_pt_br) — tradução autorizada de uma coleção com 50 perguntas e respostas sobre .NET e C#;
-- [System Design Primer — PT-BR](https://github.com/rodri-oliveira-dev/system-design-primer-pt-br) — material em português para estudo de system design.
+## Como penso arquitetura
 
-## Foco técnico
+Alguns princípios orientam meu trabalho:
 
-- **Arquitetura:** sistemas distribuídos, Domain-Driven Design, arquitetura orientada a eventos, Clean Architecture, APIs e integrações;
-- **Backend & .NET:** C#, ASP.NET Core, bibliotecas reutilizáveis, Roslyn analyzers, source generators, MSBuild e NuGet;
-- **Cloud & Plataforma:** GCP, AWS, Docker, Kubernetes, Terraform e CI/CD;
-- **Dados & Mensageria:** PostgreSQL, SQL Server, Redis, BigQuery, Kafka e Pub/Sub;
-- **Qualidade & Operação:** observabilidade, resiliência, segurança, testes, análise estática, supply-chain security e automação de políticas de engenharia;
-- **Developer Experience:** templates, automação de repositórios, governança arquitetural e uso pragmático de IA em code review e workflows de engenharia.
+- **Começar pelo problema, não pelo padrão.**
+- **Tratar restrições como parte do design.**
+- **Projetar para falhas e operação desde o início.**
+- **Preferir guardrails a burocracia.**
+- **Manter arquitetura próxima o suficiente do código para validar decisões.**
+- **Automatizar padrões quando isso gera feedback útil para os times.**
 
-## Conteúdo e comunidade
+Esse é também o fio condutor do meu [portfólio profissional](https://rodri-oliveira-dev.github.io/), onde apresento minha atuação em arquitetura, sistemas distribuídos, cloud, DDD e engenharia de software de forma mais completa.
 
-Também escrevo sobre arquitetura de software, sistemas distribuídos, Domain-Driven
-Design, backend, cloud e engenharia de software.
+---
 
-- [Medium — artigos técnicos](https://medium.com/@rodrigodotnet)
-- [NuGet — pacotes .NET publicados](https://www.nuget.org/profiles/rodri-oliveira-dev)
-- [LinkedIn](https://www.linkedin.com/in/rodri-oliveira-dev)
-- [Links profissionais](https://linktr.ee/rodri.oliveira.dev)
+## Conteúdo técnico
 
-## Atividade no GitHub
+Escrevo sobre arquitetura de software, Domain-Driven Design, sistemas distribuídos, backend, qualidade e decisões de engenharia.
 
-<p align="left">
-  <img
-    src="https://github-stats-extended.vercel.app/api?username=rodri-oliveira-dev&show_icons=true&theme=transparent&locale=en&show=prs_merged,prs_reviewed&hide_border=true&hide_title=true"
-    alt="Estatísticas do GitHub de Rodrigo de Oliveira"
-  />
-</p>
+- **[Medium](https://medium.com/@rodrigodotnet)** — artigos e séries técnicas;
+- **[NuGet](https://www.nuget.org/profiles/rodri-oliveira-dev)** — bibliotecas e ferramentas .NET publicadas;
+- **[Portfólio](https://rodri-oliveira-dev.github.io/)** — visão consolidada da minha atuação profissional;
+- **[LinkedIn](https://www.linkedin.com/in/rodri-oliveira-dev)** — trajetória, experiência e presença profissional.
