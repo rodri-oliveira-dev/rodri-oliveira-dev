@@ -37,7 +37,6 @@ jobs:
           args: >-
             --verbose
             --no-progress
-            --exclude-mail
             --exclude 'https://(www\.)?linkedin\.com/'
             README.md
             README.en.md
