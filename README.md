@@ -10,7 +10,7 @@ Atuo na interseção entre **negócio, arquitetura e engenharia**, transformando
 
 Meu foco é transformar **decisões arquiteturais em código, contratos, guardrails e automação**, mantendo a arquitetura próxima o suficiente da engenharia para que suas premissas possam ser validadas na prática.
 
-**[Portfólio profissional](https://rodri-oliveira-dev.github.io/)** · [LinkedIn](https://www.linkedin.com/in/rodri-oliveira-dev) · [Medium](https://medium.com/@rodrigodotnet) · [NuGet](https://www.nuget.org/profiles/rodri-oliveira-dev)
+**[Portfólio profissional](https://rodri-oliveira-dev.github.io/)** · [LinkedIn](https://www.linkedin.com/in/rodri-oliveira-dev) · [Café com código](https://www.linkedin.com/newsletters/caf%C3%A9-com-c%C3%B3digo-6880618748047314945) · [NuGet](https://www.nuget.org/profiles/rodri-oliveira-dev)
 
 ---
 
@@ -72,7 +72,7 @@ Esse é também o fio condutor do meu [portfólio profissional](https://rodri-ol
 
 Escrevo sobre arquitetura de software, Domain-Driven Design, sistemas distribuídos, backend, qualidade e decisões de engenharia.
 
-- **[Medium](https://medium.com/@rodrigodotnet)** — artigos e séries técnicas;
+- **[Café com código](https://www.linkedin.com/newsletters/caf%C3%A9-com-c%C3%B3digo-6880618748047314945)** — newsletter sobre arquitetura de software, Domain-Driven Design, sistemas distribuídos, backend, qualidade e os trade-offs por trás das decisões técnicas;
 - **[NuGet](https://www.nuget.org/profiles/rodri-oliveira-dev)** — bibliotecas e ferramentas .NET publicadas;
 - **[Portfólio](https://rodri-oliveira-dev.github.io/)** — visão consolidada da minha atuação profissional;
 - **[LinkedIn](https://www.linkedin.com/in/rodri-oliveira-dev)** — trajetória, experiência e presença profissional.
