@@ -1,0 +1,46 @@
+name: Validate profile
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "README.md"
+      - "README.en.md"
+      - "assets/brand/**"
+      - ".github/workflows/validate-profile.yml"
+  pull_request:
+    paths:
+      - "README.md"
+      - "README.en.md"
+      - "assets/brand/**"
+      - ".github/workflows/validate-profile.yml"
+  schedule:
+    - cron: "0 12 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  links:
+    name: Check README links
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Validate links
+        uses: lycheeverse/lychee-action@v2
+        with:
+          args: >-
+            --verbose
+            --no-progress
+            --exclude-mail
+            --exclude 'https://(www\.)?linkedin\.com/'
+            README.md
+            README.en.md
+          fail: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
