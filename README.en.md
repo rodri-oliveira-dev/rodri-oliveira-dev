@@ -79,3 +79,14 @@ I write about software architecture, Domain-Driven Design, distributed systems, 
 - **[NuGet](https://www.nuget.org/profiles/rodri-oliveira-dev)** — published .NET libraries and tools;
 - **[Portfolio](https://rodri-oliveira-dev.github.io/)** — consolidated view of my professional work;
 - **[LinkedIn](https://www.linkedin.com/in/rodri-oliveira-dev)** — career, experience, and professional presence.
+
+---
+
+## GitHub Activity
+
+<p align="left">
+  <img
+    src="https://github-stats-extended.vercel.app/api?username=rodri-oliveira-dev&show_icons=true&theme=transparent&locale=en&show=prs_merged,prs_reviewed&hide_border=true&hide_title=true"
+    alt="Rodrigo de Oliveira's GitHub statistics"
+  />
+</p>
