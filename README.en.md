@@ -10,7 +10,7 @@ I work at the intersection of **business, architecture, and engineering**, turni
 
 My focus is turning **architectural decisions into code, contracts, guardrails, and automation**, keeping architecture close enough to engineering that its assumptions can be validated in practice.
 
-**[Professional portfolio](https://rodri-oliveira-dev.github.io/)** · [LinkedIn](https://www.linkedin.com/in/rodri-oliveira-dev) · [Medium](https://medium.com/@rodrigodotnet) · [NuGet](https://www.nuget.org/profiles/rodri-oliveira-dev)
+**[Professional portfolio](https://rodri-oliveira-dev.github.io/)** · [LinkedIn](https://www.linkedin.com/in/rodri-oliveira-dev) · [Café com código](https://www.linkedin.com/newsletters/caf%C3%A9-com-c%C3%B3digo-6880618748047314945) · [NuGet](https://www.nuget.org/profiles/rodri-oliveira-dev)
 
 ---
 
@@ -72,7 +72,7 @@ These principles also shape my [professional portfolio](https://rodri-oliveira-d
 
 I write about software architecture, Domain-Driven Design, distributed systems, backend engineering, software quality, and technical decision-making.
 
-- **[Medium](https://medium.com/@rodrigodotnet)** — technical articles and series;
+- **[Café com código](https://www.linkedin.com/newsletters/caf%C3%A9-com-c%C3%B3digo-6880618748047314945)** — newsletter about software architecture, Domain-Driven Design, distributed systems, backend engineering, software quality, and the trade-offs behind technical decisions;
 - **[NuGet](https://www.nuget.org/profiles/rodri-oliveira-dev)** — published .NET libraries and tools;
 - **[Portfolio](https://rodri-oliveira-dev.github.io/)** — consolidated view of my professional work;
 - **[LinkedIn](https://www.linkedin.com/in/rodri-oliveira-dev)** — career, experience, and professional presence.
