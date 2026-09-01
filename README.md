@@ -79,3 +79,14 @@ Escrevo sobre arquitetura de software, Domain-Driven Design, sistemas distribuí
 - **[NuGet](https://www.nuget.org/profiles/rodri-oliveira-dev)** — bibliotecas e ferramentas .NET publicadas;
 - **[Portfólio](https://rodri-oliveira-dev.github.io/)** — visão consolidada da minha atuação profissional;
 - **[LinkedIn](https://www.linkedin.com/in/rodri-oliveira-dev)** — trajetória, experiência e presença profissional.
+
+---
+
+## Atividade no GitHub
+
+<p align="left">
+  <img
+    src="https://github-stats-extended.vercel.app/api?username=rodri-oliveira-dev&show_icons=true&theme=transparent&locale=en&show=prs_merged,prs_reviewed&hide_border=true&hide_title=true"
+    alt="Estatísticas do GitHub de Rodrigo de Oliveira"
+  />
+</p>
