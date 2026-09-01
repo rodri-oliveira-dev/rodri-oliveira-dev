@@ -50,6 +50,9 @@ Contributing to codebases I do not control is another way to make my engineering
 | **[CrispyWaffle](https://github.com/guibranco/CrispyWaffle)** | [PR #980](https://github.com/guibranco/CrispyWaffle/pull/980): YAML serialization support using YamlDotNet, integrated with the existing abstractions, tests, and documentation. |
 | **[Architecture Decision Record](https://github.com/architecture-decision-record/architecture-decision-record)** | [PR #115](https://github.com/architecture-decision-record/architecture-decision-record/pull/115): complete Brazilian Portuguese localization while preserving structure, references, and identity across equivalent content. |
 
+**[Track contributions and work in progress →](https://github.com/users/rodri-oliveira-dev/projects/1/views/1)**  
+I use this GitHub Project to track issues, contributions, and open-source initiatives that I am working on, evaluating, or have previously worked on.
+
 ---
 
 ## How I think about architecture
