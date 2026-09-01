@@ -1,5 +1,11 @@
 [Português](README.md) | **English**
 
+<p align="left">
+  <a href="https://rodri-oliveira-dev.github.io/" aria-label="Professional portfolio">
+    <img src="assets/brand/ro-architect-mark.svg" alt="RO Architect" width="64" />
+  </a>
+</p>
+
 # Rodrigo de Oliveira
 
 **Software Architect | Distributed Systems | .NET | Cloud | DDD | Engineering Governance**
