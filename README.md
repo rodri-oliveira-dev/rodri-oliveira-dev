@@ -46,6 +46,16 @@ Isso reflete uma das ideias que orientam meu trabalho: **preferir guardrails aut
 
 ---
 
+## Manutenção open source
+
+Também atuo como mantenedor de projetos que já possuem histórico, usuários e contratos públicos estabelecidos.
+
+**[Dapper.FluentMap](https://github.com/rodri-oliveira-dev/Dapper-FluentMap)** — mantenedor atual da biblioteca de mapeamento fluente para Dapper, criada originalmente por **Henk Mollema**. Estou conduzindo sua retomada e modernização, preservando compatibilidade com o ecossistema existente enquanto evoluo runtime, tooling, CI/CD, qualidade, segurança e estratégia de distribuição para a próxima geração do projeto.
+
+Assumir um projeto existente envolve um tipo diferente de engenharia: **evoluir sem desconsiderar o contrato construído ao longo dos anos com seus usuários**.
+
+---
+
 ## Contribuições open source
 
 Contribuir em bases de código que não controlo é outra forma de tornar minha engenharia verificável: entender decisões existentes, respeitar contratos e convenções do projeto, discutir trade-offs e entregar mudanças compatíveis com o ecossistema.
