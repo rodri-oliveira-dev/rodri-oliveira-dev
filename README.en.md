@@ -46,6 +46,16 @@ This reflects one of the principles behind my work: **prefer automated guardrail
 
 ---
 
+## Open-source maintenance
+
+I also maintain projects with an established history, user base, and public contracts.
+
+**[Dapper.FluentMap](https://github.com/rodri-oliveira-dev/Dapper-FluentMap)** — current maintainer of the fluent mapping library for Dapper, originally created by **Henk Mollema**. I am leading its revival and modernization, preserving compatibility with the existing ecosystem while evolving the runtime, tooling, CI/CD, quality, security, and distribution strategy for the project's next generation.
+
+Maintaining an established project requires a different kind of engineering: **evolving the software without disregarding the contract built with its users over the years**.
+
+---
+
 ## Open-source contributions
 
 Contributing to codebases I do not control is another way to make my engineering verifiable: understanding existing decisions, respecting project contracts and conventions, discussing trade-offs, and delivering changes that fit the surrounding ecosystem.
