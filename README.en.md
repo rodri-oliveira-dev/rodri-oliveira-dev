@@ -20,6 +20,14 @@ My focus is turning **architectural decisions into code, contracts, guardrails, 
 
 ---
 
+## Selected impact
+
+Beyond open-source work, my career includes measurable outcomes in enterprise systems: **30% lower response time** in a critical .NET/HANA flow, **40% lower average incident detection and response time**, and new integrations completed in **approximately one third of the previous time** after redesigning APIs and system boundaries.
+
+The quantitative outcomes are from projects delivered in **2020–2021**. **[See the context, decisions, and outcomes in my portfolio →](https://rodri-oliveira-dev.github.io/en/#practice)**
+
+---
+
 ## Architecture in practice
 
 My open-source projects make part of my engineering reasoning inspectable. The central point is not the technology in isolation, but **the problem, the constraints, the decision, and how that decision can be validated through code, infrastructure, and automation**.
