@@ -20,6 +20,14 @@ Meu foco é transformar **decisões arquiteturais em código, contratos, guardra
 
 ---
 
+## Impacto selecionado
+
+Além do trabalho open source, minha trajetória inclui resultados mensuráveis em sistemas corporativos: **30% de redução no tempo de resposta** de um fluxo crítico .NET/HANA, **40% de redução no tempo médio de detecção e resposta a incidentes** e novas integrações realizadas em **aproximadamente um terço do tempo** após o redesenho de APIs e fronteiras.
+
+Os resultados quantitativos são de projetos realizados em **2020–2021**. **[Ver contexto, decisões e resultados no portfólio →](https://rodri-oliveira-dev.github.io/#practice)**
+
+---
+
 ## Arquitetura na prática
 
 Meus projetos open source tornam parte do meu raciocínio de engenharia inspecionável. O ponto central não é a tecnologia isolada, mas **o problema, as restrições, a decisão tomada e a forma como essa decisão pode ser validada no código, na infraestrutura e na automação**.
