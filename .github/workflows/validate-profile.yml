@@ -5,16 +5,16 @@ on:
     branches:
       - main
     paths:
-      - "README.md"
-      - "README.en.md"
+      - "**/*.md"
       - "assets/brand/**"
-      - ".github/workflows/validate-profile.yml"
+      - ".github/workflows/**"
+      - ".markdownlint.jsonc"
   pull_request:
     paths:
-      - "README.md"
-      - "README.en.md"
+      - "**/*.md"
       - "assets/brand/**"
-      - ".github/workflows/validate-profile.yml"
+      - ".github/workflows/**"
+      - ".markdownlint.jsonc"
   schedule:
     - cron: "0 12 * * 1"
   workflow_dispatch:
@@ -23,23 +23,37 @@ permissions:
   contents: read
 
 jobs:
-  links:
+  profile-validation:
+    # Keep this name stable because the repository ruleset requires this status check.
     name: Check README links
     runs-on: ubuntu-latest
+    timeout-minutes: 10
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Validate Markdown
+        uses: DavidAnson/markdownlint-cli2-action@v23
+        with:
+          config: .markdownlint.jsonc
+          globs: |
+            **/*.md
+
       - name: Validate links
         uses: lycheeverse/lychee-action@v2
         with:
           args: >-
+            --root-dir "$(pwd)"
             --verbose
             --no-progress
             --exclude 'https://(www\.)?linkedin\.com/'
-            README.md
-            README.en.md
+            './**/*.md'
           fail: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Validate GitHub Actions workflows
+        uses: docker://rhysd/actionlint:1.7.12
+        with:
+          args: -color

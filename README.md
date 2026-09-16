@@ -8,7 +8,7 @@
 
 # Rodrigo de Oliveira
 
-**Arquiteto de Software | Sistemas Distribuídos | .NET | Cloud | DDD | Governança Técnica**
+**Arquiteto de Software | Sistemas Distribuídos | .NET | Cloud | DDD | Governança como Código**
 
 Sou arquiteto de software com mais de 20 anos de experiência construindo, modernizando e evoluindo sistemas corporativos.
 
@@ -20,17 +20,27 @@ Meu foco é transformar **decisões arquiteturais em código, contratos, guardra
 
 ---
 
+## Impacto selecionado
+
+Além do trabalho open source, minha trajetória inclui resultados mensuráveis em sistemas corporativos: **30% de redução no tempo de resposta** de um fluxo crítico .NET/HANA, **40% de redução no tempo médio de detecção e resposta a incidentes** e novas integrações realizadas em **aproximadamente um terço do tempo** após o redesenho de APIs e fronteiras.
+
+Os resultados quantitativos são de projetos realizados em **2020–2021**. **[Ver contexto, decisões e resultados no portfólio →](https://rodri-oliveira-dev.github.io/#practice)**
+
+---
+
 ## Arquitetura na prática
 
-Meus projetos open source tornam parte do meu raciocínio de engenharia inspecionável. O ponto central não é a tecnologia isolada, mas **o problema, as restrições, a decisão tomada e a forma como essa decisão pode ser validada no código e na automação**.
+Nos projetos open source, parte do meu raciocínio técnico fica visível no código. O que me interessa não é a tecnologia isolada, mas **o problema, as restrições, a decisão tomada e como essa decisão pode ser verificada na implementação, na infraestrutura ou na automação**.
 
 | Projeto | Problema, decisão e evidência |
 | --- | --- |
-| **[POC Arquitetura](https://github.com/rodri-oliveira-dev/poc-arquitetura)** | Como manter consistência e rastreabilidade entre serviços distribuídos: DDD, bounded contexts, Kafka, Outbox/Inbox, idempotência, sagas, OpenTelemetry, ADRs e runbooks tornam os trade-offs e modos de falha explícitos. |
-| **[DotNetRepoInspector](https://github.com/rodri-oliveira-dev/DotNetRepoInspector)** | Como aplicar governança sobre repositórios .NET sem heurísticas frágeis: metadados avaliados pelo MSBuild são tratados como fonte de verdade e expostos por contratos determinísticos para CI/CD e automação. |
-| **[.NET Library Template](https://github.com/rodri-oliveira-dev/dotnet-library-template)** | Como transformar práticas recorrentes de build, testes, segurança, empacotamento, versionamento e release em um golden path reutilizável, reduzindo decisões repetitivas sem retirar autonomia dos times. |
-| **[ComplexityAnalysis.Analyzers](https://github.com/rodri-oliveira-dev/complexity-analyzers)** | Como transformar complexidade de código em feedback automatizado durante o desenvolvimento: análise Roslyn para complexidade algorítmica, ciclomática, cognitiva e estrutural, com comportamento conservador quando a inferência não é segura. |
-| **[Brazilian Primitives for .NET](https://github.com/rodri-oliveira-dev/brazilian-primitives)** | Como representar conceitos do domínio explicitamente em vez de espalhar regras de validação pela aplicação: value objects fortemente tipados com integrações opcionais para EF Core e Dapper. |
+| **[POC Arquitetura](https://github.com/rodri-oliveira-dev/poc-arquitetura)** | Explora consistência e rastreabilidade entre serviços distribuídos com DDD, bounded contexts, Kafka, Outbox/Inbox, idempotência, sagas, OpenTelemetry, ADRs e runbooks. Os trade-offs e modos de falha fazem parte do desenho. |
+| **[ReliableWebhooks](https://github.com/rodri-oliveira-dev/ReliableWebhooks)** | Trata entrega de webhooks como um problema de confiabilidade: at-least-once delivery, leases, concorrência limitada, retries determinísticos, HMAC-SHA256, observabilidade e políticas de destino são responsabilidades explícitas e testáveis. |
+| **[Terraform GCP .NET Blueprint](https://github.com/rodri-oliveira-dev/terraform-gcp-dotnet-blueprint)** | Reúne uma baseline reproduzível para workloads .NET no Google Cloud com Terraform, Cloud Run, Jobs, Pub/Sub, DLQ, Redis, Secret Manager, VPC, IAM, Workload Identity Federation, CI e observabilidade. |
+| **[ADR Guard](https://github.com/rodri-oliveira-dev/adr-guard)** | Torna ADRs verificáveis no fluxo de engenharia: valida e indexa decisões de forma determinística, integra regras estáveis ao CI/CD e oferece drafting assistido por IA sem retirar das pessoas a revisão e a aceitação arquitetural. |
+| **[DotNetRepoInspector](https://github.com/rodri-oliveira-dev/DotNetRepoInspector)** | Usa metadados realmente avaliados pelo MSBuild como fonte de verdade para inventário, CI/CD e automação, evitando governança baseada em parsing frágil ou heurísticas. |
+| **[.NET Library Template](https://github.com/rodri-oliveira-dev/dotnet-library-template)** | Consolida práticas recorrentes de build, testes, segurança, empacotamento e release em um golden path reutilizável, com package validation, NuGet Audit, CodeQL, Trusted Publishing via OIDC e controles de software supply chain. |
+| **[ComplexityAnalysis.Analyzers](https://github.com/rodri-oliveira-dev/complexity-analyzers)** | Leva análise de complexidade para perto do desenvolvimento com analyzers Roslyn para complexidade algorítmica, ciclomática, cognitiva e estrutural, usando uma abordagem conservadora quando a inferência não é segura. |
 
 [Ver todos os repositórios →](https://github.com/rodri-oliveira-dev?tab=repositories)
 
@@ -38,27 +48,29 @@ Meus projetos open source tornam parte do meu raciocínio de engenharia inspecio
 
 ## Governança como código
 
-Arquitetura sustentável também depende de tornar padrões operacionais e de engenharia executáveis.
+Arquitetura sustentável também depende de transformar padrões recorrentes em feedback e automação, em vez de depender apenas de documentação ou processo manual.
 
-O repositório **[.github](https://github.com/rodri-oliveira-dev/.github)** centraliza padrões de contribuição e segurança e mantém automação cross-repository para manutenção de SDKs .NET. A abordagem segue princípios de **least privilege, revisão antes da mudança, defaults seguros e autoridade local do repositório**.
+O repositório **[.github](https://github.com/rodri-oliveira-dev/.github)** funciona como uma camada central de governança e automação para os projetos que mantenho. Ele concentra padrões de contribuição e segurança, manutenção cross-repository, inventário de projetos .NET a partir de metadados avaliados pelo MSBuild, secret scanning reutilizável e a distribuição de instruções e skills para agentes de desenvolvimento.
 
-Isso reflete uma das ideias que orientam meu trabalho: **preferir guardrails automatizados a processos burocráticos sempre que a regra puder gerar feedback útil para os times**.
+As automações seguem **menor privilégio, mudanças via Pull Request, defaults seguros e autonomia local dos repositórios**. Operações de escrita passam por revisão; fluxos somente leitura não recebem permissões de mutação.
+
+A ideia é simples: **quando uma regra pode gerar feedback útil automaticamente, prefiro um guardrail a mais uma etapa burocrática**.
 
 ---
 
 ## Manutenção open source
 
-Também atuo como mantenedor de projetos que já possuem histórico, usuários e contratos públicos estabelecidos.
+Também mantenho projetos que já possuem histórico, usuários e contratos públicos estabelecidos.
 
-**[Dapper.FluentMap](https://github.com/rodri-oliveira-dev/Dapper-FluentMap)** — mantenedor atual da biblioteca de mapeamento fluente para Dapper, criada originalmente por **Henk Mollema**. Estou conduzindo sua retomada e modernização, preservando compatibilidade com o ecossistema existente enquanto evoluo runtime, tooling, CI/CD, qualidade, segurança e estratégia de distribuição para a próxima geração do projeto.
+**[Dapper.FluentMap](https://github.com/rodri-oliveira-dev/Dapper-FluentMap)** — sou o mantenedor atual da biblioteca de mapeamento fluente para Dapper, criada originalmente por **Henk Mollema**. Estou conduzindo sua retomada e modernização, preservando compatibilidade com o ecossistema existente enquanto evoluo runtime, tooling, CI/CD, qualidade, segurança e estratégia de distribuição.
 
-Assumir um projeto existente envolve um tipo diferente de engenharia: **evoluir sem desconsiderar o contrato construído ao longo dos anos com seus usuários**.
+Esse trabalho exige um tipo diferente de decisão: **evoluir o projeto sem ignorar o contrato construído ao longo dos anos com quem já depende dele**.
 
 ---
 
 ## Contribuições open source
 
-Contribuir em bases de código que não controlo é outra forma de tornar minha engenharia verificável: entender decisões existentes, respeitar contratos e convenções do projeto, discutir trade-offs e entregar mudanças compatíveis com o ecossistema.
+Contribuir em bases de código que não controlo também expõe uma parte importante da engenharia: entender decisões existentes, respeitar contratos e convenções, discutir trade-offs e entregar mudanças que façam sentido dentro daquele ecossistema.
 
 | Projeto | Contribuição |
 | --- | --- |
@@ -89,10 +101,10 @@ Esse é também o fio condutor do meu [portfólio profissional](https://rodri-ol
 
 ## Conteúdo técnico
 
-Escrevo sobre arquitetura de software, Domain-Driven Design, sistemas distribuídos, backend, qualidade e decisões de engenharia.
+Escrevo sobre arquitetura de software, Domain-Driven Design, sistemas distribuídos, backend, qualidade, cloud, governança técnica e decisões de engenharia.
 
 - **[Café com código](https://www.linkedin.com/newsletters/caf%C3%A9-com-c%C3%B3digo-6880618748047314945)** — newsletter sobre arquitetura de software, Domain-Driven Design, sistemas distribuídos, backend, qualidade e os trade-offs por trás das decisões técnicas;
-- **[NuGet](https://www.nuget.org/profiles/rodri-oliveira-dev)** — bibliotecas e ferramentas .NET publicadas;
+- **[NuGet](https://www.nuget.org/profiles/rodri-oliveira-dev)** — bibliotecas, ferramentas e templates .NET publicados;
 - **[Portfólio](https://rodri-oliveira-dev.github.io/)** — visão consolidada da minha atuação profissional;
 - **[LinkedIn](https://www.linkedin.com/in/rodri-oliveira-dev)** — trajetória, experiência e presença profissional.
 
