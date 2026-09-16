@@ -1,6 +1,9 @@
 ADR
 ADRs
+Arquitetura
+ciclomática
 CodeQL
+código
 CrispyWaffle
 Dapper
 DotNetRepoInspector
@@ -15,12 +18,15 @@ MSBuild
 NuGet
 Ocelot
 OIDC
+Oliveira
 OpenTelemetry
 Outbox
+Português
 Pub
 Redis
 Rodrigo
 Roslyn
+serialização
 SHA
 Terraform
 YamlDotNet
