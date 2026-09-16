@@ -1,0 +1,56 @@
+name: Spell check
+
+on:
+  pull_request:
+    paths:
+      - "README.md"
+      - "README.en.md"
+      - ".cspell.json"
+      - ".cspell/**"
+      - ".github/workflows/spell-check.yml"
+  push:
+    branches:
+      - main
+    paths:
+      - "README.md"
+      - "README.en.md"
+      - ".cspell.json"
+      - ".cspell/**"
+      - ".github/workflows/spell-check.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  spellcheck:
+    name: Check spelling
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+        with:
+          persist-credentials: false
+
+      - name: Set up Node.js
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: 22
+
+      - name: Install Brazilian Portuguese dictionary
+        run: npm install --no-save --ignore-scripts @cspell/dict-pt-br@2.4.2
+
+      - name: Check spelling
+        uses: streetsidesoftware/cspell-action@e0668cf020899e887ee8ad4d173c31738a79eae8 # v9.0.1
+        with:
+          config: .cspell.json
+          files: |
+            README.md
+            README.en.md
+          incremental_files_only: false
+          strict: true
+          suggestions: true
+          inline: error
+          report: all
