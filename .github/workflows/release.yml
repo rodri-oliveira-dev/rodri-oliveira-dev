@@ -1,0 +1,241 @@
+name: Release profile
+
+on:
+  workflow_run:
+    workflows:
+      - Validate profile
+    types:
+      - completed
+    branches:
+      - main
+
+permissions:
+  actions: read
+  contents: write
+
+concurrency:
+  group: release-profile-${{ github.event.workflow_run.head_sha }}
+  cancel-in-progress: false
+
+jobs:
+  release:
+    name: Create incremental release
+    if: >-
+      github.event.workflow_run.conclusion == 'success' &&
+      github.event.workflow_run.event == 'push' &&
+      github.event.workflow_run.head_branch == 'main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      GH_TOKEN: ${{ github.token }}
+      RELEASE_SHA: ${{ github.event.workflow_run.head_sha }}
+
+    steps:
+      - name: ✅ Release gate accepted
+        shell: bash
+        run: |
+          set -euo pipefail
+          {
+            echo "## Release pipeline"
+            echo
+            echo "Target commit: \`${RELEASE_SHA}\`"
+            echo
+            echo "- [x] 1. Validate profile completed successfully"
+            echo "- [ ] 2. Verify every push workflow for this commit"
+            echo "- [ ] 3. Resolve the next incremental tag"
+            echo "- [ ] 4. Create the tag"
+            echo "- [ ] 5. Publish the GitHub Release"
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: 📥 Checkout validated commit
+        uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+        with:
+          ref: ${{ env.RELEASE_SHA }}
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: 🔎 Verify all push workflows
+        id: workflows
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          repo="$GITHUB_REPOSITORY"
+          sha="$RELEASE_SHA"
+          attempts=20
+          sleep_seconds=15
+          runs='[]'
+
+          for attempt in $(seq 1 "$attempts"); do
+            response="$(gh api \
+              -H 'Accept: application/vnd.github+json' \
+              "/repos/${repo}/actions/runs?head_sha=${sha}&event=push&per_page=100")"
+
+            runs="$(jq '[.workflow_runs[] | {name, status, conclusion, html_url}]' <<< "$response")"
+            count="$(jq 'length' <<< "$runs")"
+            pending="$(jq '[.[] | select(.status != "completed")] | length' <<< "$runs")"
+
+            if [[ "$count" -gt 0 && "$pending" -eq 0 ]]; then
+              break
+            fi
+
+            if [[ "$attempt" -eq "$attempts" ]]; then
+              echo "Timed out waiting for push workflows for ${sha}." >&2
+              {
+                echo
+                echo "### ❌ Workflow verification"
+                echo
+                echo "Timed out waiting for all push workflows to complete."
+              } >> "$GITHUB_STEP_SUMMARY"
+              exit 1
+            fi
+
+            sleep "$sleep_seconds"
+          done
+
+          failed="$(jq '[.[] | select(.conclusion != "success")] | length' <<< "$runs")"
+
+          {
+            echo
+            echo "### Workflow verification"
+            echo
+            echo "| Workflow | Status | Conclusion |"
+            echo "| --- | --- | --- |"
+            jq -r '.[] | "| \(.name) | \(.status) | \(.conclusion // "-") |"' <<< "$runs"
+          } >> "$GITHUB_STEP_SUMMARY"
+
+          if [[ "$failed" -ne 0 ]]; then
+            echo "One or more push workflows did not complete successfully." >&2
+            {
+              echo
+              echo "❌ Release stopped because not every push workflow concluded with success."
+            } >> "$GITHUB_STEP_SUMMARY"
+            exit 1
+          fi
+
+          {
+            echo
+            echo "✅ All push workflows for the target commit completed successfully."
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: 🏷️ Resolve incremental tag
+        id: version
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          git fetch --tags --force
+          stable_regex='^v(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)$'
+
+          existing_tag="$(git tag --points-at "$RELEASE_SHA" | grep -E "$stable_regex" | sort -V | tail -n 1 || true)"
+
+          if [[ -n "$existing_tag" ]]; then
+            tag="$existing_tag"
+            tag_exists=true
+          else
+            latest_tag="$(git tag -l 'v*' | grep -E "$stable_regex" | sort -V | tail -n 1 || true)"
+
+            if [[ -z "$latest_tag" ]]; then
+              tag='v1.0.0'
+            else
+              version="${latest_tag#v}"
+              IFS='.' read -r major minor patch <<< "$version"
+              tag="v${major}.${minor}.$((patch + 1))"
+            fi
+
+            tag_exists=false
+          fi
+
+          echo "tag=${tag}" >> "$GITHUB_OUTPUT"
+          echo "tag_exists=${tag_exists}" >> "$GITHUB_OUTPUT"
+
+          {
+            echo
+            echo "### Tag resolution"
+            echo
+            if [[ "$tag_exists" == 'true' ]]; then
+              echo "♻️ Existing release tag for this commit: \`${tag}\`"
+            else
+              echo "🏷️ Next release tag: \`${tag}\`"
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: 🔖 Create tag
+        id: tag
+        shell: bash
+        env:
+          TAG: ${{ steps.version.outputs.tag }}
+          TAG_EXISTS: ${{ steps.version.outputs.tag_exists }}
+        run: |
+          set -euo pipefail
+
+          if [[ "$TAG_EXISTS" == 'true' ]]; then
+            echo "Tag ${TAG} already points to this commit; creation is not required."
+            echo "created=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          if gh api "/repos/${GITHUB_REPOSITORY}/git/ref/tags/${TAG}" >/dev/null 2>&1; then
+            existing_sha="$(gh api "/repos/${GITHUB_REPOSITORY}/git/ref/tags/${TAG}" --jq '.object.sha')"
+            if [[ "$existing_sha" != "$RELEASE_SHA" ]]; then
+              echo "Tag ${TAG} already exists and points to ${existing_sha}, not ${RELEASE_SHA}." >&2
+              exit 1
+            fi
+            echo "Tag ${TAG} was created concurrently and already points to the target commit."
+            echo "created=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          gh api \
+            --method POST \
+            -H 'Accept: application/vnd.github+json' \
+            "/repos/${GITHUB_REPOSITORY}/git/refs" \
+            -f "ref=refs/tags/${TAG}" \
+            -f "sha=${RELEASE_SHA}" >/dev/null
+
+          echo "created=true" >> "$GITHUB_OUTPUT"
+
+          {
+            echo
+            echo "✅ Tag \`${TAG}\` points to \`${RELEASE_SHA}\`."
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: 🚀 Publish GitHub Release
+        id: release
+        shell: bash
+        env:
+          TAG: ${{ steps.version.outputs.tag }}
+        run: |
+          set -euo pipefail
+
+          if gh release view "$TAG" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            release_url="$(gh release view "$TAG" --repo "$GITHUB_REPOSITORY" --json url --jq '.url')"
+            echo "Release ${TAG} already exists; nothing to publish."
+            echo "created=false" >> "$GITHUB_OUTPUT"
+            echo "url=${release_url}" >> "$GITHUB_OUTPUT"
+          else
+            gh release create "$TAG" \
+              --repo "$GITHUB_REPOSITORY" \
+              --verify-tag \
+              --title "$TAG" \
+              --generate-notes
+
+            release_url="$(gh release view "$TAG" --repo "$GITHUB_REPOSITORY" --json url --jq '.url')"
+            echo "created=true" >> "$GITHUB_OUTPUT"
+            echo "url=${release_url}" >> "$GITHUB_OUTPUT"
+          fi
+
+          {
+            echo
+            echo "### ✅ Release complete"
+            echo
+            echo "- Tag: \`${TAG}\`"
+            echo "- Commit: \`${RELEASE_SHA}\`"
+            echo "- Release: ${release_url}"
+            echo
+            echo "- [x] 1. Validate profile completed successfully"
+            echo "- [x] 2. Every push workflow completed successfully"
+            echo "- [x] 3. Incremental tag resolved"
+            echo "- [x] 4. Tag available on the validated commit"
+            echo "- [x] 5. GitHub Release published"
+          } >> "$GITHUB_STEP_SUMMARY"
