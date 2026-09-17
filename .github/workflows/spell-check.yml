@@ -3,8 +3,7 @@ name: Spell check
 on:
   pull_request:
     paths:
-      - "README.md"
-      - "README.en.md"
+      - "**/*.md"
       - ".cspell.json"
       - ".cspell/**"
       - ".github/workflows/spell-check.yml"
@@ -12,8 +11,7 @@ on:
     branches:
       - main
     paths:
-      - "README.md"
-      - "README.en.md"
+      - "**/*.md"
       - ".cspell.json"
       - ".cspell/**"
       - ".github/workflows/spell-check.yml"
@@ -48,8 +46,7 @@ jobs:
         with:
           config: .cspell.json
           files: |
-            README.md
-            README.en.md
+            **/*.md
           incremental_files_only: false
           strict: true
           suggestions: true
