@@ -2,7 +2,7 @@
 
 <p align="left">
   <a href="https://rodri-oliveira-dev.github.io/" aria-label="Professional portfolio">
-    <img src="assets/brand/ro-architect-mark.svg" alt="RO Architect" width="64" />
+    <img src="assets/brand/ro-architect-mark.png" alt="RO Architect" width="64" />
   </a>
 </p>
 
