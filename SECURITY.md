@@ -1,9 +1,11 @@
-# Security Policy
+**Português** | [English](SECURITY.en.md)
 
-This repository contains my personal GitHub profile, documentation, and related assets. It does not publish a software product, package, API, or service.
+# Política de Segurança
 
-## Reporting a security concern
+Este repositório contém meu perfil pessoal do GitHub, documentação e recursos relacionados. Ele não publica um produto de software, pacote, API ou serviço.
 
-If you identify a security issue related specifically to the contents or automation of this repository, please do not disclose sensitive details through a public issue.
+## Reportando um problema de segurança
 
-For vulnerabilities affecting one of my open-source projects, refer to the security policy of the respective repository.
+Se você identificar um problema de segurança relacionado especificamente ao conteúdo ou às automações deste repositório, não divulgue detalhes sensíveis por meio de uma issue pública.
+
+Para vulnerabilidades que afetem um dos meus projetos open source, consulte a política de segurança do respectivo repositório.

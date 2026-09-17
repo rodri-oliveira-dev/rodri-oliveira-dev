@@ -25,7 +25,23 @@
       ]
     },
     {
-      "filename": "README.en.md",
+      "filename": "CONTRIBUTING.md",
+      "language": "pt_BR,en-US",
+      "dictionaries": [
+        "pt-br",
+        "profile-terms"
+      ]
+    },
+    {
+      "filename": "SECURITY.md",
+      "language": "pt_BR,en-US",
+      "dictionaries": [
+        "pt-br",
+        "profile-terms"
+      ]
+    },
+    {
+      "filename": "*.en.md",
       "language": "en-US",
       "dictionaries": [
         "profile-terms"
