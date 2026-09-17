@@ -16,7 +16,7 @@ I work where **business constraints, architecture, and implementation meet**. My
 
 I prefer architecture that stays close to engineering: **decisions should show up in code, contracts, guardrails, and automation**, so their assumptions can be tested instead of living only in diagrams or documents.
 
-**[Professional portfolio](https://rodri-oliveira-dev.github.io/)** · [LinkedIn](https://www.linkedin.com/in/rodri-oliveira-dev) · [Café com código](https://www.linkedin.com/newsletters/caf%C3%A9-com-c%C3%B3digo-6880618748047314945) · [NuGet](https://www.nuget.org/profiles/rodri-oliveira-dev)
+**[Professional portfolio](https://rodri-oliveira-dev.github.io/)** · [LinkedIn](https://www.linkedin.com/in/rodri-oliveira-dev) · [DEV.to](https://dev.to/rodri-oliveira-dev) · [NuGet](https://www.nuget.org/profiles/rodri-oliveira-dev)
 
 ---
 
@@ -103,7 +103,7 @@ These principles also shape my [professional portfolio](https://rodri-oliveira-d
 
 I write about software architecture, Domain-Driven Design, distributed systems, backend engineering, software quality, cloud, engineering governance, and technical decision-making.
 
-- **[Café com código](https://www.linkedin.com/newsletters/caf%C3%A9-com-c%C3%B3digo-6880618748047314945)** — newsletter on software architecture, Domain-Driven Design, distributed systems, backend engineering, software quality, and the trade-offs behind technical decisions;
+- **[DEV.to](https://dev.to/rodri-oliveira-dev)** — articles on software architecture, Domain-Driven Design, distributed systems, backend engineering, software quality, and the trade-offs behind technical decisions;
 - **[NuGet](https://www.nuget.org/profiles/rodri-oliveira-dev)** — published .NET libraries, tools, and templates;
 - **[Portfolio](https://rodri-oliveira-dev.github.io/)** — a broader view of my professional work;
 - **[LinkedIn](https://www.linkedin.com/in/rodri-oliveira-dev)** — career history and professional presence.
