@@ -6,6 +6,7 @@ CodeQL
 código
 CrispyWaffle
 Dapper
+dotnet
 DotNetRepoInspector
 FluentMap
 HANA
