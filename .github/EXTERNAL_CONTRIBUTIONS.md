@@ -1,6 +1,6 @@
 # Coleta de contribuições externas
 
-Esta etapa do [roadmap #12](https://github.com/rodri-oliveira-dev/rodri-oliveira-dev/issues/12) implementa apenas a coleta e validação dos dados. Não altera o README e não publica estatísticas automaticamente.
+A implementação do [roadmap #12](https://github.com/rodri-oliveira-dev/rodri-oliveira-dev/issues/12) coleta PRs públicos em projetos de terceiros selecionados, gera Markdown bilíngue e entrega uma prévia verificável para revisão. O workflow não altera diretamente a branch principal.
 
 ## Escopo dos dados
 
@@ -34,7 +34,7 @@ A busca paginada usa a API pública GET /search/issues com os qualificadores is:
 
 O status vem do campo pull_request.merged_at retornado pelo GitHub Search, e não é inferido do fato de um PR estar fechado. Resultados podem sofrer atraso de indexação ou mudanças durante a paginação; as verificações de completude reduzem, mas não eliminam, essas limitações. Somente dados públicos e somente os repositórios curados estão no escopo.
 
-O JSON é escrito de forma atômica apenas quando todos os projetos terminam com sucesso. A etapa de renderização do Markdown e a política de atualização via PR pertencem às issues #16 e #17.
+O JSON é escrito de forma atômica apenas quando todos os projetos terminam com sucesso. A renderização e a proposta de atualização revisável estão implementadas nas issues #16 e #17.
 
 
 ## Renderização bilíngue, sem publicação automática (issue #16)
@@ -63,7 +63,7 @@ python3 scripts/render_external_contributions.py \
   --write
 ~~~
 
-A versão definitiva do GitHub Actions e o mecanismo de atualização por PR estão reservados à issue #17. O workflow temporário de desenvolvimento **apenas testa cópias dos READMEs em RUNNER_TEMP**; não faz commit, não publica artefato nem altera main.
+O workflow definitivo está em `.github/workflows/external-contributions.yml`. Na branch de desenvolvimento e em PRs, somente coleta e renderiza cópias dos READMEs e publica artefatos de prévia. A proposta automática de atualização é restrita a execuções agendadas ou disparadas explicitamente na `main`.
 
 ### Contrato e limites
 
@@ -73,3 +73,21 @@ A versão definitiva do GitHub Actions e o mecanismo de atualização por PR est
 - A data exibida é a **data da última alteração do painel**, não uma promessa de atualização diária. Uma coleta posterior com estados, totais e conteúdo editorial idênticos não muda a data nem os READMEs. Mudanças substantivas nos estados, totais ou textos editoriais atualizam a seção e a data.
 - Executar novamente com os mesmos dados não produz diferenças; o modo padrão é somente prévia. As escritas explícitas usam arquivos temporários nos diretórios de destino e somente ocorrem após o preparo completo das duas versões. Caso a segunda gravação em disco falhe depois da primeira, é possível restaurar pelo controle de versão: a operação entre os dois arquivos não constitui uma transação do sistema de arquivos.
 - A validação de desenvolvimento cobre 25 testes offline (coletor e renderizador), coleta real de dados públicos, invariantes do snapshot, renderização nas duas cópias e repetição sem alterações.
+
+## Workflow definitivo: execução e revisão (issue #17)
+
+Arquivo: [.github/workflows/external-contributions.yml](workflows/external-contributions.yml).
+
+- **Disparos:** push na branch de desenvolvimento (somente caminhos afetados); PR que modifica os arquivos envolvidos; agendamento semanal na quarta-feira, 12:00 UTC, **somente após o workflow existir na main**; e workflow_dispatch. Uma execução manual tem publish=false por padrão. A proposta automatizada é restrita a schedule ou workflow_dispatch com publish=true, executados na branch main.
+- **Jobs visíveis:** (1) validar curadoria, testes offline e sintaxe dos workflows; (2) consultar GitHub com GITHUB_TOKEN temporário e permissão contents: read; (3) renderizar ambos os READMEs em cópias e verificar a idempotência; (4) propor PR de atualização **apenas na main**, se houver mudanças e se não houver outra proposta automática aberta.
+- **Prévia:** cada execução bem-sucedida produz external-contributions-preview com README.md, README.en.md e snapshot.json; e external-contributions-data com o snapshot utilizado. Ambos os artefatos são retidos por 7 dias. Os READMEs versionados não são alterados durante os três primeiros jobs.
+- **Publicação:** o quarto job é o único que recebe contents: write e pull-requests: write. Em uma execução elegível na main, ele verifica se já há um PR de atualização automática aberto; se não houver e as duas versões diferirem das atuais, cria uma branch exclusiva para a execução e abre um PR de revisão em direção à main. **Nunca faz push para a main, merge automático, nem cria branch/PR em execuções de push de desenvolvimento ou pull_request**.
+- **Fallback:** algumas configurações de repositório bloqueiam a criação de PRs pelo GITHUB_TOKEN. Nesse caso, a branch gerada e o artefato de prévia permitem abrir o PR manualmente; o workflow emite aviso sem afirmar que houve publicação. Se também houver bloqueio de push, o job falha e o artefato gerado anteriormente permanece disponível.
+- **Proteção da main:** o ruleset ativo exige PR, resolução de threads e os checks Check README links e Check spelling. PRs criados por GITHUB_TOKEN podem não disparar automaticamente novos workflows de CI; se isso ocorrer, um colaborador autorizado precisa atualizar a branch pelo seu próprio login para acionar os checks, ou propor manualmente o conteúdo do artefato em um novo PR. Não contorne nem enfraqueça o ruleset.
+- **Sem mudanças:** se os dados continuarem iguais, a data não é atualizada, o gerador não modifica os READMEs e o job não abre PR. Se já houver proposta automática aberta, a execução produz novo artefato e aguarda revisão da proposta anterior, sem criar duplicatas.
+- **Falha da API:** a coleta/renderização falha sem editar os READMEs e sem executar a proposta de PR. O token só é disponibilizado ao step de coleta e, no quarto job, às operações GitHub autorizadas.
+- **Migração do Metrics:** o workflow SVG experimental existe somente em branches separadas test/metrics-*, não na main. O PR experimental #11 continua independente. Ao aceitar a solução Markdown, encerrar ou arquivar o experimento de Metrics em uma etapa de manutenção separada, sem integrar seu workflow na main e sem excluir branches antes de conferir o histórico.
+
+### Operação após integração
+
+No GitHub, abra Actions > External open-source contributions > Run workflow, selecione **main** e deixe publish desmarcado para baixar e conferir o artefato de prévia. Marque publish somente quando quiser solicitar um PR revisável de atualização. A execução semanal também proporá uma atualização se houver mudança e não existir outra proposta automática pendente. Revise os números, estados dos PRs, links, traduções e checks antes de integrar.
