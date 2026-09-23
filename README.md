@@ -77,6 +77,8 @@ Contribuir em bases de código que não controlo também expõe uma parte import
 
 <!-- EXTERNAL_CONTRIBUTIONS:START -->
 
+**PRs públicos de minha autoria nos 4 projetos externos selecionados:** 10 no total, 4 integrados, 6 abertos e 0 fechados sem integração. **Projetos com PRs integrados:** 2.
+
 | Projeto externo | Colaboração e PRs de referência |
 | --- | --- |
 | **[Ocelot](https://github.com/ThreeMammals/Ocelot)** | [PR #2420 · integrado](https://github.com/ThreeMammals/Ocelot/pull/2420): Tratamento de timeout downstream como **504 Gateway Timeout**, alinhado à RFC 9110.<br><br>[PR #2421 · aberto](https://github.com/ThreeMammals/Ocelot/pull/2421): Proposta de cobertura de regressão para roteamento de `multipart/form-data`, preservando body, boundary e metadados do arquivo. |
@@ -84,7 +86,7 @@ Contribuir em bases de código que não controlo também expõe uma parte import
 | **[Architecture Decision Record](https://github.com/architecture-decision-record/architecture-decision-record)** | [PR #115 · aberto](https://github.com/architecture-decision-record/architecture-decision-record/pull/115): Proposta de localização completa para Português do Brasil, preservando estrutura, referências e identidade entre conteúdos equivalentes. |
 | **[LikeC4](https://github.com/likec4/likec4)** | [PR #3179 · integrado](https://github.com/likec4/likec4/pull/3179): Introdução do README em pt-BR, suporte à internacionalização e tutorial.<br><br>[PR #3236 · integrado](https://github.com/likec4/likec4/pull/3236): Tradução de Guides e dos fundamentos da DSL.<br><br>[PR #3262 · integrado](https://github.com/likec4/likec4/pull/3262): Localização da documentação de Views da DSL, preservando sintaxe, exemplos e terminologia arquitetural. |
 
-*Situação dos PRs verificada em 23/09/2026. Esta seleção não representa o total histórico de contribuições; PRs abertos não são contabilizados como integrados.*
+*A seleção e as descrições são editoriais. Os números incluem todos os PRs públicos de minha autoria nesses projetos, mesmo os não destacados na tabela. Atualização do painel: 23/09/2026.*
 
 <!-- EXTERNAL_CONTRIBUTIONS:END -->
 
