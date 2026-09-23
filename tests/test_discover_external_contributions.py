@@ -86,6 +86,7 @@ class DiscoveryTests(unittest.TestCase):
             ["merged", "open"],
         )
         self.assertIn(f"-user:{LOGIN}", api.queries[0][1]["q"])
+        self.assertIn("is:public", api.queries[0][1]["q"].split())
 
     def test_no_candidates_is_valid(self):
         result = discover(config(), FakeAPI({1: response([issue(CURATED, 1)])}), DATE)
