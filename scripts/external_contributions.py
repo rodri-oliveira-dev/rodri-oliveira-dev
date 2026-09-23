@@ -140,7 +140,7 @@ def _repository_pull_requests(api: GitHubAPI, repository: str, profile: str) -> 
     found: dict[int, dict] = {}
     total = None
     for page in range(1, (MAX_SEARCH_RESULTS // PAGE_SIZE) + 1):
-        query = f"is:pr author:{profile} repo:{repository}"
+        query = f"is:pr is:public author:{profile} repo:{repository}"
         payload = api.get(
             "/search/issues",
             {"q": query, "per_page": PAGE_SIZE, "page": page},
