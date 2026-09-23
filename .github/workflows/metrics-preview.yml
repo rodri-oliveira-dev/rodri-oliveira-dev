@@ -52,11 +52,11 @@ jobs:
           template: classic
           base: ""
           config_timezone: America/Sao_Paulo
-          plugin_activity: yes
-          plugin_activity_limit: 6
-          plugin_activity_days: 30
-          plugin_activity_visibility: public
-          plugin_activity_filter: pr,review,issue,release
+          # O plugin activity foi desativado temporariamente nesta versão.
+          # Na versão fixada do Metrics ele falha em PushEvent sem payload.commits,
+          # mesmo com push fora de plugin_activity_filter.
+          # Validamos followup/notable separadamente para não bloquear o painel.
+          plugin_activity: no
           plugin_followup: yes
           plugin_followup_sections: user
           plugin_notable: yes
