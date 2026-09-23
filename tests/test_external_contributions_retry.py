@@ -9,8 +9,22 @@ from urllib.error import HTTPError, URLError
 
 from scripts.discover_external_contributions import discover
 from scripts.external_contributions import CollectionError, GitHubAPI, collect, write_snapshot
-from tests.test_external_contributions import curated, issue, search
-from tests.test_discover_external_contributions import config as discovery_config
+
+
+def curated():
+    return {
+        "schema_version": 1,
+        "profile": "rodri-oliveira-dev",
+        "projects": [{
+            "repository": "SomeOrg/SomeProject",
+            "name": "External project",
+            "pull_requests": [{"number": 10, "pt": "Texto", "en": "Text"}],
+        }],
+    }
+
+
+def discovery_config():
+    return curated()
 
 
 class Clock:
