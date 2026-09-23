@@ -28,7 +28,7 @@ class WorkflowContractTests(unittest.TestCase):
         self.assertNotIn("scripts/discover_external_contributions.py", workflow["collect"])
         self.assertIn("scripts/discover_external_contributions.py", workflow["discover"])
         self.assertIn('echo "status=unavailable" >> "$GITHUB_OUTPUT"', workflow["discover"])
-        self.assertIn("if: \${{ steps.discovery.outputs.status == 'success' }}", workflow["discover"])
+        self.assertIn("if: ${{ steps.discovery.outputs.status == 'success' }}", workflow["discover"])
 
     def test_render_survives_optional_failure_and_rejects_curated_failure(self):
         workflow = jobs()
@@ -44,7 +44,7 @@ class WorkflowContractTests(unittest.TestCase):
         self.assertIn("needs.render.result == 'success'", workflow["propose"])
         self.assertIn("github.ref == 'refs/heads/main'", workflow["propose"])
         self.assertIn("inputs.publish == true", workflow["propose"])
-        self.assertIn("ref: \${{ github.sha }}", workflow["propose"])
+        self.assertIn("ref: ${{ github.sha }}", workflow["propose"])
         self.assertIn("python3 scripts/propose_external_contributions.py", workflow["propose"])
         self.assertIn("contents: write", workflow["propose"])
         for job in ("validate", "collect", "discover", "render"):
