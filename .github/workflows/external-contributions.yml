@@ -8,6 +8,8 @@ on:
       - .github/external-contributions.json
       - .github/workflows/external-contributions.yml
       - scripts/external_contributions.py
+      - scripts/discover_external_contributions.py
+      - tests/test_discover_external_contributions.py
       - scripts/render_external_contributions.py
       - tests/test_external_contributions.py
       - tests/test_render_external_contributions.py
@@ -18,13 +20,15 @@ on:
       - .github/external-contributions.json
       - .github/workflows/external-contributions.yml
       - scripts/external_contributions.py
+      - scripts/discover_external_contributions.py
+      - tests/test_discover_external_contributions.py
       - scripts/render_external_contributions.py
       - tests/test_external_contributions.py
       - tests/test_render_external_contributions.py
       - README.md
       - README.en.md
   schedule:
-    - cron: "0 12 * * 3"
+    - cron: "0 9 * * *"
   workflow_dispatch:
     inputs:
       publish:
@@ -89,6 +93,22 @@ jobs:
             --config .github/external-contributions.json \
             --output "$RUNNER_TEMP/external-contributions-snapshot.json"
 
+      - name: Discover new third-party repositories
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          python3 scripts/discover_external_contributions.py \
+            --config .github/external-contributions.json \
+            --output "$RUNNER_TEMP/external-contributions-candidates.json"
+
+      - name: Upload new project candidates for manual review
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: external-contributions-candidates
+          path: ${{ runner.temp }}/external-contributions-candidates.json
+          if-no-files-found: error
+          retention-days: 7
+
       - name: Upload verified data for rendering
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
@@ -113,6 +133,12 @@ jobs:
         with:
           name: external-contributions-data
           path: ${{ runner.temp }}/contributions
+
+      - name: Download newly discovered repository candidates
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with:
+          name: external-contributions-candidates
+          path: ${{ runner.temp }}/discovery
 
       - name: Generate preview without modifying tracked files
         run: |
@@ -139,6 +165,7 @@ jobs:
           cmp preview/README.en.md "$RUNNER_TEMP/README.en.first.md"
           git diff --exit-code -- README.md README.en.md
           cp "$RUNNER_TEMP/contributions/external-contributions-snapshot.json" preview/snapshot.json
+          cp "$RUNNER_TEMP/discovery/external-contributions-candidates.json" preview/candidates.json
 
       - name: Summarize scope and availability
         run: |
@@ -148,6 +175,7 @@ jobs:
           from os import environ
 
           data = json.loads(Path("preview/snapshot.json").read_text(encoding="utf-8"))
+          discovery = json.loads(Path("preview/candidates.json").read_text(encoding="utf-8"))
           totals = data["totals"]
           with open(environ["GITHUB_STEP_SUMMARY"], "a", encoding="utf-8") as summary:
               summary.write("### External contributions preview\n\n")
@@ -157,9 +185,26 @@ jobs:
                   f"{totals['open_prs']} open, {totals['closed_unmerged_prs']} closed without merge.\n\n"
               )
               summary.write(
-                  "Download the **external-contributions-preview** artifact to review "
-                  "README.md, README.en.md and snapshot.json. No tracked README was modified.\n"
+                  "Download **external-contributions-preview** to review README.md, "
+                  "README.en.md, snapshot.json and candidates.json. "
+                  "No tracked README was modified.\n\n"
               )
+              candidates = discovery["candidate_repositories"]
+              summary.write(
+                  f"### Newly discovered external repositories: {len(candidates)}\n\n"
+              )
+              summary.write(
+                  "New repositories are reported for editorial review, not automatically "
+                  "added to the profile or included in the curated metrics.\n\n"
+              )
+              for project in candidates:
+                  repo = project["repository"]
+                  links = ", ".join(
+                      f"[#{pr['number']}]({pr['url']})"
+                      for pr in project["pull_requests"]
+                  )
+                  summary.write(f"- [{repo}](https://github.com/{repo}): {links}\n")
+
           PY
 
       - name: Upload bilingual README preview
