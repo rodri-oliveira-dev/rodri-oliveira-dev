@@ -277,70 +277,16 @@ jobs:
           name: external-contributions-preview
           path: ${{ runner.temp }}/external-preview
 
-      - name: Create branch and request review if no update PR exists
+      - name: Propose update from the verified rendered commit
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PUBLISH: ${{ inputs.publish }}
         run: |
-          set -euo pipefail
-          existing="$(gh pr list --repo "$GITHUB_REPOSITORY" --base main --state open \
-            --limit 100 --json headRefName \
-            --jq '[.[] | select(.headRefName | startswith("automation/external-contributions-"))] | length')"
-
-          if [ "$existing" -gt 0 ]; then
-            echo "An external contributions update PR is already open. Review that PR before another update."
-            echo "A fresh preview remains available in this run's artifact." >> "$GITHUB_STEP_SUMMARY"
-            exit 0
-          fi
-
-          if cmp -s README.md "$RUNNER_TEMP/external-preview/README.md" \
-            && cmp -s README.en.md "$RUNNER_TEMP/external-preview/README.en.md"; then
-            echo "README data unchanged; no branch or PR necessary."
-            exit 0
-          fi
-
-          # The preview was rendered from GITHUB_SHA. Never propose a complete
-          # README built from that commit if main has advanced in the meantime.
-          current_main="$(git ls-remote --exit-code origin refs/heads/main | cut -f1)"
-          if [ "$current_main" != "$GITHUB_SHA" ]; then
-            echo "::warning::main changed after the preview was rendered. Skipping this proposal; run the workflow again to preserve concurrent README edits."
-            echo "main advanced during this run. Review the preview and rerun against the latest main commit." >> "$GITHUB_STEP_SUMMARY"
-            exit 0
-          fi
-
-          branch="automation/external-contributions-$GITHUB_RUN_ID"
-          git switch -c "$branch"
-          cp "$RUNNER_TEMP/external-preview/README.md" README.md
-          cp "$RUNNER_TEMP/external-preview/README.en.md" README.en.md
-          git add -- README.md README.en.md
-          if git diff --cached --quiet; then
-            echo "No changes to propose."
-            exit 0
-          fi
-          git -c user.name="github-actions[bot]" \
-              -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
-              commit -m "docs: refresh curated external contributions"
-          current_main="$(git ls-remote --exit-code origin refs/heads/main | cut -f1)"
-          if [ "$current_main" != "$GITHUB_SHA" ]; then
-            echo "::warning::main changed before the update branch was pushed. Skipping this proposal; rerun against the latest main commit."
-            echo "main advanced before publishing; rerun against the latest main commit." >> "$GITHUB_STEP_SUMMARY"
-            exit 0
-          fi
-          git push origin "HEAD:refs/heads/$branch"
-
-          if gh pr create --repo "$GITHUB_REPOSITORY" --base main --head "$branch" \
-            --title "docs: atualizar contribuições open source externas" \
-            --body "Atualização automática proposta para revisão humana. Modifica somente os blocos delimitados em README.md e README.en.md. Origem: workflow run $GITHUB_RUN_ID. Verifique os estados dos PRs, links e checks obrigatórios antes de integrar."; then
-            echo "Update PR created for review; main was not modified." >> "$GITHUB_STEP_SUMMARY"
-            # Pushes/PRs made by GITHUB_TOKEN do not automatically trigger CI.
-            # workflow_dispatch is explicitly allowed to initiate new runs.
-            for workflow in validate-profile.yml spell-check.yml; do
-              if gh workflow run "$workflow" --repo "$GITHUB_REPOSITORY" --ref "$branch"; then
-                echo "Required check workflow dispatched: $workflow" >> "$GITHUB_STEP_SUMMARY"
-              else
-                echo "::warning::Could not dispatch $workflow. Reviewers must ensure the required checks run before merge."
-              fi
-            done
-          else
-            echo "::warning::The repository may forbid workflows from creating pull requests. Preview artifact is available; open a PR manually from $branch after reviewing it."
-            echo "PR creation was denied. Review the preview artifact and manually open a PR from $branch into main." >> "$GITHUB_STEP_SUMMARY"
-          fi
+          python3 scripts/propose_external_contributions.py \
+            --preview-dir "$RUNNER_TEMP/external-preview" \
+            --repo "$GITHUB_REPOSITORY" \
+            --sha "$GITHUB_SHA" \
+            --run-id "$GITHUB_RUN_ID" \
+            --event "$GITHUB_EVENT_NAME" \
+            --ref "$GITHUB_REF" \
+            --publish "${PUBLISH:-false}"
