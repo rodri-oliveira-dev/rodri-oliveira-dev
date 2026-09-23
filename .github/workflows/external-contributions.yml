@@ -77,6 +77,17 @@ jobs:
           print(f"Validated {len(config['projects'])} external repositories and {count} curated PRs")
           PY
 
+      - name: Smoke-test production publisher entrypoint without write credentials
+        run: |
+          python3 scripts/propose_external_contributions.py \
+            --preview-dir "$RUNNER_TEMP/missing-preview" \
+            --repo "$GITHUB_REPOSITORY" \
+            --sha "$GITHUB_SHA" \
+            --run-id "$GITHUB_RUN_ID" \
+            --event pull_request \
+            --ref refs/heads/qa-smoke-test \
+            --publish true
+
       - name: Validate GitHub Actions workflow syntax
         uses: docker://rhysd/actionlint:1.7.12
         with:
