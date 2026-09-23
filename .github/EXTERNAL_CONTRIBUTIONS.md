@@ -36,7 +36,6 @@ O status vem do campo pull_request.merged_at retornado pelo GitHub Search, e nã
 
 O JSON é escrito de forma atômica apenas quando todos os projetos terminam com sucesso. A renderização e a proposta de atualização revisável estão implementadas nas issues #16 e #17.
 
-
 ## Renderização bilíngue, sem publicação automática (issue #16)
 
 O renderizador [render_external_contributions.py](../scripts/render_external_contributions.py) consome **somente** a configuração editorial e o snapshot completo do coletor. Não consulta a API, não exige token e não sobrescreve o README inteiro.
