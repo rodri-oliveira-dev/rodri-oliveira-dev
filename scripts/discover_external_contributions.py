@@ -50,7 +50,7 @@ def discover(config: dict, api: GitHubAPI, collected_at: datetime | None = None)
     """
     login = config["profile"]
     curated = {item["repository"].casefold() for item in config["projects"]}
-    query = f"is:pr author:{login} -user:{login}"
+    query = f"is:pr is:public author:{login} -user:{login}"
     found: dict[tuple[str, int], dict] = {}
     repository_names: dict[str, str] = {}
     total = None
