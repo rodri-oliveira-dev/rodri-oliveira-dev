@@ -1,0 +1,59 @@
+name: Preview GitHub Metrics
+
+on:
+  push:
+    branches:
+      - test/metrics-engineering-preview
+    paths:
+      - .github/workflows/metrics-preview.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: profile-metrics-preview
+  cancel-in-progress: false
+
+jobs:
+  preview:
+    name: Generate engineering metrics preview
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: write
+
+    steps:
+      - name: Verify metrics token
+        env:
+          METRICS_TOKEN: ${{ secrets.METRICS_TOKEN }}
+        run: |
+          if [ -z "$METRICS_TOKEN" ]; then
+            echo "::error::Configure o secret METRICS_TOKEN no repositorio para gerar o painel."
+            exit 1
+          fi
+
+      - name: Generate preview only on test branch
+        uses: lowlighter/metrics@65836723097537a54cd8eb90f61839426b4266b6 # stable latest branch (verified 2026-09-23)
+        with:
+          token: ${{ secrets.METRICS_TOKEN }}
+          user: rodri-oliveira-dev
+          filename: assets/metrics/github-engineering-preview.svg
+          template: classic
+          base: ""
+          config_timezone: America/Sao_Paulo
+          plugin_activity: yes
+          plugin_activity_limit: 6
+          plugin_activity_days: 30
+          plugin_activity_visibility: public
+          plugin_activity_filter: pr,review,issue,release
+          plugin_followup: yes
+          plugin_followup_sections: user
+          plugin_notable: yes
+          plugin_notable_from: all
+          plugin_notable_types: pull_request,commit
+          plugin_notable_repositories: yes
+          plugins_errors_fatal: yes
+          output_action: commit
+          committer_branch: test/metrics-engineering-preview
+          committer_message: "chore: update engineering metrics preview [skip ci]"
