@@ -108,6 +108,7 @@ class CollectorTests(unittest.TestCase):
         result = collect(curated(numbers=(101,)), api, NOW)
         self.assertEqual(result["totals"]["authored_prs"], 101)
         self.assertEqual([call[1]["page"] for call in api.calls], [1, 2])
+        self.assertTrue(all("is:public" in call[1]["q"].split() for call in api.calls))
         self.assertEqual(result["projects"][0]["reference_prs"][0]["number"], 101)
 
     def test_incomplete_pagination_rejects_false_totals(self):
