@@ -184,10 +184,10 @@ jobs:
       pull-requests: write
       actions: write # dispatch the required profile checks for a bot-created PR
     steps:
-      - name: Checkout main (only this job has write access)
+      - name: Checkout rendered main commit (only this job has write access)
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
-          ref: main
+          ref: ${{ github.sha }}
           persist-credentials: true
 
       - name: Download validated README preview
@@ -217,6 +217,15 @@ jobs:
             exit 0
           fi
 
+          # The preview was rendered from GITHUB_SHA. Never propose a complete
+          # README built from that commit if main has advanced in the meantime.
+          current_main="$(git ls-remote --exit-code origin refs/heads/main | cut -f1)"
+          if [ "$current_main" != "$GITHUB_SHA" ]; then
+            echo "::warning::main changed after the preview was rendered. Skipping this proposal; run the workflow again to preserve concurrent README edits."
+            echo "main advanced during this run. Review the preview and rerun against the latest main commit." >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
+
           branch="automation/external-contributions-$GITHUB_RUN_ID"
           git switch -c "$branch"
           cp "$RUNNER_TEMP/external-preview/README.md" README.md
@@ -229,6 +238,12 @@ jobs:
           git -c user.name="github-actions[bot]" \
               -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
               commit -m "docs: refresh curated external contributions"
+          current_main="$(git ls-remote --exit-code origin refs/heads/main | cut -f1)"
+          if [ "$current_main" != "$GITHUB_SHA" ]; then
+            echo "::warning::main changed before the update branch was pushed. Skipping this proposal; rerun against the latest main commit."
+            echo "main advanced before publishing; rerun against the latest main commit." >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
           git push origin "HEAD:refs/heads/$branch"
 
           if gh pr create --repo "$GITHUB_REPOSITORY" --base main --head "$branch" \
