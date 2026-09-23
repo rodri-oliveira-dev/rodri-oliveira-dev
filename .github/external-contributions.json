@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "profile": "rodri-oliveira-dev",
+  "scope": "selected external repositories; public pull requests authored by profile; repositories owned by profile excluded",
+  "projects": [
+    {
+      "repository": "ThreeMammals/Ocelot",
+      "name": "Ocelot",
+      "pull_requests": [
+        {
+          "number": 2420,
+          "pt": "Tratamento de timeout downstream como **504 Gateway Timeout**, alinhado à RFC 9110.",
+          "en": "Mapped downstream timeouts to **504 Gateway Timeout**, aligned with RFC 9110."
+        },
+        {
+          "number": 2421,
+          "pt": "Proposta de cobertura de regressão para roteamento de `multipart/form-data`, preservando body, boundary e metadados do arquivo.",
+          "en": "Proposed regression coverage for `multipart/form-data` rerouting while preserving the body, boundary, and file metadata."
+        }
+      ]
+    },
+    {
+      "repository": "guibranco/CrispyWaffle",
+      "name": "CrispyWaffle",
+      "pull_requests": [
+        {
+          "number": 980,
+          "pt": "Proposta de serialização YAML com YamlDotNet, integrada às abstrações existentes, com testes e documentação.",
+          "en": "Proposed YAML serialization using YamlDotNet, integrated with the existing abstractions, tests, and documentation."
+        }
+      ]
+    },
+    {
+      "repository": "architecture-decision-record/architecture-decision-record",
+      "name": "Architecture Decision Record",
+      "pull_requests": [
+        {
+          "number": 115,
+          "pt": "Proposta de localização completa para Português do Brasil, preservando estrutura, referências e identidade entre conteúdos equivalentes.",
+          "en": "Proposed a complete Brazilian Portuguese localization while preserving structure and references across equivalent content."
+        }
+      ]
+    },
+    {
+      "repository": "likec4/likec4",
+      "name": "LikeC4",
+      "pull_requests": [
+        {
+          "number": 3179,
+          "pt": "Introdução do README em pt-BR, suporte à internacionalização e tutorial.",
+          "en": "Introduced the pt-BR README, documentation i18n support, and tutorial."
+        },
+        {
+          "number": 3236,
+          "pt": "Tradução de Guides e dos fundamentos da DSL.",
+          "en": "Localized Guides and the DSL fundamentals."
+        },
+        {
+          "number": 3262,
+          "pt": "Localização da documentação de Views da DSL, preservando sintaxe, exemplos e terminologia arquitetural.",
+          "en": "Localized the DSL Views documentation while preserving syntax, examples, and architecture terminology."
+        }
+      ]
+    }
+  ]
+}
