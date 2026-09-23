@@ -73,16 +73,6 @@ That work comes with a different constraint: **move the project forward without 
 
 Contributing to codebases I do not control exercises a different part of engineering: understanding existing decisions, respecting project conventions and contracts, discussing trade-offs, and making changes that fit the surrounding ecosystem.
 
-| Project | Contribution |
-| --- | --- |
-| **[Ocelot](https://github.com/ThreeMammals/Ocelot)** | [PR #2420](https://github.com/ThreeMammals/Ocelot/pull/2420): mapped downstream timeouts to **504 Gateway Timeout**, aligned with RFC 9110. [PR #2421](https://github.com/ThreeMammals/Ocelot/pull/2421): added regression coverage for `multipart/form-data` rerouting while preserving the body, boundary, and file metadata. |
-| **[CrispyWaffle](https://github.com/guibranco/CrispyWaffle)** | [PR #980](https://github.com/guibranco/CrispyWaffle/pull/980): added YAML serialization with YamlDotNet, integrated with the existing abstractions, tests, and documentation. |
-| **[Architecture Decision Record](https://github.com/architecture-decision-record/architecture-decision-record)** | [PR #115](https://github.com/architecture-decision-record/architecture-decision-record/pull/115): completed the Brazilian Portuguese localization while preserving structure and references across equivalent content. |
-| **[LikeC4](https://github.com/likec4/likec4)** | Expanded the official **Brazilian Portuguese** localization: [PR #3179](https://github.com/likec4/likec4/pull/3179) introduced the pt-BR README, documentation i18n support, and tutorial; [PR #3236](https://github.com/likec4/likec4/pull/3236) localized Guides and the DSL fundamentals; [PR #3262](https://github.com/likec4/likec4/pull/3262) completed the DSL Views documentation localization while preserving syntax, examples, and architecture terminology. |
-
-**[Track contributions and work in progress →](https://github.com/users/rodri-oliveira-dev/projects/1/views/1)**  
-I use this GitHub Project to track open-source issues, contributions, and initiatives I am working on, evaluating, or have worked on previously.
-
 **Selected contributions to third-party projects**, linking to proposed and merged work.
 
 <!-- EXTERNAL_CONTRIBUTIONS:START -->
