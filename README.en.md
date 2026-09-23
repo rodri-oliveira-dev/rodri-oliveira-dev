@@ -77,6 +77,8 @@ Contributing to codebases I do not control exercises a different part of enginee
 
 <!-- EXTERNAL_CONTRIBUTIONS:START -->
 
+**Public PRs authored by me in the 4 selected external projects:** 10 total, 4 merged, 6 open and 0 closed without merge. **Projects with merged PRs:** 2.
+
 | External project | Contributions and reference PRs |
 | --- | --- |
 | **[Ocelot](https://github.com/ThreeMammals/Ocelot)** | [PR #2420 · merged](https://github.com/ThreeMammals/Ocelot/pull/2420): Mapped downstream timeouts to **504 Gateway Timeout**, aligned with RFC 9110.<br><br>[PR #2421 · open](https://github.com/ThreeMammals/Ocelot/pull/2421): Proposed regression coverage for `multipart/form-data` rerouting while preserving the body, boundary, and file metadata. |
@@ -84,7 +86,7 @@ Contributing to codebases I do not control exercises a different part of enginee
 | **[Architecture Decision Record](https://github.com/architecture-decision-record/architecture-decision-record)** | [PR #115 · open](https://github.com/architecture-decision-record/architecture-decision-record/pull/115): Proposed a complete Brazilian Portuguese localization while preserving structure and references across equivalent content. |
 | **[LikeC4](https://github.com/likec4/likec4)** | [PR #3179 · merged](https://github.com/likec4/likec4/pull/3179): Introduced the pt-BR README, documentation i18n support, and tutorial.<br><br>[PR #3236 · merged](https://github.com/likec4/likec4/pull/3236): Localized Guides and the DSL fundamentals.<br><br>[PR #3262 · merged](https://github.com/likec4/likec4/pull/3262): Localized the DSL Views documentation while preserving syntax, examples, and architecture terminology. |
 
-*PR status verified on 2026-09-23. This selection is not a lifetime contributions total; open PRs are not counted as merged.*
+*Project selection and descriptions are editorial. Figures include all public PRs I authored in these projects, including those not highlighted in the table. Dashboard updated: 2026-09-23.*
 
 <!-- EXTERNAL_CONTRIBUTIONS:END -->
 
