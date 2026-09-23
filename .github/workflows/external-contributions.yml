@@ -307,6 +307,7 @@ jobs:
             --repo "$GITHUB_REPOSITORY" \
             --sha "$GITHUB_SHA" \
             --run-id "$GITHUB_RUN_ID" \
+            --run-attempt "$GITHUB_RUN_ATTEMPT" \
             --event "$GITHUB_EVENT_NAME" \
             --ref "$GITHUB_REF" \
             --publish "${PUBLISH:-false}"
