@@ -46,6 +46,8 @@ class WorkflowContractTests(unittest.TestCase):
         self.assertIn("inputs.publish == true", workflow["propose"])
         self.assertIn("ref: ${{ github.sha }}", workflow["propose"])
         self.assertIn("python3 scripts/propose_external_contributions.py", workflow["propose"])
+        self.assertIn('--run-attempt "$GITHUB_RUN_ATTEMPT"', workflow["propose"])
+        self.assertIn('--run-attempt "$GITHUB_RUN_ATTEMPT"', workflow["validate"])
         self.assertIn("contents: write", workflow["propose"])
         for job in ("validate", "collect", "discover", "render"):
             self.assertNotIn("contents: write", workflow[job])
