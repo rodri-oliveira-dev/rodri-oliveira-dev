@@ -10,10 +10,14 @@ from __future__ import annotations
 import argparse
 import json
 import os
+import random
 import re
+import ssl
 import sys
 import tempfile
+import time
 from datetime import datetime, timezone
+from email.utils import parsedate_to_datetime
 from pathlib import Path
 from urllib.error import HTTPError, URLError
 from urllib.parse import urlencode
@@ -32,11 +36,68 @@ class CollectionError(Exception):
 
 
 class GitHubAPI:
-    def __init__(self, token: str, opener=None):
+    """Read-only GitHub client with bounded, transient-only retries.
+
+    Maximum attempts, cumulative sleep and elapsed time are separate bounds:
+    never retry before a server-requested delay if it exceeds the budget.
+    """
+
+    RETRYABLE_HTTP = frozenset((408, 429, 500, 502, 503, 504))
+
+    def __init__(
+        self, token: str, opener=None, *, max_attempts: int = 3,
+        timeout: float = 10.0, max_total_wait: float = 20.0,
+        max_elapsed: float = 50.0, sleep=None, monotonic=None,
+        wall_time=None, jitter=None,
+    ):
         if not token:
             raise CollectionError("GITHUB_TOKEN is required; no snapshot was generated")
+        if (
+            type(max_attempts) is not int or not 1 <= max_attempts <= 4
+            or timeout <= 0 or max_total_wait < 0 or max_elapsed <= 0
+            or max_elapsed < timeout or max_total_wait > max_elapsed
+        ):
+            raise ValueError("Invalid GitHub API retry configuration")
         self._token = token
         self._open = opener or urlopen
+        self._max_attempts = max_attempts
+        self._timeout = timeout
+        self._max_total_wait = max_total_wait
+        self._max_elapsed = max_elapsed
+        self._sleep = sleep or time.sleep
+        self._monotonic = monotonic or time.monotonic
+        self._wall_time = wall_time or time.time
+        self._jitter = jitter or random.random
+
+    def _retry_delay(self, attempt: int, error: HTTPError | None) -> float:
+        """Honor Retry-After / rate reset, otherwise bounded exponential jitter."""
+        if error is not None:
+            headers = error.headers
+            retry_after = headers.get("Retry-After") if headers is not None else None
+            if retry_after is not None:
+                try:
+                    seconds = float(retry_after)
+                    if not 0 <= seconds < float("inf"):
+                        raise ValueError
+                    return seconds
+                except ValueError:
+                    try:
+                        parsed = parsedate_to_datetime(retry_after)
+                        if parsed.tzinfo is not None:
+                            return max(0.0, parsed.timestamp() - self._wall_time())
+                    except (ValueError, TypeError, OverflowError):
+                        pass
+            if error.code == 429 and headers is not None:
+                reset = headers.get("X-RateLimit-Reset")
+                if reset is not None:
+                    try:
+                        seconds = max(0.0, float(reset) - self._wall_time())
+                        if seconds < float("inf"):
+                            return seconds
+                    except ValueError:
+                        pass
+        # Jittered backoff is bounded, including when the RNG is injectable.
+        return min(10.0, (2 ** (attempt - 1)) + max(0.0, min(1.0, self._jitter())))
 
     def get(self, path: str, params: dict[str, object]) -> dict:
         url = API_ROOT + path + "?" + urlencode(params)
@@ -49,22 +110,50 @@ class GitHubAPI:
                 "User-Agent": "profile-external-contributions",
             },
         )
-        try:
-            with self._open(request, timeout=20) as response:
-                result = json.loads(response.read())
-        except HTTPError as error:
-            # Deliberately exclude response bodies, URLs, and request headers.
-            raise CollectionError(
-                f"GitHub API returned HTTP {error.code}; the previous snapshot is unchanged"
-            ) from None
-        except (URLError, TimeoutError, OSError, ValueError):
-            raise CollectionError(
-                "GitHub API request or response failed; the previous snapshot is unchanged"
-            ) from None
-        if not isinstance(result, dict):
-            raise CollectionError("Unexpected GitHub API response format")
-        return result
+        started = self._monotonic()
+        waited = 0.0
+        for attempt in range(1, self._max_attempts + 1):
+            remaining = self._max_elapsed - (self._monotonic() - started)
+            if remaining <= 0:
+                raise CollectionError("GitHub API retry time budget exhausted; previous snapshot unchanged")
+            retry_error = None
+            try:
+                with self._open(request, timeout=min(self._timeout, remaining)) as response:
+                    result = json.loads(response.read())
+            except HTTPError as error:
+                if error.code not in self.RETRYABLE_HTTP:
+                    raise CollectionError(
+                        f"GitHub API returned HTTP {error.code}; the previous snapshot is unchanged"
+                    ) from None
+                retry_error = error
+            except (TimeoutError, URLError, ConnectionError) as error:
+                if isinstance(error, URLError) and isinstance(error.reason, ssl.SSLError):
+                    raise CollectionError(
+                        "GitHub API TLS verification failed; the previous snapshot is unchanged"
+                    ) from None
+            except (OSError, ValueError):
+                # Unexpected local/configuration errors and invalid JSON are not transient.
+                raise CollectionError(
+                    "GitHub API request or response failed; the previous snapshot is unchanged"
+                ) from None
+            else:
+                if not isinstance(result, dict):
+                    raise CollectionError("Unexpected GitHub API response format")
+                return result
 
+            if attempt >= self._max_attempts:
+                raise CollectionError(
+                    "GitHub API transient failure after retry limit; previous snapshot unchanged"
+                )
+            delay = self._retry_delay(attempt, retry_error)
+            remaining = self._max_elapsed - (self._monotonic() - started)
+            if delay > self._max_total_wait - waited or delay > remaining:
+                raise CollectionError(
+                    "GitHub API rate limit or retry time budget exceeded; previous snapshot unchanged"
+                )
+            self._sleep(delay)
+            waited += delay
+        raise CollectionError("GitHub API retry limit exceeded; previous snapshot unchanged")
 
 def load_config(path: Path) -> dict:
     try:
