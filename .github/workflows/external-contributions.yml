@@ -1,0 +1,240 @@
+name: External open-source contributions
+
+on:
+  push:
+    branches:
+      - feat/external-contributions-markdown
+    paths:
+      - .github/external-contributions.json
+      - .github/workflows/external-contributions.yml
+      - scripts/external_contributions.py
+      - scripts/render_external_contributions.py
+      - tests/test_external_contributions.py
+      - tests/test_render_external_contributions.py
+      - README.md
+      - README.en.md
+  pull_request:
+    paths:
+      - .github/external-contributions.json
+      - .github/workflows/external-contributions.yml
+      - scripts/external_contributions.py
+      - scripts/render_external_contributions.py
+      - tests/test_external_contributions.py
+      - tests/test_render_external_contributions.py
+      - README.md
+      - README.en.md
+  schedule:
+    - cron: "0 12 * * 3"
+  workflow_dispatch:
+    inputs:
+      publish:
+        description: "Propose a reviewed README update from main (default: preview only)"
+        required: false
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: external-contributions-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  validate:
+    name: 1. Validate curated projects and unit tests
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Checkout without persistent credentials
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+
+      - name: Run offline tests
+        run: python3 -m unittest discover -s tests -v
+
+      - name: Validate curated repositories and PR references
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          from scripts.external_contributions import load_config
+
+          config = load_config(Path(".github/external-contributions.json"))
+          count = sum(len(p["pull_requests"]) for p in config["projects"])
+          print(f"Validated {len(config['projects'])} external repositories and {count} curated PRs")
+          PY
+
+      - name: Validate GitHub Actions workflow syntax
+        uses: docker://rhysd/actionlint:1.7.12
+        with:
+          args: -color
+
+  collect:
+    name: 2. Collect verified public pull requests
+    needs: validate
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Checkout without persistent credentials
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+
+      - name: Collect complete public data
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          python3 scripts/external_contributions.py \
+            --config .github/external-contributions.json \
+            --output "$RUNNER_TEMP/external-contributions-snapshot.json"
+
+      - name: Upload verified data for rendering
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: external-contributions-data
+          path: ${{ runner.temp }}/external-contributions-snapshot.json
+          if-no-files-found: error
+          retention-days: 7
+
+  render:
+    name: 3. Render and verify PT-BR and EN preview
+    needs: collect
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Checkout without persistent credentials
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+
+      - name: Download verified data
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with:
+          name: external-contributions-data
+          path: ${{ runner.temp }}/contributions
+
+      - name: Generate preview without modifying tracked files
+        run: |
+          mkdir -p preview
+          cp README.md preview/README.md
+          cp README.en.md preview/README.en.md
+
+          python3 scripts/render_external_contributions.py \
+            --snapshot "$RUNNER_TEMP/contributions/external-contributions-snapshot.json" \
+            --readme-pt preview/README.md \
+            --readme-en preview/README.en.md \
+            --write
+
+          cp preview/README.md "$RUNNER_TEMP/README.pt.first.md"
+          cp preview/README.en.md "$RUNNER_TEMP/README.en.first.md"
+
+          python3 scripts/render_external_contributions.py \
+            --snapshot "$RUNNER_TEMP/contributions/external-contributions-snapshot.json" \
+            --readme-pt preview/README.md \
+            --readme-en preview/README.en.md \
+            --write
+
+          cmp preview/README.md "$RUNNER_TEMP/README.pt.first.md"
+          cmp preview/README.en.md "$RUNNER_TEMP/README.en.first.md"
+          git diff --exit-code -- README.md README.en.md
+          cp "$RUNNER_TEMP/contributions/external-contributions-snapshot.json" preview/snapshot.json
+
+      - name: Summarize scope and availability
+        run: |
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          from os import environ
+
+          data = json.loads(Path("preview/snapshot.json").read_text(encoding="utf-8"))
+          totals = data["totals"]
+          with open(environ["GITHUB_STEP_SUMMARY"], "a", encoding="utf-8") as summary:
+              summary.write("### External contributions preview\n\n")
+              summary.write(
+                  f"Public authored PRs in {data['repositories']} curated external repositories: "
+                  f"{totals['authored_prs']} total, {totals['merged_prs']} merged, "
+                  f"{totals['open_prs']} open, {totals['closed_unmerged_prs']} closed without merge.\n\n"
+              )
+              summary.write(
+                  "Download the **external-contributions-preview** artifact to review "
+                  "README.md, README.en.md and snapshot.json. No tracked README was modified.\n"
+              )
+          PY
+
+      - name: Upload bilingual README preview
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: external-contributions-preview
+          path: preview/
+          if-no-files-found: error
+          retention-days: 7
+
+  propose:
+    name: 4. Propose reviewed update (main only)
+    needs: render
+    if: >-
+      github.ref == 'refs/heads/main' &&
+      (github.event_name == 'schedule' ||
+       (github.event_name == 'workflow_dispatch' && inputs.publish == true))
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - name: Checkout main (only this job has write access)
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          ref: main
+          persist-credentials: true
+
+      - name: Download validated README preview
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with:
+          name: external-contributions-preview
+          path: ${{ runner.temp }}/external-preview
+
+      - name: Create branch and request review if no update PR exists
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          existing="$(gh pr list --repo "$GITHUB_REPOSITORY" --base main --state open \
+            --limit 100 --json headRefName \
+            --jq '[.[] | select(.headRefName | startswith("automation/external-contributions-"))] | length')"
+
+          if [ "$existing" -gt 0 ]; then
+            echo "An external contributions update PR is already open. Review that PR before another update."
+            echo "A fresh preview remains available in this run's artifact." >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
+
+          if cmp -s README.md "$RUNNER_TEMP/external-preview/README.md" \
+            && cmp -s README.en.md "$RUNNER_TEMP/external-preview/README.en.md"; then
+            echo "README data unchanged; no branch or PR necessary."
+            exit 0
+          fi
+
+          branch="automation/external-contributions-$GITHUB_RUN_ID"
+          git switch -c "$branch"
+          cp "$RUNNER_TEMP/external-preview/README.md" README.md
+          cp "$RUNNER_TEMP/external-preview/README.en.md" README.en.md
+          git add -- README.md README.en.md
+          if git diff --cached --quiet; then
+            echo "No changes to propose."
+            exit 0
+          fi
+          git -c user.name="github-actions[bot]" \
+              -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
+              commit -m "docs: refresh curated external contributions"
+          git push origin "HEAD:refs/heads/$branch"
+
+          if gh pr create --repo "$GITHUB_REPOSITORY" --base main --head "$branch" \
+            --title "docs: atualizar contribuições open source externas" \
+            --body "Atualização automática proposta para revisão humana. Modifica somente os blocos delimitados em README.md e README.en.md. Origem: workflow run $GITHUB_RUN_ID. Verifique os estados dos PRs, links e checks obrigatórios antes de integrar."; then
+            echo "Update PR created for review; main was not modified." >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "::warning::The repository may forbid workflows from creating pull requests. Preview artifact is available; open a PR manually from $branch after reviewing it."
+            echo "PR creation was denied. Review the preview artifact and manually open a PR from $branch into main." >> "$GITHUB_STEP_SUMMARY"
+          fi
