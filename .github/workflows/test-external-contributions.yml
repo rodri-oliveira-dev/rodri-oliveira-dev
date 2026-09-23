@@ -7,6 +7,8 @@ on:
     paths:
       - scripts/external_contributions.py
       - tests/test_external_contributions.py
+      - scripts/render_external_contributions.py
+      - tests/test_render_external_contributions.py
       - .github/external-contributions.json
       - .github/workflows/test-external-contributions.yml
   workflow_dispatch:
@@ -52,3 +54,29 @@ jobs:
           assert all(not project["repository"].lower().startswith("rodri-oliveira-dev/") for project in snapshot["projects"])
           print("Snapshot completo, coerente e limitado a projetos externos.")
           PY
+
+      - name: Render Markdown preview in temporary README copies
+        run: |
+          cp README.md "$RUNNER_TEMP/README.md"
+          cp README.en.md "$RUNNER_TEMP/README.en.md"
+
+          python3 scripts/render_external_contributions.py \
+            --config .github/external-contributions.json \
+            --snapshot "$RUNNER_TEMP/external-contributions-snapshot.json" \
+            --readme-pt "$RUNNER_TEMP/README.md" \
+            --readme-en "$RUNNER_TEMP/README.en.md" \
+            --write
+
+          cp "$RUNNER_TEMP/README.md" "$RUNNER_TEMP/README.first.md"
+          cp "$RUNNER_TEMP/README.en.md" "$RUNNER_TEMP/README.en.first.md"
+
+          python3 scripts/render_external_contributions.py \
+            --config .github/external-contributions.json \
+            --snapshot "$RUNNER_TEMP/external-contributions-snapshot.json" \
+            --readme-pt "$RUNNER_TEMP/README.md" \
+            --readme-en "$RUNNER_TEMP/README.en.md" \
+            --write
+
+          cmp "$RUNNER_TEMP/README.md" "$RUNNER_TEMP/README.first.md"
+          cmp "$RUNNER_TEMP/README.en.md" "$RUNNER_TEMP/README.en.first.md"
+          git diff --exit-code -- README.md README.en.md
