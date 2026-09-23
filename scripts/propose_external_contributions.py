@@ -15,7 +15,10 @@ import subprocess
 import sys
 from pathlib import Path
 
-from scripts.render_external_contributions import END, START
+try:
+    from scripts.render_external_contributions import END, START
+except ModuleNotFoundError:
+    from render_external_contributions import END, START
 
 
 REPO_PATTERN = re.compile(r"[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+")
