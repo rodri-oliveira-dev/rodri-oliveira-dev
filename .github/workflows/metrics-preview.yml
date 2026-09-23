@@ -3,6 +3,12 @@ name: Preview GitHub Metrics
 on:
   push:
     branches:
+      - test/metrics-preview-visual-stages
+      - test/metrics-engineering-preview
+    paths:
+      - .github/workflows/metrics-preview.yml
+  pull_request:
+    branches:
       - test/metrics-engineering-preview
     paths:
       - .github/workflows/metrics-preview.yml
@@ -12,29 +18,33 @@ permissions:
   contents: read
 
 concurrency:
-  group: profile-metrics-preview
+  group: profile-metrics-preview-${{ github.ref }}
   cancel-in-progress: false
 
 jobs:
-  preview:
-    name: Generate engineering metrics preview
+  verify-token:
+    name: 1. Validar token de consulta
     runs-on: ubuntu-latest
-    timeout-minutes: 20
-    permissions:
-      contents: write
-
+    timeout-minutes: 2
     steps:
-      - name: Verify metrics token
+      - name: Confirmar configuracao de METRICS_TOKEN
         env:
           METRICS_TOKEN: ${{ secrets.METRICS_TOKEN }}
         run: |
           if [ -z "$METRICS_TOKEN" ]; then
-            echo "::error::Configure o secret METRICS_TOKEN no repositorio para gerar o painel."
+            echo "::error::Configure METRICS_TOKEN nos secrets do repositorio."
             exit 1
           fi
+          echo "METRICS_TOKEN configurado."
 
-      - name: Generate preview only on test branch
-        uses: lowlighter/metrics@65836723097537a54cd8eb90f61839426b4266b6 # stable latest branch (verified 2026-09-23)
+  generate:
+    name: 2. Gerar painel de engenharia
+    needs: verify-token
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Consultar GitHub e renderizar painel
+        uses: lowlighter/metrics@65836723097537a54cd8eb90f61839426b4266b6 # latest verificado em 2026-09-23
         with:
           token: ${{ secrets.METRICS_TOKEN }}
           user: rodri-oliveira-dev
@@ -54,6 +64,74 @@ jobs:
           plugin_notable_types: pull_request,commit
           plugin_notable_repositories: yes
           plugins_errors_fatal: yes
-          output_action: commit
-          committer_branch: test/metrics-engineering-preview
-          committer_message: "chore: update engineering metrics preview [skip ci]"
+          output_action: none
+
+      - name: Enviar SVG como artefato do teste
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: github-engineering-preview
+          path: /metrics_renders/assets/metrics/github-engineering-preview.svg
+          if-no-files-found: error
+          retention-days: 7
+
+  validate:
+    name: 3. Validar SVG gerado
+    needs: generate
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Baixar painel gerado
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with:
+          name: github-engineering-preview
+          path: preview
+
+      - name: Verificar integridade e formato SVG
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import xml.etree.ElementTree as ET
+
+          image = Path("preview/github-engineering-preview.svg")
+          if not image.is_file() or image.stat().st_size == 0:
+              raise SystemExit("SVG ausente ou vazio")
+          if image.stat().st_size > 5_000_000:
+              raise SystemExit("SVG excede o limite de 5 MB")
+          root = ET.parse(image).getroot()
+          if root.tag != "{http://www.w3.org/2000/svg}svg":
+              raise SystemExit("Arquivo nao possui raiz SVG valida")
+          print(f"SVG valido: {image.stat().st_size} bytes")
+          PY
+
+  publish:
+    name: 4. Publicar somente na branch de teste
+    needs: validate
+    if: github.event_name == 'push' && github.ref == 'refs/heads/test/metrics-engineering-preview'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: write
+    steps:
+      - name: Obter branch de teste
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          ref: test/metrics-engineering-preview
+          persist-credentials: true
+
+      - name: Baixar painel validado
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with:
+          name: github-engineering-preview
+          path: assets/metrics
+
+      - name: Commit somente do SVG na branch de teste
+        run: |
+          git add -- assets/metrics/github-engineering-preview.svg
+          if git diff --cached --quiet; then
+            echo "Painel sem alteracoes; nenhuma publicacao necessaria."
+            exit 0
+          fi
+          git -c user.name="github-actions[bot]" \
+              -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
+              commit -m "chore: update engineering metrics preview [skip ci]"
+          git push origin HEAD:refs/heads/test/metrics-engineering-preview
