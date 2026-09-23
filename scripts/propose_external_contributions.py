@@ -128,6 +128,7 @@ def propose(
     repository: str,
     sha: str,
     run_id: str,
+    run_attempt: str,
     event: str,
     ref: str,
     publish: str,
@@ -141,8 +142,10 @@ def propose(
         return "skipped_not_authorized", None
     if not REPO_PATTERN.fullmatch(repository) or not SHA_PATTERN.fullmatch(sha):
         raise ProposalError("Invalid repository or rendered commit identifier")
-    if not RUN_PATTERN.fullmatch(run_id):
+    if not RUN_PATTERN.fullmatch(run_id) or int(run_id) < 1:
         raise ProposalError("Invalid workflow run identifier")
+    if not RUN_PATTERN.fullmatch(run_attempt) or int(run_attempt) < 1:
+        raise ProposalError("Invalid workflow run attempt")
     head = required(command, "git", "rev-parse", "HEAD")
     if head != sha:
         raise ProposalError("Publication checkout does not match the rendered commit")
@@ -154,7 +157,9 @@ def propose(
     if not verify_main(command, sha):
         return "main_advanced", None
 
-    branch = f"automation/external-contributions-{run_id}"
+    # GitHub re-runs retain GITHUB_RUN_ID but increment GITHUB_RUN_ATTEMPT.
+    # A new branch avoids non-fast-forward pushes to a branch left by a failed PR creation.
+    branch = f"automation/external-contributions-{run_id}-{run_attempt}"
     required(command, "git", "switch", "-c", branch)
     for filename, contents in changed.items():
         Path(filename).write_bytes(contents)
@@ -183,7 +188,7 @@ def propose(
         "--body", (
             "Atualização automática proposta para revisão humana. Modifica somente "
             "os blocos delimitados em README.md e README.en.md. "
-            f"Origem: workflow run {run_id}. "
+            f"Origem: workflow run {run_id}, tentativa {run_attempt}. "
             "Verifique os estados dos PRs, links e checks obrigatórios antes de integrar."
         ),
     )
@@ -206,6 +211,7 @@ def main(argv: list[str] | None = None, command: Commands | None = None) -> int:
     parser.add_argument("--repo", required=True)
     parser.add_argument("--sha", required=True)
     parser.add_argument("--run-id", required=True)
+    parser.add_argument("--run-attempt", required=True)
     parser.add_argument("--event", required=True)
     parser.add_argument("--ref", required=True)
     parser.add_argument("--publish", default="false")
@@ -214,6 +220,7 @@ def main(argv: list[str] | None = None, command: Commands | None = None) -> int:
         state, branch = propose(
             command or Commands(), preview_dir=args.preview_dir,
             repository=args.repo, sha=args.sha, run_id=args.run_id,
+            run_attempt=args.run_attempt,
             event=args.event, ref=args.ref, publish=args.publish,
         )
     except (ProposalError, OSError, subprocess.TimeoutExpired) as error:
