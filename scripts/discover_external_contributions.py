@@ -52,6 +52,7 @@ def discover(config: dict, api: GitHubAPI, collected_at: datetime | None = None)
     curated = {item["repository"].casefold() for item in config["projects"]}
     query = f"is:pr author:{login} -user:{login}"
     found: dict[tuple[str, int], dict] = {}
+    repository_names: dict[str, str] = {}
     total = None
     for page in range(1, MAX_SEARCH_RESULTS // PAGE_SIZE + 1):
         data = api.get(
@@ -83,6 +84,7 @@ def discover(config: dict, api: GitHubAPI, collected_at: datetime | None = None)
                 # projects owned by the profile never become candidates.
                 continue
             pr = _normalized_issue(item, repository, login)
+            repository_names.setdefault(repository.casefold(), repository)
             key = (repository.casefold(), pr["number"])
             previous = found.get(key)
             if previous is not None and previous != pr:
@@ -97,7 +99,7 @@ def discover(config: dict, api: GitHubAPI, collected_at: datetime | None = None)
     for (repository, _), pr in found.items():
         if repository in curated:
             continue
-        by_repository.setdefault(repository, []).append(pr)
+        by_repository.setdefault(repository_names[repository], []).append(pr)
     candidates = [
         {
             "repository": repository,
