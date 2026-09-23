@@ -14,7 +14,7 @@ from scripts.propose_external_contributions import ProposalError, eligible, main
 SHA = "a" * 40
 NEW_SHA = "b" * 40
 REPO = "example/profile"
-BRANCH = "automation/external-contributions-12345"
+BRANCH = "automation/external-contributions-12345-1"
 BEGIN = "<!-- EXTERNAL_CONTRIBUTIONS:START -->"
 END = "<!-- EXTERNAL_CONTRIBUTIONS:END -->"
 
@@ -22,12 +22,13 @@ END = "<!-- EXTERNAL_CONTRIBUTIONS:END -->"
 class FakeCommands:
     """Emulate git/gh responses, recording every attempted external action."""
 
-    def __init__(self, *, existing=False, remote_shas=None, failure=None, dispatch_failure=None):
+    def __init__(self, *, existing=False, remote_shas=None, failure=None, dispatch_failure=None, remote_branches=None):
         self.commands = []
         self.existing = existing
         self.remote_shas = list(remote_shas if remote_shas is not None else [SHA] * 4)
         self.failure = failure
         self.dispatch_failure = dispatch_failure
+        self.remote_branches = remote_branches if remote_branches is not None else set()
 
     def run(self, *args):
         self.commands.append(args)
@@ -41,6 +42,11 @@ class FakeCommands:
         if args[:2] == ("git", "ls-remote"):
             sha = self.remote_shas.pop(0) if self.remote_shas else SHA
             return subprocess.CompletedProcess(args, 0, sha + "\trefs/heads/main\n", "")
+        if args[:2] == ("git", "push"):
+            remote_ref = args[-1]
+            if remote_ref in self.remote_branches:
+                return subprocess.CompletedProcess(args, 1, "", "non-fast-forward")
+            self.remote_branches.add(remote_ref)
         if args[:3] == ("git", "diff", "--cached"):
             return subprocess.CompletedProcess(args, 1, "", "")
         if args[:3] == ("gh", "workflow", "run") and args[3] == self.dispatch_failure:
@@ -71,7 +77,7 @@ class ProposalTests(unittest.TestCase):
     def call(self, cmd, **overrides):
         params = dict(
             preview_dir=self.preview, repository=REPO, sha=SHA,
-            run_id="12345", event="schedule", ref="refs/heads/main", publish="false",
+            run_id="12345", run_attempt="1", event="schedule", ref="refs/heads/main", publish="false",
         )
         params.update(overrides)
         return propose(cmd, **params)
@@ -191,11 +197,73 @@ class ProposalTests(unittest.TestCase):
             self.call(fake, sha=NEW_SHA)
         self.assertEqual(fake.actions("git", "switch"), [])
 
+    def test_retry_after_pr_creation_denied_uses_new_branch_and_succeeds(self):
+        """A re-run must not collide with an already pushed branch from attempt 1."""
+        shared_remote = set()
+        first = FakeCommands(
+            failure=("gh", "pr", "create"),
+            remote_branches=shared_remote,
+        )
+        with self.assertRaisesRegex(ProposalError, "PR creation denied"):
+            self.call(first, run_attempt="1")
+        self.assertIn(f"HEAD:refs/heads/{BRANCH}", shared_remote)
+
+        # A new GitHub attempt starts from the unchanged main checkout and
+        # uses a fresh local working tree with an identical, still-valid preview.
+        for filename in ("README.md", "README.en.md"):
+            Path(filename).write_text(
+                "# Profile\n\n" + BEGIN + "\n\nOld values\n\n" + END + "\n\nFooter\n",
+                encoding="utf-8",
+            )
+        second = FakeCommands(remote_branches=shared_remote)
+        state, branch = self.call(second, run_attempt="2")
+        self.assertEqual(state, "created")
+        self.assertEqual(branch, "automation/external-contributions-12345-2")
+        self.assertEqual(len(shared_remote), 2)
+        self.assertEqual(second.actions("git", "push"), [
+            ("git", "push", "origin", f"HEAD:refs/heads/{branch}"),
+        ])
+        self.assertEqual(len(second.actions("gh", "pr", "create")), 1)
+
+    def test_retry_after_main_advanced_post_push_uses_fresh_branch(self):
+        shared_remote = set()
+        first = FakeCommands(remote_shas=[SHA, SHA, NEW_SHA], remote_branches=shared_remote)
+        self.assertEqual(self.call(first, run_attempt="1"), ("main_advanced", BRANCH))
+        for filename in ("README.md", "README.en.md"):
+            Path(filename).write_text(
+                "# Profile\n\n" + BEGIN + "\n\nOld values\n\n" + END + "\n\nFooter\n",
+                encoding="utf-8",
+            )
+        second = FakeCommands(remote_branches=shared_remote)
+        self.assertEqual(
+            self.call(second, run_attempt="2"),
+            ("created", "automation/external-contributions-12345-2"),
+        )
+
+    def test_invalid_run_attempt_fails_before_any_git_or_github_operation(self):
+        for attempt in ("", "0", "-1", "1-invalid", "abc"):
+            with self.subTest(attempt=attempt):
+                fake = FakeCommands()
+                with self.assertRaisesRegex(ProposalError, "run attempt"):
+                    self.call(fake, run_attempt=attempt)
+                self.assertEqual(fake.commands, [])
+
+    def test_cli_requires_run_attempt_for_eligible_publication(self):
+        fake = FakeCommands()
+        with self.assertRaises(SystemExit) as raised:
+            main([
+                "--preview-dir", str(self.preview), "--repo", REPO, "--sha", SHA,
+                "--run-id", "12345", "--event", "schedule",
+                "--ref", "refs/heads/main",
+            ], command=fake)
+        self.assertEqual(raised.exception.code, 2)
+        self.assertEqual(fake.commands, [])
+
     def test_cli_denies_pull_request_event_without_running_any_command(self):
         fake = FakeCommands()
         result = main([
             "--preview-dir", str(self.preview), "--repo", REPO, "--sha", SHA,
-            "--run-id", "12345", "--event", "pull_request",
+            "--run-id", "12345", "--run-attempt", "1", "--event", "pull_request",
             "--ref", "refs/heads/main", "--publish", "true",
         ], command=fake)
         self.assertEqual(result, 0)
