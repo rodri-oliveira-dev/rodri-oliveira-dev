@@ -34,6 +34,17 @@ A busca paginada usa a API pública GET /search/issues com os qualificadores is:
 
 O status vem do campo pull_request.merged_at retornado pelo GitHub Search, e não é inferido do fato de um PR estar fechado. Resultados podem sofrer atraso de indexação ou mudanças durante a paginação; as verificações de completude reduzem, mas não eliminam, essas limitações. Somente dados públicos e somente os repositórios curados estão no escopo.
 
+## Retentativas da API e limites de espera (issue #22)
+
+O cliente compartilhado `GitHubAPI` realiza **até 3 tentativas por consulta**, com timeout máximo de **10 segundos por requisição**, orçamento acumulado de **20 segundos de espera** e duração máxima de **50 segundos por consulta**. O número de tentativas pode ser configurado em código entre 1 e 4 sem alterar a autenticação, o escopo público ou o JSON de saída.
+
+- **Retentativas:** HTTP 408, 429, 500, 502, 503 e 504, além de timeout e erro transitório de rede. Sem orientação do servidor, utiliza espera exponencial com jitter e teto de 10 segundos.
+- **Restrições do servidor:** respeita `Retry-After` (segundos ou data HTTP) e, para HTTP 429 sem esse cabeçalho, `X-RateLimit-Reset`. Caso a espera exigida exceda o orçamento, interrompe a consulta **sem tentar antes do prazo pedido pelo GitHub**. Não transforma esse cenário em ausência de contribuições.
+- **Falhas permanentes:** HTTP 400, 401 e 403, erro de TLS, formato inválido e JSON malformado não são repetidos. Não há registro de URL de requisição, corpo da resposta, token ou cabeçalhos sensíveis nas mensagens de erro.
+- **Isolamento:** o retry é usado tanto pela coleta curada quanto pela descoberta global, sem reuni-las no mesmo job. Se o limite for esgotado durante a coleta curada, o snapshot anterior permanece intacto e a publicação é bloqueada. Uma falha apenas na descoberta mantém a atualização curada e sinaliza `unavailable` no relatório de candidatos.
+
+Os limites foram definidos para caber no timeout de 10 minutos dos jobs em condições usuais. O GitHub Actions pode encerrar um job com muitas consultas lentas; nesse caso, os dados incompletos não são publicados. Os testes offline usam um relógio e uma conexão simulados para testar esperas e falhas sem acesso à rede nem atrasos reais.
+
 O JSON é escrito de forma atômica apenas quando todos os projetos terminam com sucesso. A renderização e a proposta de atualização revisável estão implementadas nas issues #16 e #17.
 
 ## Renderização bilíngue, sem publicação automática (issue #16)
