@@ -114,6 +114,8 @@ jobs:
     needs: validate
     runs-on: ubuntu-24.04
     timeout-minutes: 10
+    outputs:
+      status: ${{ steps.discovery.outputs.status }}
     steps:
       - name: Checkout without persistent credentials
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
@@ -121,14 +123,21 @@ jobs:
           persist-credentials: false
 
       - name: Discover new third-party repositories
+        id: discovery
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          python3 scripts/discover_external_contributions.py \
+          if python3 scripts/discover_external_contributions.py \
             --config .github/external-contributions.json \
-            --output "$RUNNER_TEMP/external-contributions-candidates.json"
+            --output "$RUNNER_TEMP/external-contributions-candidates.json"; then
+            echo "status=success" >> "$GITHUB_OUTPUT"
+          else
+            echo "status=unavailable" >> "$GITHUB_OUTPUT"
+            echo "::warning::Optional new-repository discovery failed. Curated README updates will continue; candidate count is unknown."
+          fi
 
       - name: Upload new project candidates for manual review
+        if: ${{ steps.discovery.outputs.status == 'success' }}
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: external-contributions-candidates
@@ -156,7 +165,7 @@ jobs:
           path: ${{ runner.temp }}/contributions
 
       - name: Download newly discovered repository candidates
-        if: ${{ needs.discover.result == 'success' }}
+        if: ${{ needs.discover.result == 'success' && needs.discover.outputs.status == 'success' }}
         uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
         with:
           name: external-contributions-candidates
@@ -164,7 +173,7 @@ jobs:
 
       - name: Generate preview without modifying tracked files
         env:
-          DISCOVERY_RESULT: ${{ needs.discover.result }}
+          DISCOVERY_RESULT: ${{ needs.discover.outputs.status }}
         run: |
           mkdir -p preview
           cp README.md preview/README.md
