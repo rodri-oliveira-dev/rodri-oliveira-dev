@@ -30,7 +30,7 @@ jobs:
 
       - name: Collect live public contribution data
         env:
-          GITHUB_TOKEN: \${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           python3 scripts/external_contributions.py \
             --config .github/external-contributions.json \
