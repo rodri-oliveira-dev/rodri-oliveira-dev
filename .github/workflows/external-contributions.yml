@@ -182,6 +182,7 @@ jobs:
     permissions:
       contents: write
       pull-requests: write
+      actions: write # dispatch the required profile checks for a bot-created PR
     steps:
       - name: Checkout main (only this job has write access)
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
@@ -234,6 +235,15 @@ jobs:
             --title "docs: atualizar contribuições open source externas" \
             --body "Atualização automática proposta para revisão humana. Modifica somente os blocos delimitados em README.md e README.en.md. Origem: workflow run $GITHUB_RUN_ID. Verifique os estados dos PRs, links e checks obrigatórios antes de integrar."; then
             echo "Update PR created for review; main was not modified." >> "$GITHUB_STEP_SUMMARY"
+            # Pushes/PRs made by GITHUB_TOKEN do not automatically trigger CI.
+            # workflow_dispatch is explicitly allowed to initiate new runs.
+            for workflow in validate-profile.yml spell-check.yml; do
+              if gh workflow run "$workflow" --repo "$GITHUB_REPOSITORY" --ref "$branch"; then
+                echo "Required check workflow dispatched: $workflow" >> "$GITHUB_STEP_SUMMARY"
+              else
+                echo "::warning::Could not dispatch $workflow. Reviewers must ensure the required checks run before merge."
+              fi
+            done
           else
             echo "::warning::The repository may forbid workflows from creating pull requests. Preview artifact is available; open a PR manually from $branch after reviewing it."
             echo "PR creation was denied. Review the preview artifact and manually open a PR from $branch into main." >> "$GITHUB_STEP_SUMMARY"
