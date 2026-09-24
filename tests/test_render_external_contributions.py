@@ -3,6 +3,8 @@
 import copy
 import io
 import json
+import os
+import stat
 import tempfile
 import unittest
 from pathlib import Path
@@ -242,6 +244,103 @@ class RendererTests(unittest.TestCase):
                     prepare_updates(self.cfg, data, self.paths)
                 for lang, path in self.paths.items():
                     self.assertEqual(path.read_bytes(), original[lang])
+
+    def test_write_preserves_original_permissions_and_idempotency(self):
+        self.pt.chmod(0o640)
+        self.en.chmod(0o600)
+        old_modes = {path: stat.S_IMODE(path.stat().st_mode) for path in self.paths.values()}
+        self._update()
+        for path, old_mode in old_modes.items():
+            self.assertEqual(stat.S_IMODE(path.stat().st_mode), old_mode)
+        self.assertEqual(prepare_updates(self.cfg, self.data, self.paths), {})
+        self.assertEqual(self._temporary_files(), [])
+
+    def _temporary_files(self):
+        return sorted(path for path in self.root.iterdir()
+                      if ".external-contributions-" in path.name)
+
+    def test_second_replace_failure_restores_both_readmes_and_modes(self):
+        self.pt.chmod(0o640)
+        self.en.chmod(0o600)
+        originals = {path: (path.read_bytes(), stat.S_IMODE(path.stat().st_mode))
+                     for path in self.paths.values()}
+        real_replace = os.replace
+        calls = []
+
+        def fail_second(source, destination):
+            calls.append(destination)
+            if len(calls) == 2:
+                raise OSError("injected second replacement failure")
+            return real_replace(source, destination)
+
+        with patch("scripts.render_external_contributions.os.replace", side_effect=fail_second):
+            with self.assertRaisesRegex(RenderError, "original files rolled back"):
+                self._update()
+        self.assertEqual(len(calls), 4)  # Two attempts, two restorations.
+        for path, (original, mode) in originals.items():
+            self.assertEqual(path.read_bytes(), original)
+            self.assertEqual(stat.S_IMODE(path.stat().st_mode), mode)
+        self.assertEqual(self._temporary_files(), [])
+
+    def test_rollback_failure_retains_original_backup_for_manual_recovery(self):
+        originals = {path: path.read_bytes() for path in self.paths.values()}
+        real_replace = os.replace
+        calls = 0
+
+        def fail_write_and_rollback(source, destination):
+            nonlocal calls
+            calls += 1
+            if calls in (2, 4):  # English write fails; Portuguese restoration fails.
+                raise OSError(f"injected failure {calls}")
+            return real_replace(source, destination)
+
+        with patch("scripts.render_external_contributions.os.replace",
+                   side_effect=fail_write_and_rollback):
+            with self.assertRaisesRegex(RenderError, "manual recovery required") as error:
+                self._update()
+        self.assertEqual(calls, 4)
+        self.assertEqual(self.en.read_bytes(), originals[self.en])
+        self.assertNotEqual(self.pt.read_bytes(), originals[self.pt])
+        backups = self._temporary_files()
+        self.assertEqual(len(backups), 1)
+        self.assertIn(".README.md.external-contributions-backup-", backups[0].name)
+        self.assertIn(str(backups[0]), str(error.exception))
+        self.assertEqual(backups[0].read_bytes(), originals[self.pt])
+        os.replace(backups[0], self.pt)
+        self.assertEqual(self.pt.read_bytes(), originals[self.pt])
+        self.assertEqual(self._temporary_files(), [])
+
+    def test_backup_preparation_failure_keeps_both_originals_untouched(self):
+        originals = {path: path.read_bytes() for path in self.paths.values()}
+        real_copy = __import__("shutil").copy2
+        copies = 0
+
+        def fail_second_backup(source, destination):
+            nonlocal copies
+            copies += 1
+            if copies == 2:
+                raise OSError("injected backup failure")
+            return real_copy(source, destination)
+
+        with patch("scripts.render_external_contributions.shutil.copy2",
+                   side_effect=fail_second_backup):
+            with self.assertRaisesRegex(OSError, "injected backup failure"):
+                self._update()
+        for path, original in originals.items():
+            self.assertEqual(path.read_bytes(), original)
+        self.assertEqual(self._temporary_files(), [])
+
+    def test_single_language_update_preserves_other_readme(self):
+        self._update()
+        unchanged_en = self.en.read_bytes()
+        revised = copy.deepcopy(self.cfg)
+        revised["projects"][0]["pull_requests"][0]["pt"] = "Descrição revisada."
+        updates = prepare_updates(revised, snapshot("2026-09-24T11:00:00Z"), self.paths)
+        self.assertEqual(set(updates), {self.pt})
+        write_updates(updates)
+        self.assertIn("Descrição revisada.", self.pt.read_text(encoding="utf-8"))
+        self.assertEqual(self.en.read_bytes(), unchanged_en)
+        self.assertEqual(self._temporary_files(), [])
 
     def test_missing_or_corrupt_snapshot_does_not_modify_readmes(self):
         source = self.root / "snapshot.json"
