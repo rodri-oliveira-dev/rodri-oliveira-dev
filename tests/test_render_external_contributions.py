@@ -282,6 +282,27 @@ class RendererTests(unittest.TestCase):
             self.assertEqual(stat.S_IMODE(path.stat().st_mode), mode)
         self.assertEqual(self._temporary_files(), [])
 
+    def test_keyboard_interrupt_during_second_replace_rolls_back(self):
+        originals = {path: path.read_bytes() for path in self.paths.values()}
+        real_replace = os.replace
+        calls = 0
+
+        def interrupt_second(source, destination):
+            nonlocal calls
+            calls += 1
+            if calls == 2:
+                raise KeyboardInterrupt()
+            return real_replace(source, destination)
+
+        with patch("scripts.render_external_contributions.os.replace",
+                   side_effect=interrupt_second):
+            with self.assertRaises(KeyboardInterrupt):
+                self._update()
+        self.assertEqual(calls, 4)
+        for path, original in originals.items():
+            self.assertEqual(path.read_bytes(), original)
+        self.assertEqual(self._temporary_files(), [])
+
     def test_rollback_failure_retains_original_backup_for_manual_recovery(self):
         originals = {path: path.read_bytes() for path in self.paths.values()}
         real_replace = os.replace
