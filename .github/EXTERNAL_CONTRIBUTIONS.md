@@ -73,6 +73,16 @@ python3 scripts/render_external_contributions.py \
   --write
 ~~~
 
+### Segurança da escrita local dos READMEs (issue #25)
+
+A prévia sem `--write` apenas valida e informa quais arquivos mudariam. Para escrever, execute o comando acima com `--write` primeiro sobre **cópias locais** dos dois READMEs; revise o diff antes de aplicá-lo aos arquivos versionados.
+
+Antes de substituir qualquer arquivo, o renderizador prepara as novas versões e guarda cópias integrais dos originais na mesma pasta, com o padrão oculto `.README*.external-contributions-backup-*`. As novas versões preservam os bits de permissão originais. Cada troca individual usa `os.replace`. Se uma das trocas falhar, a execução termina com erro, tenta restaurar todos os arquivos cuja substituição foi iniciada e remove os temporários que não são mais necessários. Uma falha ainda na preparação dos arquivos não modifica nenhum README.
+
+Se a restauração automática também falhar, a mensagem de erro informa o caminho do backup **preservado**, e a execução retorna código diferente de zero. Antes de tentar novamente, compare o arquivo atual com o backup indicado, restaure o original manualmente, por exemplo `cp -p 'CAMINHO_DO_BACKUP' 'CAMINHO_DO_README'`, e confira os dois READMEs. Apague o backup preservado apenas depois de validar a recuperação. Em caso de interrupção abrupta (processo encerrado ou falha de energia), procure também por backups ocultos na pasta dos READMEs antes de nova execução; a restauração automática não pode ser garantida nesse cenário.
+
+**Limite técnico:** não existe transação atômica nativa que substitua os dois arquivos simultaneamente. A estratégia oferece rollback em falhas tratáveis de I/O, mas não promete atomicidade absoluta durante interrupções bruscas ou falha na própria restauração. No GitHub Actions, as alterações continuam sendo feitas em cópias temporárias e propostas para revisão pelo PR; não há escrita direta na `main`.
+
 O workflow definitivo está em `.github/workflows/external-contributions.yml`. Na branch de desenvolvimento e em PRs, somente coleta e renderiza cópias dos READMEs e publica artefatos de prévia. A proposta automática de atualização é restrita a execuções agendadas ou disparadas explicitamente na `main`.
 
 ### Contrato e limites
