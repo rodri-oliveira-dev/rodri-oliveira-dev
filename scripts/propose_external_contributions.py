@@ -191,6 +191,16 @@ def inspect_existing(
         return "main_advanced"
     number, head_sha = proposal["number"], proposal["sha"]
     try:
+        # Reading an immutable commit alone cannot detect a deleted PR branch.
+        # Verify that the named branch still exists and points to the inspected SHA.
+        branch = proposal["branch"]
+        live_ref = _json_command(
+            command, "gh", "api", f"repos/{repository}/git/ref/heads/{branch}",
+        )
+        if not isinstance(live_ref, dict) or not isinstance(live_ref.get("object"), dict):
+            return "existing_pr_attention"
+        if live_ref["object"].get("sha") != head_sha:
+            return "existing_pr_attention"
         needs_refresh = False
         modified_outside_block = False
         for filename in ("README.md", "README.en.md"):
