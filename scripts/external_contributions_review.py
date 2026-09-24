@@ -42,7 +42,7 @@ def load_review_registry(path: Path, config: dict) -> dict:
             raise CollectionError("External review registry contains invalid entries")
         name = item.get("repository")
         state = item.get("status")
-        if not isinstance(name, str) or not REPO_PATTERN.fullmatch(name) or state not in STATES:
+        if not isinstance(name, str) or not REPO_PATTERN.fullmatch(name) or not isinstance(state, str) or state not in STATES:
             raise CollectionError("External review registry has an invalid repository or status")
         if name.partition("/")[0].casefold() == config["profile"].casefold():
             raise CollectionError("Profile-owned repositories cannot be review candidates")
@@ -52,7 +52,7 @@ def load_review_registry(path: Path, config: dict) -> dict:
         if not isinstance(observed, dict):
             raise CollectionError("External review registry requires a PR baseline")
         for number, status in observed.items():
-            if not isinstance(number, str) or not NUMBER_PATTERN.fullmatch(number) or status not in PR_STATES:
+            if not isinstance(number, str) or not NUMBER_PATTERN.fullmatch(number) or not isinstance(status, str) or status not in PR_STATES:
                 raise CollectionError("External review registry contains invalid PR baseline")
         timestamp = item.get("observed_at")
         try:
@@ -67,8 +67,8 @@ def load_review_registry(path: Path, config: dict) -> dict:
                     raise ValueError
             except ValueError as error:
                 raise CollectionError("External review registry has an invalid decision date") from error
-        if state == "ignored" and item.get("decision_date") is None:
-            raise CollectionError("Ignored entries need a documented decision date")
+        if state in ("ignored", "selected") and item.get("decision_date") is None:
+            raise CollectionError("Reviewed decisions need a documented decision date")
         reason = item.get("reason")
         if reason is not None and (not isinstance(reason, str) or not reason.strip()):
             raise CollectionError("External review registry reason must be nonempty text")
