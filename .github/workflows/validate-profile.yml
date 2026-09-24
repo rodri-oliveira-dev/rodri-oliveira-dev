@@ -10,11 +10,6 @@ on:
       - ".github/workflows/**"
       - ".markdownlint.jsonc"
   pull_request:
-    paths:
-      - "**/*.md"
-      - "assets/brand/**"
-      - ".github/workflows/**"
-      - ".markdownlint.jsonc"
   schedule:
     - cron: "0 12 * * 1"
   workflow_dispatch:
