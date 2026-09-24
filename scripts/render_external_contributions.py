@@ -12,6 +12,8 @@ import argparse
 import json
 import os
 import re
+import shutil
+import stat
 import sys
 import tempfile
 from datetime import datetime
@@ -265,20 +267,64 @@ def prepare_updates(config: dict, snapshot: dict, paths: dict[str, Path]) -> dic
 
 
 def write_updates(updates: dict[Path, str]) -> None:
-    """Stage all outputs before replacing either README."""
-    staging = {}
+    """Stage both versions and retain original backups until all replacements succeed.
+
+    os.replace is atomic for a single path, not across multiple README files.
+    A failed replacement triggers best-effort rollback of every attempted path.
+    Failed rollback backups are retained for explicit manual recovery.
+    """
+    staging: dict[Path, Path] = {}
+    backups: dict[Path, Path] = {}
+    attempted: list[Path] = []
+    retained: set[Path] = set()
     try:
+        # Complete all staging and backups before modifying either original.
         for path, content in updates.items():
+            original_mode = stat.S_IMODE(path.stat().st_mode)
             with tempfile.NamedTemporaryFile(
-                mode="w", encoding="utf-8", newline="", dir=path.parent, delete=False
+                mode="w", encoding="utf-8", newline="", dir=path.parent,
+                prefix=f".{path.name}.external-contributions-stage-", delete=False
             ) as destination:
                 staging[path] = Path(destination.name)
                 destination.write(content)
-        for path, temporary in staging.items():
-            os.replace(temporary, path)
+            os.chmod(staging[path], original_mode)
+            with tempfile.NamedTemporaryFile(
+                dir=path.parent,
+                prefix=f".{path.name}.external-contributions-backup-", delete=False
+            ) as destination:
+                backups[path] = Path(destination.name)
+            shutil.copy2(path, backups[path])
+
+        try:
+            for path, temporary in staging.items():
+                # Include the failing path: an injected failure may occur after
+                # the filesystem has already completed the replacement.
+                attempted.append(path)
+                os.replace(temporary, path)
+        except OSError as error:
+            recovery_errors = []
+            for path in reversed(attempted):
+                try:
+                    os.replace(backups[path], path)
+                except OSError as rollback_error:
+                    retained.add(backups[path])
+                    recovery_errors.append(
+                        f"{path}: {rollback_error}; original backup: {backups[path]}"
+                    )
+            if recovery_errors:
+                raise RenderError(
+                    f"README update failed ({error}); manual recovery required: "
+                    + "; ".join(recovery_errors)
+                ) from error
+            raise RenderError(
+                f"README update failed ({error}); original files rolled back"
+            ) from error
     finally:
         for temporary in staging.values():
             temporary.unlink(missing_ok=True)
+        for backup in backups.values():
+            if backup not in retained:
+                backup.unlink(missing_ok=True)
 
 
 def main(argv: list[str] | None = None) -> int:
