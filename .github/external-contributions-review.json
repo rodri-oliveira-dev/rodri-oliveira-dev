@@ -1,0 +1,106 @@
+{
+  "schema_version": 1,
+  "profile": "rodri-oliveira-dev",
+  "description": "Reviewed candidate baseline. pending = recorded for review, not approved for README.",
+  "projects": [
+    {
+      "repository": "ddd-crew/aggregate-design-canvas",
+      "status": "pending",
+      "observed_at": "2026-09-24",
+      "observed_prs": {
+        "16": "merged"
+      }
+    },
+    {
+      "repository": "ddd-crew/bounded-context-canvas",
+      "status": "pending",
+      "observed_at": "2026-09-24",
+      "observed_prs": {
+        "59": "merged"
+      }
+    },
+    {
+      "repository": "ddd-crew/context-mapping",
+      "status": "pending",
+      "observed_at": "2026-09-24",
+      "observed_prs": {
+        "22": "merged"
+      }
+    },
+    {
+      "repository": "ddd-crew/core-domain-charts",
+      "status": "pending",
+      "observed_at": "2026-09-24",
+      "observed_prs": {
+        "24": "merged"
+      }
+    },
+    {
+      "repository": "ddd-crew/ddd-starter-modelling-process",
+      "status": "pending",
+      "observed_at": "2026-09-24",
+      "observed_prs": {
+        "75": "merged",
+        "76": "merged"
+      }
+    },
+    {
+      "repository": "ddd-crew/domain-message-flow-modelling",
+      "status": "pending",
+      "observed_at": "2026-09-24",
+      "observed_prs": {
+        "12": "merged"
+      }
+    },
+    {
+      "repository": "ddd-crew/eventstorming-glossary-cheat-sheet",
+      "status": "pending",
+      "observed_at": "2026-09-24",
+      "observed_prs": {
+        "22": "merged"
+      }
+    },
+    {
+      "repository": "ddd-crew/welcome-to-ddd",
+      "status": "pending",
+      "observed_at": "2026-09-24",
+      "observed_prs": {
+        "11": "merged"
+      }
+    },
+    {
+      "repository": "donnemartin/system-design-primer",
+      "status": "pending",
+      "observed_at": "2026-09-24",
+      "observed_prs": {
+        "1350": "open"
+      }
+    },
+    {
+      "repository": "egoughnour/complexity-hints",
+      "status": "pending",
+      "observed_at": "2026-09-24",
+      "observed_prs": {
+        "2": "closed_unmerged"
+      }
+    },
+    {
+      "repository": "Hitmasu/OpenCNPJ",
+      "status": "pending",
+      "observed_at": "2026-09-24",
+      "observed_prs": {
+        "71": "merged",
+        "74": "merged",
+        "75": "open"
+      }
+    },
+    {
+      "repository": "StefanTheCode/dotnet_interview_questions",
+      "status": "pending",
+      "observed_at": "2026-09-24",
+      "observed_prs": {
+        "5": "open"
+      }
+    }
+  ]
+}
