@@ -39,10 +39,19 @@ except ModuleNotFoundError:
     )
 
 
+try:
+    from scripts.external_contributions_review import classify_candidates, load_review_registry
+except ModuleNotFoundError:
+    from external_contributions_review import classify_candidates, load_review_registry
+
+
 REPOSITORY_API_PREFIX = "https://api.github.com/repos/"
 
 
-def discover(config: dict, api: GitHubAPI, collected_at: datetime | None = None) -> dict:
+def discover(
+    config: dict, api: GitHubAPI, collected_at: datetime | None = None,
+    registry: dict | None = None,
+) -> dict:
     """Return only uncurated third-party repositories with public authored PRs.
 
     GitHub Search indexes at most 1000 entries per query; fail closed if results
@@ -110,7 +119,7 @@ def discover(config: dict, api: GitHubAPI, collected_at: datetime | None = None)
     instant = collected_at or datetime.now(timezone.utc)
     if instant.tzinfo is None or instant.utcoffset() is None:
         raise CollectionError("External discovery requires a timezone-aware collection date")
-    return {
+    result = {
         "schema_version": 1,
         "profile": login,
         "scope": "Public authored PRs in repositories not owned by the profile and not yet curated",
@@ -118,24 +127,30 @@ def discover(config: dict, api: GitHubAPI, collected_at: datetime | None = None)
         "matching_public_prs": total,
         "candidate_repositories": candidates,
     }
+    if registry is not None:
+        classify_candidates(result, registry, config)
+    return result
 
 
 def main(argv: list[str] | None = None) -> int:
     """Write a complete discovery report atomically, or leave the old file unchanged."""
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--config", type=Path, default=Path(".github/external-contributions.json"))
+    parser.add_argument("--review-file", type=Path, default=Path(".github/external-contributions-review.json"))
     parser.add_argument("--output", type=Path, required=True)
     options = parser.parse_args(argv)
     try:
         config = load_config(options.config)
-        result = discover(config, GitHubAPI(os.environ.get("GITHUB_TOKEN", "")))
+        registry = load_review_registry(options.review_file, config)
+        result = discover(config, GitHubAPI(os.environ.get("GITHUB_TOKEN", "")), registry=registry)
         write_snapshot(options.output, result)
     except CollectionError as error:
         print(f"External discovery failed: {error}", file=sys.stderr)
         return 1
     print(
-        f"Found {len(result['candidate_repositories'])} uncurated external repositories. "
-        "Review the report before adding projects to the README."
+        f"Found {result['review']['untracked_count']} untracked projects and "
+        f"{result['review']['changed_count']} projects with unacknowledged changes. "
+        "Consult the full artifact for reviewed and ignored history."
     )
     return 0
 
