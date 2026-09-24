@@ -1,5 +1,6 @@
 """Offline tests for the real production PR publication code, without GitHub writes."""
 
+import base64
 import json
 import os
 import subprocess
@@ -22,13 +23,21 @@ END = "<!-- EXTERNAL_CONTRIBUTIONS:END -->"
 class FakeCommands:
     """Emulate git/gh responses, recording every attempted external action."""
 
-    def __init__(self, *, existing=False, remote_shas=None, failure=None, dispatch_failure=None, remote_branches=None):
+    def __init__(self, *, existing=False, remote_shas=None, failure=None, dispatch_failure=None,
+                 remote_branches=None, head_files=None, pr_states=None, head_shas=None,
+                 fork=False, removed_branch=False, removed_source=False):
         self.commands = []
         self.existing = existing
         self.remote_shas = list(remote_shas if remote_shas is not None else [SHA] * 4)
         self.failure = failure
         self.dispatch_failure = dispatch_failure
         self.remote_branches = remote_branches if remote_branches is not None else set()
+        self.head_files = head_files
+        self.pr_states = list(pr_states or ["open"])
+        self.head_shas = list(head_shas or ["c" * 40])
+        self.fork = fork
+        self.removed_branch = removed_branch
+        self.removed_source = removed_source
 
     def run(self, *args):
         self.commands.append(args)
@@ -37,8 +46,37 @@ class FakeCommands:
         if args[:3] == ("git", "rev-parse", "HEAD"):
             return subprocess.CompletedProcess(args, 0, SHA + "\n", "")
         if args[:3] == ("gh", "pr", "list"):
-            prs = [{"headRefName": BRANCH}] if self.existing else []
+            prs = [{"headRefName": BRANCH, "number": 44}] if self.existing else []
             return subprocess.CompletedProcess(args, 0, json.dumps(prs), "")
+        if args[:2] == ("gh", "api"):
+            endpoint = args[2]
+            if endpoint == f"repos/{REPO}/git/ref/heads/{BRANCH}":
+                if self.removed_branch:
+                    return subprocess.CompletedProcess(args, 1, "", "404 Not Found")
+                return subprocess.CompletedProcess(
+                    args, 0, json.dumps({"object": {"sha": self.head_shas[0]}}), "",
+                )
+            if endpoint == f"repos/{REPO}/pulls/44":
+                state = self.pr_states.pop(0) if len(self.pr_states) > 1 else self.pr_states[0]
+                oid = self.head_shas.pop(0) if len(self.head_shas) > 1 else self.head_shas[0]
+                owner = "another-owner/example" if self.fork else REPO
+                obj = {
+                    "number": 44, "state": state,
+                    "head": {"ref": BRANCH, "sha": oid,
+                             "repo": None if self.removed_source else {"full_name": owner}},
+                    "base": {"ref": "main"},
+                }
+                return subprocess.CompletedProcess(args, 0, json.dumps(obj), "")
+            if "/contents/" in endpoint:
+                if self.removed_branch:
+                    return subprocess.CompletedProcess(args, 1, "", "404 Not Found")
+                filename = endpoint.split("/contents/", 1)[1].split("?ref=", 1)[0]
+                raw = (self.head_files or {}).get(filename)
+                if raw is None:
+                    raw = (Path("preview") / filename).read_bytes()
+                obj = {"encoding": "base64", "content": base64.b64encode(raw).decode()}
+                return subprocess.CompletedProcess(args, 0, json.dumps(obj), "")
+            raise AssertionError(f"Unexpected gh api request: {endpoint}")
         if args[:2] == ("git", "ls-remote"):
             sha = self.remote_shas.pop(0) if self.remote_shas else SHA
             return subprocess.CompletedProcess(args, 0, sha + "\trefs/heads/main\n", "")
@@ -112,7 +150,7 @@ class ProposalTests(unittest.TestCase):
     def test_existing_update_pr_stops_before_modifying_files(self):
         fake = FakeCommands(existing=True)
         old = Path("README.md").read_bytes()
-        self.assertEqual(self.call(fake), ("existing_pr", None))
+        self.assertEqual(self.call(fake), ("existing_pr_current", "44"))
         self.assertEqual(Path("README.md").read_bytes(), old)
         self.assertEqual(fake.actions("git", "switch"), [])
 
@@ -131,6 +169,89 @@ class ProposalTests(unittest.TestCase):
             ["validate-profile.yml", "spell-check.yml"],
         )
         self.assertEqual(fake.actions("git", "push", "origin", "HEAD:refs/heads/main"), [])
+
+    def test_existing_pr_with_outdated_preview_requests_manual_replacement(self):
+        fake = FakeCommands(
+            existing=True,
+            head_files={name: Path(name).read_bytes()
+                        for name in ("README.md", "README.en.md")},
+        )
+        self.assertEqual(self.call(fake), ("existing_pr_stale", "44"))
+        self.assertEqual(fake.actions("git", "push"), [])
+        self.assertEqual(fake.actions("gh", "pr", "create"), [])
+        self.assertEqual(fake.actions("gh", "pr", "comment"), [])
+        self.assertEqual(fake.actions("gh", "pr", "close"), [])
+
+    def test_existing_pr_with_human_editorial_change_is_preserved(self):
+        head_files = {}
+        for name in ("README.md", "README.en.md"):
+            head_files[name] = (self.preview / name).read_bytes().replace(
+                b"Footer", b"Human editorial change",
+            )
+        fake = FakeCommands(existing=True, head_files=head_files)
+        self.assertEqual(self.call(fake), ("existing_pr_modified", "44"))
+        self.assertEqual(fake.actions("git", "switch"), [])
+        self.assertEqual(fake.actions("git", "push"), [])
+        self.assertEqual(fake.actions("gh", "pr", "create"), [])
+
+    def test_existing_branch_missing_requires_manual_attention(self):
+        fake = FakeCommands(existing=True, removed_branch=True)
+        self.assertEqual(self.call(fake), ("existing_pr_attention", "44"))
+        self.assertEqual(fake.actions("git", "push"), [])
+        self.assertEqual(fake.actions("gh", "pr", "create"), [])
+
+    def test_deleted_source_repository_needs_manual_attention(self):
+        fake = FakeCommands(existing=True, removed_source=True)
+        self.assertEqual(self.call(fake), ("existing_pr_attention", "44"))
+        self.assertEqual(fake.actions("gh", "pr", "create"), [])
+        self.assertEqual(fake.actions("git", "push"), [])
+
+    def test_pr_closed_during_inspection_requires_manual_attention(self):
+        fake = FakeCommands(existing=True, pr_states=["open", "closed"])
+        self.assertEqual(self.call(fake), ("existing_pr_attention", "44"))
+        self.assertEqual(fake.actions("git", "push"), [])
+        self.assertEqual(fake.actions("gh", "pr", "create"), [])
+
+    def test_concurrent_pr_head_change_requires_manual_attention(self):
+        fake = FakeCommands(existing=True, head_shas=["c" * 40, "d" * 40])
+        self.assertEqual(self.call(fake), ("existing_pr_attention", "44"))
+        self.assertEqual(fake.actions("git", "push"), [])
+        self.assertEqual(fake.actions("gh", "pr", "create"), [])
+
+    def test_similarly_named_fork_pr_does_not_block_own_proposal(self):
+        fake = FakeCommands(existing=True, fork=True)
+        self.assertEqual(self.call(fake), ("created", BRANCH))
+        self.assertEqual(len(fake.actions("gh", "pr", "create")), 1)
+
+    def test_existing_pr_with_main_advanced_does_not_read_or_modify_it(self):
+        fake = FakeCommands(existing=True, remote_shas=[NEW_SHA])
+        self.assertEqual(self.call(fake), ("main_advanced", "44"))
+        self.assertEqual(fake.actions("gh", "pr", "create"), [])
+        self.assertEqual(fake.actions("git", "push"), [])
+
+    def test_two_runs_on_same_open_pr_never_duplicate_or_mutate(self):
+        for _ in range(2):
+            fake = FakeCommands(existing=True)
+            self.assertEqual(self.call(fake), ("existing_pr_current", "44"))
+            self.assertEqual(fake.actions("git", "push"), [])
+            self.assertEqual(fake.actions("gh", "pr", "create"), [])
+
+    def test_main_summary_identifies_existing_pr_to_review(self):
+        fake = FakeCommands(existing=True, head_files={
+            name: Path(name).read_bytes() for name in ("README.md", "README.en.md")
+        })
+        summary = self.preview / "summary.md"
+        with patch.dict("os.environ", {"GITHUB_STEP_SUMMARY": str(summary)}):
+            code = main([
+                "--preview-dir", str(self.preview), "--repo", REPO, "--sha", SHA,
+                "--run-id", "12345", "--run-attempt", "1", "--event", "schedule",
+                "--ref", "refs/heads/main",
+            ], command=fake)
+        self.assertEqual(code, 0)
+        text = summary.read_text(encoding="utf-8")
+        self.assertIn("https://github.com/example/profile/pull/44", text)
+        self.assertIn("Review and close the stale PR", text)
+        self.assertEqual(fake.actions("git", "push"), [])
 
     def test_private_or_unexpected_markdown_outside_markers_is_rejected(self):
         for name in ("README.md", "README.en.md"):

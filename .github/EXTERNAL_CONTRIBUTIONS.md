@@ -34,6 +34,17 @@ A busca paginada usa a API pública GET /search/issues com os qualificadores is:
 
 O status vem do campo pull_request.merged_at retornado pelo GitHub Search, e não é inferido do fato de um PR estar fechado. Resultados podem sofrer atraso de indexação ou mudanças durante a paginação; as verificações de completude reduzem, mas não eliminam, essas limitações. Somente dados públicos e somente os repositórios curados estão no escopo.
 
+## Retentativas da API e limites de espera (issue #22)
+
+O cliente compartilhado `GitHubAPI` realiza **até 3 tentativas por consulta**, com timeout máximo de **10 segundos por requisição**, orçamento acumulado de **20 segundos de espera** e duração máxima de **50 segundos por consulta**. O número de tentativas pode ser configurado em código entre 1 e 4 sem alterar a autenticação, o escopo público ou o JSON de saída.
+
+- **Retentativas:** HTTP 408, 429, 500, 502, 503 e 504, além de timeout e erro transitório de rede. Sem orientação do servidor, utiliza espera exponencial com jitter e teto de 10 segundos.
+- **Restrições do servidor:** respeita `Retry-After` (segundos ou data HTTP) e, para HTTP 429 sem esse cabeçalho, `X-RateLimit-Reset`. Caso a espera exigida exceda o orçamento, interrompe a consulta **sem tentar antes do prazo pedido pelo GitHub**. Não transforma esse cenário em ausência de contribuições.
+- **Falhas permanentes:** HTTP 400, 401 e 403, erro de TLS, formato inválido e JSON malformado não são repetidos. Não há registro de URL de requisição, corpo da resposta, token ou cabeçalhos sensíveis nas mensagens de erro.
+- **Isolamento:** o retry é usado tanto pela coleta curada quanto pela descoberta global, sem reuni-las no mesmo job. Se o limite for esgotado durante a coleta curada, o snapshot anterior permanece intacto e a publicação é bloqueada. Uma falha apenas na descoberta mantém a atualização curada e sinaliza `unavailable` no relatório de candidatos.
+
+Os limites foram definidos para caber no timeout de 10 minutos dos jobs em condições usuais. O GitHub Actions pode encerrar um job com muitas consultas lentas; nesse caso, os dados incompletos não são publicados. Os testes offline usam um relógio e uma conexão simulados para testar esperas e falhas sem acesso à rede nem atrasos reais.
+
 O JSON é escrito de forma atômica apenas quando todos os projetos terminam com sucesso. A renderização e a proposta de atualização revisável estão implementadas nas issues #16 e #17.
 
 ## Renderização bilíngue, sem publicação automática (issue #16)
@@ -83,7 +94,7 @@ Arquivo: [.github/workflows/external-contributions.yml](workflows/external-contr
 - **Publicação:** o quinto job (`propose`) é o único que recebe `contents: write`, `pull-requests: write` e `actions: write`. Em uma execução elegível na main, ele verifica se já há um PR de atualização automática aberto; se não houver e as duas versões diferirem das atuais, cria uma branch exclusiva para a execução e abre um PR de revisão em direção à main. **Nunca faz push para a main, merge automático, nem cria branch/PR em execuções de push de desenvolvimento ou pull_request**.
 - **Fallback:** algumas configurações de repositório bloqueiam a criação de PRs pelo GITHUB_TOKEN. Nesse caso, a branch gerada e o artefato de prévia permitem abrir o PR manualmente; o workflow emite aviso sem afirmar que houve publicação. Se também houver bloqueio de push, o job falha e o artefato gerado anteriormente permanece disponível.
 - **Proteção da main:** o ruleset ativo exige PR, resolução de threads e os checks Check README links e Check spelling. PRs criados por GITHUB_TOKEN não iniciam automaticamente os workflows comuns de push/PR; após abrir um PR, o job com permissão actions: write dispara explicitamente os workflows existentes validate-profile.yml e spell-check.yml via workflow_dispatch na branch proposta. Caso a configuração do repositório impeça um desses disparos, o job registra aviso e um colaborador autorizado deverá fazer os checks serem executados antes do merge. Não contorne nem enfraqueça o ruleset.
-- **Sem mudanças:** se os dados continuarem iguais, a data não é atualizada, o gerador não modifica os READMEs e o job não abre PR. Se já houver proposta automática aberta, a execução produz novo artefato e aguarda revisão da proposta anterior, sem criar duplicatas.
+- **Sem mudanças:** se os dados continuarem iguais, a data não é atualizada, o gerador não modifica os READMEs e o job não abre PR. Se já houver proposta automática aberta, o publicador confronta a prévia atual com os READMEs do SHA do PR e registra se ela está atual, defasada, contém edições editoriais fora dos marcadores ou exige atenção manual. Não reescreve a branch pendente nem cria duplicatas.
 - **Falha da API:** uma falha na coleta **curada** impede renderização e proposta. A descoberta **opcional** executa em job isolado; se falhar, exibe um aviso e marca o relatório como indisponível, sem impedir a atualização dos READMEs curados. Tokens de consulta só aparecem nos passos que usam a API, e apenas o quinto job elegível recebe credenciais de escrita.
 - **Migração do Metrics:** o workflow SVG experimental existe somente em branches separadas test/metrics-*, não na main. O PR experimental #11 continua independente. Ao aceitar a solução Markdown, encerrar ou arquivar o experimento de Metrics em uma etapa de manutenção separada, sem integrar seu workflow na main e sem excluir branches antes de conferir o histórico.
 
@@ -113,3 +124,17 @@ A descoberta opcional utiliza `scripts/prepare_discovery_report.py` para preserv
 4. Para validar o caminho de erro opcional sem criar propostas em produção, usar os testes offline de `tests/test_prepare_discovery_report.py` e `tests/test_workflow_contract.py` e conferir no Actions que a descoberta não é dependência funcional da coleta curada. A falha real da descoberta ainda não foi injetada em uma execução agendada da main.
 
 Nenhum desses passos de produção pode ser declarado aprovado apenas com os testes da branch de desenvolvimento. O intervalo de execução programada permanece diário às 06h de São Paulo (09h UTC), sujeito a atrasos do GitHub Actions.
+
+### Proposta automática já aberta: revisão e reapresentação (issue #23)
+
+**Política editorial:** não atualizar automaticamente uma branch com PR aberto. O novo snapshot gera uma prévia bilíngue, mas o publicador apenas **consulta** o PR pendente para não substituir alterações humanas, invalidar revisões ou interferir em comentários. O GitHub Actions publica o URL do PR e o estado no resumo da execução.
+
+- **Atual:** os dois READMEs do PR coincidem com a prévia mais recente. Nenhum novo PR é aberto.
+- **Defasado:** os arquivos do PR diferem da prévia nos blocos gerenciados. O workflow emite um aviso e solicita uma **reapresentação manual**: revisar o PR pendente, preservar os comentários e o trabalho necessário, fechá-lo e executar novamente o workflow em `main` com `publish=true` para gerar uma nova proposta. **Fechar o PR não copia alterações humanas para a nova proposta.**
+- **Alterado manualmente:** o PR também modifica conteúdo fora dos marcadores. O workflow não sobrescreve essas edições e exige que um revisor as preserve ou reaplique antes de fechar e reapresentar.
+- **Indisponível ou alterado durante a consulta:** branch removida, PR fechado, SHA alterado ou falha de leitura exigem inspeção humana. O workflow não cria outro PR quando não consegue confirmar o estado da proposta existente.
+- **PR de um fork com nome de branch semelhante:** não é confundido com uma proposta da automação do próprio repositório. O publicador consulta e valida repositório de origem, número, branch e SHA antes de classificar um PR pendente.
+
+A comparação consulta os dois READMEs pelo **SHA imutável** do PR e confirma a referência da branch, a existência do PR e a integridade do SHA antes e depois. O fluxo mantém as verificações da `main` para impedir uso de prévia renderizada de um commit antigo. O job de escrita continua restrito a execuções elegíveis na `main` e nunca faz merge ou force push.
+
+**Rollout da entrega única:** as melhorias #22 e #23 integram a mesma branch e o mesmo PR #19. Após o merge de #19 na `main`, executar o smoke test de publicação real de #21 e validar a classificação do PR pendente em uma execução controlada; os testes da branch não substituem a validação de produção.

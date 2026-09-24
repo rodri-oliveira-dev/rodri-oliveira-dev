@@ -201,8 +201,8 @@ class CollectorTests(unittest.TestCase):
         def timed_out(request, timeout):
             raise TimeoutError("Request timeout")
 
-        with self.assertRaisesRegex(CollectionError, "request or response failed") as caught:
-            GitHubAPI("my-secret", opener=timed_out).get("/search/issues", {"q": "test"})
+        with self.assertRaisesRegex(CollectionError, "retry limit") as caught:
+            GitHubAPI("my-secret", opener=timed_out, max_attempts=1).get("/search/issues", {"q": "test"})
         self.assertNotIn("my-secret", str(caught.exception))
 
     def test_failed_collection_never_overwrites_last_valid_file(self):
