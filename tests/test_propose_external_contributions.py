@@ -49,6 +49,12 @@ class FakeCommands:
             return subprocess.CompletedProcess(args, 0, json.dumps(prs), "")
         if args[:2] == ("gh", "api"):
             endpoint = args[2]
+            if endpoint == f"repos/{REPO}/git/ref/heads/{BRANCH}":
+                if self.removed_branch:
+                    return subprocess.CompletedProcess(args, 1, "", "404 Not Found")
+                return subprocess.CompletedProcess(
+                    args, 0, json.dumps({"object": {"sha": self.head_shas[0]}}), "",
+                )
             if endpoint == f"repos/{REPO}/pulls/44":
                 state = self.pr_states.pop(0) if len(self.pr_states) > 1 else self.pr_states[0]
                 oid = self.head_shas.pop(0) if len(self.head_shas) > 1 else self.head_shas[0]
