@@ -6,6 +6,9 @@ on:
       - feat/external-contributions-markdown
     paths:
       - .github/external-contributions.json
+      - .github/external-contributions-review.json
+      - scripts/external_contributions_review.py
+      - tests/test_external_contributions_review.py
       - .github/workflows/external-contributions.yml
       - scripts/external_contributions.py
       - scripts/discover_external_contributions.py
@@ -25,6 +28,9 @@ on:
   pull_request:
     paths:
       - .github/external-contributions.json
+      - .github/external-contributions-review.json
+      - scripts/external_contributions_review.py
+      - tests/test_external_contributions_review.py
       - .github/workflows/external-contributions.yml
       - scripts/external_contributions.py
       - scripts/discover_external_contributions.py
@@ -77,10 +83,12 @@ jobs:
           python3 - <<'PY'
           from pathlib import Path
           from scripts.external_contributions import load_config
+          from scripts.external_contributions_review import load_review_registry
 
           config = load_config(Path(".github/external-contributions.json"))
+          registry = load_review_registry(Path(".github/external-contributions-review.json"), config)
           count = sum(len(p["pull_requests"]) for p in config["projects"])
-          print(f"Validated {len(config['projects'])} external repositories and {count} curated PRs")
+          print(f"Validated {len(config['projects'])} curated repositories, {count} reference PRs and {len(registry['projects'])} tracked review entries")
           PY
 
       - name: Smoke-test production publisher entrypoint without write credentials
@@ -147,6 +155,7 @@ jobs:
         run: |
           if python3 scripts/discover_external_contributions.py \
             --config .github/external-contributions.json \
+            --review-file .github/external-contributions-review.json \
             --output "$RUNNER_TEMP/external-contributions-candidates.json"; then
             echo "status=success" >> "$GITHUB_OUTPUT"
           else
@@ -251,21 +260,40 @@ jobs:
                       "no candidate count is available for this run.\n"
                   )
               else:
-                  candidates = discovery["candidate_repositories"]
+                  review = discovery["review"]
                   summary.write(
-                      f"### Newly discovered external repositories: {len(candidates)}\n\n"
+                      f"### Projects requiring review: {review['untracked_count']} untracked, "
+                      f"{review['changed_count']} with unacknowledged changes\n\n"
                   )
                   summary.write(
-                      "New repositories are reported for editorial review, not automatically "
-                      "added to the profile or included in the curated metrics.\n\n"
+                      f"Known pending projects without changes: {review['tracked_pending_count']}. "
+                      f"Ignored projects: {review['ignored_count']}. "
+                      "Full project and PR history is in candidates.json.\n\n"
                   )
-                  for project in candidates:
+                  for project in review["new_candidates"]:
                       repo = project["repository"]
                       links = ", ".join(
                           f"[#{pr['number']}]({pr['url']})"
                           for pr in project["pull_requests"]
                       )
-                      summary.write(f"- [{repo}](https://github.com/{repo}): {links}\n")
+                      summary.write(f"- **Untracked:** [{repo}](https://github.com/{repo}): {links}\n")
+                  for project in review["changed_candidates"]:
+                      repo = project["repository"]
+                      links = ", ".join(
+                          f"[#{pr['number']}]({pr['url']})"
+                          for pr in project["pull_requests"]
+                      )
+                      summary.write(
+                          f"- **Activity changed** ({project['change_reason']}): "
+                          f"[{repo}](https://github.com/{repo}): {links}\n"
+                      )
+                  if review["untracked_count"] or review["changed_count"]:
+                      summary.write(
+                          "\nReview candidates.json and update the versioned "
+                          ".github/external-contributions-review.json through a reviewed PR "
+                          "to acknowledge changes or record editorial decisions. "
+                          "Pending does not mean approval for the README.\n"
+                      )
 
           PY
 
