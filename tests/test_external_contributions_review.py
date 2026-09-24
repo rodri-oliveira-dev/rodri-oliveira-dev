@@ -119,6 +119,9 @@ class ReviewRegistryTests(unittest.TestCase):
         bad = [
             registry(review_entry(status="unknown")),
             registry(review_entry(status="ignored")),
+            registry(review_entry(status=["pending"])),
+            registry(review_entry(repository=CURATED, status="selected", observed={})),
+            registry(review_entry(observed={"7": ["open"]})),
             registry(review_entry(repository=CURATED, status="pending")),
             registry(review_entry(repository=KNOWN, status="selected")),
             registry(review_entry(), review_entry(repository="neworg/knownproject")),
