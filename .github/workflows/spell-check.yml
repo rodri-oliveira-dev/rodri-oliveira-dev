@@ -1,12 +1,11 @@
 name: Spell check
 
 on:
+  # Required by the main branch ruleset: run on every PR so the required
+  # "Check spelling" status is always reported, including workflow-only PRs.
+  # Do not add paths filters to pull_request: skipped workflows leave required
+  # checks permanently pending ("Expected — Waiting for status to be reported").
   pull_request:
-    paths:
-      - "**/*.md"
-      - ".cspell.json"
-      - ".cspell/**"
-      - ".github/workflows/spell-check.yml"
   push:
     branches:
       - main
