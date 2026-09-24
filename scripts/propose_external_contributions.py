@@ -8,6 +8,8 @@ that eligibility check so the exact publication logic can be unit tested.
 from __future__ import annotations
 
 import argparse
+import base64
+import binascii
 import json
 import os
 import re
@@ -102,24 +104,116 @@ def changed_preview(preview_dir: Path) -> dict[str, bytes]:
     return changed
 
 
-def open_automation_prs(command: Commands, repository: str) -> bool:
-    """Fail closed if the GitHub CLI cannot enumerate all open proposals."""
-    response = required(
-        command, "gh", "pr", "list", "--repo", repository, "--base", "main",
-        "--state", "open", "--limit", "100", "--json", "headRefName",
-    )
+AUTOMATION_BRANCH = re.compile(r"automation/external-contributions-[0-9]+(?:-[0-9]+)?")
+
+
+def _json_command(command: Commands, *args: str) -> object:
+    """Decode CLI output without leaking GitHub response contents into logs."""
+    result = required(command, *args)
     try:
-        prs = json.loads(response)
+        return json.loads(result)
     except ValueError as error:
-        raise ProposalError("GitHub returned invalid pull request data") from error
+        raise ProposalError("GitHub returned invalid JSON for an existing proposal") from error
+
+
+def existing_proposal(command: Commands, repository: str) -> dict | None:
+    """Locate an actual same-repository proposal, ignoring similarly named forks.
+
+    Return an attention state on a close/delete race. Never turn uncertainty into
+    permission to open another pull request.
+    """
+    prs = _json_command(
+        command, "gh", "pr", "list", "--repo", repository, "--base", "main",
+        "--state", "open", "--limit", "100", "--json", "headRefName,number",
+    )
     if not isinstance(prs, list) or len(prs) >= 100:
         raise ProposalError("Cannot reliably inspect all open update pull requests")
-    return any(
-        isinstance(pr, dict)
-        and isinstance(pr.get("headRefName"), str)
-        and pr["headRefName"].startswith("automation/external-contributions-")
-        for pr in prs
+    candidates = []
+    for entry in prs:
+        if not isinstance(entry, dict):
+            raise ProposalError("GitHub returned malformed pull request listing")
+        name = entry.get("headRefName")
+        number = entry.get("number")
+        if not isinstance(name, str) or not name.startswith("automation/external-contributions-"):
+            continue
+        if not AUTOMATION_BRANCH.fullmatch(name) or type(number) is not int or number < 1:
+            raise ProposalError("Unexpected automated update pull request metadata")
+        metadata = _json_command(command, "gh", "api", f"repos/{repository}/pulls/{number}")
+        if not isinstance(metadata, dict):
+            raise ProposalError("GitHub returned invalid update PR metadata")
+        head = metadata.get("head")
+        base = metadata.get("base")
+        if not isinstance(head, dict) or not isinstance(base, dict):
+            raise ProposalError("GitHub returned incomplete update PR metadata")
+        head_repo = head.get("repo")
+        if not isinstance(head_repo, dict):
+            # A closed or deleted source repository needs manual attention.
+            raise ProposalError("Update pull request source repository is missing")
+        if str(head_repo.get("full_name", "")).casefold() != repository.casefold():
+            # A fork may use the same branch name; do not block a repository-owned PR.
+            continue
+        if metadata.get("number") != number or base.get("ref") != "main":
+            raise ProposalError("Update pull request metadata changed during inspection")
+        if metadata.get("state") != "open" or head.get("ref") != name:
+            return {"number": number, "state": "attention"}
+        oid = head.get("sha")
+        if not isinstance(oid, str) or SHA_PATTERN.fullmatch(oid) is None:
+            return {"number": number, "state": "attention"}
+        candidates.append({"number": number, "sha": oid, "branch": name})
+    if len(candidates) > 1:
+        return {"number": candidates[0]["number"], "state": "attention"}
+    return candidates[0] if candidates else None
+
+
+def _head_readme(command: Commands, repository: str, sha: str, filename: str) -> bytes:
+    """Read README from immutable PR-head SHA; never check out or modify the PR."""
+    result = _json_command(
+        command, "gh", "api", f"repos/{repository}/contents/{filename}?ref={sha}",
     )
+    if not isinstance(result, dict) or result.get("encoding") != "base64":
+        raise ProposalError("Update PR README is unavailable or unexpectedly encoded")
+    content = result.get("content")
+    if not isinstance(content, str) or len(content) > 4_000_000:
+        raise ProposalError("Update PR README is invalid or too large")
+    try:
+        return base64.b64decode("".join(content.split()), validate=True)
+    except (ValueError, binascii.Error) as error:
+        raise ProposalError("Update PR README contains invalid base64 data") from error
+
+
+def inspect_existing(
+    command: Commands, repository: str, proposal: dict, preview_dir: Path, sha: str,
+) -> str:
+    """Select an explicit human-review state; never rewrite an open PR."""
+    if proposal.get("state") == "attention":
+        return "existing_pr_attention"
+    if not verify_main(command, sha):
+        return "main_advanced"
+    number, head_sha = proposal["number"], proposal["sha"]
+    try:
+        needs_refresh = False
+        modified_outside_block = False
+        for filename in ("README.md", "README.en.md"):
+            previous = Path(filename).read_bytes()
+            proposed = (preview_dir / filename).read_bytes()
+            current = _head_readme(command, repository, head_sha, filename)
+            # The approved preview is checked separately against current main.
+            if _bounded(previous.decode("utf-8")) != _bounded(current.decode("utf-8")):
+                modified_outside_block = True
+            if current != proposed:
+                needs_refresh = True
+    except (ProposalError, OSError, UnicodeError):
+        return "existing_pr_attention"
+    latest = _json_command(command, "gh", "api", f"repos/{repository}/pulls/{number}")
+    if not isinstance(latest, dict) or not isinstance(latest.get("head"), dict):
+        return "existing_pr_attention"
+    if latest.get("state") != "open" or latest["head"].get("sha") != head_sha:
+        return "existing_pr_attention"
+    if not verify_main(command, sha):
+        return "main_advanced"
+    if modified_outside_block:
+        return "existing_pr_modified"
+    return "existing_pr_stale" if needs_refresh else "existing_pr_current"
 
 
 def propose(
@@ -149,9 +243,10 @@ def propose(
     head = required(command, "git", "rev-parse", "HEAD")
     if head != sha:
         raise ProposalError("Publication checkout does not match the rendered commit")
-    if open_automation_prs(command, repository):
-        return "existing_pr", None
+    pending = existing_proposal(command, repository)
     changed = changed_preview(preview_dir)
+    if pending is not None:
+        return inspect_existing(command, repository, pending, preview_dir, sha), str(pending["number"])
     if not changed:
         return "unchanged", None
     if not verify_main(command, sha):
@@ -228,7 +323,10 @@ def main(argv: list[str] | None = None, command: Commands | None = None) -> int:
         return 1
     messages = {
         "skipped_not_authorized": "Publication denied outside eligible main runs.",
-        "existing_pr": "An automatic update PR is open. Review it before another proposal.",
+        "existing_pr_current": "The open update PR already matches the latest verified preview. No new PR was created.",
+        "existing_pr_stale": "The open update PR differs from the latest verified preview. Review and close the stale PR, then rerun the workflow on current main with publish=true to propose a replacement. The existing branch and reviews were preserved.",
+        "existing_pr_modified": "The open update PR also changes text outside the managed README blocks. Review and preserve any human edits before manually closing and requesting a replacement; no files or reviews were changed.",
+        "existing_pr_attention": "The existing update PR changed, disappeared, or could not be inspected safely. Review the PR and its branch manually before rerunning the workflow; no replacement was created.",
         "unchanged": "No README changes; branch and PR not created.",
         "main_advanced": "main advanced during this run. Rerun from the latest main commit.",
         "checks_unavailable": "Update PR created, but at least one required check was not dispatched. Run checks manually before merging.",
@@ -236,13 +334,16 @@ def main(argv: list[str] | None = None, command: Commands | None = None) -> int:
     }
     message = messages[state]
     print(message)
+    is_existing = state.startswith("existing_pr_")
     if branch:
-        print(f"Proposed branch: {branch}")
+        print(f"Existing PR: https://github.com/{args.repo}/pull/{branch}" if is_existing else f"Proposed branch: {branch}")
+    if state in ("existing_pr_stale", "existing_pr_modified", "existing_pr_attention"):
+        print(f"::warning::{message}", file=sys.stderr)
     if os.environ.get("GITHUB_STEP_SUMMARY"):
         with open(os.environ["GITHUB_STEP_SUMMARY"], "a", encoding="utf-8") as summary:
             summary.write(message + "\n")
             if branch:
-                summary.write(f"Branch: {branch}\n")
+                summary.write(f"Existing PR: https://github.com/{args.repo}/pull/{branch}\n" if is_existing else f"Branch: {branch}\n")
     if state == "checks_unavailable":
         print("::warning::One or more required check workflows were not dispatched.", file=sys.stderr)
     return 0
