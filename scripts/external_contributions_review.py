@@ -36,7 +36,7 @@ def load_review_registry(path: Path, config: dict) -> dict:
     ):
         raise CollectionError("External review registry has an invalid schema")
     curated = {p["repository"].casefold() for p in config["projects"]}
-    names = set(curated)
+    names = set()
     for item in data["projects"]:
         if not isinstance(item, dict):
             raise CollectionError("External review registry contains invalid entries")
@@ -79,11 +79,8 @@ def load_review_registry(path: Path, config: dict) -> dict:
             raise CollectionError("External review registry contains invalid repository aliases")
         for name_or_alias in [name, *aliases]:
             key = name_or_alias.casefold()
-            if key in names:
-                # A selected project may occupy its own curated repository once.
-                if not (state == "selected" and key == name.casefold() and key in curated):
-                    raise CollectionError("External review registry contains duplicate or conflicting aliases")
-                names.remove(key)
+            if key in names or (key in curated and not (state == "selected" and key == name.casefold())):
+                raise CollectionError("External review registry contains duplicate or conflicting aliases")
             if name_or_alias.partition("/")[0].casefold() == config["profile"].casefold():
                 raise CollectionError("Profile-owned aliases cannot be review candidates")
             names.add(key)
