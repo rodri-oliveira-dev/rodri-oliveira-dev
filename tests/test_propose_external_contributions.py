@@ -25,7 +25,7 @@ class FakeCommands:
 
     def __init__(self, *, existing=False, remote_shas=None, failure=None, dispatch_failure=None,
                  remote_branches=None, head_files=None, pr_states=None, head_shas=None,
-                 fork=False, removed_branch=False):
+                 fork=False, removed_branch=False, removed_source=False):
         self.commands = []
         self.existing = existing
         self.remote_shas = list(remote_shas if remote_shas is not None else [SHA] * 4)
@@ -37,6 +37,7 @@ class FakeCommands:
         self.head_shas = list(head_shas or ["c" * 40])
         self.fork = fork
         self.removed_branch = removed_branch
+        self.removed_source = removed_source
 
     def run(self, *args):
         self.commands.append(args)
@@ -61,7 +62,8 @@ class FakeCommands:
                 owner = "another-owner/example" if self.fork else REPO
                 obj = {
                     "number": 44, "state": state,
-                    "head": {"ref": BRANCH, "sha": oid, "repo": {"full_name": owner}},
+                    "head": {"ref": BRANCH, "sha": oid,
+                             "repo": None if self.removed_source else {"full_name": owner}},
                     "base": {"ref": "main"},
                 }
                 return subprocess.CompletedProcess(args, 0, json.dumps(obj), "")
@@ -197,6 +199,12 @@ class ProposalTests(unittest.TestCase):
         self.assertEqual(self.call(fake), ("existing_pr_attention", "44"))
         self.assertEqual(fake.actions("git", "push"), [])
         self.assertEqual(fake.actions("gh", "pr", "create"), [])
+
+    def test_deleted_source_repository_needs_manual_attention(self):
+        fake = FakeCommands(existing=True, removed_source=True)
+        self.assertEqual(self.call(fake), ("existing_pr_attention", "44"))
+        self.assertEqual(fake.actions("gh", "pr", "create"), [])
+        self.assertEqual(fake.actions("git", "push"), [])
 
     def test_pr_closed_during_inspection_requires_manual_attention(self):
         fake = FakeCommands(existing=True, pr_states=["open", "closed"])
