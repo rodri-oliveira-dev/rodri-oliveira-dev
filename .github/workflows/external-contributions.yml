@@ -1,0 +1,348 @@
+name: External open-source contributions
+
+on:
+  push:
+    branches:
+      - feat/external-contributions-markdown
+    paths:
+      - .github/external-contributions.json
+      - .github/external-contributions-review.json
+      - scripts/external_contributions_review.py
+      - tests/test_external_contributions_review.py
+      - .github/workflows/external-contributions.yml
+      - scripts/external_contributions.py
+      - scripts/discover_external_contributions.py
+      - tests/test_discover_external_contributions.py
+      - scripts/render_external_contributions.py
+      - scripts/prepare_discovery_report.py
+      - scripts/propose_external_contributions.py
+      - tests/test_prepare_discovery_report.py
+      - tests/test_propose_external_contributions.py
+      - tests/test_workflow_contract.py
+      - tests/test_external_contributions_integration.py
+      - tests/test_external_contributions.py
+      - tests/test_external_contributions_retry.py
+      - tests/test_render_external_contributions.py
+      - README.md
+      - README.en.md
+  pull_request:
+    paths:
+      - .github/external-contributions.json
+      - .github/external-contributions-review.json
+      - scripts/external_contributions_review.py
+      - tests/test_external_contributions_review.py
+      - .github/workflows/external-contributions.yml
+      - scripts/external_contributions.py
+      - scripts/discover_external_contributions.py
+      - tests/test_discover_external_contributions.py
+      - scripts/render_external_contributions.py
+      - scripts/prepare_discovery_report.py
+      - scripts/propose_external_contributions.py
+      - tests/test_prepare_discovery_report.py
+      - tests/test_propose_external_contributions.py
+      - tests/test_workflow_contract.py
+      - tests/test_external_contributions_integration.py
+      - tests/test_external_contributions.py
+      - tests/test_external_contributions_retry.py
+      - tests/test_render_external_contributions.py
+      - README.md
+      - README.en.md
+  schedule:
+    - cron: "0 9 * * *"
+  workflow_dispatch:
+    inputs:
+      publish:
+        description: "Propose a reviewed README update from main (default: preview only)"
+        required: false
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: external-contributions-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  validate:
+    name: 1. Validate curated projects and unit tests
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Checkout without persistent credentials
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+
+      - name: Run offline tests
+        run: python3 -m unittest discover -s tests -v
+
+      - name: Validate curated repositories and PR references
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          from scripts.external_contributions import load_config
+          from scripts.external_contributions_review import load_review_registry
+
+          config = load_config(Path(".github/external-contributions.json"))
+          registry = load_review_registry(Path(".github/external-contributions-review.json"), config)
+          count = sum(len(p["pull_requests"]) for p in config["projects"])
+          print(f"Validated {len(config['projects'])} curated repositories, {count} reference PRs and {len(registry['projects'])} tracked review entries")
+          PY
+
+      - name: Smoke-test production publisher entrypoint without write credentials
+        run: |
+          python3 scripts/propose_external_contributions.py \
+            --preview-dir "$RUNNER_TEMP/missing-preview" \
+            --repo "$GITHUB_REPOSITORY" \
+            --sha "$GITHUB_SHA" \
+            --run-id "$GITHUB_RUN_ID" \
+            --run-attempt "$GITHUB_RUN_ATTEMPT" \
+            --event pull_request \
+            --ref refs/heads/qa-smoke-test \
+            --publish true
+
+      - name: Validate GitHub Actions workflow syntax
+        uses: docker://rhysd/actionlint:1.7.12
+        with:
+          args: -color
+
+  collect:
+    name: 2. Collect verified public pull requests
+    needs: validate
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Checkout without persistent credentials
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+
+      - name: Collect complete public data
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          python3 scripts/external_contributions.py \
+            --config .github/external-contributions.json \
+            --output "$RUNNER_TEMP/external-contributions-snapshot.json"
+
+      - name: Upload verified data for rendering
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: external-contributions-data
+          path: ${{ runner.temp }}/external-contributions-snapshot.json
+          if-no-files-found: error
+          retention-days: 7
+
+  discover:
+    name: 3. Discover optional new public repositories
+    needs: validate
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    outputs:
+      status: ${{ steps.discovery.outputs.status }}
+    steps:
+      - name: Checkout without persistent credentials
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+
+      - name: Discover new third-party repositories
+        id: discovery
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          if python3 scripts/discover_external_contributions.py \
+            --config .github/external-contributions.json \
+            --review-file .github/external-contributions-review.json \
+            --output "$RUNNER_TEMP/external-contributions-candidates.json"; then
+            echo "status=success" >> "$GITHUB_OUTPUT"
+          else
+            echo "status=unavailable" >> "$GITHUB_OUTPUT"
+            echo "::warning::Optional new-repository discovery failed. Curated README updates will continue; candidate count is unknown."
+          fi
+
+      - name: Upload new project candidates for manual review
+        if: ${{ steps.discovery.outputs.status == 'success' }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: external-contributions-candidates
+          path: ${{ runner.temp }}/external-contributions-candidates.json
+          if-no-files-found: error
+          retention-days: 7
+
+
+  render:
+    name: 4. Render and verify PT-BR and EN preview
+    needs: [collect, discover]
+    if: ${{ always() && needs.collect.result == 'success' }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Checkout without persistent credentials
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+
+      - name: Download verified data
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with:
+          name: external-contributions-data
+          path: ${{ runner.temp }}/contributions
+
+      - name: Download newly discovered repository candidates
+        if: ${{ needs.discover.result == 'success' && needs.discover.outputs.status == 'success' }}
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with:
+          name: external-contributions-candidates
+          path: ${{ runner.temp }}/discovery
+
+      - name: Generate preview without modifying tracked files
+        env:
+          DISCOVERY_RESULT: ${{ needs.discover.outputs.status }}
+        run: |
+          mkdir -p preview
+          cp README.md preview/README.md
+          cp README.en.md preview/README.en.md
+
+          python3 scripts/render_external_contributions.py \
+            --snapshot "$RUNNER_TEMP/contributions/external-contributions-snapshot.json" \
+            --readme-pt preview/README.md \
+            --readme-en preview/README.en.md \
+            --write
+
+          cp preview/README.md "$RUNNER_TEMP/README.pt.first.md"
+          cp preview/README.en.md "$RUNNER_TEMP/README.en.first.md"
+
+          python3 scripts/render_external_contributions.py \
+            --snapshot "$RUNNER_TEMP/contributions/external-contributions-snapshot.json" \
+            --readme-pt preview/README.md \
+            --readme-en preview/README.en.md \
+            --write
+
+          cmp preview/README.md "$RUNNER_TEMP/README.pt.first.md"
+          cmp preview/README.en.md "$RUNNER_TEMP/README.en.first.md"
+          git diff --exit-code -- README.md README.en.md
+          cp "$RUNNER_TEMP/contributions/external-contributions-snapshot.json" preview/snapshot.json
+          python3 scripts/prepare_discovery_report.py \
+            --discovery-result "$DISCOVERY_RESULT" \
+            --input "$RUNNER_TEMP/discovery/external-contributions-candidates.json" \
+            --output preview/candidates.json
+
+      - name: Summarize scope and availability
+        run: |
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          from os import environ
+
+          data = json.loads(Path("preview/snapshot.json").read_text(encoding="utf-8"))
+          discovery = json.loads(Path("preview/candidates.json").read_text(encoding="utf-8"))
+          totals = data["totals"]
+          with open(environ["GITHUB_STEP_SUMMARY"], "a", encoding="utf-8") as summary:
+              summary.write("### External contributions preview\n\n")
+              summary.write(
+                  f"Public authored PRs in {data['repositories']} curated external repositories: "
+                  f"{totals['authored_prs']} total, {totals['merged_prs']} merged, "
+                  f"{totals['open_prs']} open, {totals['closed_unmerged_prs']} closed without merge.\n\n"
+              )
+              summary.write(
+                  "Download **external-contributions-preview** to review README.md, "
+                  "README.en.md, snapshot.json and candidates.json. "
+                  "No tracked README was modified.\n\n"
+              )
+              if discovery.get("status") == "unavailable":
+                  summary.write(
+                      "### New repository discovery: unavailable\n\n"
+                      "The optional search failed or was skipped. "
+                      "The curated README preview remains valid; "
+                      "no candidate count is available for this run.\n"
+                  )
+              else:
+                  review = discovery["review"]
+                  summary.write(
+                      f"### Projects requiring review: {review['untracked_count']} untracked, "
+                      f"{review['changed_count']} with unacknowledged changes\n\n"
+                  )
+                  summary.write(
+                      f"Known pending projects without changes: {review['tracked_pending_count']}. "
+                      f"Ignored projects: {review['ignored_count']}. "
+                      "Full project and PR history is in candidates.json.\n\n"
+                  )
+                  for project in review["new_candidates"]:
+                      repo = project["repository"]
+                      links = ", ".join(
+                          f"[#{pr['number']}]({pr['url']})"
+                          for pr in project["pull_requests"]
+                      )
+                      summary.write(f"- **Untracked:** [{repo}](https://github.com/{repo}): {links}\n")
+                  for project in review["changed_candidates"]:
+                      repo = project["repository"]
+                      links = ", ".join(
+                          f"[#{pr['number']}]({pr['url']})"
+                          for pr in project["pull_requests"]
+                      )
+                      summary.write(
+                          f"- **Activity changed** ({project['change_reason']}): "
+                          f"[{repo}](https://github.com/{repo}): {links}\n"
+                      )
+                  if review["untracked_count"] or review["changed_count"]:
+                      summary.write(
+                          "\nReview candidates.json and update the versioned "
+                          ".github/external-contributions-review.json through a reviewed PR "
+                          "to acknowledge changes or record editorial decisions. "
+                          "Pending does not mean approval for the README.\n"
+                      )
+
+          PY
+
+      - name: Upload bilingual README preview
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: external-contributions-preview
+          path: preview/
+          if-no-files-found: error
+          retention-days: 7
+
+  propose:
+    name: 5. Propose reviewed update (main only)
+    needs: render
+    if: >-
+      always() && needs.render.result == 'success' &&
+      github.ref == 'refs/heads/main' &&
+      (github.event_name == 'schedule' ||
+       (github.event_name == 'workflow_dispatch' && inputs.publish == true))
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: write
+      pull-requests: write
+      actions: write # dispatch the required profile checks for a bot-created PR
+    steps:
+      - name: Checkout rendered main commit (only this job has write access)
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: true
+
+      - name: Download validated README preview
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with:
+          name: external-contributions-preview
+          path: ${{ runner.temp }}/external-preview
+
+      - name: Propose update from the verified rendered commit
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PUBLISH: ${{ inputs.publish }}
+        run: |
+          python3 scripts/propose_external_contributions.py \
+            --preview-dir "$RUNNER_TEMP/external-preview" \
+            --repo "$GITHUB_REPOSITORY" \
+            --sha "$GITHUB_SHA" \
+            --run-id "$GITHUB_RUN_ID" \
+            --run-attempt "$GITHUB_RUN_ATTEMPT" \
+            --event "$GITHUB_EVENT_NAME" \
+            --ref "$GITHUB_REF" \
+            --publish "${PUBLISH:-false}"

@@ -73,12 +73,22 @@ Esse trabalho exige um tipo diferente de decisão: **evoluir o projeto sem ignor
 
 Contribuir em bases de código que não controlo também expõe uma parte importante da engenharia: entender decisões existentes, respeitar contratos e convenções, discutir trade-offs e entregar mudanças que façam sentido dentro daquele ecossistema.
 
-| Projeto | Contribuição |
+**Contribuições em projetos de terceiros selecionados**, com links para o trabalho proposto e integrado.
+
+<!-- EXTERNAL_CONTRIBUTIONS:START -->
+
+**PRs públicos de minha autoria nos 4 projetos externos selecionados:** 10 no total, 4 integrados, 6 abertos e 0 fechados sem integração. **Projetos com PRs integrados:** 2.
+
+| Projeto externo | Colaboração e PRs de referência |
 | --- | --- |
-| **[Ocelot](https://github.com/ThreeMammals/Ocelot)** | [PR #2420](https://github.com/ThreeMammals/Ocelot/pull/2420): tratamento de timeout downstream como **504 Gateway Timeout**, alinhado à RFC 9110. [PR #2421](https://github.com/ThreeMammals/Ocelot/pull/2421): cobertura de regressão para roteamento de `multipart/form-data`, preservando body, boundary e metadados do arquivo. |
-| **[CrispyWaffle](https://github.com/guibranco/CrispyWaffle)** | [PR #980](https://github.com/guibranco/CrispyWaffle/pull/980): suporte a serialização YAML com YamlDotNet, integração com as abstrações existentes, testes e documentação. |
-| **[Architecture Decision Record](https://github.com/architecture-decision-record/architecture-decision-record)** | [PR #115](https://github.com/architecture-decision-record/architecture-decision-record/pull/115): localização completa para Português do Brasil, preservando estrutura, referências e identidade entre os conteúdos equivalentes. |
-| **[LikeC4](https://github.com/likec4/likec4)** | Expansão da localização oficial para **Português do Brasil**: [PR #3179](https://github.com/likec4/likec4/pull/3179) introduziu o README em pt-BR, suporte de internacionalização e o tutorial; [PR #3236](https://github.com/likec4/likec4/pull/3236) traduziu Guides e os fundamentos da DSL; [PR #3262](https://github.com/likec4/likec4/pull/3262) completou a localização da documentação de Views da DSL, preservando sintaxe, exemplos e terminologia arquitetural. |
+| **[Ocelot](https://github.com/ThreeMammals/Ocelot)** | [PR #2420 · integrado](https://github.com/ThreeMammals/Ocelot/pull/2420): Tratamento de timeout downstream como **504 Gateway Timeout**, alinhado à RFC 9110.<br><br>[PR #2421 · aberto](https://github.com/ThreeMammals/Ocelot/pull/2421): Proposta de cobertura de regressão para roteamento de `multipart/form-data`, preservando body, boundary e metadados do arquivo. |
+| **[CrispyWaffle](https://github.com/guibranco/CrispyWaffle)** | [PR #980 · aberto](https://github.com/guibranco/CrispyWaffle/pull/980): Proposta de serialização YAML com YamlDotNet, integrada às abstrações existentes, com testes e documentação. |
+| **[Architecture Decision Record](https://github.com/architecture-decision-record/architecture-decision-record)** | [PR #115 · aberto](https://github.com/architecture-decision-record/architecture-decision-record/pull/115): Proposta de localização completa para Português do Brasil, preservando estrutura, referências e identidade entre conteúdos equivalentes. |
+| **[LikeC4](https://github.com/likec4/likec4)** | [PR #3179 · integrado](https://github.com/likec4/likec4/pull/3179): Introdução do README em pt-BR, suporte à internacionalização e tutorial.<br><br>[PR #3236 · integrado](https://github.com/likec4/likec4/pull/3236): Tradução de Guides e dos fundamentos da DSL.<br><br>[PR #3262 · integrado](https://github.com/likec4/likec4/pull/3262): Localização da documentação de Views da DSL, preservando sintaxe, exemplos e terminologia arquitetural. |
+
+*A seleção e as descrições são editoriais. Os números incluem todos os PRs públicos de minha autoria nesses projetos, mesmo os não destacados na tabela. Atualização do painel: 23/09/2026.*
+
+<!-- EXTERNAL_CONTRIBUTIONS:END -->
 
 **[Acompanhar contribuições e trabalho em andamento →](https://github.com/users/rodri-oliveira-dev/projects/1/views/1)**  
 Uso este GitHub Project para acompanhar issues, contribuições e iniciativas open source em que estou atuando, avaliando ou em que já atuei.
