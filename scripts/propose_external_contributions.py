@@ -147,8 +147,8 @@ def existing_proposal(command: Commands, repository: str) -> dict | None:
             raise ProposalError("GitHub returned incomplete update PR metadata")
         head_repo = head.get("repo")
         if not isinstance(head_repo, dict):
-            # A closed or deleted source repository needs manual attention.
-            raise ProposalError("Update pull request source repository is missing")
+            # GitHub may null the head repo when the source is deleted.
+            return {"number": number, "state": "attention"}
         if str(head_repo.get("full_name", "")).casefold() != repository.casefold():
             # A fork may use the same branch name; do not block a repository-owned PR.
             continue
