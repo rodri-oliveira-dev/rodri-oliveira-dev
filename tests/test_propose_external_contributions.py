@@ -178,7 +178,7 @@ class ProposalTests(unittest.TestCase):
         head_files = {}
         for name in ("README.md", "README.en.md"):
             head_files[name] = (self.preview / name).read_bytes().replace(
-                b"Editorial footer", b"Human editorial change",
+                b"Footer", b"Human editorial change",
             )
         fake = FakeCommands(existing=True, head_files=head_files)
         self.assertEqual(self.call(fake), ("existing_pr_modified", "44"))
