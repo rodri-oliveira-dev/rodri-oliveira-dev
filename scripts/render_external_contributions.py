@@ -301,7 +301,9 @@ def write_updates(updates: dict[Path, str]) -> None:
                 # the filesystem has already completed the replacement.
                 attempted.append(path)
                 os.replace(temporary, path)
-        except OSError as error:
+        except BaseException as error:
+            # KeyboardInterrupt and SystemExit also need rollback before
+            # propagating; otherwise finally would discard their backups.
             recovery_errors = []
             for path in reversed(attempted):
                 try:
@@ -316,9 +318,11 @@ def write_updates(updates: dict[Path, str]) -> None:
                     f"README update failed ({error}); manual recovery required: "
                     + "; ".join(recovery_errors)
                 ) from error
-            raise RenderError(
-                f"README update failed ({error}); original files rolled back"
-            ) from error
+            if isinstance(error, OSError):
+                raise RenderError(
+                    f"README update failed ({error}); original files rolled back"
+                ) from error
+            raise
     finally:
         for temporary in staging.values():
             temporary.unlink(missing_ok=True)
