@@ -44,7 +44,9 @@ My open-source work shows how I approach engineering in practice. Each project c
 | **[.NET Library Template](https://github.com/rodri-oliveira-dev/dotnet-library-template)** | Packages recurring build, testing, security, packaging, and release practices into a reusable golden path, including package validation, NuGet Audit, CodeQL, OIDC-based Trusted Publishing, and software supply-chain controls. |
 | **[ComplexityAnalysis.Analyzers](https://github.com/rodri-oliveira-dev/complexity-analyzers)** | Moves complexity feedback closer to development with Roslyn analyzers for algorithmic, cyclomatic, cognitive, and structural complexity, using conservative behavior when an inference cannot be made safely. |
 
-**DotNetRepoInspector identifies technical facts in a repository; Repo2C4 uses verifiable evidence to interpret those facts architecturally and produce reviewable C4 documentation.**\n\n[Explore all repositories →](https://github.com/rodri-oliveira-dev?tab=repositories)
+**DotNetRepoInspector identifies technical facts in a repository; Repo2C4 uses verifiable evidence to interpret those facts architecturally and produce reviewable C4 documentation.**
+
+[Explore all repositories →](https://github.com/rodri-oliveira-dev?tab=repositories)
 
 ---
 
