@@ -44,7 +44,9 @@ Nos projetos open source, parte do meu raciocínio técnico fica visível no có
 | **[.NET Library Template](https://github.com/rodri-oliveira-dev/dotnet-library-template)** | Consolida práticas recorrentes de build, testes, segurança, empacotamento e release em um golden path reutilizável, com package validation, NuGet Audit, CodeQL, Trusted Publishing via OIDC e controles de software supply chain. |
 | **[ComplexityAnalysis.Analyzers](https://github.com/rodri-oliveira-dev/complexity-analyzers)** | Leva análise de complexidade para perto do desenvolvimento com analyzers Roslyn para complexidade algorítmica, ciclomática, cognitiva e estrutural, usando uma abordagem conservadora quando a inferência não é segura. |
 
-**DotNetRepoInspector identifica fatos técnicos do repositório; Repo2C4 usa evidências verificáveis para interpretá-los arquiteturalmente e produzir documentação C4 revisável.**\n\n[Ver todos os repositórios →](https://github.com/rodri-oliveira-dev?tab=repositories)
+**DotNetRepoInspector identifica fatos técnicos do repositório; Repo2C4 usa evidências verificáveis para interpretá-los arquiteturalmente e produzir documentação C4 revisável.**
+
+[Ver todos os repositórios →](https://github.com/rodri-oliveira-dev?tab=repositories)
 
 ---
 
