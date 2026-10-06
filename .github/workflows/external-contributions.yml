@@ -67,7 +67,7 @@ concurrency:
 jobs:
   validate:
     name: 1. Validate curated projects and unit tests
-    runs-on: ubuntu-24.04
+    runs-on: ${{ vars.RUNNER_OS || 'ubuntu-26.04' }}
     timeout-minutes: 10
     steps:
       - name: Checkout without persistent credentials
@@ -111,7 +111,7 @@ jobs:
   collect:
     name: 2. Collect verified public pull requests
     needs: validate
-    runs-on: ubuntu-24.04
+    runs-on: ${{ vars.RUNNER_OS || 'ubuntu-26.04' }}
     timeout-minutes: 10
     steps:
       - name: Checkout without persistent credentials
@@ -138,7 +138,7 @@ jobs:
   discover:
     name: 3. Discover optional new public repositories
     needs: validate
-    runs-on: ubuntu-24.04
+    runs-on: ${{ vars.RUNNER_OS || 'ubuntu-26.04' }}
     timeout-minutes: 10
     outputs:
       status: ${{ steps.discovery.outputs.status }}
@@ -177,7 +177,7 @@ jobs:
     name: 4. Render and verify PT-BR and EN preview
     needs: [collect, discover]
     if: ${{ always() && needs.collect.result == 'success' }}
-    runs-on: ubuntu-24.04
+    runs-on: ${{ vars.RUNNER_OS || 'ubuntu-26.04' }}
     timeout-minutes: 10
     steps:
       - name: Checkout without persistent credentials
@@ -313,7 +313,7 @@ jobs:
       github.ref == 'refs/heads/main' &&
       (github.event_name == 'schedule' ||
        (github.event_name == 'workflow_dispatch' && inputs.publish == true))
-    runs-on: ubuntu-24.04
+    runs-on: ${{ vars.RUNNER_OS || 'ubuntu-26.04' }}
     timeout-minutes: 10
     permissions:
       contents: write
