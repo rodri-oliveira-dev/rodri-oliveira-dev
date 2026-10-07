@@ -20,14 +20,6 @@ I prefer architecture that stays close to engineering: **decisions should show u
 
 ---
 
-## Selected impact
-
-Some results from enterprise systems I worked on include **30% lower response time** in a critical .NET/HANA flow, **40% lower average incident detection and response time**, and new integrations completed in **about one third of the previous time** after API and boundary redesign.
-
-These quantitative outcomes come from projects delivered in **2020–2021**. **[See the context and engineering decisions in my portfolio →](https://rodri-oliveira-dev.github.io/en/#practice)**
-
----
-
 ## Architecture in practice
 
 My open-source work shows how I approach engineering in practice. Each project captures a problem, the constraints around it, and a decision that can be inspected in code, infrastructure, or automation.
@@ -35,12 +27,11 @@ My open-source work shows how I approach engineering in practice. Each project c
 | Project | Problem, decision, and evidence |
 | --- | --- |
 | **[POC Arquitetura](https://github.com/rodri-oliveira-dev/poc-arquitetura)** | A distributed-systems reference covering DDD, bounded contexts, Kafka, Outbox/Inbox, idempotency, sagas, OpenTelemetry, ADRs, and runbooks. Failure modes and trade-offs are part of the design rather than afterthoughts. |
-| **[dotnet-observability-lab](https://github.com/rodri-oliveira-dev/dotnet-observability-lab)** | A runnable .NET 10, Aspire, and OpenTelemetry lab for reliable asynchronous processing, Outbox/Inbox, at-least-once delivery, and idempotency. ADRs and LikeC4 form a versioned architecture that is validated in CI and published as interactive documentation. |
+| **[Dapper.FluentMap](https://github.com/rodri-oliveira-dev/Dapper-FluentMap)** | Fluent mapping library for Dapper that I currently maintain. The work combines compatibility preservation with modernization of runtime, tooling, CI/CD, quality, security, and distribution, treating public-contract evolution as an explicit architectural constraint. |
 | **[Repo2C4](https://github.com/rodri-oliveira-dev/Repo2C4)** | Treats drift between code and diagrams as an evidence-and-review problem: turns verifiable evidence from .NET repositories into reviewable C4/LikeC4 documentation, with C1/C2, selective C3, a CLI, and a [local stdio MCP server](https://github.com/rodri-oliveira-dev/Repo2C4/blob/main/docs/mcp.md). Its current evolution adds a Microsoft Agent Framework-based Agent to orchestrate evidence-first analysis, validation, and bounded correction while keeping human approval before any write. |
-| **[ReliableWebhooks](https://github.com/rodri-oliveira-dev/ReliableWebhooks)** | Treats webhook delivery as a reliability problem, with at-least-once delivery, leases, bounded concurrency, deterministic retries, HMAC-SHA256, observability, and destination policies modeled as explicit responsibilities. |
-| **[Terraform GCP .NET Blueprint](https://github.com/rodri-oliveira-dev/terraform-gcp-dotnet-blueprint)** | A reproducible baseline for .NET workloads on Google Cloud using Terraform, Cloud Run, Jobs, Pub/Sub, DLQ, Redis, Secret Manager, VPC, IAM, Workload Identity Federation, CI, and observability. |
 | **[ADR Guard](https://github.com/rodri-oliveira-dev/adr-guard)** | Brings ADRs into the engineering workflow through deterministic validation and indexing across the CLI, containers, and GitHub Action, plus AI-assisted drafting while keeping review and architectural acceptance with people. |
 | **[DotNetRepoInspector](https://github.com/rodri-oliveira-dev/DotNetRepoInspector)** | Uses evaluated MSBuild metadata as the source of truth for inventory and governance, exposing the same deterministic contract through the CLI/.NET Tool, GitHub Action, and a local read-only MCP server. It is evolving to discover external integrations — HTTP, multi-cloud messaging, databases, caches, and storage — as structured facts reusable by other tools. |
+| **[Repo Control Center](https://github.com/rodri-oliveira-dev/repo-status-dashboard)** | An observability layer for the repository portfolio: consolidates CI, delivery, releases, activity, security, package, and health signals into a static snapshot collected by GitHub Actions and published as an Angular SPA on GitHub Pages, with explicit coverage and confidence for partial data. |
 | **[.NET Library Template](https://github.com/rodri-oliveira-dev/dotnet-library-template)** | Packages recurring build, testing, security, packaging, and release practices into a reusable golden path, including package validation, NuGet Audit, CodeQL, OIDC-based Trusted Publishing, and software supply-chain controls. |
 | **[ComplexityAnalysis.Analyzers](https://github.com/rodri-oliveira-dev/complexity-analyzers)** | Moves complexity feedback closer to development with Roslyn analyzers for algorithmic, cyclomatic, cognitive, and structural complexity, using conservative behavior when an inference cannot be made safely. |
 
@@ -62,16 +53,6 @@ The principle is straightforward: **when a rule can provide useful feedback auto
 
 ---
 
-## Open-source maintenance
-
-I also maintain projects with an established history, user base, and public contracts.
-
-**[Dapper.FluentMap](https://github.com/rodri-oliveira-dev/Dapper-FluentMap)** — I am the current maintainer of the fluent mapping library for Dapper, originally created by **Henk Mollema**. I am leading its revival and modernization while preserving compatibility with the existing ecosystem and evolving the runtime, tooling, CI/CD, quality, security, and distribution strategy.
-
-That work comes with a different constraint: **move the project forward without breaking the contract built over the years with people who already depend on it**.
-
----
-
 ## Open-source contributions
 
 Contributing to codebases I do not control exercises a different part of engineering: understanding existing decisions, respecting project conventions and contracts, discussing trade-offs, and making changes that fit the surrounding ecosystem.
@@ -80,16 +61,18 @@ Contributing to codebases I do not control exercises a different part of enginee
 
 <!-- EXTERNAL_CONTRIBUTIONS:START -->
 
-**Public PRs authored by me in the 4 selected external projects:** 10 total, 4 merged, 6 open and 0 closed without merge. **Projects with merged PRs:** 2.
+**Public PRs authored by me in the 6 selected external projects:** 17 total, 11 merged, 6 open and 0 closed without merge. **Projects with merged PRs:** 4.
 
 | External project | Contributions and reference PRs |
 | --- | --- |
-| **[Ocelot](https://github.com/ThreeMammals/Ocelot)** | [PR #2420 · merged](https://github.com/ThreeMammals/Ocelot/pull/2420): Mapped downstream timeouts to **504 Gateway Timeout**, aligned with RFC 9110.<br><br>[PR #2421 · open](https://github.com/ThreeMammals/Ocelot/pull/2421): Proposed regression coverage for `multipart/form-data` rerouting while preserving the body, boundary, and file metadata. |
-| **[CrispyWaffle](https://github.com/guibranco/CrispyWaffle)** | [PR #980 · open](https://github.com/guibranco/CrispyWaffle/pull/980): Proposed YAML serialization using YamlDotNet, integrated with the existing abstractions, tests, and documentation. |
+| **[Ocelot](https://github.com/ThreeMammals/Ocelot)** | [PR #2420 · merged](https://github.com/ThreeMammals/Ocelot/pull/2420): Mapped downstream timeouts to **504 Gateway Timeout**, aligned with RFC 9110.<br><br>[PR #2421 · open](https://github.com/ThreeMammals/Ocelot/pull/2421): Added regression coverage for `multipart/form-data` rerouting while preserving the body, boundary, and file metadata. |
+| **[OpenCNPJ](https://github.com/Hitmasu/OpenCNPJ)** | [PR #75 · merged](https://github.com/Hitmasu/OpenCNPJ/pull/75): Hardened external downloads with size and time limits, safe partial files, and preservation of the last valid artifact.<br><br>[PR #76 · merged](https://github.com/Hitmasu/OpenCNPJ/pull/76): Exposed legal-nature codes additively through the API and BigQuery projection while preserving compatibility.<br><br>[PR #77 · merged](https://github.com/Hitmasu/OpenCNPJ/pull/77): Implemented safe interrupted-download resume using Range, ETag/Last-Modified, and If-Range.<br><br>[PR #78 · merged](https://github.com/Hitmasu/OpenCNPJ/pull/78): Exposed the Receita dataset update timestamp by reusing existing metadata without inflating data shards. |
+| **[LikeC4](https://github.com/likec4/likec4)** | [PR #3179 · merged](https://github.com/likec4/likec4/pull/3179): Introduced the pt-BR README, documentation i18n support, and tutorial.<br><br>[PR #3236 · merged](https://github.com/likec4/likec4/pull/3236): Localized Guides and the DSL fundamentals.<br><br>[PR #3262 · merged](https://github.com/likec4/likec4/pull/3262): Localized the DSL Views documentation while preserving syntax, examples, and architecture terminology.<br><br>[PR #3276 · open](https://github.com/likec4/likec4/pull/3276): Continued the pt-BR localization across DSL Styling and configuration.<br><br>[PR #3277 · open](https://github.com/likec4/likec4/pull/3277): Continued the pt-BR localization across Deployment and model extension. |
+| **[Bounded Context Canvas](https://github.com/ddd-crew/bounded-context-canvas)** | [PR #59 · merged](https://github.com/ddd-crew/bounded-context-canvas/pull/59): Added the complete Brazilian Portuguese v5 documentation while preserving the existing visual and editable resources. |
+| **[CrispyWaffle](https://github.com/guibranco/CrispyWaffle)** | [PR #980 · open](https://github.com/guibranco/CrispyWaffle/pull/980): Proposed YAML serialization using YamlDotNet, integrated with the existing abstractions, tests, and documentation.<br><br>[PR #981 · open](https://github.com/guibranco/CrispyWaffle/pull/981): Proposed TOML serialization with Tomlyn while reusing the shared abstraction for text formats. |
 | **[Architecture Decision Record](https://github.com/architecture-decision-record/architecture-decision-record)** | [PR #115 · open](https://github.com/architecture-decision-record/architecture-decision-record/pull/115): Proposed a complete Brazilian Portuguese localization while preserving structure and references across equivalent content. |
-| **[LikeC4](https://github.com/likec4/likec4)** | [PR #3179 · merged](https://github.com/likec4/likec4/pull/3179): Introduced the pt-BR README, documentation i18n support, and tutorial.<br><br>[PR #3236 · merged](https://github.com/likec4/likec4/pull/3236): Localized Guides and the DSL fundamentals.<br><br>[PR #3262 · merged](https://github.com/likec4/likec4/pull/3262): Localized the DSL Views documentation while preserving syntax, examples, and architecture terminology. |
 
-*Project selection and descriptions are editorial. Figures include all public PRs I authored in these projects, including those not highlighted in the table. Dashboard updated: 2026-09-23.*
+*Project selection and descriptions are editorial. Figures include all public PRs I authored in these projects, including those not highlighted in the table. Dashboard updated: 2026-10-07.*
 
 <!-- EXTERNAL_CONTRIBUTIONS:END -->
 

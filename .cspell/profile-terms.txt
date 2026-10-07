@@ -2,6 +2,7 @@ ADR
 ADRs
 Arquitetura
 ciclomática
+CNPJ
 CodeQL
 código
 CrispyWaffle
@@ -25,6 +26,7 @@ OpenTelemetry
 Outbox
 Português
 Pub
+Receita
 Redis
 Repo2C4
 Rodrigo
@@ -33,4 +35,5 @@ serialização
 SHA
 stdio
 Terraform
+Tomlyn
 YamlDotNet
