@@ -17,7 +17,8 @@
       "observed_at": "2026-10-07",
       "observed_prs": {
         "59": "merged"
-      }
+      },
+      "decision_date": "2026-10-07"
     },
     {
       "repository": "ddd-crew/context-mapping",
@@ -95,7 +96,8 @@
         "76": "merged",
         "77": "merged",
         "78": "merged"
-      }
+      },
+      "decision_date": "2026-10-07"
     },
     {
       "repository": "StefanTheCode/dotnet_interview_questions",
