@@ -14,30 +14,34 @@
         },
         {
           "number": 2421,
-          "pt": "Proposta de cobertura de regressão para roteamento de `multipart/form-data`, preservando body, boundary e metadados do arquivo.",
-          "en": "Proposed regression coverage for `multipart/form-data` rerouting while preserving the body, boundary, and file metadata."
+          "pt": "Cobertura de regressão para roteamento de `multipart/form-data`, preservando body, boundary e metadados do arquivo.",
+          "en": "Added regression coverage for `multipart/form-data` rerouting while preserving the body, boundary, and file metadata."
         }
       ]
     },
     {
-      "repository": "guibranco/CrispyWaffle",
-      "name": "CrispyWaffle",
+      "repository": "Hitmasu/OpenCNPJ",
+      "name": "OpenCNPJ",
       "pull_requests": [
         {
-          "number": 980,
-          "pt": "Proposta de serialização YAML com YamlDotNet, integrada às abstrações existentes, com testes e documentação.",
-          "en": "Proposed YAML serialization using YamlDotNet, integrated with the existing abstractions, tests, and documentation."
-        }
-      ]
-    },
-    {
-      "repository": "architecture-decision-record/architecture-decision-record",
-      "name": "Architecture Decision Record",
-      "pull_requests": [
+          "number": 75,
+          "pt": "Endurece downloads externos com limites de tamanho e tempo, arquivos parciais seguros e preservação do último artefato válido.",
+          "en": "Hardened external downloads with size and time limits, safe partial files, and preservation of the last valid artifact."
+        },
         {
-          "number": 115,
-          "pt": "Proposta de localização completa para Português do Brasil, preservando estrutura, referências e identidade entre conteúdos equivalentes.",
-          "en": "Proposed a complete Brazilian Portuguese localization while preserving structure and references across equivalent content."
+          "number": 76,
+          "pt": "Expõe o código da natureza jurídica de forma aditiva na API e na projeção do BigQuery, preservando compatibilidade.",
+          "en": "Exposed legal-nature codes additively through the API and BigQuery projection while preserving compatibility."
+        },
+        {
+          "number": 77,
+          "pt": "Implementa retomada segura de downloads interrompidos com Range, ETag/Last-Modified e If-Range.",
+          "en": "Implemented safe interrupted-download resume using Range, ETag/Last-Modified, and If-Range."
+        },
+        {
+          "number": 78,
+          "pt": "Expõe a data de atualização do dataset da Receita reutilizando metadados existentes, sem inflar os shards.",
+          "en": "Exposed the Receita dataset update timestamp by reusing existing metadata without inflating data shards."
         }
       ]
     },
@@ -59,6 +63,54 @@
           "number": 3262,
           "pt": "Localização da documentação de Views da DSL, preservando sintaxe, exemplos e terminologia arquitetural.",
           "en": "Localized the DSL Views documentation while preserving syntax, examples, and architecture terminology."
+        },
+        {
+          "number": 3276,
+          "pt": "Continuidade da localização pt-BR para Styling e configuração da DSL.",
+          "en": "Continued the pt-BR localization across DSL Styling and configuration."
+        },
+        {
+          "number": 3277,
+          "pt": "Continuidade da localização pt-BR para Deployment e extensão de modelos.",
+          "en": "Continued the pt-BR localization across Deployment and model extension."
+        }
+      ]
+    },
+    {
+      "repository": "ddd-crew/bounded-context-canvas",
+      "name": "Bounded Context Canvas",
+      "pull_requests": [
+        {
+          "number": 59,
+          "pt": "Tradução completa da documentação v5 para Português do Brasil, preservando recursos visuais e editáveis existentes.",
+          "en": "Added the complete Brazilian Portuguese v5 documentation while preserving the existing visual and editable resources."
+        }
+      ]
+    },
+    {
+      "repository": "guibranco/CrispyWaffle",
+      "name": "CrispyWaffle",
+      "pull_requests": [
+        {
+          "number": 980,
+          "pt": "Serialização YAML com YamlDotNet integrada às abstrações existentes, com testes e documentação.",
+          "en": "Proposed YAML serialization using YamlDotNet, integrated with the existing abstractions, tests, and documentation."
+        },
+        {
+          "number": 981,
+          "pt": "Serialização TOML com Tomlyn reutilizando a abstração comum para formatos textuais.",
+          "en": "Proposed TOML serialization with Tomlyn while reusing the shared abstraction for text formats."
+        }
+      ]
+    },
+    {
+      "repository": "architecture-decision-record/architecture-decision-record",
+      "name": "Architecture Decision Record",
+      "pull_requests": [
+        {
+          "number": 115,
+          "pt": "Localização completa para Português do Brasil, preservando estrutura, referências e identidade entre conteúdos equivalentes.",
+          "en": "Proposed a complete Brazilian Portuguese localization while preserving structure and references across equivalent content."
         }
       ]
     }
