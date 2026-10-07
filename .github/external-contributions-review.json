@@ -13,8 +13,8 @@
     },
     {
       "repository": "ddd-crew/bounded-context-canvas",
-      "status": "pending",
-      "observed_at": "2026-09-24",
+      "status": "selected",
+      "observed_at": "2026-10-07",
       "observed_prs": {
         "59": "merged"
       }
@@ -86,12 +86,15 @@
     },
     {
       "repository": "Hitmasu/OpenCNPJ",
-      "status": "pending",
-      "observed_at": "2026-09-24",
+      "status": "selected",
+      "observed_at": "2026-10-07",
       "observed_prs": {
         "71": "merged",
         "74": "merged",
-        "75": "open"
+        "75": "merged",
+        "76": "merged",
+        "77": "merged",
+        "78": "merged"
       }
     },
     {
