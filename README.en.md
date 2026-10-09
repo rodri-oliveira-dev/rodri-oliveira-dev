@@ -61,7 +61,7 @@ Contributing to codebases I do not control exercises a different part of enginee
 
 <!-- EXTERNAL_CONTRIBUTIONS:START -->
 
-**Public PRs authored by me in the 6 selected external projects:** 18 total, 13 merged, 5 open and 0 closed without merge. **Projects with merged PRs:** 4.
+**Public PRs authored by me in the 6 selected external projects:** 19 total, 14 merged, 5 open and 0 closed without merge. **Projects with merged PRs:** 4.
 
 | External project | Contributions and reference PRs |
 | --- | --- |
@@ -72,7 +72,7 @@ Contributing to codebases I do not control exercises a different part of enginee
 | **[CrispyWaffle](https://github.com/guibranco/CrispyWaffle)** | [PR #980 · open](https://github.com/guibranco/CrispyWaffle/pull/980): Proposed YAML serialization using YamlDotNet, integrated with the existing abstractions, tests, and documentation.<br><br>[PR #981 · open](https://github.com/guibranco/CrispyWaffle/pull/981): Proposed TOML serialization with Tomlyn while reusing the shared abstraction for text formats. |
 | **[Architecture Decision Record](https://github.com/architecture-decision-record/architecture-decision-record)** | [PR #115 · open](https://github.com/architecture-decision-record/architecture-decision-record/pull/115): Proposed a complete Brazilian Portuguese localization while preserving structure and references across equivalent content. |
 
-*Project selection and descriptions are editorial. Figures include all public PRs I authored in these projects, including those not highlighted in the table. Dashboard updated: 2026-10-08.*
+*Project selection and descriptions are editorial. Figures include all public PRs I authored in these projects, including those not highlighted in the table. Dashboard updated: 2026-10-09.*
 
 <!-- EXTERNAL_CONTRIBUTIONS:END -->
 

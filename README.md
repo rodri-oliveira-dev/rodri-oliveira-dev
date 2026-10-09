@@ -61,7 +61,7 @@ Contribuir em bases de código que não controlo também expõe uma parte import
 
 <!-- EXTERNAL_CONTRIBUTIONS:START -->
 
-**PRs públicos de minha autoria nos 6 projetos externos selecionados:** 18 no total, 13 integrados, 5 abertos e 0 fechados sem integração. **Projetos com PRs integrados:** 4.
+**PRs públicos de minha autoria nos 6 projetos externos selecionados:** 19 no total, 14 integrados, 5 abertos e 0 fechados sem integração. **Projetos com PRs integrados:** 4.
 
 | Projeto externo | Colaboração e PRs de referência |
 | --- | --- |
@@ -72,7 +72,7 @@ Contribuir em bases de código que não controlo também expõe uma parte import
 | **[CrispyWaffle](https://github.com/guibranco/CrispyWaffle)** | [PR #980 · aberto](https://github.com/guibranco/CrispyWaffle/pull/980): Serialização YAML com YamlDotNet integrada às abstrações existentes, com testes e documentação.<br><br>[PR #981 · aberto](https://github.com/guibranco/CrispyWaffle/pull/981): Serialização TOML com Tomlyn reutilizando a abstração comum para formatos textuais. |
 | **[Architecture Decision Record](https://github.com/architecture-decision-record/architecture-decision-record)** | [PR #115 · aberto](https://github.com/architecture-decision-record/architecture-decision-record/pull/115): Localização completa para Português do Brasil, preservando estrutura, referências e identidade entre conteúdos equivalentes. |
 
-*A seleção e as descrições são editoriais. Os números incluem todos os PRs públicos de minha autoria nesses projetos, mesmo os não destacados na tabela. Atualização do painel: 08/10/2026.*
+*A seleção e as descrições são editoriais. Os números incluem todos os PRs públicos de minha autoria nesses projetos, mesmo os não destacados na tabela. Atualização do painel: 09/10/2026.*
 
 <!-- EXTERNAL_CONTRIBUTIONS:END -->
 
