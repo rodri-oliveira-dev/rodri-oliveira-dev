@@ -1,60 +1,32 @@
-"""Guard the deployment workflow job graph and production entrypoint."""
-
 import unittest
 from pathlib import Path
 
 
-def jobs():
-    """Extract top-level job sections from the current checked-out workflow."""
-    source = Path(".github/workflows/external-contributions.yml").read_text(encoding="utf-8")
-    names = ("validate", "collect", "discover", "render", "propose")
-    result = {}
-    for index, name in enumerate(names):
-        begin = source.index("\n  " + name + ":\n") + 1
-        if index + 1 < len(names):
-            end = source.index("\n  " + names[index + 1] + ":\n", begin)
-        else:
-            end = len(source)
-        result[name] = source[begin:end]
-    return result
-
-
 class WorkflowContractTests(unittest.TestCase):
-    """Reject regressions in fault isolation and write permissions."""
+    @classmethod
+    def setUpClass(cls):
+        cls.source = Path(".github/workflows/external-contributions.yml").read_text(encoding="utf-8")
 
-    def test_discovery_is_separate_and_reports_unavailable(self):
-        workflow = jobs()
-        self.assertIn("scripts/external_contributions.py", workflow["collect"])
-        self.assertNotIn("scripts/discover_external_contributions.py", workflow["collect"])
-        self.assertIn("scripts/discover_external_contributions.py", workflow["discover"])
-        self.assertIn('echo "status=unavailable" >> "$GITHUB_OUTPUT"', workflow["discover"])
-        self.assertIn("if: ${{ steps.discovery.outputs.status == 'success' }}", workflow["discover"])
+    def test_daily_schedule_and_manual_dispatch_remain(self):
+        self.assertIn('cron: "0 9 * * *"', self.source)
+        self.assertIn("workflow_dispatch:", self.source)
 
-    def test_render_survives_optional_failure_and_rejects_curated_failure(self):
-        workflow = jobs()
-        self.assertIn("needs: [collect, discover]", workflow["render"])
-        self.assertIn("always() && needs.collect.result == 'success'", workflow["render"])
-        self.assertIn("needs.discover.outputs.status == 'success'", workflow["render"])
-        self.assertIn("--discovery-result", workflow["render"])
-        self.assertIn('discovery.get("status") == "unavailable"', workflow["render"])
-        self.assertNotIn('discovery.get("candidate_repositories", [])', workflow["render"])
+    def test_only_proposal_job_has_write_permissions(self):
+        before, proposal = self.source.split("  propose:\n", 1)
+        self.assertNotIn("contents: write", before)
+        self.assertIn("contents: write", proposal)
+        self.assertIn("pull-requests: write", proposal)
 
-    def test_propose_has_main_gate_and_uses_tested_script(self):
-        workflow = jobs()
-        self.assertIn("needs.render.result == 'success'", workflow["propose"])
-        self.assertIn("github.ref == 'refs/heads/main'", workflow["propose"])
-        self.assertIn("inputs.publish == true", workflow["propose"])
-        self.assertIn("ref: ${{ github.sha }}", workflow["propose"])
-        self.assertIn("python3 scripts/propose_external_contributions.py", workflow["propose"])
-        self.assertIn('--run-attempt "$GITHUB_RUN_ATTEMPT"', workflow["propose"])
-        self.assertIn('--run-attempt "$GITHUB_RUN_ATTEMPT"', workflow["validate"])
-        self.assertIn("contents: write", workflow["propose"])
-        for job in ("validate", "collect", "discover", "render"):
-            self.assertNotIn("contents: write", workflow[job])
+    def test_global_collection_is_required_before_publication(self):
+        self.assertIn("--previous .github/external-contributions-catalog.json", self.source)
+        self.assertIn("needs: synchronize", self.source)
+        self.assertNotIn("external-contributions-review.json", self.source)
+        self.assertIn("include-hidden-files: true", self.source)
 
-    def test_schedule_uses_nine_utc_daily(self):
-        source = Path(".github/workflows/external-contributions.yml").read_text(encoding="utf-8")
-        self.assertIn('cron: "0 9 * * *"', source)
+    def test_concurrency_and_main_gate_are_present(self):
+        self.assertIn("concurrency:", self.source)
+        self.assertIn("github.ref == 'refs/heads/main'", self.source)
+        self.assertIn("scripts/propose_external_contributions.py", self.source)
 
 
 if __name__ == "__main__":
