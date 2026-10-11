@@ -3,7 +3,9 @@ import unittest
 from pathlib import Path
 from unittest.mock import patch
 
-from scripts.render_external_contributions import RenderError, render_catalog, validate_snapshot, write_updates
+from scripts.render_external_contributions import (
+    RenderError, _anchor, render_catalog, validate_snapshot, write_updates,
+)
 
 
 def snapshot(title="Fix [unsafe] *markdown* <tag>"):
@@ -21,6 +23,13 @@ def snapshot(title="Fix [unsafe] *markdown* <tag>"):
 
 
 class RendererTests(unittest.TestCase):
+    def test_repository_anchors_preserve_punctuation_identity(self):
+        dotted = _anchor("owner/a.b")
+        dashed = _anchor("owner/a-b")
+        self.assertNotEqual(dotted, dashed)
+        self.assertEqual(dotted, _anchor("OWNER/A.B"))
+        self.assertRegex(dotted, r"^repository-[0-9a-f]+$")
+
     def test_bilingual_catalogs_share_facts_but_not_interface_text(self):
         data = snapshot("Original PR title")
         pt, en = render_catalog(data, "pt"), render_catalog(data, "en")

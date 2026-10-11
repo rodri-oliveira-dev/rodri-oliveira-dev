@@ -6,7 +6,6 @@ from __future__ import annotations
 import argparse
 import json
 import os
-import re
 import shutil
 import stat
 import sys
@@ -144,7 +143,9 @@ def _escape(value: str) -> str:
 
 
 def _anchor(repository: str) -> str:
-    return "repository-" + re.sub(r"[^a-z0-9]+", "-", repository.casefold()).strip("-")
+    # Repository names are case-insensitive. Encoding every UTF-8 byte preserves
+    # punctuation identity, so names such as owner/a.b and owner/a-b cannot collide.
+    return "repository-" + repository.casefold().encode("utf-8").hex()
 
 
 def _date(value: str, language: str) -> str:
