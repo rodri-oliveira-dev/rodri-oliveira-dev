@@ -45,7 +45,7 @@ Projetos são ordenados pela atividade mais recente e, em empate, alfabeticament
 
 ## Geração bilíngue
 
-Os catálogos PT-BR e EN são derivados do mesmo JSON validado. Cabeçalhos, rótulos, estados e datas são localizados; títulos de PR permanecem exatamente no idioma original do GitHub. Conteúdo não confiável é escapado para Markdown, e URLs são reconstruídas e validadas no formato canônico.
+Os catálogos PT-BR e EN são derivados do mesmo JSON validado. Cabeçalhos, rótulos, estados e datas são localizados; títulos de PR permanecem exatamente no idioma original do GitHub. Cada repositório apresenta seus PRs em uma tabela Markdown com título e link, situação, data de abertura e data de integração; PRs não integrados exibem um travessão na última coluna. Conteúdo não confiável é escapado para Markdown, e URLs são reconstruídas e validadas no formato canônico.
 
 O renderizador prepara os dois arquivos antes de substituir qualquer um. Cada troca usa `os.replace`; uma falha tenta restaurar ambos a partir de backups locais. Falhas de validação não alteram arquivos existentes.
 
