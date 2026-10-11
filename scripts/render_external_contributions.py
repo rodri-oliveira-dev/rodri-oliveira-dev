@@ -31,7 +31,8 @@ TEXT = {
         "by_repo": "Contribuições por repositório", "repos": "Repositórios externos",
         "prs": "PRs encontrados", "merged": "PRs integrados", "open": "PRs abertos",
         "closed_unmerged": "PRs fechados sem integração", "sync": "Última sincronização bem-sucedida",
-        "total": "Total", "opened": "Aberto em", "merged_on": "Integrado em",
+        "total": "Total", "pr_label": "Pull request", "status_label": "Situação",
+        "opened": "Aberto em", "merged_on": "Integrado em",
         "states": {"merged": "Integrado", "open": "Aberto", "closed_unmerged": "Fechado sem integração"},
         "date": "%d/%m/%Y", "note": "A data acima corresponde à sincronização que produziu a versão publicada atual; consultas sem mudança factual não geram commit.",
     },
@@ -42,7 +43,8 @@ TEXT = {
         "by_repo": "Contributions by repository", "repos": "External repositories",
         "prs": "PRs found", "merged": "Merged PRs", "open": "Open PRs",
         "closed_unmerged": "PRs closed without merge", "sync": "Last successful synchronization",
-        "total": "Total", "opened": "Opened", "merged_on": "Merged",
+        "total": "Total", "pr_label": "Pull request", "status_label": "Status",
+        "opened": "Opened", "merged_on": "Merged",
         "states": {"merged": "Merged", "open": "Open", "closed_unmerged": "Closed without merge"},
         "date": "%Y-%m-%d", "note": "The date above is the synchronization that produced the current published version; queries with no factual changes create no commit.",
     },
@@ -174,12 +176,12 @@ def render_catalog(snapshot: dict, language: str) -> str:
         lines.extend([f'<a id="{_anchor(repository)}"></a>', "",
                       f"### [{_escape(repository)}]({project['url']})", "",
                       f"**{labels['total']}:** {counts['pull_requests']} · **{labels['merged']}:** {counts['merged']} · **{labels['open']}:** {counts['open']} · **{labels['closed_unmerged']}:** {counts['closed_unmerged']}", ""])
+        lines.extend([f"| {labels['pr_label']} | {labels['status_label']} | {labels['opened']} | {labels['merged_on']} |",
+                      "| --- | --- | --- | --- |"])
         for pr in project["pull_requests"]:
             state = labels["states"][pr["status"]]
-            details = f"{state} · {labels['opened']} {_date(pr['created_at'], language)}"
-            if pr["merged_at"]:
-                details += f" · {labels['merged_on']} {_date(pr['merged_at'], language)}"
-            lines.extend([f"- [#{pr['number']}]({pr['url']}) — {_escape(pr['title'])}", f"  - {details}"])
+            merged_date = _date(pr["merged_at"], language) if pr["merged_at"] else "—"
+            lines.append(f"| [#{pr['number']}]({pr['url']}) — {_escape(pr['title'])} | {state} | {_date(pr['created_at'], language)} | {merged_date} |")
         lines.append("")
     lines.append("<!-- cspell:enable -->")
     return "\n".join(lines).rstrip() + "\n"
