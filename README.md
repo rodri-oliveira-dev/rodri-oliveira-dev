@@ -27,10 +27,10 @@ Alguns projetos em que exploro problemas de arquitetura e engenharia com código
 | Projeto | O que demonstra |
 | --- | --- |
 | **[POC Arquitetura](https://github.com/rodri-oliveira-dev/poc-arquitetura)** | Laboratório de sistemas distribuídos para estudar consistência eventual, falhas e rastreabilidade. Reúne DDD, Kafka, Outbox/Inbox, sagas, idempotência, testes e runbooks. |
-| **[ADR Guard](https://github.com/rodri-oliveira-dev/adr-guard)** | Ferramenta para criar, validar e organizar ADRs durante o desenvolvimento e na CI. Tem CLI, integração com GitHub Actions e VS Code, além de recursos opcionais de IA com revisão humana. |
+| **[ADR Guard](https://github.com/rodri-oliveira-dev/adr-guard)** | Ferramenta para criar, validar e organizar ADRs durante o desenvolvimento e na CI. Tem CLI, integração com GitHub Actions e [extensão para VS Code](https://marketplace.visualstudio.com/items?itemName=rodrioliveira.adr-guard), além de recursos opcionais de IA com revisão humana. |
 | **[Repo2C4](https://github.com/rodri-oliveira-dev/Repo2C4)** | Gera documentação C4/LikeC4 a partir de evidências do código, com revisão antes de gravar alterações. Inclui CLI, MCP e um agente opcional, separando fatos observados de hipóteses arquiteturais. |
 | **[Dapper.FluentMap](https://github.com/rodri-oliveira-dev/Dapper-FluentMap)** | Biblioteca de mapeamento para Dapper que mantenho e evoluo. O trabalho envolve compatibilidade com aplicações existentes, testes, versionamento, modernização do .NET e publicação de pacotes NuGet. |
-| **[Repo Control Center](https://github.com/rodri-oliveira-dev/repo-status-dashboard)** | Painel em Angular para acompanhar CI, releases, segurança e saúde dos meus repositórios. Os dados são coletados pelo GitHub Actions e publicados como snapshots estáticos; inclui um radar de tecnologias. |
+| **[Repo Control Center](https://github.com/rodri-oliveira-dev/repo-status-dashboard)** | Painel em Angular para acompanhar CI, releases, segurança e saúde dos meus repositórios. Os dados são coletados pelo GitHub Actions e publicados como snapshots estáticos; inclui um [radar de tecnologias](https://rodri-oliveira-dev.github.io/repo-status-dashboard/#/technology-radar). |
 
 [Ver todos os repositórios →](https://github.com/rodri-oliveira-dev?tab=repositories)
 
