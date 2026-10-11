@@ -57,24 +57,9 @@ A ideia é simples: **quando uma regra pode gerar feedback útil automaticamente
 
 Contribuir em bases de código que não controlo também expõe uma parte importante da engenharia: entender decisões existentes, respeitar contratos e convenções, discutir trade-offs e entregar mudanças que façam sentido dentro daquele ecossistema.
 
-**Contribuições em projetos de terceiros selecionados**, com links para o trabalho proposto e integrado.
+O histórico completo de Pull Requests públicos em projetos de terceiros é descoberto e reconciliado automaticamente, sem depender de uma lista editorial de repositórios.
 
-<!-- EXTERNAL_CONTRIBUTIONS:START -->
-
-**PRs públicos de minha autoria nos 6 projetos externos selecionados:** 19 no total, 14 integrados, 5 abertos e 0 fechados sem integração. **Projetos com PRs integrados:** 4.
-
-| Projeto externo | Colaboração e PRs de referência |
-| --- | --- |
-| **[Ocelot](https://github.com/ThreeMammals/Ocelot)** | [PR #2420 · integrado](https://github.com/ThreeMammals/Ocelot/pull/2420): Tratamento de timeout downstream como **504 Gateway Timeout**, alinhado à RFC 9110.<br><br>[PR #2421 · aberto](https://github.com/ThreeMammals/Ocelot/pull/2421): Cobertura de regressão para roteamento de `multipart/form-data`, preservando body, boundary e metadados do arquivo. |
-| **[OpenCNPJ](https://github.com/Hitmasu/OpenCNPJ)** | [PR #75 · integrado](https://github.com/Hitmasu/OpenCNPJ/pull/75): Endurece downloads externos com limites de tamanho e tempo, arquivos parciais seguros e preservação do último artefato válido.<br><br>[PR #76 · integrado](https://github.com/Hitmasu/OpenCNPJ/pull/76): Expõe o código da natureza jurídica de forma aditiva na API e na projeção do BigQuery, preservando compatibilidade.<br><br>[PR #77 · integrado](https://github.com/Hitmasu/OpenCNPJ/pull/77): Implementa retomada segura de downloads interrompidos com Range, ETag/Last-Modified e If-Range.<br><br>[PR #78 · integrado](https://github.com/Hitmasu/OpenCNPJ/pull/78): Expõe a data de atualização do dataset da Receita reutilizando metadados existentes, sem inflar os shards. |
-| **[LikeC4](https://github.com/likec4/likec4)** | [PR #3179 · integrado](https://github.com/likec4/likec4/pull/3179): Introdução do README em pt-BR, suporte à internacionalização e tutorial.<br><br>[PR #3236 · integrado](https://github.com/likec4/likec4/pull/3236): Tradução de Guides e dos fundamentos da DSL.<br><br>[PR #3262 · integrado](https://github.com/likec4/likec4/pull/3262): Localização da documentação de Views da DSL, preservando sintaxe, exemplos e terminologia arquitetural.<br><br>[PR #3276 · integrado](https://github.com/likec4/likec4/pull/3276): Continuidade da localização pt-BR para Styling e configuração da DSL.<br><br>[PR #3277 · integrado](https://github.com/likec4/likec4/pull/3277): Continuidade da localização pt-BR para Deployment e extensão de modelos. |
-| **[Bounded Context Canvas](https://github.com/ddd-crew/bounded-context-canvas)** | [PR #59 · integrado](https://github.com/ddd-crew/bounded-context-canvas/pull/59): Tradução completa da documentação v5 para Português do Brasil, preservando recursos visuais e editáveis existentes. |
-| **[CrispyWaffle](https://github.com/guibranco/CrispyWaffle)** | [PR #980 · aberto](https://github.com/guibranco/CrispyWaffle/pull/980): Serialização YAML com YamlDotNet integrada às abstrações existentes, com testes e documentação.<br><br>[PR #981 · aberto](https://github.com/guibranco/CrispyWaffle/pull/981): Serialização TOML com Tomlyn reutilizando a abstração comum para formatos textuais. |
-| **[Architecture Decision Record](https://github.com/architecture-decision-record/architecture-decision-record)** | [PR #115 · aberto](https://github.com/architecture-decision-record/architecture-decision-record/pull/115): Localização completa para Português do Brasil, preservando estrutura, referências e identidade entre conteúdos equivalentes. |
-
-*A seleção e as descrições são editoriais. Os números incluem todos os PRs públicos de minha autoria nesses projetos, mesmo os não destacados na tabela. Atualização do painel: 09/10/2026.*
-
-<!-- EXTERNAL_CONTRIBUTIONS:END -->
+**[Ver o catálogo completo de contribuições open source →](docs/open-source-contributions.md)**
 
 **[Acompanhar contribuições e trabalho em andamento →](https://github.com/users/rodri-oliveira-dev/projects/1/views/1)**  
 Uso este GitHub Project para acompanhar issues, contribuições e iniciativas open source em que estou atuando, avaliando ou em que já atuei.

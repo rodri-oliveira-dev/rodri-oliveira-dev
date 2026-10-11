@@ -46,6 +46,14 @@
       "dictionaries": [
         "profile-terms"
       ]
+    },
+    {
+      "filename": "docs/open-source-contributions.md",
+      "language": "pt_BR,en-US",
+      "dictionaries": [
+        "pt-br",
+        "profile-terms"
+      ]
     }
   ],
   "ignoreRegExpList": [

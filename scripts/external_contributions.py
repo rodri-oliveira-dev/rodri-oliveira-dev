@@ -1,9 +1,5 @@
 #!/usr/bin/env python3
-"""Collect verifiable public PR data for curated third-party repositories.
-
-No README is edited here. A later renderer consumes this complete JSON snapshot.
-Run with GITHUB_TOKEN in the environment and --output pointing to a local file.
-"""
+"""Collect every public pull request authored in third-party repositories."""
 
 from __future__ import annotations
 
@@ -16,47 +12,42 @@ import ssl
 import sys
 import tempfile
 import time
-from datetime import datetime, timezone
+from datetime import date, datetime, timedelta, timezone
 from email.utils import parsedate_to_datetime
 from pathlib import Path
 from urllib.error import HTTPError, URLError
 from urllib.parse import urlencode
 from urllib.request import Request, urlopen
 
-
 API_ROOT = "https://api.github.com"
+REPOSITORY_API_PREFIX = f"{API_ROOT}/repos/"
 REPO_PATTERN = re.compile(r"[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+")
 LOGIN_PATTERN = re.compile(r"[A-Za-z0-9-]+")
+TIMESTAMP_PATTERN = re.compile(r"\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z")
 PAGE_SIZE = 100
 MAX_SEARCH_RESULTS = 1000
+GITHUB_EPOCH = date(2008, 1, 1)
+SCOPE = "All public PRs authored by this profile in repositories owned by others"
 
 
 class CollectionError(Exception):
-    """Expected failure. The caller must not publish a partial snapshot."""
+    """Expected failure: callers must preserve the last valid catalog."""
 
 
 class GitHubAPI:
-    """Read-only GitHub client with bounded, transient-only retries.
-
-    Maximum attempts, cumulative sleep and elapsed time are separate bounds:
-    never retry before a server-requested delay if it exceeds the budget.
-    """
+    """Small read-only REST client with bounded transient retries."""
 
     RETRYABLE_HTTP = frozenset((408, 429, 500, 502, 503, 504))
 
-    def __init__(
-        self, token: str, opener=None, *, max_attempts: int = 3,
-        timeout: float = 10.0, max_total_wait: float = 20.0,
-        max_elapsed: float = 50.0, sleep=None, monotonic=None,
-        wall_time=None, jitter=None,
-    ):
+    def __init__(self, token: str, opener=None, *, max_attempts: int = 3,
+                 timeout: float = 10.0, max_total_wait: float = 20.0,
+                 max_elapsed: float = 50.0, sleep=None, monotonic=None,
+                 wall_time=None, jitter=None):
         if not token:
-            raise CollectionError("GITHUB_TOKEN is required; no snapshot was generated")
-        if (
-            type(max_attempts) is not int or not 1 <= max_attempts <= 4
-            or timeout <= 0 or max_total_wait < 0 or max_elapsed <= 0
-            or max_elapsed < timeout or max_total_wait > max_elapsed
-        ):
+            raise CollectionError("GITHUB_TOKEN is required; previous catalog unchanged")
+        if (type(max_attempts) is not int or not 1 <= max_attempts <= 4
+                or timeout <= 0 or max_total_wait < 0 or max_elapsed < timeout
+                or max_total_wait > max_elapsed):
             raise ValueError("Invalid GitHub API retry configuration")
         self._token = token
         self._open = opener or urlopen
@@ -70,259 +61,281 @@ class GitHubAPI:
         self._jitter = jitter or random.random
 
     def _retry_delay(self, attempt: int, error: HTTPError | None) -> float:
-        """Honor Retry-After / rate reset, otherwise bounded exponential jitter."""
-        if error is not None:
-            headers = error.headers
-            retry_after = headers.get("Retry-After") if headers is not None else None
+        if error is not None and error.headers is not None:
+            retry_after = error.headers.get("Retry-After")
             if retry_after is not None:
                 try:
-                    seconds = float(retry_after)
-                    if not 0 <= seconds < float("inf"):
-                        raise ValueError
-                    return seconds
+                    delay = float(retry_after)
+                    if 0 <= delay < float("inf"):
+                        return delay
                 except ValueError:
                     try:
                         parsed = parsedate_to_datetime(retry_after)
-                        if parsed.tzinfo is not None:
+                        if parsed.tzinfo:
                             return max(0.0, parsed.timestamp() - self._wall_time())
                     except (ValueError, TypeError, OverflowError):
                         pass
-            if error.code == 429 and headers is not None:
-                reset = headers.get("X-RateLimit-Reset")
-                if reset is not None:
-                    try:
-                        seconds = max(0.0, float(reset) - self._wall_time())
-                        if seconds < float("inf"):
-                            return seconds
-                    except ValueError:
-                        pass
-        # Jittered backoff is bounded, including when the RNG is injectable.
-        return min(10.0, (2 ** (attempt - 1)) + max(0.0, min(1.0, self._jitter())))
+            reset = error.headers.get("X-RateLimit-Reset") if error.code == 429 else None
+            if reset is not None:
+                try:
+                    return max(0.0, float(reset) - self._wall_time())
+                except ValueError:
+                    pass
+        return min(10.0, 2 ** (attempt - 1) + max(0.0, min(1.0, self._jitter())))
 
     def get(self, path: str, params: dict[str, object]) -> dict:
-        url = API_ROOT + path + "?" + urlencode(params)
         request = Request(
-            url,
-            headers={
-                "Accept": "application/vnd.github+json",
-                "Authorization": "Bearer " + self._token,
-                "X-GitHub-Api-Version": "2022-11-28",
-                "User-Agent": "profile-external-contributions",
-            },
+            API_ROOT + path + "?" + urlencode(params),
+            headers={"Accept": "application/vnd.github+json",
+                     "Authorization": "Bearer " + self._token,
+                     "X-GitHub-Api-Version": "2022-11-28",
+                     "User-Agent": "profile-external-contributions"},
         )
-        started = self._monotonic()
-        waited = 0.0
+        started, waited = self._monotonic(), 0.0
         for attempt in range(1, self._max_attempts + 1):
             remaining = self._max_elapsed - (self._monotonic() - started)
             if remaining <= 0:
-                raise CollectionError("GitHub API retry time budget exhausted; previous snapshot unchanged")
+                raise CollectionError("GitHub API retry time budget exhausted")
             retry_error = None
             try:
                 with self._open(request, timeout=min(self._timeout, remaining)) as response:
                     result = json.loads(response.read())
             except HTTPError as error:
                 if error.code not in self.RETRYABLE_HTTP:
-                    raise CollectionError(
-                        f"GitHub API returned HTTP {error.code}; the previous snapshot is unchanged"
-                    ) from None
+                    error.close()
+                    raise CollectionError(f"GitHub API returned HTTP {error.code}") from None
                 retry_error = error
             except (TimeoutError, URLError, ConnectionError) as error:
                 if isinstance(error, URLError) and isinstance(error.reason, ssl.SSLError):
-                    raise CollectionError(
-                        "GitHub API TLS verification failed; the previous snapshot is unchanged"
-                    ) from None
+                    raise CollectionError("GitHub API TLS verification failed") from None
             except (OSError, ValueError):
-                # Unexpected local/configuration errors and invalid JSON are not transient.
-                raise CollectionError(
-                    "GitHub API request or response failed; the previous snapshot is unchanged"
-                ) from None
+                raise CollectionError("GitHub API request or response failed") from None
             else:
                 if not isinstance(result, dict):
                     raise CollectionError("Unexpected GitHub API response format")
                 return result
-
-            if attempt >= self._max_attempts:
-                raise CollectionError(
-                    "GitHub API transient failure after retry limit; previous snapshot unchanged"
-                )
+            if attempt == self._max_attempts:
+                if retry_error is not None:
+                    retry_error.close()
+                raise CollectionError("GitHub API transient failure after retry limit")
             delay = self._retry_delay(attempt, retry_error)
+            if retry_error is not None:
+                retry_error.close()
             remaining = self._max_elapsed - (self._monotonic() - started)
             if delay > self._max_total_wait - waited or delay > remaining:
-                raise CollectionError(
-                    "GitHub API rate limit or retry time budget exceeded; previous snapshot unchanged"
-                )
+                raise CollectionError("GitHub API rate-limit or retry budget exceeded")
             self._sleep(delay)
             waited += delay
-        raise CollectionError("GitHub API retry limit exceeded; previous snapshot unchanged")
+        raise CollectionError("GitHub API retry limit exceeded")
+
 
 def load_config(path: Path) -> dict:
     try:
         config = json.loads(path.read_text(encoding="utf-8"))
     except (OSError, ValueError) as error:
-        raise CollectionError("Curated project configuration could not be read") from error
-    if not isinstance(config, dict) or config.get("schema_version") != 1:
-        raise CollectionError("Unsupported curated project configuration")
-    profile, projects = config.get("profile"), config.get("projects")
+        raise CollectionError("Configuration could not be read") from error
+    if not isinstance(config, dict) or config.get("schema_version") != 2:
+        raise CollectionError("Unsupported configuration schema")
+    profile = config.get("profile")
+    exclusions = config.get("exclude_repositories", [])
     if not isinstance(profile, str) or not LOGIN_PATTERN.fullmatch(profile):
-        raise CollectionError("Invalid profile login in configuration")
-    if not isinstance(projects, list) or not projects:
-        raise CollectionError("Curated projects list must be non-empty")
-    seen_repos = set()
-    for project in projects:
-        if not isinstance(project, dict):
-            raise CollectionError("Invalid curated project")
-        repo = project.get("repository")
-        if not isinstance(repo, str) or not REPO_PATTERN.fullmatch(repo):
-            raise CollectionError("Invalid curated repository")
-        owner = repo.partition("/")[0]
-        if owner.casefold() == profile.casefold():
-            raise CollectionError("Profile-owned repositories cannot be external projects")
-        if repo.casefold() in seen_repos:
-            raise CollectionError("Duplicate curated repository")
-        seen_repos.add(repo.casefold())
-        references = project.get("pull_requests")
-        if not isinstance(references, list) or not references:
-            raise CollectionError("Every curated project needs reference pull requests")
-        numbers = [ref.get("number") for ref in references if isinstance(ref, dict)]
-        if (
-            len(numbers) != len(references)
-            or any(type(number) is not int or number < 1 for number in numbers)
-            or len(set(numbers)) != len(numbers)
-        ):
-            raise CollectionError("Invalid or duplicated curated PR number")
+        raise CollectionError("Invalid profile login")
+    if (not isinstance(exclusions, list) or any(
+            not isinstance(repo, str) or not REPO_PATTERN.fullmatch(repo)
+            or repo.partition("/")[0].casefold() == profile.casefold()
+            for repo in exclusions)
+            or len({repo.casefold() for repo in exclusions}) != len(exclusions)):
+        raise CollectionError("Invalid or duplicate repository exclusion")
+    if set(config) - {"schema_version", "profile", "exclude_repositories", "exclusion_policy"}:
+        raise CollectionError("Unknown configuration field")
+    policy = config.get("exclusion_policy")
+    if policy is not None and (not isinstance(policy, str) or not policy.strip()):
+        raise CollectionError("Exclusion policy must be nonempty text")
     return config
 
 
-def _normalized_issue(issue: dict, repository: str, profile: str) -> dict:
+def _timestamp(value: object, field: str, *, nullable: bool = False) -> str | None:
+    if value is None and nullable:
+        return None
+    if not isinstance(value, str) or not TIMESTAMP_PATTERN.fullmatch(value):
+        raise CollectionError(f"GitHub returned invalid {field}")
+    try:
+        datetime.strptime(value, "%Y-%m-%dT%H:%M:%SZ")
+    except ValueError as error:
+        raise CollectionError(f"GitHub returned invalid {field}") from error
+    return value
+
+
+def _normalized_issue(issue: object, profile: str) -> tuple[str, dict]:
     if not isinstance(issue, dict):
-        raise CollectionError("Unexpected GitHub search item")
-    expected_repo = f"{API_ROOT}/repos/{repository}".casefold()
-    author = issue.get("user")
-    number = issue.get("number")
-    pr = issue.get("pull_request")
-    if (
-        str(issue.get("repository_url", "")).casefold() != expected_repo
-        or not isinstance(author, dict)
-        or str(author.get("login", "")).casefold() != profile.casefold()
-        or type(number) is not int
-        or number < 1
-        or not isinstance(pr, dict)
-        or "merged_at" not in pr
-    ):
-        raise CollectionError("GitHub search returned an unexpected PR or author")
-    merged_at = pr["merged_at"]
-    state = issue.get("state")
-    if state not in ("open", "closed") or (
-        merged_at is not None and (not isinstance(merged_at, str) or state != "closed")
-    ):
-        raise CollectionError("GitHub returned an inconsistent pull request state")
+        raise CollectionError("GitHub search returned an invalid item")
+    repository_url = issue.get("repository_url")
+    if not isinstance(repository_url, str) or not repository_url.startswith(REPOSITORY_API_PREFIX):
+        raise CollectionError("GitHub returned an invalid repository URL")
+    repository = repository_url[len(REPOSITORY_API_PREFIX):]
+    author, pull = issue.get("user"), issue.get("pull_request")
+    number, identifier, state = issue.get("number"), issue.get("id"), issue.get("state")
+    if (not REPO_PATTERN.fullmatch(repository)
+            or not isinstance(author, dict)
+            or str(author.get("login", "")).casefold() != profile.casefold()
+            or type(number) is not int or number < 1
+            or type(identifier) is not int or identifier < 1
+            or state not in ("open", "closed")
+            or not isinstance(pull, dict) or "merged_at" not in pull):
+        raise CollectionError("GitHub search returned an unexpected PR, author, or state")
+    canonical = f"https://github.com/{repository}/pull/{number}"
+    if issue.get("html_url") != canonical:
+        raise CollectionError("GitHub returned a noncanonical pull-request URL")
+    title = issue.get("title")
+    if not isinstance(title, str) or not title.strip() or len(title) > 1024 or any(c in title for c in "\r\n\x00"):
+        raise CollectionError("GitHub returned an invalid pull-request title")
+    merged_at = _timestamp(pull.get("merged_at"), "merged_at", nullable=True)
+    created_at = _timestamp(issue.get("created_at"), "created_at")
+    updated_at = _timestamp(issue.get("updated_at"), "updated_at")
+    if merged_at is not None and state != "closed":
+        raise CollectionError("GitHub returned an inconsistent merged PR")
     status = "merged" if merged_at else ("open" if state == "open" else "closed_unmerged")
-    return {
-        "number": number,
-        "url": f"https://github.com/{repository}/pull/{number}",
-        "status": status,
-        "merged_at": merged_at,
-    }
+    return repository, {"id": identifier, "number": number, "url": canonical,
+                        "title": title, "status": status, "created_at": created_at,
+                        "updated_at": updated_at, "merged_at": merged_at}
 
 
-def _repository_pull_requests(api: GitHubAPI, repository: str, profile: str) -> list[dict]:
-    found: dict[int, dict] = {}
-    total = None
-    for page in range(1, (MAX_SEARCH_RESULTS // PAGE_SIZE) + 1):
-        query = f"is:pr is:public author:{profile} repo:{repository}"
-        payload = api.get(
-            "/search/issues",
-            {"q": query, "per_page": PAGE_SIZE, "page": page},
-        )
-        count, items = payload.get("total_count"), payload.get("items")
-        if (
-            type(count) is not int
-            or count < 0
-            or count > MAX_SEARCH_RESULTS
-            or payload.get("incomplete_results") is not False
-            or not isinstance(items, list)
-            or (total is not None and total != count)
-        ):
-            raise CollectionError("GitHub search is incomplete or exceeds its result limit")
-        total = count
-        for issue in items:
-            pr = _normalized_issue(issue, repository, profile)
-            previous = found.get(pr["number"])
-            if previous is not None and previous != pr:
-                raise CollectionError("GitHub returned conflicting duplicate PR data")
-            found[pr["number"]] = pr
-        if len(items) < PAGE_SIZE:
-            break
-    if total is None or len(found) != total:
-        raise CollectionError("GitHub pagination is incomplete; refusing partial statistics")
-    return sorted(found.values(), key=lambda pr: pr["number"])
+def _query(profile: str, start: date, end: date) -> str:
+    return f"is:pr is:public author:{profile} -user:{profile} created:{start.isoformat()}..{end.isoformat()}"
 
 
-def collect(config: dict, api: GitHubAPI, collected_at: datetime | None = None) -> dict:
-    profile = config["profile"]
-    totals = {
-        "authored_prs": 0,
-        "merged_prs": 0,
-        "open_prs": 0,
-        "closed_unmerged_prs": 0,
-        "repositories_with_merged_prs": 0,
-    }
-    projects = []
-    latest_merged_at = None
-    for curated in config["projects"]:
-        repository = curated["repository"]
-        prs = _repository_pull_requests(api, repository, profile)
-        by_number = {pr["number"]: pr for pr in prs}
-        references = [ref["number"] for ref in curated["pull_requests"]]
-        if any(number not in by_number for number in references):
-            raise CollectionError(
-                "A curated reference PR was not returned by GitHub; refusing partial data"
-            )
-        merged = sum(pr["status"] == "merged" for pr in prs)
-        opened = sum(pr["status"] == "open" for pr in prs)
-        closed = sum(pr["status"] == "closed_unmerged" for pr in prs)
-        totals["authored_prs"] += len(prs)
-        totals["merged_prs"] += merged
-        totals["open_prs"] += opened
-        totals["closed_unmerged_prs"] += closed
-        totals["repositories_with_merged_prs"] += int(merged > 0)
-        dates = [pr["merged_at"] for pr in prs if pr["merged_at"]]
-        if dates:
-            candidate = max(dates)
-            latest_merged_at = max(latest_merged_at or candidate, candidate)
-        projects.append({
-            "repository": repository,
-            "authored_prs": len(prs),
-            "merged_prs": merged,
-            "open_prs": opened,
-            "closed_unmerged_prs": closed,
-            "reference_prs": [by_number[number] for number in references],
-        })
+def _fetch_window(api: GitHubAPI, profile: str, start: date, end: date) -> tuple[int, list[dict]]:
+    query = _query(profile, start, end)
+    first = api.get("/search/issues", {"q": query, "per_page": PAGE_SIZE, "page": 1,
+                                       "sort": "created", "order": "asc"})
+    count, items = first.get("total_count"), first.get("items")
+    if (type(count) is not int or count < 0 or first.get("incomplete_results") is not False
+            or not isinstance(items, list)):
+        raise CollectionError("GitHub search returned incomplete or invalid results")
+    if count > MAX_SEARCH_RESULTS:
+        return count, []
+    found = list(items)
+    pages = (count + PAGE_SIZE - 1) // PAGE_SIZE
+    for page in range(2, pages + 1):
+        payload = api.get("/search/issues", {"q": query, "per_page": PAGE_SIZE, "page": page,
+                                             "sort": "created", "order": "asc"})
+        if (payload.get("total_count") != count or payload.get("incomplete_results") is not False
+                or not isinstance(payload.get("items"), list)):
+            raise CollectionError("GitHub search changed or became incomplete during pagination")
+        found.extend(payload["items"])
+    if len(found) != count:
+        raise CollectionError("GitHub pagination did not return the declared result count")
+    return count, found
+
+
+def _partitioned_search(api: GitHubAPI, profile: str, start: date, end: date) -> list[dict]:
+    count, items = _fetch_window(api, profile, start, end)
+    if count <= MAX_SEARCH_RESULTS:
+        return items
+    if start == end:
+        raise CollectionError(f"More than 1000 PRs match {start}; interval cannot be safely split")
+    midpoint = start + timedelta(days=(end - start).days // 2)
+    left = _partitioned_search(api, profile, start, midpoint)
+    right = _partitioned_search(api, profile, midpoint + timedelta(days=1), end)
+    if len(left) + len(right) != count:
+        raise CollectionError("Temporal partitions disagree with their parent result count")
+    return left + right
+
+
+def _factual(snapshot: dict) -> dict:
+    return {key: value for key, value in snapshot.items() if key != "last_successful_sync"}
+
+
+def _previous_prs(previous: object, profile: str) -> dict[tuple[str, int], dict]:
+    if previous is None:
+        return {}
+    if not isinstance(previous, dict) or previous.get("schema_version") != 2 or previous.get("profile") != profile:
+        raise CollectionError("Previous catalog has an incompatible schema or profile")
+    result = {}
+    for project in previous.get("projects", []):
+        if not isinstance(project, dict) or not isinstance(project.get("repository"), str):
+            raise CollectionError("Previous catalog is invalid")
+        for pr in project.get("pull_requests", []):
+            if not isinstance(pr, dict) or type(pr.get("number")) is not int:
+                raise CollectionError("Previous catalog contains an invalid PR")
+            result[(project["repository"].casefold(), pr["number"])] = pr
+    return result
+
+
+def collect(config: dict, api: GitHubAPI, collected_at: datetime | None = None,
+            previous: dict | None = None) -> dict:
     instant = collected_at or datetime.now(timezone.utc)
     if instant.tzinfo is None or instant.utcoffset() is None:
         raise CollectionError("Collection timestamp must include a timezone")
-    return {
-        "schema_version": 1,
-        "profile": profile,
-        "scope": "Public PRs authored by this profile in the curated external repositories only",
-        "repositories": len(projects),
-        "collected_at": instant.astimezone(timezone.utc).isoformat(timespec="seconds").replace("+00:00", "Z"),
-        "latest_merged_at": latest_merged_at,
-        "totals": totals,
-        "projects": projects,
-    }
+    now = instant.astimezone(timezone.utc)
+    raw = _partitioned_search(api, config["profile"], GITHUB_EPOCH, now.date())
+    excluded = {repo.casefold() for repo in config.get("exclude_repositories", [])}
+    found: dict[tuple[str, int], tuple[str, dict]] = {}
+    for item in raw:
+        repository, pr = _normalized_issue(item, config["profile"])
+        if repository.partition("/")[0].casefold() == config["profile"].casefold():
+            # Defense in depth if GitHub ignores the negative owner qualifier.
+            continue
+        if repository.casefold() in excluded:
+            continue
+        key = (repository.casefold(), pr["number"])
+        prior = found.get(key)
+        if prior is not None and prior != (repository, pr):
+            raise CollectionError("GitHub returned conflicting duplicate PR data")
+        found[key] = (repository, pr)
+    known = {key: value for key, value in _previous_prs(previous, config["profile"]).items()
+             if key[0] not in excluded}
+    missing = set(known) - set(found)
+    if missing:
+        raise CollectionError("Previously published PRs disappeared; refusing silent removal")
+    for key, (_, pr) in found.items():
+        if key in known and known[key].get("id") != pr["id"]:
+            raise CollectionError("A stable pull-request identity changed unexpectedly")
+
+    repositories: dict[str, tuple[str, list[dict]]] = {}
+    for (key, _), (repository, pr) in found.items():
+        repositories.setdefault(key, (repository, []))[1].append(pr)
+    projects = []
+    total = {"pull_requests": 0, "merged": 0, "open": 0, "closed_unmerged": 0}
+    for repository, prs in repositories.values():
+        prs.sort(key=lambda pr: (pr["created_at"], pr["number"]), reverse=True)
+        counts = {state: sum(pr["status"] == state for pr in prs)
+                  for state in ("merged", "open", "closed_unmerged")}
+        activity = max(pr["updated_at"] for pr in prs)
+        projects.append({"repository": repository, "url": f"https://github.com/{repository}",
+                         "activity_at": activity, "pull_requests": prs,
+                         "totals": {"pull_requests": len(prs), **counts}})
+        total["pull_requests"] += len(prs)
+        for state in counts:
+            total[state] += counts[state]
+    projects.sort(key=lambda p: p["repository"].casefold())
+    projects.sort(key=lambda p: p["activity_at"], reverse=True)
+    result = {"schema_version": 2, "profile": config["profile"], "scope": SCOPE,
+              "last_successful_sync": now.isoformat(timespec="seconds").replace("+00:00", "Z"),
+              "totals": {"repositories": len(projects), **total}, "projects": projects}
+    if previous is not None and _factual(previous) == _factual(result):
+        result["last_successful_sync"] = previous["last_successful_sync"]
+    return result
+
+
+def load_previous(path: Path | None) -> dict | None:
+    if path is None or not path.exists():
+        return None
+    try:
+        return json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, ValueError) as error:
+        raise CollectionError("Previous catalog could not be read") from error
 
 
 def write_snapshot(path: Path, payload: dict) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     temporary = None
     try:
-        with tempfile.NamedTemporaryFile(
-            mode="w", encoding="utf-8", dir=path.parent, delete=False
-        ) as file:
-            temporary = Path(file.name)
-            json.dump(payload, file, ensure_ascii=False, indent=2)
-            file.write("\n")
+        with tempfile.NamedTemporaryFile(mode="w", encoding="utf-8", newline="", dir=path.parent,
+                                         prefix=f".{path.name}.", delete=False) as handle:
+            temporary = Path(handle.name)
+            json.dump(payload, handle, ensure_ascii=False, indent=2)
+            handle.write("\n")
         os.replace(temporary, path)
     finally:
         if temporary is not None:
@@ -332,16 +345,21 @@ def write_snapshot(path: Path, payload: dict) -> None:
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--config", type=Path, default=Path(".github/external-contributions.json"))
+    parser.add_argument("--previous", type=Path)
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args(argv)
     try:
         config = load_config(args.config)
-        result = collect(config, GitHubAPI(os.environ.get("GITHUB_TOKEN", "")))
+        queried_at = datetime.now(timezone.utc)
+        result = collect(config, GitHubAPI(os.environ.get("GITHUB_TOKEN", "")), collected_at=queried_at,
+                         previous=load_previous(args.previous))
         write_snapshot(args.output, result)
     except CollectionError as error:
-        print(f"Collection failed: {error}", file=sys.stderr)
+        print(f"Collection failed: {error}; previous catalog unchanged", file=sys.stderr)
         return 1
-    print(f"Collected {result['totals']['authored_prs']} public PRs in {result['repositories']} curated external repositories")
+    totals = result["totals"]
+    print(f"Collected {totals['pull_requests']} public PRs in {totals['repositories']} external repositories")
+    print("Query completed at " + queried_at.isoformat(timespec="seconds").replace("+00:00", "Z"))
     return 0
 
 
