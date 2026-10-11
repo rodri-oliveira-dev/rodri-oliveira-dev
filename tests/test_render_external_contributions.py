@@ -56,6 +56,33 @@ class RendererTests(unittest.TestCase):
         self.assertIn(r"Fix \[unsafe\] \*markdown\* &lt;tag&gt;", rendered)
         self.assertNotIn("<tag>", rendered)
 
+    def test_repository_prs_are_rendered_as_a_table_in_both_languages(self):
+        data = snapshot("Fix a | b")
+        for language, status, date_opened, date_merged in (
+                ("pt", "Integrado", "01/01/2026", "02/01/2026"),
+                ("en", "Merged", "2026-01-01", "2026-01-02")):
+            rendered = render_catalog(data, language)
+            self.assertIn("| --- | --- | --- | --- |", rendered)
+            self.assertIn(
+                f"| [#7](https://github.com/acme/widget/pull/7) — Fix a \\| b | {status} | {date_opened} | {date_merged} |",
+                rendered,
+            )
+            self.assertNotIn("\n- [#7](", rendered)
+
+    def test_non_merged_prs_show_no_merge_date(self):
+        for status, totals_key, label in (("open", "open", "Aberto"),
+                                          ("closed_unmerged", "closed_unmerged", "Fechado sem integração")):
+            data = snapshot("Non-merged change")
+            pr = data["projects"][0]["pull_requests"][0]
+            pr["status"], pr["merged_at"] = status, None
+            data["projects"][0]["totals"].update(merged=0, **{totals_key: 1})
+            data["totals"].update(merged=0, **{totals_key: 1})
+            rendered = render_catalog(data, "pt")
+            self.assertIn(
+                f"| [#7](https://github.com/acme/widget/pull/7) — Non-merged change | {label} | 01/01/2026 | — |",
+                rendered,
+            )
+
     def test_invalid_order_and_totals_are_rejected(self):
         data = snapshot()
         data["totals"]["open"] = 1
