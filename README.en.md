@@ -27,10 +27,10 @@ A selection of projects where I explore architecture and engineering problems th
 | Project | What it demonstrates |
 | --- | --- |
 | **[POC Arquitetura](https://github.com/rodri-oliveira-dev/poc-arquitetura)** | A distributed-systems lab for exploring eventual consistency, failures, and traceability. It brings together DDD, Kafka, Outbox/Inbox, sagas, idempotency, tests, and runbooks. |
-| **[ADR Guard](https://github.com/rodri-oliveira-dev/adr-guard)** | A tool for creating, validating, and organizing ADRs during development and in CI. It includes a CLI, GitHub Actions and VS Code integrations, and optional AI features with human review. |
+| **[ADR Guard](https://github.com/rodri-oliveira-dev/adr-guard)** | A tool for creating, validating, and organizing ADRs during development and in CI. It includes a CLI, GitHub Actions integration, a [VS Code extension](https://marketplace.visualstudio.com/items?itemName=rodrioliveira.adr-guard), and optional AI features with human review. |
 | **[Repo2C4](https://github.com/rodri-oliveira-dev/Repo2C4)** | Generates C4/LikeC4 documentation from code evidence, with review before changes are written. Includes a CLI, MCP, and an optional agent, keeping observed facts separate from architectural hypotheses. |
 | **[Dapper.FluentMap](https://github.com/rodri-oliveira-dev/Dapper-FluentMap)** | A Dapper mapping library that I maintain and evolve. The work involves compatibility with existing applications, testing, versioning, .NET modernization, and publishing NuGet packages. |
-| **[Repo Control Center](https://github.com/rodri-oliveira-dev/repo-status-dashboard)** | An Angular dashboard for tracking CI, releases, security, and health across my repositories. GitHub Actions collects the data for static snapshots; the dashboard also includes a technology radar. |
+| **[Repo Control Center](https://github.com/rodri-oliveira-dev/repo-status-dashboard)** | An Angular dashboard for tracking CI, releases, security, and health across my repositories. GitHub Actions collects the data for static snapshots; the dashboard also includes a [technology radar](https://rodri-oliveira-dev.github.io/repo-status-dashboard/#/technology-radar). |
 
 [Explore all repositories →](https://github.com/rodri-oliveira-dev?tab=repositories)
 
