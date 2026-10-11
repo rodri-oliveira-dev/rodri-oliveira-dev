@@ -33,7 +33,7 @@ TEXT = {
         "prs": "PRs encontrados", "merged": "PRs integrados", "open": "PRs abertos",
         "closed_unmerged": "PRs fechados sem integração", "sync": "Última sincronização bem-sucedida",
         "total": "Total", "opened": "Aberto em", "merged_on": "Integrado em",
-        "states": {"merged": "Integrado", "open": "Aberto", "closed_unmerged": "Fechado sem merge"},
+        "states": {"merged": "Integrado", "open": "Aberto", "closed_unmerged": "Fechado sem integração"},
         "date": "%d/%m/%Y", "note": "A data acima corresponde à sincronização que produziu a versão publicada atual; consultas sem mudança factual não geram commit.",
     },
     "en": {

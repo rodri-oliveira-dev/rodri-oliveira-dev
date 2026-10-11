@@ -69,6 +69,7 @@ A publicação usa a branch fixa `automation/external-contributions`:
 - se não houver mudança factual, encerra sem commit;
 - se não houver PR aberto, cria branch, commit e PR;
 - se houver um PR válido, atualiza a mesma branch por fast-forward, sem force push;
+- se a branch gerenciada existir sem um PR aberto, falha com orientação para revisão manual;
 - nunca modifica uma branch de fork;
 - reconhece somente PR aberto criado por `github-actions[bot]`, no repositório base e na branch exata;
 - verifica que o head foi criado com a identidade esperada do bot e que o PR altera somente o snapshot e os dois catálogos;

@@ -32,6 +32,16 @@ class RendererTests(unittest.TestCase):
         self.assertIn("Índice de projetos", pt)
         self.assertIn("Project index", en)
 
+    def test_closed_state_uses_consistent_portuguese_terminology(self):
+        data = snapshot()
+        pr = data["projects"][0]["pull_requests"][0]
+        pr["status"], pr["merged_at"] = "closed_unmerged", None
+        data["projects"][0]["totals"].update(merged=0, closed_unmerged=1)
+        data["totals"].update(merged=0, closed_unmerged=1)
+        rendered = render_catalog(data, "pt")
+        self.assertIn("Fechado sem integração", rendered)
+        self.assertNotIn("Fechado sem merge", rendered)
+
     def test_untrusted_markdown_is_escaped(self):
         rendered = render_catalog(snapshot(), "en")
         self.assertIn(r"Fix \[unsafe\] \*markdown\* &lt;tag&gt;", rendered)

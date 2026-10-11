@@ -206,7 +206,7 @@ _A data acima corresponde à sincronização que produziu a versão publicada at
 **Total:** 1 · **PRs integrados:** 0 · **PRs abertos:** 0 · **PRs fechados sem integração:** 1
 
 - [#2](https://github.com/egoughnour/complexity-hints/pull/2) — Chore/bootstrap analyzer workspace
-  - Fechado sem merge · Aberto em 12/08/2026
+  - Fechado sem integração · Aberto em 12/08/2026
 
 <a id="repository-ddd-crew-welcome-to-ddd"></a>
 

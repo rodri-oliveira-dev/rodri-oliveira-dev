@@ -13,10 +13,14 @@ from pathlib import Path
 
 try:
     from scripts.external_contributions import REPO_PATTERN
-    from scripts.render_external_contributions import RenderError, load_snapshot, render_catalog
+    from scripts.render_external_contributions import (
+        RenderError, load_snapshot, render_catalog, validate_snapshot,
+    )
 except ModuleNotFoundError:
     from external_contributions import REPO_PATTERN
-    from render_external_contributions import RenderError, load_snapshot, render_catalog
+    from render_external_contributions import (
+        RenderError, load_snapshot, render_catalog, validate_snapshot,
+    )
 
 MANAGED_FILES = (".github/external-contributions-catalog.json",
                  "docs/open-source-contributions.md",
@@ -84,7 +88,7 @@ def changed_preview(preview_dir: Path) -> dict[str, bytes]:
 
 def existing_proposal(command: Commands, repository: str) -> dict | None:
     pulls = _json(command, "gh", "pr", "list", "--repo", repository, "--state", "open",
-                  "--base", "main", "--json",
+                  "--base", "main", "--head", BRANCH, "--limit", "100", "--json",
                   "number,author,headRefName,headRefOid,headRepository,isCrossRepository")
     if not isinstance(pulls, list):
         raise ProposalError("Open pull-request query returned an invalid response")
@@ -143,6 +147,34 @@ def _dispatch_checks(command: Commands, repository: str) -> bool:
                            "--ref", BRANCH).returncode == 0 for workflow in WORKFLOWS)
 
 
+def _same_catalog_facts(current: dict, proposed: dict) -> bool:
+    """Compare published facts while ignoring only the synchronization timestamp."""
+    current_facts = {key: value for key, value in current.items()
+                     if key != "last_successful_sync"}
+    proposed_facts = {key: value for key, value in proposed.items()
+                      if key != "last_successful_sync"}
+    return current_facts == proposed_facts
+
+
+def _preview_matches_current_catalog(contents: dict[str, bytes]) -> bool:
+    current = load_snapshot(Path(MANAGED_FILES[0]))
+    try:
+        proposed = json.loads(contents[MANAGED_FILES[0]].decode("utf-8"))
+    except (KeyError, UnicodeError, ValueError) as error:
+        raise ProposalError("Preview catalog is missing or invalid") from error
+    return _same_catalog_facts(current, validate_snapshot(proposed))
+
+
+def _ensure_managed_branch_absent(command: Commands) -> None:
+    remote = command.run("git", "ls-remote", "--exit-code", "origin", f"refs/heads/{BRANCH}")
+    if remote.returncode == 0:
+        raise ProposalError(
+            "Managed branch exists without an open PR; review and delete it before retrying"
+        )
+    if remote.returncode != 2:
+        raise ProposalError("Could not inspect the managed branch on origin")
+
+
 def propose(command: Commands, *, preview_dir: Path, repository: str, sha: str,
             run_id: str, run_attempt: str, event: str, ref: str,
             publish: str) -> tuple[str, str | None]:
@@ -167,6 +199,8 @@ def propose(command: Commands, *, preview_dir: Path, repository: str, sha: str,
             raise ProposalError("Automation branch advanced during inspection")
         required(command, "git", "switch", "--detach", pending["sha"])
         contents = verified_preview(preview_dir)
+        if _preview_matches_current_catalog(contents):
+            return "existing_pr_current", str(pending["number"])
         if not _apply_and_commit(command, contents, "docs: refresh complete external contributions catalog"):
             return "existing_pr_current", str(pending["number"])
         if not verify_main(command, sha):
@@ -174,6 +208,7 @@ def propose(command: Commands, *, preview_dir: Path, repository: str, sha: str,
         required(command, "git", "push", "origin", f"HEAD:refs/heads/{BRANCH}")
         return ("updated" if _dispatch_checks(command, repository) else "checks_unavailable"), str(pending["number"])
 
+    _ensure_managed_branch_absent(command)
     required(command, "git", "switch", "-c", BRANCH)
     contents = verified_preview(preview_dir)
     if not _apply_and_commit(command, contents, "docs: refresh complete external contributions catalog"):
