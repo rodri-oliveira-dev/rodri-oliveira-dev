@@ -8,13 +8,13 @@
 
 # Rodrigo de Oliveira
 
-**Software Architect | Distributed Systems | .NET | Cloud | DDD | Governance as Code**
+**Software Architect | Distributed Systems | .NET | Cloud**
 
-I'm a software architect with 20+ years of experience building, modernizing, and evolving enterprise systems.
+I'm a software architect with more than 20 years of experience developing and evolving enterprise systems.
 
-I work where **business constraints, architecture, and implementation meet**. My role is to turn quality attributes, operational constraints, and product needs into technical decisions that teams can build, run, observe, and evolve.
+I work with distributed systems, integrations, and application modernization. I look for solutions that meet business needs while accounting for maintenance, operations, and the constraints of existing systems.
 
-I prefer architecture that stays close to engineering: **decisions should show up in code, contracts, guardrails, and automation**, so their assumptions can be tested instead of living only in diagrams or documents.
+I like discussing technical decisions with the teams implementing them and seeing how those decisions play out in code. My open-source projects are another way to explore documentation, automation, and software quality.
 
 **[Professional portfolio](https://rodri-oliveira-dev.github.io/)** · [LinkedIn](https://www.linkedin.com/in/rodri-oliveira-dev) · [DEV.to](https://dev.to/rodri-oliveira-dev) · [NuGet](https://www.nuget.org/profiles/rodri-oliveira-dev)
 
@@ -22,20 +22,15 @@ I prefer architecture that stays close to engineering: **decisions should show u
 
 ## Architecture in practice
 
-My open-source work shows how I approach engineering in practice. Each project captures a problem, the constraints around it, and a decision that can be inspected in code, infrastructure, or automation.
+A selection of projects where I explore architecture and engineering problems through code, tests, and automation:
 
-| Project | Problem, decision, and evidence |
+| Project | What it demonstrates |
 | --- | --- |
-| **[POC Arquitetura](https://github.com/rodri-oliveira-dev/poc-arquitetura)** | A distributed-systems reference covering DDD, bounded contexts, Kafka, Outbox/Inbox, idempotency, sagas, OpenTelemetry, ADRs, and runbooks. Failure modes and trade-offs are part of the design rather than afterthoughts. |
-| **[Dapper.FluentMap](https://github.com/rodri-oliveira-dev/Dapper-FluentMap)** | Fluent mapping library for Dapper that I currently maintain. The work combines compatibility preservation with modernization of runtime, tooling, CI/CD, quality, security, and distribution, treating public-contract evolution as an explicit architectural constraint. |
-| **[Repo2C4](https://github.com/rodri-oliveira-dev/Repo2C4)** | Treats drift between code and diagrams as an evidence-and-review problem: turns verifiable evidence from .NET repositories into reviewable C4/LikeC4 documentation, with C1/C2, selective C3, a CLI, and a [local stdio MCP server](https://github.com/rodri-oliveira-dev/Repo2C4/blob/main/docs/mcp.md). Its current evolution adds a Microsoft Agent Framework-based Agent to orchestrate evidence-first analysis, validation, and bounded correction while keeping human approval before any write. |
-| **[ADR Guard](https://github.com/rodri-oliveira-dev/adr-guard)** | Brings ADRs into the engineering workflow through deterministic validation and indexing across the CLI, containers, and GitHub Action, plus AI-assisted drafting while keeping review and architectural acceptance with people. |
-| **[DotNetRepoInspector](https://github.com/rodri-oliveira-dev/DotNetRepoInspector)** | Uses evaluated MSBuild metadata as the source of truth for inventory and governance, exposing the same deterministic contract through the CLI/.NET Tool, GitHub Action, and a local read-only MCP server. It is evolving to discover external integrations — HTTP, multi-cloud messaging, databases, caches, and storage — as structured facts reusable by other tools. |
-| **[Repo Control Center](https://github.com/rodri-oliveira-dev/repo-status-dashboard)** | An observability layer for the repository portfolio: consolidates CI, delivery, releases, activity, security, package, and health signals into a static snapshot collected by GitHub Actions and published as an Angular SPA on GitHub Pages, with explicit coverage and confidence for partial data. |
-| **[.NET Library Template](https://github.com/rodri-oliveira-dev/dotnet-library-template)** | Packages recurring build, testing, security, packaging, and release practices into a reusable golden path, including package validation, NuGet Audit, CodeQL, OIDC-based Trusted Publishing, and software supply-chain controls. |
-| **[ComplexityAnalysis.Analyzers](https://github.com/rodri-oliveira-dev/complexity-analyzers)** | Moves complexity feedback closer to development with Roslyn analyzers for algorithmic, cyclomatic, cognitive, and structural complexity, using conservative behavior when an inference cannot be made safely. |
-
-**DotNetRepoInspector identifies technical facts in a repository; Repo2C4 uses verifiable evidence to interpret those facts architecturally and produce reviewable C4 documentation.**
+| **[POC Arquitetura](https://github.com/rodri-oliveira-dev/poc-arquitetura)** | A distributed-systems lab for exploring eventual consistency, failures, and traceability. It brings together DDD, Kafka, Outbox/Inbox, sagas, idempotency, tests, and runbooks. |
+| **[ADR Guard](https://github.com/rodri-oliveira-dev/adr-guard)** | A tool for creating, validating, and organizing ADRs during development and in CI. It includes a CLI, GitHub Actions integration, a [VS Code extension](https://marketplace.visualstudio.com/items?itemName=rodrioliveira.adr-guard), and optional AI features with human review. |
+| **[Repo2C4](https://github.com/rodri-oliveira-dev/Repo2C4)** | Generates C4/LikeC4 documentation from code evidence, with review before changes are written. Includes a CLI, MCP, and an optional agent, keeping observed facts separate from architectural hypotheses. |
+| **[Dapper.FluentMap](https://github.com/rodri-oliveira-dev/Dapper-FluentMap)** | A Dapper mapping library that I maintain and evolve. The work involves compatibility with existing applications, testing, versioning, .NET modernization, and publishing NuGet packages. |
+| **[Repo Control Center](https://github.com/rodri-oliveira-dev/repo-status-dashboard)** | An Angular dashboard for tracking CI, releases, security, and health across my repositories. GitHub Actions collects the data for static snapshots; the dashboard also includes a [technology radar](https://rodri-oliveira-dev.github.io/repo-status-dashboard/#/technology-radar). |
 
 [Explore all repositories →](https://github.com/rodri-oliveira-dev?tab=repositories)
 
@@ -43,53 +38,36 @@ My open-source work shows how I approach engineering in practice. Each project c
 
 ## Governance as code
 
-Sustainable architecture also means turning recurring engineering rules into feedback and automation instead of relying only on documentation and process.
+I use the **[.github](https://github.com/rodri-oliveira-dev/.github)** repository to share policies and automation across my projects. It brings together contribution and security standards, .NET project inventory, secret scanning, and controlled distribution of agent skills.
 
-The **[.github](https://github.com/rodri-oliveira-dev/.github)** repository is the shared governance and automation layer for the projects I maintain. It centralizes contribution and security standards, cross-repository maintenance, .NET project inventory, reusable secret scanning, and a versioned agent-governance registry with upstream skill synchronization and PR-controlled distribution.
-
-The automation follows **least privilege, PR-based writes, safe defaults, and repository-level ownership**. Changes that write to repositories go through review; read-only workflows do not receive mutation permissions.
-
-The principle is straightforward: **when a rule can provide useful feedback automatically, I would rather encode the guardrail than add another manual gate**.
+Changes go through Pull Requests, while each repository retains the freedom to set its own rules. The goal is to reduce repetitive work without centralizing decisions that belong to individual projects.
 
 ---
 
 ## Open-source contributions
 
-Contributing to codebases I do not control exercises a different part of engineering: understanding existing decisions, respecting project conventions and contracts, discussing trade-offs, and making changes that fit the surrounding ecosystem.
+I also contribute to projects I don't maintain. I keep a catalog of the public Pull Requests I've opened in other repositories, with their statuses updated automatically.
 
-The complete history of public pull requests in third-party projects is discovered and reconciled automatically, without relying on an editorial repository list.
+**[Browse my open-source contributions →](docs/open-source-contributions.en.md)**
 
-**[Browse the complete open-source contributions catalog →](docs/open-source-contributions.en.md)**
-
-**[Track contributions and work in progress →](https://github.com/users/rodri-oliveira-dev/projects/1/views/1)**  
-I use this GitHub Project to track open-source issues, contributions, and initiatives I am working on, evaluating, or have worked on previously.
+**[Track issues and work in progress →](https://github.com/users/rodri-oliveira-dev/projects/1/views/1)**
 
 ---
 
-## How I think about architecture
+## How I work
 
-A few principles guide my work:
-
-- **Start with the problem, not the pattern.**
-- **Treat constraints as part of the design.**
-- **Make decisions and trade-offs explicit.**
-- **Design for failure and operation from the start.**
-- **Prefer guardrails over bureaucracy.**
-- **Keep architecture close enough to the code to validate decisions.**
-- **Automate standards when the automation creates useful feedback for teams.**
-
-These principles also shape my [professional portfolio](https://rodri-oliveira-dev.github.io/), where I go deeper into software architecture, distributed systems, cloud, DDD, and engineering practice.
+- **Understand the context.** Before proposing a solution, I look at the problem, dependencies, and operational constraints.
+- **Discuss options with the team.** I weigh the cost of change, maintainability, performance, and security instead of choosing a pattern by default.
+- **Document decisions that matter.** I use ADRs and other documentation to explain why an option was chosen and what trade-offs it involves.
+- **Stay close to implementation.** Tests, observability, and automation help check architectural assumptions and revisit decisions when needed.
 
 ---
 
-## Technical content
+## Writing and technical content
 
-I write about software architecture, Domain-Driven Design, distributed systems, backend engineering, software quality, cloud, engineering governance, and technical decision-making.
+I write about software architecture, DDD, and .NET development, focusing on the decisions and problems encountered during implementation.
 
-- **[DEV.to](https://dev.to/rodri-oliveira-dev)** — articles on software architecture, Domain-Driven Design, distributed systems, backend engineering, software quality, and the trade-offs behind technical decisions;
-- **[NuGet](https://www.nuget.org/profiles/rodri-oliveira-dev)** — published .NET libraries, tools, and templates;
-- **[Portfolio](https://rodri-oliveira-dev.github.io/)** — a broader view of my professional work;
-- **[LinkedIn](https://www.linkedin.com/in/rodri-oliveira-dev)** — career history and professional presence.
+- **[DEV.to](https://dev.to/rodri-oliveira-dev)** — articles on software architecture and engineering.
 
 ---
 
