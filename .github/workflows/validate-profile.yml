@@ -42,6 +42,12 @@ jobs:
             --root-dir "$(pwd)"
             --verbose
             --no-progress
+            # Reduce burst traffic against GitHub web routes to avoid transient 504s.
+            --max-concurrency 12
+            # Retry short-lived gateway failures; continue failing on broken links.
+            --max-retries 6
+            --retry-wait-time 4
+            --timeout 25
             --exclude 'https://(www\.)?linkedin\.com/'
             './**/*.md'
           fail: true
