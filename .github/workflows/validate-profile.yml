@@ -38,10 +38,16 @@ jobs:
       - name: Validate links
         uses: lycheeverse/lychee-action@v2
         with:
+          # GitHub HTML pages sometimes return transient 504s to link checkers.
+          # Bound request bursts and retry; persistent invalid links still fail CI.
           args: >-
             --root-dir "$(pwd)"
             --verbose
             --no-progress
+            --max-concurrency 12
+            --max-retries 6
+            --retry-wait-time 4
+            --timeout 25
             --exclude 'https://(www\.)?linkedin\.com/'
             './**/*.md'
           fail: true
