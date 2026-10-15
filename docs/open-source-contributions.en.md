@@ -5,22 +5,22 @@ This catalog lists public pull requests I opened in third-party projects. Titles
 ## General indicators
 
 - **External repositories:** 17
-- **PRs found:** 31
-- **Merged PRs:** 23
+- **PRs found:** 32
+- **Merged PRs:** 24
 - **Open PRs:** 7
 - **PRs closed without merge:** 1
-- **Last successful synchronization:** 2026-10-11
+- **Last successful synchronization:** 2026-10-15
 
 _The date above is the synchronization that produced the current published version; queries with no factual changes create no commit._
 
 ## Project index
 
 <!-- cspell:disable -->
-- [likec4/likec4](#repository-6c696b6563342f6c696b656334)
+- [Hitmasu/OpenCNPJ](#repository-6869746d6173752f6f70656e636e706a)
 - [architecture-decision-record/architecture-decision-record](#repository-6172636869746563747572652d6465636973696f6e2d7265636f72642f6172636869746563747572652d6465636973696f6e2d7265636f7264)
+- [likec4/likec4](#repository-6c696b6563342f6c696b656334)
 - [ThreeMammals/Ocelot](#repository-74687265656d616d6d616c732f6f63656c6f74)
 - [guibranco/CrispyWaffle](#repository-6775696272616e636f2f637269737079776166666c65)
-- [Hitmasu/OpenCNPJ](#repository-6869746d6173752f6f70656e636e706a)
 - [thangchung/awesome-dotnet-core](#repository-7468616e676368756e672f617765736f6d652d646f746e65742d636f7265)
 - [ddd-crew/eventstorming-glossary-cheat-sheet](#repository-6464642d637265772f6576656e7473746f726d696e672d676c6f73736172792d63686561742d7368656574)
 - [ddd-crew/ddd-starter-modelling-process](#repository-6464642d637265772f6464642d737461727465722d6d6f64656c6c696e672d70726f63657373)
@@ -35,6 +35,32 @@ _The date above is the synchronization that produced the current published versi
 - [ddd-crew/welcome-to-ddd](#repository-6464642d637265772f77656c636f6d652d746f2d646464)
 
 ## Contributions by repository
+
+<a id="repository-6869746d6173752f6f70656e636e706a"></a>
+
+### [Hitmasu/OpenCNPJ](https://github.com/Hitmasu/OpenCNPJ)
+
+**Total:** 7 · **Merged PRs:** 7 · **Open PRs:** 0 · **PRs closed without merge:** 0
+
+| Pull request | Status | Opened | Merged |
+| --- | --- | --- | --- |
+| [#82](https://github.com/Hitmasu/OpenCNPJ/pull/82) — fix: adiciona timeout e cancelamento às execuções do rclone | Merged | 2026-10-14 | 2026-10-15 |
+| [#78](https://github.com/Hitmasu/OpenCNPJ/pull/78) — feat: adicionar data de atualização aos dados da Receita | Merged | 2026-10-06 | 2026-10-06 |
+| [#77](https://github.com/Hitmasu/OpenCNPJ/pull/77) — fix: retoma downloads interrompidos da Receita | Merged | 2026-10-03 | 2026-10-03 |
+| [#76](https://github.com/Hitmasu/OpenCNPJ/pull/76) — feat: expõe código da natureza jurídica na API e no BigQuery | Merged | 2026-09-30 | 2026-10-01 |
+| [#75](https://github.com/Hitmasu/OpenCNPJ/pull/75) — security: protege downloads externos com limites e timeout | Merged | 2026-09-06 | 2026-09-29 |
+| [#74](https://github.com/Hitmasu/OpenCNPJ/pull/74) — \`perf: otimiza validação pós-upload do rclone\` | Merged | 2026-08-30 | 2026-09-03 |
+| [#71](https://github.com/Hitmasu/OpenCNPJ/pull/71) — feat: improve rclone configuration and config documentation | Merged | 2026-08-28 | 2026-08-30 |
+
+<a id="repository-6172636869746563747572652d6465636973696f6e2d7265636f72642f6172636869746563747572652d6465636973696f6e2d7265636f7264"></a>
+
+### [architecture-decision-record/architecture-decision-record](https://github.com/architecture-decision-record/architecture-decision-record)
+
+**Total:** 1 · **Merged PRs:** 0 · **Open PRs:** 1 · **PRs closed without merge:** 0
+
+| Pull request | Status | Opened | Merged |
+| --- | --- | --- | --- |
+| [#115](https://github.com/architecture-decision-record/architecture-decision-record/pull/115) — Add Brazilian Portuguese translation | Open | 2026-08-11 | — |
 
 <a id="repository-6c696b6563342f6c696b656334"></a>
 
@@ -51,16 +77,6 @@ _The date above is the synchronization that produced the current published versi
 | [#3262](https://github.com/likec4/likec4/pull/3262) — docs: add Brazilian Portuguese DSL views documentation | Merged | 2026-09-17 | 2026-09-21 |
 | [#3236](https://github.com/likec4/likec4/pull/3236) — docs: expand Brazilian Portuguese guides and DSL documentation | Merged | 2026-09-08 | 2026-09-10 |
 | [#3179](https://github.com/likec4/likec4/pull/3179) — docs: add Brazilian Portuguese README, i18n, and tutorial | Merged | 2026-08-07 | 2026-09-08 |
-
-<a id="repository-6172636869746563747572652d6465636973696f6e2d7265636f72642f6172636869746563747572652d6465636973696f6e2d7265636f7264"></a>
-
-### [architecture-decision-record/architecture-decision-record](https://github.com/architecture-decision-record/architecture-decision-record)
-
-**Total:** 1 · **Merged PRs:** 0 · **Open PRs:** 1 · **PRs closed without merge:** 0
-
-| Pull request | Status | Opened | Merged |
-| --- | --- | --- | --- |
-| [#115](https://github.com/architecture-decision-record/architecture-decision-record/pull/115) — Add Brazilian Portuguese translation | Open | 2026-08-11 | — |
 
 <a id="repository-74687265656d616d6d616c732f6f63656c6f74"></a>
 
@@ -83,21 +99,6 @@ _The date above is the synchronization that produced the current published versi
 | --- | --- | --- | --- |
 | [#981](https://github.com/guibranco/CrispyWaffle/pull/981) — Add TOML serializer support +semver: minor | Open | 2026-08-16 | — |
 | [#980](https://github.com/guibranco/CrispyWaffle/pull/980) — Add YAML serializer support +semver: minor | Open | 2026-08-15 | — |
-
-<a id="repository-6869746d6173752f6f70656e636e706a"></a>
-
-### [Hitmasu/OpenCNPJ](https://github.com/Hitmasu/OpenCNPJ)
-
-**Total:** 6 · **Merged PRs:** 6 · **Open PRs:** 0 · **PRs closed without merge:** 0
-
-| Pull request | Status | Opened | Merged |
-| --- | --- | --- | --- |
-| [#78](https://github.com/Hitmasu/OpenCNPJ/pull/78) — feat: adicionar data de atualização aos dados da Receita | Merged | 2026-10-06 | 2026-10-06 |
-| [#77](https://github.com/Hitmasu/OpenCNPJ/pull/77) — fix: retoma downloads interrompidos da Receita | Merged | 2026-10-03 | 2026-10-03 |
-| [#76](https://github.com/Hitmasu/OpenCNPJ/pull/76) — feat: expõe código da natureza jurídica na API e no BigQuery | Merged | 2026-09-30 | 2026-10-01 |
-| [#75](https://github.com/Hitmasu/OpenCNPJ/pull/75) — security: protege downloads externos com limites e timeout | Merged | 2026-09-06 | 2026-09-29 |
-| [#74](https://github.com/Hitmasu/OpenCNPJ/pull/74) — \`perf: otimiza validação pós-upload do rclone\` | Merged | 2026-08-30 | 2026-09-03 |
-| [#71](https://github.com/Hitmasu/OpenCNPJ/pull/71) — feat: improve rclone configuration and config documentation | Merged | 2026-08-28 | 2026-08-30 |
 
 <a id="repository-7468616e676368756e672f617765736f6d652d646f746e65742d636f7265"></a>
 
