@@ -58,7 +58,7 @@ _A data acima corresponde à sincronização que produziu a versão publicada at
 | [ddd-crew/aggregate-design-canvas](#repository-6464642d637265772f6167677265676174652d64657369676e2d63616e766173) | [ddd-crew/domain-message-flow-modelling](#repository-6464642d637265772f646f6d61696e2d6d6573736167652d666c6f772d6d6f64656c6c696e67) |
 | [ddd-crew/core-domain-charts](#repository-6464642d637265772f636f72652d646f6d61696e2d636861727473) | [StefanTheCode/dotnet\_interview\_questions](#repository-73746566616e746865636f64652f646f746e65745f696e746572766965775f7175657374696f6e73) |
 | [donnemartin/system-design-primer](#repository-646f6e6e656d617274696e2f73797374656d2d64657369676e2d7072696d6572) | [egoughnour/complexity-hints](#repository-65676f7567686e6f75722f636f6d706c65786974792d68696e7473) |
-| [ddd-crew/welcome-to-ddd](#repository-6464642d637265772f77656c636f6d652d746f2d646464) |  |
+| [ddd-crew/welcome-to-ddd](#repository-6464642d637265772f77656c636f6d652d746f2d646464) | &nbsp; |
 
 <a id="contribution-history"></a>
 
