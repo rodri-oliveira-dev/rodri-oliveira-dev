@@ -2,7 +2,11 @@
 
 This catalog lists public pull requests I opened in third-party projects. Titles remain exactly as provided by GitHub, while statuses are reconciled automatically.
 
-[Featured projects](#featured-projects) · [Recent activity](#recent-activity) · [Project index](#project-index) · [Contributions by repository](#contribution-history)
+- 🌟 [Featured projects](#featured-projects)
+- 🕒 [Recent activity](#recent-activity)
+- 📚 [Project index](#project-index)
+- 📂 [Contributions by repository](#contribution-history)
+- 🛠️ [Track issues and work in progress](https://github.com/users/rodri-oliveira-dev/projects/1/views/1)
 
 ## General indicators
 
