@@ -2,7 +2,7 @@
   "schema_version": 2,
   "profile": "rodri-oliveira-dev",
   "scope": "All public PRs authored by this profile in repositories owned by others",
-  "last_successful_sync": "2026-10-15T14:05:09Z",
+  "last_successful_sync": "2026-10-16T13:53:29Z",
   "totals": {
     "repositories": 17,
     "pull_requests": 32,
@@ -11,6 +11,29 @@
     "closed_unmerged": 1
   },
   "projects": [
+    {
+      "repository": "thangchung/awesome-dotnet-core",
+      "url": "https://github.com/thangchung/awesome-dotnet-core",
+      "activity_at": "2026-10-15T18:32:35Z",
+      "pull_requests": [
+        {
+          "id": 5636881936,
+          "number": 957,
+          "url": "https://github.com/thangchung/awesome-dotnet-core/pull/957",
+          "title": "Update Dapper-FluentMap maintained repository",
+          "status": "open",
+          "created_at": "2026-09-29T20:51:42Z",
+          "updated_at": "2026-10-15T18:32:35Z",
+          "merged_at": null
+        }
+      ],
+      "totals": {
+        "pull_requests": 1,
+        "merged": 0,
+        "open": 1,
+        "closed_unmerged": 0
+      }
+    },
     {
       "repository": "Hitmasu/OpenCNPJ",
       "url": "https://github.com/Hitmasu/OpenCNPJ",
@@ -263,29 +286,6 @@
         "pull_requests": 2,
         "merged": 0,
         "open": 2,
-        "closed_unmerged": 0
-      }
-    },
-    {
-      "repository": "thangchung/awesome-dotnet-core",
-      "url": "https://github.com/thangchung/awesome-dotnet-core",
-      "activity_at": "2026-09-29T20:53:38Z",
-      "pull_requests": [
-        {
-          "id": 5636881936,
-          "number": 957,
-          "url": "https://github.com/thangchung/awesome-dotnet-core/pull/957",
-          "title": "Update Dapper-FluentMap maintained repository",
-          "status": "open",
-          "created_at": "2026-09-29T20:51:42Z",
-          "updated_at": "2026-09-29T20:53:38Z",
-          "merged_at": null
-        }
-      ],
-      "totals": {
-        "pull_requests": 1,
-        "merged": 0,
-        "open": 1,
         "closed_unmerged": 0
       }
     },
