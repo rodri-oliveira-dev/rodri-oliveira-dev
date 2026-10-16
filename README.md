@@ -50,7 +50,6 @@ Também contribuo para projetos de terceiros. Mantenho um catálogo dos Pull Req
 
 **[Ver minhas contribuições open source →](docs/open-source-contributions.md)**
 
-
 ---
 
 ## Como trabalho
