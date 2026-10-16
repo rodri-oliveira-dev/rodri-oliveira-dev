@@ -9,19 +9,19 @@ This catalog lists public pull requests I opened in third-party projects. Titles
 - **Merged PRs:** 24
 - **Open PRs:** 7
 - **PRs closed without merge:** 1
-- **Last successful synchronization:** 2026-10-15
+- **Last successful synchronization:** 2026-10-16
 
 _The date above is the synchronization that produced the current published version; queries with no factual changes create no commit._
 
 ## Project index
 
 <!-- cspell:disable -->
+- [thangchung/awesome-dotnet-core](#repository-7468616e676368756e672f617765736f6d652d646f746e65742d636f7265)
 - [Hitmasu/OpenCNPJ](#repository-6869746d6173752f6f70656e636e706a)
 - [architecture-decision-record/architecture-decision-record](#repository-6172636869746563747572652d6465636973696f6e2d7265636f72642f6172636869746563747572652d6465636973696f6e2d7265636f7264)
 - [likec4/likec4](#repository-6c696b6563342f6c696b656334)
 - [ThreeMammals/Ocelot](#repository-74687265656d616d6d616c732f6f63656c6f74)
 - [guibranco/CrispyWaffle](#repository-6775696272616e636f2f637269737079776166666c65)
-- [thangchung/awesome-dotnet-core](#repository-7468616e676368756e672f617765736f6d652d646f746e65742d636f7265)
 - [ddd-crew/eventstorming-glossary-cheat-sheet](#repository-6464642d637265772f6576656e7473746f726d696e672d676c6f73736172792d63686561742d7368656574)
 - [ddd-crew/ddd-starter-modelling-process](#repository-6464642d637265772f6464642d737461727465722d6d6f64656c6c696e672d70726f63657373)
 - [ddd-crew/bounded-context-canvas](#repository-6464642d637265772f626f756e6465642d636f6e746578742d63616e766173)
@@ -35,6 +35,16 @@ _The date above is the synchronization that produced the current published versi
 - [ddd-crew/welcome-to-ddd](#repository-6464642d637265772f77656c636f6d652d746f2d646464)
 
 ## Contributions by repository
+
+<a id="repository-7468616e676368756e672f617765736f6d652d646f746e65742d636f7265"></a>
+
+### [thangchung/awesome-dotnet-core](https://github.com/thangchung/awesome-dotnet-core)
+
+**Total:** 1 · **Merged PRs:** 0 · **Open PRs:** 1 · **PRs closed without merge:** 0
+
+| Pull request | Status | Opened | Merged |
+| --- | --- | --- | --- |
+| [#957](https://github.com/thangchung/awesome-dotnet-core/pull/957) — Update Dapper-FluentMap maintained repository | Open | 2026-09-29 | — |
 
 <a id="repository-6869746d6173752f6f70656e636e706a"></a>
 
@@ -99,16 +109,6 @@ _The date above is the synchronization that produced the current published versi
 | --- | --- | --- | --- |
 | [#981](https://github.com/guibranco/CrispyWaffle/pull/981) — Add TOML serializer support +semver: minor | Open | 2026-08-16 | — |
 | [#980](https://github.com/guibranco/CrispyWaffle/pull/980) — Add YAML serializer support +semver: minor | Open | 2026-08-15 | — |
-
-<a id="repository-7468616e676368756e672f617765736f6d652d646f746e65742d636f7265"></a>
-
-### [thangchung/awesome-dotnet-core](https://github.com/thangchung/awesome-dotnet-core)
-
-**Total:** 1 · **Merged PRs:** 0 · **Open PRs:** 1 · **PRs closed without merge:** 0
-
-| Pull request | Status | Opened | Merged |
-| --- | --- | --- | --- |
-| [#957](https://github.com/thangchung/awesome-dotnet-core/pull/957) — Update Dapper-FluentMap maintained repository | Open | 2026-09-29 | — |
 
 <a id="repository-6464642d637265772f6576656e7473746f726d696e672d676c6f73736172792d63686561742d7368656574"></a>
 
