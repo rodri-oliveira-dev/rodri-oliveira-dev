@@ -327,7 +327,7 @@ def render_catalog(snapshot: dict, language: str) -> str:
                 for project in pair
             ]
             if len(cells) == 1:
-                cells.append("")
+                cells.append("&nbsp;")
             lines.append("| " + " | ".join(cells) + " |")
         lines.append("")
     else:
