@@ -4,7 +4,7 @@ from pathlib import Path
 from unittest.mock import patch
 
 from scripts.render_external_contributions import (
-    RenderError, _anchor, render_catalog, validate_snapshot, write_updates,
+    RenderError, _anchor, load_snapshot, render_catalog, validate_snapshot, write_updates,
 )
 
 
@@ -167,6 +167,15 @@ class RendererTests(unittest.TestCase):
                 self.assertIn("**0%**", rendered)
                 self.assertIn("▱" * 20, rendered)
                 self.assertNotIn("<details>", rendered)
+
+    def test_published_bilingual_catalogs_match_the_renderer(self):
+        data = load_snapshot(Path(".github/external-contributions-catalog.json"))
+        for language, path in (
+            ("pt", Path("docs/open-source-contributions.md")),
+            ("en", Path("docs/open-source-contributions.en.md")),
+        ):
+            with self.subTest(language=language):
+                self.assertEqual(path.read_text(encoding="utf-8"), render_catalog(data, language))
 
     def test_same_snapshot_renders_identically(self):
         data = snapshot()
