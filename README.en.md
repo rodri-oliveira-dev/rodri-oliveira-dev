@@ -50,7 +50,6 @@ I also contribute to projects I don't maintain. I keep a catalog of the public P
 
 **[Browse my open-source contributions →](docs/open-source-contributions.en.md)**
 
-
 ---
 
 ## How I work
