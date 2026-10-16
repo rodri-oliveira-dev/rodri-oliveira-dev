@@ -62,8 +62,11 @@ DASHBOARD_TEXT = {
         "counts": "Contribuições",
         "compact_prs": "PRs",
         "merged_short": "integrados",
+        "merged_one": "integrado",
         "open_short": "abertos",
+        "open_one": "aberto",
         "closed_short": "fechados sem integração",
+        "closed_one": "fechado sem integração",
     },
     "en": {
         "highlights": "Featured projects",
@@ -75,8 +78,11 @@ DASHBOARD_TEXT = {
         "counts": "Contributions",
         "compact_prs": "PRs",
         "merged_short": "merged",
+        "merged_one": "merged",
         "open_short": "open",
+        "open_one": "open",
         "closed_short": "closed without merge",
+        "closed_one": "closed without merge",
     },
 }
 
@@ -222,6 +228,15 @@ def _featured_projects(projects: list[dict]) -> list[dict]:
     return (selected + ranked)[:4]
 
 
+def _compact_status(value: int, language: str, key: str) -> str:
+    ui = DASHBOARD_TEXT[language]
+    return f"{value} {ui[key + ('_one' if value == 1 else '_short')]}"
+
+
+def _pr_count(value: int) -> str:
+    return f"{value} {'PR' if value == 1 else 'PRs'}"
+
+
 def _highlight_card(project: dict | None, language: str) -> tuple[str, str, str]:
     if project is None:
         return ("", "", "")
@@ -230,7 +245,7 @@ def _highlight_card(project: dict | None, language: str) -> tuple[str, str, str]
     return (
         f"**[{_escape(repository)}]({project['url']})**",
         description,
-        f"**{counts['pull_requests']} PRs** · {counts['merged']} {DASHBOARD_TEXT[language]['merged_short']}",
+        f"**{_pr_count(counts['pull_requests'])}** · {_compact_status(counts['merged'], language, 'merged')}",
     )
 
 
@@ -255,7 +270,9 @@ def render_catalog(snapshot: dict, language: str) -> str:
         f"| **{total}** | **{merged}** | **{totals['open']}** | **{totals['repositories']}** |",
         "",
         f"**{percentage}%** {ui['merge_rate']} · {meter} · "
-        f"**{totals['closed_unmerged']}** {labels['closed_unmerged']}",
+        f"**{totals['closed_unmerged']}** "
+        f"{'PR' if totals['closed_unmerged'] == 1 else 'PRs'} "
+        f"{ui['closed_one'] if totals['closed_unmerged'] == 1 else ui['closed_short']}",
         "",
         f"**{labels['sync']}:** {_date(snapshot['last_successful_sync'], language)}",
         "", f"_{labels['note']}_", "", "<!-- cspell:disable -->", "",
@@ -322,11 +339,11 @@ def render_catalog(snapshot: dict, language: str) -> str:
         lines.extend([ui["empty"], ""])
     for project in projects:
         repository, counts = project["repository"], project["totals"]
-        summary = f"{counts['pull_requests']} {ui['compact_prs']} · {counts['merged']} {ui['merged_short']}"
-        if counts["open"]:
-            summary += f" · {counts['open']} {ui['open_short']}"
-        if counts["closed_unmerged"]:
-            summary += f" · {counts['closed_unmerged']} {labels['closed_unmerged']}"
+        summary = _pr_count(counts["pull_requests"])
+        for status in ("merged", "open", "closed_unmerged"):
+            if counts[status]:
+                key = "closed" if status == "closed_unmerged" else status
+                summary += f" · {_compact_status(counts[status], language, key)}"
         lines.extend([
             f'<a id="{_anchor(repository)}"></a>', "",
             "<details>",
