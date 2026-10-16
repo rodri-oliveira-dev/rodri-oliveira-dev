@@ -109,6 +109,65 @@ class RendererTests(unittest.TestCase):
             self.assertEqual(first.read_text(encoding="utf-8"), "old pt")
             self.assertEqual(second.read_text(encoding="utf-8"), "old en")
 
+
+    def test_dashboard_sections_navigation_and_collapsible_history(self):
+        data = snapshot("Document a feature")
+        for language, titles in (
+            ("pt", ("Projetos em destaque", "Atividade recente", "Índice de projetos", "Contribuições por repositório")),
+            ("en", ("Featured projects", "Recent activity", "Project index", "Contributions by repository")),
+        ):
+            with self.subTest(language=language):
+                rendered = render_catalog(data, language)
+                for title in titles:
+                    self.assertIn(f"## {title}", rendered)
+                for section in ("featured-projects", "recent-activity", "project-index", "contribution-history"):
+                    self.assertIn(f'<a id="{section}"></a>', rendered)
+                    self.assertIn(f"(#{section})", rendered)
+                self.assertEqual(rendered.count("<details>"), 1)
+                self.assertEqual(rendered.count("</details>"), 1)
+                self.assertIn("<summary><strong>acme/widget</strong> · 1 PR", rendered)
+                self.assertIn(f'<a id="{_anchor("acme/widget")}"></a>', rendered)
+                self.assertIn("**100%**", rendered)
+                self.assertIn("▰" * 20, rendered)
+                self.assertNotIn("1 PRs", rendered)
+
+    def test_featured_projects_come_from_snapshot_only(self):
+        rendered = render_catalog(snapshot(), "en")
+        featured = rendered.split("## Featured projects", 1)[1].split("## Recent activity", 1)[0]
+        self.assertIn("**[acme/widget](https://github.com/acme/widget)**", featured)
+        self.assertNotIn("likec4/likec4", featured)
+        self.assertIn("**1 PR** · 1 merged", featured)
+
+    def test_recent_activity_uses_merge_timestamp_not_display_order(self):
+        data = snapshot("First merged change")
+        project = data["projects"][0]
+        project["pull_requests"].append({
+            "id": 11, "number": 6, "url": "https://github.com/acme/widget/pull/6",
+            "title": "More recently merged change", "status": "merged",
+            "created_at": "2025-12-31T10:00:00Z", "updated_at": "2026-01-03T10:00:00Z",
+            "merged_at": "2026-01-03T09:00:00Z",
+        })
+        project["totals"].update(pull_requests=2, merged=2)
+        data["totals"].update(pull_requests=2, merged=2)
+        rendered = render_catalog(data, "en")
+        recent = rendered.split("## Recent activity", 1)[1].split("## Project index", 1)[0]
+        self.assertLess(recent.index("/pull/6"), recent.index("/pull/7"))
+        self.assertEqual(recent.count("https://github.com/acme/widget/pull/"), 2)
+
+    def test_empty_catalog_does_not_divide_by_zero_or_render_details(self):
+        data = snapshot()
+        data["projects"] = []
+        data["totals"] = {
+            "repositories": 0, "pull_requests": 0, "merged": 0,
+            "open": 0, "closed_unmerged": 0,
+        }
+        for language in ("pt", "en"):
+            with self.subTest(language=language):
+                rendered = render_catalog(data, language)
+                self.assertIn("**0%**", rendered)
+                self.assertIn("▱" * 20, rendered)
+                self.assertNotIn("<details>", rendered)
+
     def test_same_snapshot_renders_identically(self):
         data = snapshot()
         self.assertEqual(render_catalog(data, "pt"), render_catalog(data, "pt"))
