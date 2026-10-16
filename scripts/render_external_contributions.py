@@ -51,6 +51,55 @@ TEXT = {
 }
 
 
+DASHBOARD_TEXT = {
+    "pt": {
+        "highlights": "Projetos em destaque",
+        "recent": "Atividade recente",
+        "merge_rate": "dos PRs integrados",
+        "recent_repo": "Repositório",
+        "empty": "Nenhuma contribuição encontrada.",
+        "project_link": "Ver repositório",
+        "counts": "Contribuições",
+        "compact_prs": "PRs",
+    },
+    "en": {
+        "highlights": "Featured projects",
+        "recent": "Recent activity",
+        "merge_rate": "of PRs merged",
+        "recent_repo": "Repository",
+        "empty": "No contributions found.",
+        "project_link": "View repository",
+        "counts": "Contributions",
+        "compact_prs": "PRs",
+    },
+}
+
+FEATURED_ORDER = (
+    "likec4/likec4",
+    "hitmasu/opencnpj",
+    "threemammals/ocelot",
+    "guibranco/crispywaffle",
+)
+
+FEATURED_DESCRIPTIONS = {
+    "likec4/likec4": {
+        "pt": "Documentação e localização",
+        "en": "Documentation and localization",
+    },
+    "hitmasu/opencnpj": {
+        "pt": "Segurança, performance e APIs",
+        "en": "Security, performance and APIs",
+    },
+    "threemammals/ocelot": {
+        "pt": "API Gateway e testes",
+        "en": "API gateway and testing",
+    },
+    "guibranco/crispywaffle": {
+        "pt": "Serialização de dados",
+        "en": "Data serialization",
+    },
+}
+
 def _timestamp(value: object) -> datetime:
     if not isinstance(value, str) or not TIMESTAMP_PATTERN.fullmatch(value):
         raise RenderError("Snapshot contains an invalid UTC timestamp")
@@ -154,35 +203,145 @@ def _date(value: str, language: str) -> str:
     return _timestamp(value).strftime(TEXT[language]["date"])
 
 
+def _featured_projects(projects: list[dict]) -> list[dict]:
+    """Favor known projects, then fill any gaps with deterministic data-driven picks."""
+    available = {project["repository"].casefold(): project for project in projects}
+    selected = [available[name] for name in FEATURED_ORDER if name in available]
+    remaining = (project for project in projects if project["repository"].casefold() not in FEATURED_ORDER)
+    ranked = sorted(remaining, key=lambda project: (
+        -project["totals"]["pull_requests"],
+        -project["totals"]["merged"],
+        project["repository"].casefold(),
+    ))
+    return (selected + ranked)[:4]
+
+
+def _highlight_card(project: dict | None, language: str) -> tuple[str, str, str]:
+    if project is None:
+        return ("", "", "")
+    repository, counts = project["repository"], project["totals"]
+    description = FEATURED_DESCRIPTIONS.get(repository.casefold(), {}).get(language, "")
+    return (
+        f"**[{_escape(repository)}]({project['url']})**",
+        description,
+        f"**{counts['pull_requests']} PRs** · {counts['merged']} {TEXT[language]['merged'].lower()}",
+    )
+
+
 def render_catalog(snapshot: dict, language: str) -> str:
     validate_snapshot(snapshot)
-    labels = TEXT[language]
-    totals = snapshot["totals"]
-    lines = [f"# {labels['title']}", "", labels["intro"], "", f"## {labels['metrics']}", "",
-             f"- **{labels['repos']}:** {totals['repositories']}",
-             f"- **{labels['prs']}:** {totals['pull_requests']}",
-             f"- **{labels['merged']}:** {totals['merged']}",
-             f"- **{labels['open']}:** {totals['open']}",
-             f"- **{labels['closed_unmerged']}:** {totals['closed_unmerged']}",
-             f"- **{labels['sync']}:** {_date(snapshot['last_successful_sync'], language)}", "",
-             f"_{labels['note']}_", "", f"## {labels['projects']}", "",
-             "<!-- cspell:disable -->"]
-    for project in snapshot["projects"]:
-        repository = project["repository"]
-        lines.append(f"- [{_escape(repository)}](#{_anchor(repository)})")
-    lines.extend(["", f"## {labels['by_repo']}", ""])
-    for project in snapshot["projects"]:
+    labels, ui = TEXT[language], DASHBOARD_TEXT[language]
+    totals, projects = snapshot["totals"], snapshot["projects"]
+    total, merged = totals["pull_requests"], totals["merged"]
+    percentage = merged * 100 // total if total else 0
+    filled = (merged * 20 + total // 2) // total if total else 0
+    meter = chr(96) + "▰" * filled + "▱" * (20 - filled) + chr(96)
+
+    lines = [
+        f"# {labels['title']}", "", labels["intro"], "",
+        f"[{ui['highlights']}](#featured-projects) · "
+        f"[{ui['recent']}](#recent-activity) · "
+        f"[{labels['projects']}](#project-index) · "
+        f"[{labels['by_repo']}](#contribution-history)",
+        "", f"## {labels['metrics']}", "",
+        f"| {labels['prs']} | {labels['merged']} | {labels['open']} | {labels['repos']} |",
+        "| :---: | :---: | :---: | :---: |",
+        f"| **{total}** | **{merged}** | **{totals['open']}** | **{totals['repositories']}** |",
+        "",
+        f"**{percentage}%** {ui['merge_rate']} · {meter} · "
+        f"**{totals['closed_unmerged']}** {labels['closed_unmerged'].lower()}",
+        "",
+        f"**{labels['sync']}:** {_date(snapshot['last_successful_sync'], language)}",
+        "", f"_{labels['note']}_", "", "<!-- cspell:disable -->", "",
+        '<a id="featured-projects"></a>', "",
+        f"## {ui['highlights']}", "",
+    ]
+
+    featured = _featured_projects(projects)
+    if not featured:
+        lines.extend([ui["empty"], ""])
+    for start in range(0, len(featured), 2):
+        pair = featured[start:start + 2]
+        cards = [_highlight_card(project, language) for project in pair]
+        if len(cards) == 1:
+            cards.append(_highlight_card(None, language))
+        lines.extend([
+            "| " + " | ".join(card[0] for card in cards) + " |",
+            "| --- | --- |",
+            "| " + " | ".join(card[1] for card in cards) + " |",
+            "| " + " | ".join(card[2] for card in cards) + " |",
+            "",
+        ])
+
+    lines.extend(['<a id="recent-activity"></a>', "", f"## {ui['recent']}", ""])
+    recent = [(project, pr) for project in projects for pr in project["pull_requests"]
+              if pr["status"] == "merged"]
+    recent.sort(key=lambda item: (
+        item[1]["merged_at"], item[0]["repository"].casefold(), item[1]["number"],
+    ), reverse=True)
+    if recent:
+        lines.extend([
+            f"| {ui['recent_repo']} | {labels['pr_label']} | {labels['merged_on']} |",
+            "| --- | --- | --- |",
+        ])
+        for project, pr in recent[:5]:
+            lines.append(
+                f"| [{_escape(project['repository'])}]({project['url']}) | "
+                f"[#{pr['number']}]({pr['url']}) — {_escape(pr['title'])} | "
+                f"{_date(pr['merged_at'], language)} |"
+            )
+        lines.append("")
+    else:
+        lines.extend([ui["empty"], ""])
+
+    lines.extend(['<a id="project-index"></a>', "", f"## {labels['projects']}", ""])
+    if projects:
+        lines.extend(["| | |", "| --- | --- |"])
+        for start in range(0, len(projects), 2):
+            pair = projects[start:start + 2]
+            cells = [
+                f"[{_escape(project['repository'])}](#{_anchor(project['repository'])})"
+                for project in pair
+            ]
+            if len(cells) == 1:
+                cells.append("")
+            lines.append("| " + " | ".join(cells) + " |")
+        lines.append("")
+    else:
+        lines.extend([ui["empty"], ""])
+
+    lines.extend(['<a id="contribution-history"></a>', "",
+                  f"## {labels['by_repo']}", ""])
+    if not projects:
+        lines.extend([ui["empty"], ""])
+    for project in projects:
         repository, counts = project["repository"], project["totals"]
-        lines.extend([f'<a id="{_anchor(repository)}"></a>', "",
-                      f"### [{_escape(repository)}]({project['url']})", "",
-                      f"**{labels['total']}:** {counts['pull_requests']} · **{labels['merged']}:** {counts['merged']} · **{labels['open']}:** {counts['open']} · **{labels['closed_unmerged']}:** {counts['closed_unmerged']}", ""])
-        lines.extend([f"| {labels['pr_label']} | {labels['status_label']} | {labels['opened']} | {labels['merged_on']} |",
-                      "| --- | --- | --- | --- |"])
+        summary = f"{counts['pull_requests']} {ui['compact_prs']} · {counts['merged']} {labels['merged'].lower()}"
+        if counts["open"]:
+            summary += f" · {counts['open']} {labels['open'].lower()}"
+        if counts["closed_unmerged"]:
+            summary += f" · {counts['closed_unmerged']} {labels['closed_unmerged'].lower()}"
+        lines.extend([
+            f'<a id="{_anchor(repository)}"></a>', "",
+            "<details>",
+            f"<summary><strong>{repository}</strong> · {summary}</summary>",
+            "",
+            f"[{ui['project_link']}]({project['url']})", "",
+            f"**{labels['total']}:** {counts['pull_requests']} · "
+            f"**{labels['merged']}:** {counts['merged']} · "
+            f"**{labels['open']}:** {counts['open']} · "
+            f"**{labels['closed_unmerged']}:** {counts['closed_unmerged']}", "",
+            f"| {labels['pr_label']} | {labels['status_label']} | {labels['opened']} | {labels['merged_on']} |",
+            "| --- | --- | --- | --- |",
+        ])
         for pr in project["pull_requests"]:
             state = labels["states"][pr["status"]]
             merged_date = _date(pr["merged_at"], language) if pr["merged_at"] else "—"
-            lines.append(f"| [#{pr['number']}]({pr['url']}) — {_escape(pr['title'])} | {state} | {_date(pr['created_at'], language)} | {merged_date} |")
-        lines.append("")
+            lines.append(
+                f"| [#{pr['number']}]({pr['url']}) — {_escape(pr['title'])} | "
+                f"{state} | {_date(pr['created_at'], language)} | {merged_date} |"
+            )
+        lines.extend(["", "</details>", ""])
     lines.append("<!-- cspell:enable -->")
     return "\n".join(lines).rstrip() + "\n"
 
