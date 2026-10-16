@@ -61,6 +61,9 @@ DASHBOARD_TEXT = {
         "project_link": "Ver repositório",
         "counts": "Contribuições",
         "compact_prs": "PRs",
+        "merged_short": "integrados",
+        "open_short": "abertos",
+        "closed_short": "fechados sem integração",
     },
     "en": {
         "highlights": "Featured projects",
@@ -71,6 +74,9 @@ DASHBOARD_TEXT = {
         "project_link": "View repository",
         "counts": "Contributions",
         "compact_prs": "PRs",
+        "merged_short": "merged",
+        "open_short": "open",
+        "closed_short": "closed without merge",
     },
 }
 
@@ -224,7 +230,7 @@ def _highlight_card(project: dict | None, language: str) -> tuple[str, str, str]
     return (
         f"**[{_escape(repository)}]({project['url']})**",
         description,
-        f"**{counts['pull_requests']} PRs** · {counts['merged']} {TEXT[language]['merged'].lower()}",
+        f"**{counts['pull_requests']} PRs** · {counts['merged']} {DASHBOARD_TEXT[language]['merged_short']}",
     )
 
 
@@ -249,7 +255,7 @@ def render_catalog(snapshot: dict, language: str) -> str:
         f"| **{total}** | **{merged}** | **{totals['open']}** | **{totals['repositories']}** |",
         "",
         f"**{percentage}%** {ui['merge_rate']} · {meter} · "
-        f"**{totals['closed_unmerged']}** {labels['closed_unmerged'].lower()}",
+        f"**{totals['closed_unmerged']}** {labels['closed_unmerged']}",
         "",
         f"**{labels['sync']}:** {_date(snapshot['last_successful_sync'], language)}",
         "", f"_{labels['note']}_", "", "<!-- cspell:disable -->", "",
@@ -316,11 +322,11 @@ def render_catalog(snapshot: dict, language: str) -> str:
         lines.extend([ui["empty"], ""])
     for project in projects:
         repository, counts = project["repository"], project["totals"]
-        summary = f"{counts['pull_requests']} {ui['compact_prs']} · {counts['merged']} {labels['merged'].lower()}"
+        summary = f"{counts['pull_requests']} {ui['compact_prs']} · {counts['merged']} {ui['merged_short']}"
         if counts["open"]:
-            summary += f" · {counts['open']} {labels['open'].lower()}"
+            summary += f" · {counts['open']} {ui['open_short']}"
         if counts["closed_unmerged"]:
-            summary += f" · {counts['closed_unmerged']} {labels['closed_unmerged'].lower()}"
+            summary += f" · {counts['closed_unmerged']} {labels['closed_unmerged']}"
         lines.extend([
             f'<a id="{_anchor(repository)}"></a>', "",
             "<details>",
