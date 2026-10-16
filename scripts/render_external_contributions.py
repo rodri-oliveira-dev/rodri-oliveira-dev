@@ -54,6 +54,7 @@ TEXT = {
 DASHBOARD_TEXT = {
     "pt": {
         "highlights": "Projetos em destaque",
+        "work_in_progress": "Acompanhar issues e trabalho em andamento",
         "recent": "Atividade recente",
         "merge_rate": "dos PRs integrados",
         "recent_repo": "Repositório",
@@ -70,6 +71,7 @@ DASHBOARD_TEXT = {
     },
     "en": {
         "highlights": "Featured projects",
+        "work_in_progress": "Track issues and work in progress",
         "recent": "Recent activity",
         "merge_rate": "of PRs merged",
         "recent_repo": "Repository",
@@ -260,10 +262,11 @@ def render_catalog(snapshot: dict, language: str) -> str:
 
     lines = [
         f"# {labels['title']}", "", labels["intro"], "",
-        f"[{ui['highlights']}](#featured-projects) · "
-        f"[{ui['recent']}](#recent-activity) · "
-        f"[{labels['projects']}](#project-index) · "
-        f"[{labels['by_repo']}](#contribution-history)",
+        f"- 🌟 [{ui['highlights']}](#featured-projects)",
+        f"- 🕒 [{ui['recent']}](#recent-activity)",
+        f"- 📚 [{labels['projects']}](#project-index)",
+        f"- 📂 [{labels['by_repo']}](#contribution-history)",
+        f"- 🛠️ [{ui['work_in_progress']}](https://github.com/users/rodri-oliveira-dev/projects/1/views/1)",
         "", f"## {labels['metrics']}", "",
         f"| {labels['prs']} | {labels['merged']} | {labels['open']} | {labels['repos']} |",
         "| :---: | :---: | :---: | :---: |",
