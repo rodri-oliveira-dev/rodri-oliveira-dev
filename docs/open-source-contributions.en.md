@@ -10,7 +10,7 @@ This catalog lists public pull requests I opened in third-party projects. Titles
 | :---: | :---: | :---: | :---: |
 | **32** | **24** | **7** | **17** |
 
-**75%** of PRs merged · `▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▱▱▱▱▱` · **1** prs closed without merge
+**75%** of PRs merged · `▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▱▱▱▱▱` · **1** PRs closed without merge
 
 **Last successful synchronization:** 2026-10-16
 
@@ -25,12 +25,12 @@ _The date above is the synchronization that produced the current published versi
 | **[likec4/likec4](https://github.com/likec4/likec4)** | **[Hitmasu/OpenCNPJ](https://github.com/Hitmasu/OpenCNPJ)** |
 | --- | --- |
 | Documentation and localization | Security, performance and APIs |
-| **7 PRs** · 7 merged prs | **7 PRs** · 7 merged prs |
+| **7 PRs** · 7 merged | **7 PRs** · 7 merged |
 
 | **[ThreeMammals/Ocelot](https://github.com/ThreeMammals/Ocelot)** | **[guibranco/CrispyWaffle](https://github.com/guibranco/CrispyWaffle)** |
 | --- | --- |
 | API gateway and testing | Data serialization |
-| **2 PRs** · 1 merged prs | **2 PRs** · 0 merged prs |
+| **2 PRs** · 1 merged | **2 PRs** · 0 merged |
 
 <a id="recent-activity"></a>
 
@@ -67,7 +67,7 @@ _The date above is the synchronization that produced the current published versi
 <a id="repository-7468616e676368756e672f617765736f6d652d646f746e65742d636f7265"></a>
 
 <details>
-<summary><strong>thangchung/awesome-dotnet-core</strong> · 1 PRs · 0 merged prs · 1 open prs</summary>
+<summary><strong>thangchung/awesome-dotnet-core</strong> · 1 PRs · 0 merged · 1 open</summary>
 
 [View repository](https://github.com/thangchung/awesome-dotnet-core)
 
@@ -82,7 +82,7 @@ _The date above is the synchronization that produced the current published versi
 <a id="repository-6869746d6173752f6f70656e636e706a"></a>
 
 <details>
-<summary><strong>Hitmasu/OpenCNPJ</strong> · 7 PRs · 7 merged prs</summary>
+<summary><strong>Hitmasu/OpenCNPJ</strong> · 7 PRs · 7 merged</summary>
 
 [View repository](https://github.com/Hitmasu/OpenCNPJ)
 
@@ -103,7 +103,7 @@ _The date above is the synchronization that produced the current published versi
 <a id="repository-6172636869746563747572652d6465636973696f6e2d7265636f72642f6172636869746563747572652d6465636973696f6e2d7265636f7264"></a>
 
 <details>
-<summary><strong>architecture-decision-record/architecture-decision-record</strong> · 1 PRs · 0 merged prs · 1 open prs</summary>
+<summary><strong>architecture-decision-record/architecture-decision-record</strong> · 1 PRs · 0 merged · 1 open</summary>
 
 [View repository](https://github.com/architecture-decision-record/architecture-decision-record)
 
@@ -118,7 +118,7 @@ _The date above is the synchronization that produced the current published versi
 <a id="repository-6c696b6563342f6c696b656334"></a>
 
 <details>
-<summary><strong>likec4/likec4</strong> · 7 PRs · 7 merged prs</summary>
+<summary><strong>likec4/likec4</strong> · 7 PRs · 7 merged</summary>
 
 [View repository](https://github.com/likec4/likec4)
 
@@ -139,7 +139,7 @@ _The date above is the synchronization that produced the current published versi
 <a id="repository-74687265656d616d6d616c732f6f63656c6f74"></a>
 
 <details>
-<summary><strong>ThreeMammals/Ocelot</strong> · 2 PRs · 1 merged prs · 1 open prs</summary>
+<summary><strong>ThreeMammals/Ocelot</strong> · 2 PRs · 1 merged · 1 open</summary>
 
 [View repository](https://github.com/ThreeMammals/Ocelot)
 
@@ -155,7 +155,7 @@ _The date above is the synchronization that produced the current published versi
 <a id="repository-6775696272616e636f2f637269737079776166666c65"></a>
 
 <details>
-<summary><strong>guibranco/CrispyWaffle</strong> · 2 PRs · 0 merged prs · 2 open prs</summary>
+<summary><strong>guibranco/CrispyWaffle</strong> · 2 PRs · 0 merged · 2 open</summary>
 
 [View repository](https://github.com/guibranco/CrispyWaffle)
 
@@ -171,7 +171,7 @@ _The date above is the synchronization that produced the current published versi
 <a id="repository-6464642d637265772f6576656e7473746f726d696e672d676c6f73736172792d63686561742d7368656574"></a>
 
 <details>
-<summary><strong>ddd-crew/eventstorming-glossary-cheat-sheet</strong> · 1 PRs · 1 merged prs</summary>
+<summary><strong>ddd-crew/eventstorming-glossary-cheat-sheet</strong> · 1 PRs · 1 merged</summary>
 
 [View repository](https://github.com/ddd-crew/eventstorming-glossary-cheat-sheet)
 
@@ -186,7 +186,7 @@ _The date above is the synchronization that produced the current published versi
 <a id="repository-6464642d637265772f6464642d737461727465722d6d6f64656c6c696e672d70726f63657373"></a>
 
 <details>
-<summary><strong>ddd-crew/ddd-starter-modelling-process</strong> · 2 PRs · 2 merged prs</summary>
+<summary><strong>ddd-crew/ddd-starter-modelling-process</strong> · 2 PRs · 2 merged</summary>
 
 [View repository](https://github.com/ddd-crew/ddd-starter-modelling-process)
 
@@ -202,7 +202,7 @@ _The date above is the synchronization that produced the current published versi
 <a id="repository-6464642d637265772f626f756e6465642d636f6e746578742d63616e766173"></a>
 
 <details>
-<summary><strong>ddd-crew/bounded-context-canvas</strong> · 1 PRs · 1 merged prs</summary>
+<summary><strong>ddd-crew/bounded-context-canvas</strong> · 1 PRs · 1 merged</summary>
 
 [View repository](https://github.com/ddd-crew/bounded-context-canvas)
 
@@ -217,7 +217,7 @@ _The date above is the synchronization that produced the current published versi
 <a id="repository-6464642d637265772f636f6e746578742d6d617070696e67"></a>
 
 <details>
-<summary><strong>ddd-crew/context-mapping</strong> · 1 PRs · 1 merged prs</summary>
+<summary><strong>ddd-crew/context-mapping</strong> · 1 PRs · 1 merged</summary>
 
 [View repository](https://github.com/ddd-crew/context-mapping)
 
@@ -232,7 +232,7 @@ _The date above is the synchronization that produced the current published versi
 <a id="repository-6464642d637265772f6167677265676174652d64657369676e2d63616e766173"></a>
 
 <details>
-<summary><strong>ddd-crew/aggregate-design-canvas</strong> · 1 PRs · 1 merged prs</summary>
+<summary><strong>ddd-crew/aggregate-design-canvas</strong> · 1 PRs · 1 merged</summary>
 
 [View repository](https://github.com/ddd-crew/aggregate-design-canvas)
 
@@ -247,7 +247,7 @@ _The date above is the synchronization that produced the current published versi
 <a id="repository-6464642d637265772f646f6d61696e2d6d6573736167652d666c6f772d6d6f64656c6c696e67"></a>
 
 <details>
-<summary><strong>ddd-crew/domain-message-flow-modelling</strong> · 1 PRs · 1 merged prs</summary>
+<summary><strong>ddd-crew/domain-message-flow-modelling</strong> · 1 PRs · 1 merged</summary>
 
 [View repository](https://github.com/ddd-crew/domain-message-flow-modelling)
 
@@ -262,7 +262,7 @@ _The date above is the synchronization that produced the current published versi
 <a id="repository-6464642d637265772f636f72652d646f6d61696e2d636861727473"></a>
 
 <details>
-<summary><strong>ddd-crew/core-domain-charts</strong> · 1 PRs · 1 merged prs</summary>
+<summary><strong>ddd-crew/core-domain-charts</strong> · 1 PRs · 1 merged</summary>
 
 [View repository](https://github.com/ddd-crew/core-domain-charts)
 
@@ -277,7 +277,7 @@ _The date above is the synchronization that produced the current published versi
 <a id="repository-73746566616e746865636f64652f646f746e65745f696e746572766965775f7175657374696f6e73"></a>
 
 <details>
-<summary><strong>StefanTheCode/dotnet_interview_questions</strong> · 1 PRs · 0 merged prs · 1 open prs</summary>
+<summary><strong>StefanTheCode/dotnet_interview_questions</strong> · 1 PRs · 0 merged · 1 open</summary>
 
 [View repository](https://github.com/StefanTheCode/dotnet_interview_questions)
 
@@ -292,7 +292,7 @@ _The date above is the synchronization that produced the current published versi
 <a id="repository-646f6e6e656d617274696e2f73797374656d2d64657369676e2d7072696d6572"></a>
 
 <details>
-<summary><strong>donnemartin/system-design-primer</strong> · 1 PRs · 0 merged prs · 1 open prs</summary>
+<summary><strong>donnemartin/system-design-primer</strong> · 1 PRs · 0 merged · 1 open</summary>
 
 [View repository](https://github.com/donnemartin/system-design-primer)
 
@@ -307,7 +307,7 @@ _The date above is the synchronization that produced the current published versi
 <a id="repository-65676f7567686e6f75722f636f6d706c65786974792d68696e7473"></a>
 
 <details>
-<summary><strong>egoughnour/complexity-hints</strong> · 1 PRs · 0 merged prs · 1 prs closed without merge</summary>
+<summary><strong>egoughnour/complexity-hints</strong> · 1 PRs · 0 merged · 1 closed without merge</summary>
 
 [View repository](https://github.com/egoughnour/complexity-hints)
 
@@ -322,7 +322,7 @@ _The date above is the synchronization that produced the current published versi
 <a id="repository-6464642d637265772f77656c636f6d652d746f2d646464"></a>
 
 <details>
-<summary><strong>ddd-crew/welcome-to-ddd</strong> · 1 PRs · 1 merged prs</summary>
+<summary><strong>ddd-crew/welcome-to-ddd</strong> · 1 PRs · 1 merged</summary>
 
 [View repository](https://github.com/ddd-crew/welcome-to-ddd)
 
