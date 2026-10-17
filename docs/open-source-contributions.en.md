@@ -12,11 +12,11 @@ This catalog lists public pull requests I opened in third-party projects. Titles
 
 | PRs found | Merged PRs | Open PRs | External repositories |
 | :---: | :---: | :---: | :---: |
-| **32** | **24** | **7** | **17** |
+| **33** | **27** | **5** | **17** |
 
-**75%** of PRs merged · `▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▱▱▱▱▱` · **1** PR closed without merge
+**81%** of PRs merged · `▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▱▱▱▱` · **1** PR closed without merge
 
-**Last successful synchronization:** 2026-10-16
+**Last successful synchronization:** 2026-10-17
 
 _The date above is the synchronization that produced the current published version; queries with no factual changes create no commit._
 
@@ -29,12 +29,12 @@ _The date above is the synchronization that produced the current published versi
 | **[likec4/likec4](https://github.com/likec4/likec4)** | **[Hitmasu/OpenCNPJ](https://github.com/Hitmasu/OpenCNPJ)** |
 | --- | --- |
 | Documentation and localization | Security, performance and APIs |
-| **7 PRs** · 7 merged | **7 PRs** · 7 merged |
+| **8 PRs** · 8 merged | **7 PRs** · 7 merged |
 
 | **[ThreeMammals/Ocelot](https://github.com/ThreeMammals/Ocelot)** | **[guibranco/CrispyWaffle](https://github.com/guibranco/CrispyWaffle)** |
 | --- | --- |
 | API gateway and testing | Data serialization |
-| **2 PRs** · 1 merged | **2 PRs** · 0 merged |
+| **2 PRs** · 1 merged | **2 PRs** · 2 merged |
 
 <a id="recent-activity"></a>
 
@@ -42,11 +42,11 @@ _The date above is the synchronization that produced the current published versi
 
 | Repository | Pull request | Merged |
 | --- | --- | --- |
+| [likec4/likec4](https://github.com/likec4/likec4) | [#3379](https://github.com/likec4/likec4/pull/3379) — docs(pt-br): align translation with v1.60.0 features | 2026-10-16 |
+| [guibranco/CrispyWaffle](https://github.com/guibranco/CrispyWaffle) | [#981](https://github.com/guibranco/CrispyWaffle/pull/981) — Add TOML serializer support +semver: minor | 2026-10-16 |
+| [guibranco/CrispyWaffle](https://github.com/guibranco/CrispyWaffle) | [#980](https://github.com/guibranco/CrispyWaffle/pull/980) — Add YAML serializer support +semver: minor | 2026-10-16 |
 | [Hitmasu/OpenCNPJ](https://github.com/Hitmasu/OpenCNPJ) | [#82](https://github.com/Hitmasu/OpenCNPJ/pull/82) — fix: adiciona timeout e cancelamento às execuções do rclone | 2026-10-15 |
 | [likec4/likec4](https://github.com/likec4/likec4) | [#3316](https://github.com/likec4/likec4/pull/3316) — docs: complete Brazilian Portuguese docs coverage and landing pages | 2026-10-10 |
-| [likec4/likec4](https://github.com/likec4/likec4) | [#3309](https://github.com/likec4/likec4/pull/3309) — docs: add Brazilian Portuguese Tooling Core documentation | 2026-10-08 |
-| [likec4/likec4](https://github.com/likec4/likec4) | [#3277](https://github.com/likec4/likec4/pull/3277) — docs: add Brazilian Portuguese DSL deployment and extend documentation | 2026-10-08 |
-| [likec4/likec4](https://github.com/likec4/likec4) | [#3276](https://github.com/likec4/likec4/pull/3276) — docs: add Brazilian Portuguese DSL styling and config documentation | 2026-10-08 |
 
 <a id="project-index"></a>
 
@@ -54,9 +54,9 @@ _The date above is the synchronization that produced the current published versi
 
 | | |
 | --- | --- |
+| [likec4/likec4](#repository-6c696b6563342f6c696b656334) | [guibranco/CrispyWaffle](#repository-6775696272616e636f2f637269737079776166666c65) |
 | [thangchung/awesome-dotnet-core](#repository-7468616e676368756e672f617765736f6d652d646f746e65742d636f7265) | [Hitmasu/OpenCNPJ](#repository-6869746d6173752f6f70656e636e706a) |
-| [architecture-decision-record/architecture-decision-record](#repository-6172636869746563747572652d6465636973696f6e2d7265636f72642f6172636869746563747572652d6465636973696f6e2d7265636f7264) | [likec4/likec4](#repository-6c696b6563342f6c696b656334) |
-| [ThreeMammals/Ocelot](#repository-74687265656d616d6d616c732f6f63656c6f74) | [guibranco/CrispyWaffle](#repository-6775696272616e636f2f637269737079776166666c65) |
+| [architecture-decision-record/architecture-decision-record](#repository-6172636869746563747572652d6465636973696f6e2d7265636f72642f6172636869746563747572652d6465636973696f6e2d7265636f7264) | [ThreeMammals/Ocelot](#repository-74687265656d616d6d616c732f6f63656c6f74) |
 | [ddd-crew/eventstorming-glossary-cheat-sheet](#repository-6464642d637265772f6576656e7473746f726d696e672d676c6f73736172792d63686561742d7368656574) | [ddd-crew/ddd-starter-modelling-process](#repository-6464642d637265772f6464642d737461727465722d6d6f64656c6c696e672d70726f63657373) |
 | [ddd-crew/bounded-context-canvas](#repository-6464642d637265772f626f756e6465642d636f6e746578742d63616e766173) | [ddd-crew/context-mapping](#repository-6464642d637265772f636f6e746578742d6d617070696e67) |
 | [ddd-crew/aggregate-design-canvas](#repository-6464642d637265772f6167677265676174652d64657369676e2d63616e766173) | [ddd-crew/domain-message-flow-modelling](#repository-6464642d637265772f646f6d61696e2d6d6573736167652d666c6f772d6d6f64656c6c696e67) |
@@ -67,6 +67,44 @@ _The date above is the synchronization that produced the current published versi
 <a id="contribution-history"></a>
 
 ## Contributions by repository
+
+<a id="repository-6c696b6563342f6c696b656334"></a>
+
+<details>
+<summary><strong>likec4/likec4</strong> · 8 PRs · 8 merged</summary>
+
+[View repository](https://github.com/likec4/likec4)
+
+**Total:** 8 · **Merged PRs:** 8 · **Open PRs:** 0 · **PRs closed without merge:** 0
+
+| Pull request | Status | Opened | Merged |
+| --- | --- | --- | --- |
+| [#3379](https://github.com/likec4/likec4/pull/3379) — docs(pt-br): align translation with v1.60.0 features | Merged | 2026-10-16 | 2026-10-16 |
+| [#3316](https://github.com/likec4/likec4/pull/3316) — docs: complete Brazilian Portuguese docs coverage and landing pages | Merged | 2026-10-09 | 2026-10-10 |
+| [#3309](https://github.com/likec4/likec4/pull/3309) — docs: add Brazilian Portuguese Tooling Core documentation | Merged | 2026-10-08 | 2026-10-08 |
+| [#3277](https://github.com/likec4/likec4/pull/3277) — docs: add Brazilian Portuguese DSL deployment and extend documentation | Merged | 2026-09-22 | 2026-10-08 |
+| [#3276](https://github.com/likec4/likec4/pull/3276) — docs: add Brazilian Portuguese DSL styling and config documentation | Merged | 2026-09-22 | 2026-10-08 |
+| [#3262](https://github.com/likec4/likec4/pull/3262) — docs: add Brazilian Portuguese DSL views documentation | Merged | 2026-09-17 | 2026-09-21 |
+| [#3236](https://github.com/likec4/likec4/pull/3236) — docs: expand Brazilian Portuguese guides and DSL documentation | Merged | 2026-09-08 | 2026-09-10 |
+| [#3179](https://github.com/likec4/likec4/pull/3179) — docs: add Brazilian Portuguese README, i18n, and tutorial | Merged | 2026-08-07 | 2026-09-08 |
+
+</details>
+
+<a id="repository-6775696272616e636f2f637269737079776166666c65"></a>
+
+<details>
+<summary><strong>guibranco/CrispyWaffle</strong> · 2 PRs · 2 merged</summary>
+
+[View repository](https://github.com/guibranco/CrispyWaffle)
+
+**Total:** 2 · **Merged PRs:** 2 · **Open PRs:** 0 · **PRs closed without merge:** 0
+
+| Pull request | Status | Opened | Merged |
+| --- | --- | --- | --- |
+| [#981](https://github.com/guibranco/CrispyWaffle/pull/981) — Add TOML serializer support +semver: minor | Merged | 2026-08-16 | 2026-10-16 |
+| [#980](https://github.com/guibranco/CrispyWaffle/pull/980) — Add YAML serializer support +semver: minor | Merged | 2026-08-15 | 2026-10-16 |
+
+</details>
 
 <a id="repository-7468616e676368756e672f617765736f6d652d646f746e65742d636f7265"></a>
 
@@ -119,27 +157,6 @@ _The date above is the synchronization that produced the current published versi
 
 </details>
 
-<a id="repository-6c696b6563342f6c696b656334"></a>
-
-<details>
-<summary><strong>likec4/likec4</strong> · 7 PRs · 7 merged</summary>
-
-[View repository](https://github.com/likec4/likec4)
-
-**Total:** 7 · **Merged PRs:** 7 · **Open PRs:** 0 · **PRs closed without merge:** 0
-
-| Pull request | Status | Opened | Merged |
-| --- | --- | --- | --- |
-| [#3316](https://github.com/likec4/likec4/pull/3316) — docs: complete Brazilian Portuguese docs coverage and landing pages | Merged | 2026-10-09 | 2026-10-10 |
-| [#3309](https://github.com/likec4/likec4/pull/3309) — docs: add Brazilian Portuguese Tooling Core documentation | Merged | 2026-10-08 | 2026-10-08 |
-| [#3277](https://github.com/likec4/likec4/pull/3277) — docs: add Brazilian Portuguese DSL deployment and extend documentation | Merged | 2026-09-22 | 2026-10-08 |
-| [#3276](https://github.com/likec4/likec4/pull/3276) — docs: add Brazilian Portuguese DSL styling and config documentation | Merged | 2026-09-22 | 2026-10-08 |
-| [#3262](https://github.com/likec4/likec4/pull/3262) — docs: add Brazilian Portuguese DSL views documentation | Merged | 2026-09-17 | 2026-09-21 |
-| [#3236](https://github.com/likec4/likec4/pull/3236) — docs: expand Brazilian Portuguese guides and DSL documentation | Merged | 2026-09-08 | 2026-09-10 |
-| [#3179](https://github.com/likec4/likec4/pull/3179) — docs: add Brazilian Portuguese README, i18n, and tutorial | Merged | 2026-08-07 | 2026-09-08 |
-
-</details>
-
 <a id="repository-74687265656d616d6d616c732f6f63656c6f74"></a>
 
 <details>
@@ -153,22 +170,6 @@ _The date above is the synchronization that produced the current published versi
 | --- | --- | --- | --- |
 | [#2421](https://github.com/ThreeMammals/Ocelot/pull/2421) — test: cover multipart/form-data rerouting for #714 | Open | 2026-08-31 | — |
 | [#2420](https://github.com/ThreeMammals/Ocelot/pull/2420) — #1687 Return 504 Gateway Timeout for downstream request timeouts according to RFC 9110 | Merged | 2026-08-29 | 2026-08-31 |
-
-</details>
-
-<a id="repository-6775696272616e636f2f637269737079776166666c65"></a>
-
-<details>
-<summary><strong>guibranco/CrispyWaffle</strong> · 2 PRs · 2 open</summary>
-
-[View repository](https://github.com/guibranco/CrispyWaffle)
-
-**Total:** 2 · **Merged PRs:** 0 · **Open PRs:** 2 · **PRs closed without merge:** 0
-
-| Pull request | Status | Opened | Merged |
-| --- | --- | --- | --- |
-| [#981](https://github.com/guibranco/CrispyWaffle/pull/981) — Add TOML serializer support +semver: minor | Open | 2026-08-16 | — |
-| [#980](https://github.com/guibranco/CrispyWaffle/pull/980) — Add YAML serializer support +semver: minor | Open | 2026-08-15 | — |
 
 </details>
 
