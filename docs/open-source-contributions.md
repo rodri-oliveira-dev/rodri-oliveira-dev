@@ -2,7 +2,11 @@
 
 Este catálogo reúne Pull Requests públicos que abri em projetos de terceiros. Os títulos são os originais do GitHub e os estados são reconciliados automaticamente.
 
-[Projetos em destaque](#featured-projects) · [Atividade recente](#recent-activity) · [Índice de projetos](#project-index) · [Contribuições por repositório](#contribution-history)
+- 🌟 [Projetos em destaque](#featured-projects)
+- 🕒 [Atividade recente](#recent-activity)
+- 📚 [Índice de projetos](#project-index)
+- 📂 [Contribuições por repositório](#contribution-history)
+- 🛠️ [Acompanhar issues e trabalho em andamento](https://github.com/users/rodri-oliveira-dev/projects/1/views/1)
 
 ## Indicadores gerais
 

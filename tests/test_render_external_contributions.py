@@ -168,6 +168,42 @@ class RendererTests(unittest.TestCase):
                 self.assertIn("▱" * 20, rendered)
                 self.assertNotIn("<details>", rendered)
 
+    def test_navigation_links_are_separate_and_localized(self):
+        board_url = "https://github.com/users/rodri-oliveira-dev/projects/1/views/1"
+        for language, labels in (
+            ("pt", (
+                "Projetos em destaque",
+                "Atividade recente",
+                "Índice de projetos",
+                "Contribuições por repositório",
+                "Acompanhar issues e trabalho em andamento",
+            )),
+            ("en", (
+                "Featured projects",
+                "Recent activity",
+                "Project index",
+                "Contributions by repository",
+                "Track issues and work in progress",
+            )),
+        ):
+            with self.subTest(language=language):
+                rendered = render_catalog(snapshot(), language)
+                nav = rendered.split("\n\n", 2)[2].split("\n\n", 1)[0]
+                lines = nav.splitlines()
+                self.assertEqual(len(lines), 5)
+                for line, emoji, label in zip(lines, ("🌟", "🕒", "📚", "📂", "🛠️"), labels):
+                    self.assertTrue(line.startswith(f"- {emoji} [{label}]("), line)
+                self.assertIn(board_url, lines[-1])
+                self.assertEqual(rendered.count(board_url), 1)
+                self.assertNotIn(" · [", nav)
+
+    def test_board_link_only_lives_in_bilingual_catalogs(self):
+        board_url = "https://github.com/users/rodri-oliveira-dev/projects/1/views/1"
+        for readme in ("README.md", "README.en.md"):
+            self.assertNotIn(board_url, Path(readme).read_text(encoding="utf-8"))
+        for catalog in ("docs/open-source-contributions.md", "docs/open-source-contributions.en.md"):
+            self.assertEqual(Path(catalog).read_text(encoding="utf-8").count(board_url), 1)
+
     def test_published_bilingual_catalogs_match_the_renderer(self):
         data = load_snapshot(Path(".github/external-contributions-catalog.json"))
         for language, path in (

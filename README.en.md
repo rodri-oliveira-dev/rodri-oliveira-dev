@@ -8,74 +8,77 @@
 
 # Rodrigo de Oliveira
 
-**Software Architect | Distributed Systems | .NET | Cloud**
+**Software Architect · Distributed Systems · .NET · Cloud**
 
-I'm a software architect with more than 20 years of experience developing and evolving enterprise systems.
+I have more than 20 years of experience developing and evolving enterprise systems, with a focus on software architecture, integrations, and application modernization. I aim to balance business needs, technical decisions, and the operational realities of existing systems.
 
-I work with distributed systems, integrations, and application modernization. I look for solutions that meet business needs while accounting for maintenance, operations, and the constraints of existing systems.
+Here I share tools, libraries, and experiments that help turn architectural decisions into code, tests, and automation.
 
-I like discussing technical decisions with the teams implementing them and seeing how those decisions play out in code. My open-source projects are another way to explore documentation, automation, and software quality.
+**Professional links**
 
-**[Professional portfolio](https://rodri-oliveira-dev.github.io/)** · [LinkedIn](https://www.linkedin.com/in/rodri-oliveira-dev) · [DEV.to](https://dev.to/rodri-oliveira-dev) · [NuGet](https://www.nuget.org/profiles/rodri-oliveira-dev)
+- [Professional portfolio](https://rodri-oliveira-dev.github.io/)
+- [LinkedIn](https://www.linkedin.com/in/rodri-oliveira-dev)
+- [DEV.to](https://dev.to/rodri-oliveira-dev)
+- [NuGet](https://www.nuget.org/profiles/rodri-oliveira-dev)
 
 ---
 
-## Architecture in practice
+## Tools and libraries
 
-A selection of projects where I explore architecture and engineering problems through code, tests, and automation:
+Projects I maintain to support technical decisions, documentation, software development, and operations.
 
-| Project | What it demonstrates |
-| --- | --- |
-| **[POC Arquitetura](https://github.com/rodri-oliveira-dev/poc-arquitetura)** | A distributed-systems lab for exploring eventual consistency, failures, and traceability. It brings together DDD, Kafka, Outbox/Inbox, sagas, idempotency, tests, and runbooks. |
-| **[ADR Guard](https://github.com/rodri-oliveira-dev/adr-guard)** | A tool for creating, validating, and organizing ADRs during development and in CI. It includes a CLI, GitHub Actions integration, a [VS Code extension](https://marketplace.visualstudio.com/items?itemName=rodrioliveira.adr-guard), and optional AI features with human review. |
-| **[Repo2C4](https://github.com/rodri-oliveira-dev/Repo2C4)** | Generates C4/LikeC4 documentation from code evidence, with review before changes are written. Includes a CLI, MCP, and an optional agent, keeping observed facts separate from architectural hypotheses. |
-| **[Dapper.FluentMap](https://github.com/rodri-oliveira-dev/Dapper-FluentMap)** | A Dapper mapping library that I maintain and evolve. The work involves compatibility with existing applications, testing, versioning, .NET modernization, and publishing NuGet packages. |
-| **[Repo Control Center](https://github.com/rodri-oliveira-dev/repo-status-dashboard)** | An Angular dashboard for tracking CI, releases, security, and health across my repositories. GitHub Actions collects the data for static snapshots; the dashboard also includes a [technology radar](https://rodri-oliveira-dev.github.io/repo-status-dashboard/#/technology-radar). |
+### [ADR Guard](https://github.com/rodri-oliveira-dev/adr-guard)
+
+*Architecture Decision Records · CLI · GitHub Actions · VS Code*
+
+A tool for creating, validating, and organizing ADRs during development and in CI. Includes a [VS Code extension](https://marketplace.visualstudio.com/items?itemName=rodrioliveira.adr-guard) and optional AI features with human review.
+
+### [Repo2C4](https://github.com/rodri-oliveira-dev/Repo2C4)
+
+*C4 · LikeC4 · CLI · MCP*
+
+Generates architecture documentation from code evidence. Includes an optional agent and a review step before writing changes, keeping observed facts separate from architectural hypotheses.
+
+### [Dapper.FluentMap](https://github.com/rodri-oliveira-dev/Dapper-FluentMap)
+
+*.NET · Dapper · Libraries · NuGet*
+
+A Dapper mapping library I maintain and evolve, focusing on compatibility with existing applications, testing, versioning, and .NET modernization.
+
+### [Repo Control Center](https://github.com/rodri-oliveira-dev/repo-status-dashboard)
+
+*Angular · GitHub Actions · CI · Security*
+
+A dashboard for tracking CI, releases, security, and repository health. Uses automation-generated static snapshots and includes a [technology radar](https://rodri-oliveira-dev.github.io/repo-status-dashboard/#/technology-radar).
+
+## Architecture lab
+
+### [POC Arquitetura](https://github.com/rodri-oliveira-dev/poc-arquitetura)
+
+*DDD · Kafka · Outbox/Inbox · Sagas · Idempotency*
+
+A distributed-systems lab exploring eventual consistency, failures, and traceability through implementations, tests, and runbooks.
 
 [Explore all repositories →](https://github.com/rodri-oliveira-dev?tab=repositories)
 
 ---
 
-## Governance as code
-
-I use the **[.github](https://github.com/rodri-oliveira-dev/.github)** repository to share policies and automation across my projects. It brings together contribution and security standards, .NET project inventory, secret scanning, and controlled distribution of agent skills.
-
-Changes go through Pull Requests, while each repository retains the freedom to set its own rules. The goal is to reduce repetitive work without centralizing decisions that belong to individual projects.
-
----
-
 ## Open-source contributions
 
-I also contribute to projects I don't maintain. I keep a catalog of the public Pull Requests I've opened in other repositories, with their statuses updated automatically.
+I also contribute fixes, tests, and documentation to third-party projects, including LikeC4, OpenCNPJ, and Ocelot.
 
-**[Browse my open-source contributions →](docs/open-source-contributions.en.md)**
+I maintain an [open-source contribution catalog](docs/open-source-contributions.en.md) with public Pull Requests and their automatically reconciled statuses.
 
-**[Track issues and work in progress →](https://github.com/users/rodri-oliveira-dev/projects/1/views/1)**
+## Governance as code
 
----
+The **[.github](https://github.com/rodri-oliveira-dev/.github)** repository brings together reusable policies and automation: contribution and security standards, a .NET project inventory, secret scanning, and controlled distribution of agent skills. Changes go through Pull Requests, and individual repositories retain control over their own rules.
 
 ## How I work
 
-- **Understand the context.** Before proposing a solution, I look at the problem, dependencies, and operational constraints.
-- **Discuss options with the team.** I weigh the cost of change, maintainability, performance, and security instead of choosing a pattern by default.
-- **Document decisions that matter.** I use ADRs and other documentation to explain why an option was chosen and what trade-offs it involves.
-- **Stay close to implementation.** Tests, observability, and automation help check architectural assumptions and revisit decisions when needed.
-
----
+I start by understanding context, dependencies, and operational constraints. I discuss alternatives and trade-offs with teams, document significant decisions in ADRs, and stay close to implementation through tests, observability, and automation.
 
 ## Writing and technical content
 
-I write about software architecture, DDD, and .NET development, focusing on the decisions and problems encountered during implementation.
+I write about software architecture, DDD, and .NET development, focusing on decisions and problems encountered in practice.
 
-- **[DEV.to](https://dev.to/rodri-oliveira-dev)** — articles on software architecture and engineering.
-
----
-
-## GitHub Activity
-
-<p align="left">
-  <img
-    src="https://github-stats-extended.vercel.app/api?username=rodri-oliveira-dev&show_icons=true&theme=transparent&locale=en&show=prs_merged,prs_reviewed&hide_border=true&hide_title=true"
-    alt="Rodrigo de Oliveira's GitHub statistics"
-  />
-</p>
+- **[DEV.to](https://dev.to/rodri-oliveira-dev)** — articles about software architecture and engineering.
