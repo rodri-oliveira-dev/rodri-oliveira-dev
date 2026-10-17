@@ -2,15 +2,141 @@
   "schema_version": 2,
   "profile": "rodri-oliveira-dev",
   "scope": "All public PRs authored by this profile in repositories owned by others",
-  "last_successful_sync": "2026-10-16T13:53:29Z",
+  "last_successful_sync": "2026-10-17T12:53:21Z",
   "totals": {
     "repositories": 17,
-    "pull_requests": 32,
-    "merged": 24,
-    "open": 7,
+    "pull_requests": 33,
+    "merged": 27,
+    "open": 5,
     "closed_unmerged": 1
   },
   "projects": [
+    {
+      "repository": "likec4/likec4",
+      "url": "https://github.com/likec4/likec4",
+      "activity_at": "2026-10-17T00:20:57Z",
+      "pull_requests": [
+        {
+          "id": 5889320150,
+          "number": 3379,
+          "url": "https://github.com/likec4/likec4/pull/3379",
+          "title": "docs(pt-br): align translation with v1.60.0 features",
+          "status": "merged",
+          "created_at": "2026-10-16T18:34:33Z",
+          "updated_at": "2026-10-17T00:20:57Z",
+          "merged_at": "2026-10-16T22:23:29Z"
+        },
+        {
+          "id": 5778634968,
+          "number": 3316,
+          "url": "https://github.com/likec4/likec4/pull/3316",
+          "title": "docs: complete Brazilian Portuguese docs coverage and landing pages",
+          "status": "merged",
+          "created_at": "2026-10-09T13:10:16Z",
+          "updated_at": "2026-10-11T00:05:27Z",
+          "merged_at": "2026-10-10T18:02:31Z"
+        },
+        {
+          "id": 5763051177,
+          "number": 3309,
+          "url": "https://github.com/likec4/likec4/pull/3309",
+          "title": "docs: add Brazilian Portuguese Tooling Core documentation",
+          "status": "merged",
+          "created_at": "2026-10-08T13:54:48Z",
+          "updated_at": "2026-10-09T13:04:42Z",
+          "merged_at": "2026-10-08T22:23:32Z"
+        },
+        {
+          "id": 5542857983,
+          "number": 3277,
+          "url": "https://github.com/likec4/likec4/pull/3277",
+          "title": "docs: add Brazilian Portuguese DSL deployment and extend documentation",
+          "status": "merged",
+          "created_at": "2026-09-22T17:18:51Z",
+          "updated_at": "2026-10-08T13:33:25Z",
+          "merged_at": "2026-10-08T12:39:47Z"
+        },
+        {
+          "id": 5539582748,
+          "number": 3276,
+          "url": "https://github.com/likec4/likec4/pull/3276",
+          "title": "docs: add Brazilian Portuguese DSL styling and config documentation",
+          "status": "merged",
+          "created_at": "2026-09-22T12:30:50Z",
+          "updated_at": "2026-10-08T07:20:30Z",
+          "merged_at": "2026-10-08T07:20:30Z"
+        },
+        {
+          "id": 5490671232,
+          "number": 3262,
+          "url": "https://github.com/likec4/likec4/pull/3262",
+          "title": "docs: add Brazilian Portuguese DSL views documentation",
+          "status": "merged",
+          "created_at": "2026-09-17T17:30:40Z",
+          "updated_at": "2026-09-21T11:51:41Z",
+          "merged_at": "2026-09-21T11:10:46Z"
+        },
+        {
+          "id": 5389928434,
+          "number": 3236,
+          "url": "https://github.com/likec4/likec4/pull/3236",
+          "title": "docs: expand Brazilian Portuguese guides and DSL documentation",
+          "status": "merged",
+          "created_at": "2026-09-08T17:32:23Z",
+          "updated_at": "2026-09-10T14:36:55Z",
+          "merged_at": "2026-09-10T10:27:39Z"
+        },
+        {
+          "id": 5090681721,
+          "number": 3179,
+          "url": "https://github.com/likec4/likec4/pull/3179",
+          "title": "docs: add Brazilian Portuguese README, i18n, and tutorial",
+          "status": "merged",
+          "created_at": "2026-08-07T13:38:01Z",
+          "updated_at": "2026-09-08T11:33:05Z",
+          "merged_at": "2026-09-08T07:39:23Z"
+        }
+      ],
+      "totals": {
+        "pull_requests": 8,
+        "merged": 8,
+        "open": 0,
+        "closed_unmerged": 0
+      }
+    },
+    {
+      "repository": "guibranco/CrispyWaffle",
+      "url": "https://github.com/guibranco/CrispyWaffle",
+      "activity_at": "2026-10-16T21:22:57Z",
+      "pull_requests": [
+        {
+          "id": 5166096130,
+          "number": 981,
+          "url": "https://github.com/guibranco/CrispyWaffle/pull/981",
+          "title": "Add TOML serializer support +semver: minor",
+          "status": "merged",
+          "created_at": "2026-08-16T19:53:45Z",
+          "updated_at": "2026-10-16T21:22:57Z",
+          "merged_at": "2026-10-16T21:21:38Z"
+        },
+        {
+          "id": 5159052138,
+          "number": 980,
+          "url": "https://github.com/guibranco/CrispyWaffle/pull/980",
+          "title": "Add YAML serializer support +semver: minor",
+          "status": "merged",
+          "created_at": "2026-08-15T10:57:05Z",
+          "updated_at": "2026-10-16T21:09:35Z",
+          "merged_at": "2026-10-16T21:07:33Z"
+        }
+      ],
+      "totals": {
+        "pull_requests": 2,
+        "merged": 2,
+        "open": 0,
+        "closed_unmerged": 0
+      }
+    },
     {
       "repository": "thangchung/awesome-dotnet-core",
       "url": "https://github.com/thangchung/awesome-dotnet-core",
@@ -141,89 +267,6 @@
       }
     },
     {
-      "repository": "likec4/likec4",
-      "url": "https://github.com/likec4/likec4",
-      "activity_at": "2026-10-11T00:05:27Z",
-      "pull_requests": [
-        {
-          "id": 5778634968,
-          "number": 3316,
-          "url": "https://github.com/likec4/likec4/pull/3316",
-          "title": "docs: complete Brazilian Portuguese docs coverage and landing pages",
-          "status": "merged",
-          "created_at": "2026-10-09T13:10:16Z",
-          "updated_at": "2026-10-11T00:05:27Z",
-          "merged_at": "2026-10-10T18:02:31Z"
-        },
-        {
-          "id": 5763051177,
-          "number": 3309,
-          "url": "https://github.com/likec4/likec4/pull/3309",
-          "title": "docs: add Brazilian Portuguese Tooling Core documentation",
-          "status": "merged",
-          "created_at": "2026-10-08T13:54:48Z",
-          "updated_at": "2026-10-09T13:04:42Z",
-          "merged_at": "2026-10-08T22:23:32Z"
-        },
-        {
-          "id": 5542857983,
-          "number": 3277,
-          "url": "https://github.com/likec4/likec4/pull/3277",
-          "title": "docs: add Brazilian Portuguese DSL deployment and extend documentation",
-          "status": "merged",
-          "created_at": "2026-09-22T17:18:51Z",
-          "updated_at": "2026-10-08T13:33:25Z",
-          "merged_at": "2026-10-08T12:39:47Z"
-        },
-        {
-          "id": 5539582748,
-          "number": 3276,
-          "url": "https://github.com/likec4/likec4/pull/3276",
-          "title": "docs: add Brazilian Portuguese DSL styling and config documentation",
-          "status": "merged",
-          "created_at": "2026-09-22T12:30:50Z",
-          "updated_at": "2026-10-08T07:20:30Z",
-          "merged_at": "2026-10-08T07:20:30Z"
-        },
-        {
-          "id": 5490671232,
-          "number": 3262,
-          "url": "https://github.com/likec4/likec4/pull/3262",
-          "title": "docs: add Brazilian Portuguese DSL views documentation",
-          "status": "merged",
-          "created_at": "2026-09-17T17:30:40Z",
-          "updated_at": "2026-09-21T11:51:41Z",
-          "merged_at": "2026-09-21T11:10:46Z"
-        },
-        {
-          "id": 5389928434,
-          "number": 3236,
-          "url": "https://github.com/likec4/likec4/pull/3236",
-          "title": "docs: expand Brazilian Portuguese guides and DSL documentation",
-          "status": "merged",
-          "created_at": "2026-09-08T17:32:23Z",
-          "updated_at": "2026-09-10T14:36:55Z",
-          "merged_at": "2026-09-10T10:27:39Z"
-        },
-        {
-          "id": 5090681721,
-          "number": 3179,
-          "url": "https://github.com/likec4/likec4/pull/3179",
-          "title": "docs: add Brazilian Portuguese README, i18n, and tutorial",
-          "status": "merged",
-          "created_at": "2026-08-07T13:38:01Z",
-          "updated_at": "2026-09-08T11:33:05Z",
-          "merged_at": "2026-09-08T07:39:23Z"
-        }
-      ],
-      "totals": {
-        "pull_requests": 7,
-        "merged": 7,
-        "open": 0,
-        "closed_unmerged": 0
-      }
-    },
-    {
       "repository": "ThreeMammals/Ocelot",
       "url": "https://github.com/ThreeMammals/Ocelot",
       "activity_at": "2026-10-08T11:47:13Z",
@@ -253,39 +296,6 @@
         "pull_requests": 2,
         "merged": 1,
         "open": 1,
-        "closed_unmerged": 0
-      }
-    },
-    {
-      "repository": "guibranco/CrispyWaffle",
-      "url": "https://github.com/guibranco/CrispyWaffle",
-      "activity_at": "2026-10-07T13:06:09Z",
-      "pull_requests": [
-        {
-          "id": 5166096130,
-          "number": 981,
-          "url": "https://github.com/guibranco/CrispyWaffle/pull/981",
-          "title": "Add TOML serializer support +semver: minor",
-          "status": "open",
-          "created_at": "2026-08-16T19:53:45Z",
-          "updated_at": "2026-09-09T13:07:34Z",
-          "merged_at": null
-        },
-        {
-          "id": 5159052138,
-          "number": 980,
-          "url": "https://github.com/guibranco/CrispyWaffle/pull/980",
-          "title": "Add YAML serializer support +semver: minor",
-          "status": "open",
-          "created_at": "2026-08-15T10:57:05Z",
-          "updated_at": "2026-10-07T13:06:09Z",
-          "merged_at": null
-        }
-      ],
-      "totals": {
-        "pull_requests": 2,
-        "merged": 0,
-        "open": 2,
         "closed_unmerged": 0
       }
     },
