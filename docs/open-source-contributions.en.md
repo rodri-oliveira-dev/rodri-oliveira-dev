@@ -12,11 +12,11 @@ This catalog lists public pull requests I opened in third-party projects. Titles
 
 | PRs found | Merged PRs | Open PRs | External repositories |
 | :---: | :---: | :---: | :---: |
-| **33** | **27** | **5** | **17** |
+| **34** | **27** | **6** | **18** |
 
-**81%** of PRs merged · `▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▱▱▱▱` · **1** PR closed without merge
+**79%** of PRs merged · `▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▱▱▱▱` · **1** PR closed without merge
 
-**Last successful synchronization:** 2026-10-17
+**Last successful synchronization:** 2026-10-19
 
 _The date above is the synchronization that produced the current published version; queries with no factual changes create no commit._
 
@@ -54,19 +54,34 @@ _The date above is the synchronization that produced the current published versi
 
 | | |
 | --- | --- |
-| [likec4/likec4](#repository-6c696b6563342f6c696b656334) | [guibranco/CrispyWaffle](#repository-6775696272616e636f2f637269737079776166666c65) |
-| [thangchung/awesome-dotnet-core](#repository-7468616e676368756e672f617765736f6d652d646f746e65742d636f7265) | [Hitmasu/OpenCNPJ](#repository-6869746d6173752f6f70656e636e706a) |
-| [architecture-decision-record/architecture-decision-record](#repository-6172636869746563747572652d6465636973696f6e2d7265636f72642f6172636869746563747572652d6465636973696f6e2d7265636f7264) | [ThreeMammals/Ocelot](#repository-74687265656d616d6d616c732f6f63656c6f74) |
-| [ddd-crew/eventstorming-glossary-cheat-sheet](#repository-6464642d637265772f6576656e7473746f726d696e672d676c6f73736172792d63686561742d7368656574) | [ddd-crew/ddd-starter-modelling-process](#repository-6464642d637265772f6464642d737461727465722d6d6f64656c6c696e672d70726f63657373) |
-| [ddd-crew/bounded-context-canvas](#repository-6464642d637265772f626f756e6465642d636f6e746578742d63616e766173) | [ddd-crew/context-mapping](#repository-6464642d637265772f636f6e746578742d6d617070696e67) |
-| [ddd-crew/aggregate-design-canvas](#repository-6464642d637265772f6167677265676174652d64657369676e2d63616e766173) | [ddd-crew/domain-message-flow-modelling](#repository-6464642d637265772f646f6d61696e2d6d6573736167652d666c6f772d6d6f64656c6c696e67) |
-| [ddd-crew/core-domain-charts](#repository-6464642d637265772f636f72652d646f6d61696e2d636861727473) | [StefanTheCode/dotnet\_interview\_questions](#repository-73746566616e746865636f64652f646f746e65745f696e746572766965775f7175657374696f6e73) |
-| [donnemartin/system-design-primer](#repository-646f6e6e656d617274696e2f73797374656d2d64657369676e2d7072696d6572) | [egoughnour/complexity-hints](#repository-65676f7567686e6f75722f636f6d706c65786974792d68696e7473) |
-| [ddd-crew/welcome-to-ddd](#repository-6464642d637265772f77656c636f6d652d746f2d646464) | &nbsp; |
+| [mysql-net/MySqlConnector](#repository-6d7973716c2d6e65742f6d7973716c636f6e6e6563746f72) | [likec4/likec4](#repository-6c696b6563342f6c696b656334) |
+| [guibranco/CrispyWaffle](#repository-6775696272616e636f2f637269737079776166666c65) | [thangchung/awesome-dotnet-core](#repository-7468616e676368756e672f617765736f6d652d646f746e65742d636f7265) |
+| [Hitmasu/OpenCNPJ](#repository-6869746d6173752f6f70656e636e706a) | [architecture-decision-record/architecture-decision-record](#repository-6172636869746563747572652d6465636973696f6e2d7265636f72642f6172636869746563747572652d6465636973696f6e2d7265636f7264) |
+| [ThreeMammals/Ocelot](#repository-74687265656d616d6d616c732f6f63656c6f74) | [ddd-crew/eventstorming-glossary-cheat-sheet](#repository-6464642d637265772f6576656e7473746f726d696e672d676c6f73736172792d63686561742d7368656574) |
+| [ddd-crew/ddd-starter-modelling-process](#repository-6464642d637265772f6464642d737461727465722d6d6f64656c6c696e672d70726f63657373) | [ddd-crew/bounded-context-canvas](#repository-6464642d637265772f626f756e6465642d636f6e746578742d63616e766173) |
+| [ddd-crew/context-mapping](#repository-6464642d637265772f636f6e746578742d6d617070696e67) | [ddd-crew/aggregate-design-canvas](#repository-6464642d637265772f6167677265676174652d64657369676e2d63616e766173) |
+| [ddd-crew/domain-message-flow-modelling](#repository-6464642d637265772f646f6d61696e2d6d6573736167652d666c6f772d6d6f64656c6c696e67) | [ddd-crew/core-domain-charts](#repository-6464642d637265772f636f72652d646f6d61696e2d636861727473) |
+| [StefanTheCode/dotnet\_interview\_questions](#repository-73746566616e746865636f64652f646f746e65745f696e746572766965775f7175657374696f6e73) | [donnemartin/system-design-primer](#repository-646f6e6e656d617274696e2f73797374656d2d64657369676e2d7072696d6572) |
+| [egoughnour/complexity-hints](#repository-65676f7567686e6f75722f636f6d706c65786974792d68696e7473) | [ddd-crew/welcome-to-ddd](#repository-6464642d637265772f77656c636f6d652d746f2d646464) |
 
 <a id="contribution-history"></a>
 
 ## Contributions by repository
+
+<a id="repository-6d7973716c2d6e65742f6d7973716c636f6e6e6563746f72"></a>
+
+<details>
+<summary><strong>mysql-net/MySqlConnector</strong> · 1 PR · 1 open</summary>
+
+[View repository](https://github.com/mysql-net/MySqlConnector)
+
+**Total:** 1 · **Merged PRs:** 0 · **Open PRs:** 1 · **PRs closed without merge:** 0
+
+| Pull request | Status | Opened | Merged |
+| --- | --- | --- | --- |
+| [#1675](https://github.com/mysql-net/MySqlConnector/pull/1675) — Remove retired Azure MySQL Single Server proxy detection | Open | 2026-10-19 | — |
+
+</details>
 
 <a id="repository-6c696b6563342f6c696b656334"></a>
 

@@ -2,15 +2,38 @@
   "schema_version": 2,
   "profile": "rodri-oliveira-dev",
   "scope": "All public PRs authored by this profile in repositories owned by others",
-  "last_successful_sync": "2026-10-17T12:53:21Z",
+  "last_successful_sync": "2026-10-19T16:23:37Z",
   "totals": {
-    "repositories": 17,
-    "pull_requests": 33,
+    "repositories": 18,
+    "pull_requests": 34,
     "merged": 27,
-    "open": 5,
+    "open": 6,
     "closed_unmerged": 1
   },
   "projects": [
+    {
+      "repository": "mysql-net/MySqlConnector",
+      "url": "https://github.com/mysql-net/MySqlConnector",
+      "activity_at": "2026-10-19T14:39:43Z",
+      "pull_requests": [
+        {
+          "id": 5921888757,
+          "number": 1675,
+          "url": "https://github.com/mysql-net/MySqlConnector/pull/1675",
+          "title": "Remove retired Azure MySQL Single Server proxy detection",
+          "status": "open",
+          "created_at": "2026-10-19T10:07:11Z",
+          "updated_at": "2026-10-19T14:39:43Z",
+          "merged_at": null
+        }
+      ],
+      "totals": {
+        "pull_requests": 1,
+        "merged": 0,
+        "open": 1,
+        "closed_unmerged": 0
+      }
+    },
     {
       "repository": "likec4/likec4",
       "url": "https://github.com/likec4/likec4",
