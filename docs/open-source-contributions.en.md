@@ -12,11 +12,11 @@ This catalog lists public pull requests I opened in third-party projects. Titles
 
 | PRs found | Merged PRs | Open PRs | External repositories |
 | :---: | :---: | :---: | :---: |
-| **34** | **27** | **6** | **18** |
+| **34** | **28** | **5** | **18** |
 
-**79%** of PRs merged · `▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▱▱▱▱` · **1** PR closed without merge
+**82%** of PRs merged · `▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▱▱▱▱` · **1** PR closed without merge
 
-**Last successful synchronization:** 2026-10-19
+**Last successful synchronization:** 2026-10-20
 
 _The date above is the synchronization that produced the current published version; queries with no factual changes create no commit._
 
@@ -42,11 +42,11 @@ _The date above is the synchronization that produced the current published versi
 
 | Repository | Pull request | Merged |
 | --- | --- | --- |
+| [mysql-net/MySqlConnector](https://github.com/mysql-net/MySqlConnector) | [#1675](https://github.com/mysql-net/MySqlConnector/pull/1675) — Remove retired Azure MySQL Single Server proxy detection | 2026-10-19 |
 | [likec4/likec4](https://github.com/likec4/likec4) | [#3379](https://github.com/likec4/likec4/pull/3379) — docs(pt-br): align translation with v1.60.0 features | 2026-10-16 |
 | [guibranco/CrispyWaffle](https://github.com/guibranco/CrispyWaffle) | [#981](https://github.com/guibranco/CrispyWaffle/pull/981) — Add TOML serializer support +semver: minor | 2026-10-16 |
 | [guibranco/CrispyWaffle](https://github.com/guibranco/CrispyWaffle) | [#980](https://github.com/guibranco/CrispyWaffle/pull/980) — Add YAML serializer support +semver: minor | 2026-10-16 |
 | [Hitmasu/OpenCNPJ](https://github.com/Hitmasu/OpenCNPJ) | [#82](https://github.com/Hitmasu/OpenCNPJ/pull/82) — fix: adiciona timeout e cancelamento às execuções do rclone | 2026-10-15 |
-| [likec4/likec4](https://github.com/likec4/likec4) | [#3316](https://github.com/likec4/likec4/pull/3316) — docs: complete Brazilian Portuguese docs coverage and landing pages | 2026-10-10 |
 
 <a id="project-index"></a>
 
@@ -71,15 +71,15 @@ _The date above is the synchronization that produced the current published versi
 <a id="repository-6d7973716c2d6e65742f6d7973716c636f6e6e6563746f72"></a>
 
 <details>
-<summary><strong>mysql-net/MySqlConnector</strong> · 1 PR · 1 open</summary>
+<summary><strong>mysql-net/MySqlConnector</strong> · 1 PR · 1 merged</summary>
 
 [View repository](https://github.com/mysql-net/MySqlConnector)
 
-**Total:** 1 · **Merged PRs:** 0 · **Open PRs:** 1 · **PRs closed without merge:** 0
+**Total:** 1 · **Merged PRs:** 1 · **Open PRs:** 0 · **PRs closed without merge:** 0
 
 | Pull request | Status | Opened | Merged |
 | --- | --- | --- | --- |
-| [#1675](https://github.com/mysql-net/MySqlConnector/pull/1675) — Remove retired Azure MySQL Single Server proxy detection | Open | 2026-10-19 | — |
+| [#1675](https://github.com/mysql-net/MySqlConnector/pull/1675) — Remove retired Azure MySQL Single Server proxy detection | Merged | 2026-10-19 | 2026-10-19 |
 
 </details>
 
