@@ -2,15 +2,117 @@
   "schema_version": 2,
   "profile": "rodri-oliveira-dev",
   "scope": "All public PRs authored by this profile in repositories owned by others",
-  "last_successful_sync": "2026-10-20T14:14:31Z",
+  "last_successful_sync": "2026-10-21T14:26:16Z",
   "totals": {
-    "repositories": 18,
-    "pull_requests": 34,
-    "merged": 28,
-    "open": 5,
+    "repositories": 21,
+    "pull_requests": 37,
+    "merged": 30,
+    "open": 6,
     "closed_unmerged": 1
   },
   "projects": [
+    {
+      "repository": "ThreeMammals/Ocelot",
+      "url": "https://github.com/ThreeMammals/Ocelot",
+      "activity_at": "2026-10-21T14:25:02Z",
+      "pull_requests": [
+        {
+          "id": 5302925579,
+          "number": 2421,
+          "url": "https://github.com/ThreeMammals/Ocelot/pull/2421",
+          "title": "test: cover multipart/form-data rerouting for #714",
+          "status": "open",
+          "created_at": "2026-08-31T17:18:05Z",
+          "updated_at": "2026-10-21T14:25:02Z",
+          "merged_at": null
+        },
+        {
+          "id": 5288532773,
+          "number": 2420,
+          "url": "https://github.com/ThreeMammals/Ocelot/pull/2420",
+          "title": "#1687 Return 504 Gateway Timeout for downstream request timeouts according to RFC 9110",
+          "status": "merged",
+          "created_at": "2026-08-29T19:50:39Z",
+          "updated_at": "2026-08-31T16:26:18Z",
+          "merged_at": "2026-08-31T15:56:12Z"
+        }
+      ],
+      "totals": {
+        "pull_requests": 2,
+        "merged": 1,
+        "open": 1,
+        "closed_unmerged": 0
+      }
+    },
+    {
+      "repository": "mjebrahimi/Awesome-Nuget-Packages",
+      "url": "https://github.com/mjebrahimi/Awesome-Nuget-Packages",
+      "activity_at": "2026-10-21T06:55:24Z",
+      "pull_requests": [
+        {
+          "id": 5951995183,
+          "number": 10,
+          "url": "https://github.com/mjebrahimi/Awesome-Nuget-Packages/pull/10",
+          "title": "docs: update Dapper.FluentMap repository and maintenance details",
+          "status": "merged",
+          "created_at": "2026-10-21T00:28:05Z",
+          "updated_at": "2026-10-21T06:55:24Z",
+          "merged_at": "2026-10-21T06:55:24Z"
+        }
+      ],
+      "totals": {
+        "pull_requests": 1,
+        "merged": 1,
+        "open": 0,
+        "closed_unmerged": 0
+      }
+    },
+    {
+      "repository": "zzzprojects/docs",
+      "url": "https://github.com/zzzprojects/docs",
+      "activity_at": "2026-10-21T04:40:47Z",
+      "pull_requests": [
+        {
+          "id": 5951922267,
+          "number": 113,
+          "url": "https://github.com/zzzprojects/docs/pull/113",
+          "title": "docs: update Dapper.FluentMap maintenance status and documentation",
+          "status": "merged",
+          "created_at": "2026-10-21T00:20:23Z",
+          "updated_at": "2026-10-21T04:40:47Z",
+          "merged_at": "2026-10-21T04:39:51Z"
+        }
+      ],
+      "totals": {
+        "pull_requests": 1,
+        "merged": 1,
+        "open": 0,
+        "closed_unmerged": 0
+      }
+    },
+    {
+      "repository": "ModerRAS/star-vault",
+      "url": "https://github.com/ModerRAS/star-vault",
+      "activity_at": "2026-10-21T00:36:31Z",
+      "pull_requests": [
+        {
+          "id": 5952074414,
+          "number": 1,
+          "url": "https://github.com/ModerRAS/star-vault/pull/1",
+          "title": "docs: 更新 Dapper FluentMap 的维护状态和仓库链接",
+          "status": "open",
+          "created_at": "2026-10-21T00:36:22Z",
+          "updated_at": "2026-10-21T00:36:31Z",
+          "merged_at": null
+        }
+      ],
+      "totals": {
+        "pull_requests": 1,
+        "merged": 0,
+        "open": 1,
+        "closed_unmerged": 0
+      }
+    },
     {
       "repository": "mysql-net/MySqlConnector",
       "url": "https://github.com/mysql-net/MySqlConnector",
@@ -285,39 +387,6 @@
       "totals": {
         "pull_requests": 1,
         "merged": 0,
-        "open": 1,
-        "closed_unmerged": 0
-      }
-    },
-    {
-      "repository": "ThreeMammals/Ocelot",
-      "url": "https://github.com/ThreeMammals/Ocelot",
-      "activity_at": "2026-10-08T11:47:13Z",
-      "pull_requests": [
-        {
-          "id": 5302925579,
-          "number": 2421,
-          "url": "https://github.com/ThreeMammals/Ocelot/pull/2421",
-          "title": "test: cover multipart/form-data rerouting for #714",
-          "status": "open",
-          "created_at": "2026-08-31T17:18:05Z",
-          "updated_at": "2026-10-08T11:47:13Z",
-          "merged_at": null
-        },
-        {
-          "id": 5288532773,
-          "number": 2420,
-          "url": "https://github.com/ThreeMammals/Ocelot/pull/2420",
-          "title": "#1687 Return 504 Gateway Timeout for downstream request timeouts according to RFC 9110",
-          "status": "merged",
-          "created_at": "2026-08-29T19:50:39Z",
-          "updated_at": "2026-08-31T16:26:18Z",
-          "merged_at": "2026-08-31T15:56:12Z"
-        }
-      ],
-      "totals": {
-        "pull_requests": 2,
-        "merged": 1,
         "open": 1,
         "closed_unmerged": 0
       }
