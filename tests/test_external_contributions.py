@@ -90,8 +90,10 @@ class CollectorTests(unittest.TestCase):
                 _partitioned_search(object(), CONFIG["profile"], date(2026, 1, 1), date(2026, 1, 2))
 
     def test_incomplete_results_and_missing_previous_pr_fail_closed(self):
-        with self.assertRaisesRegex(CollectionError, "incomplete"):
-            collect(CONFIG, StaticAPI([issue()], incomplete=True), NOW)
+        with patch("scripts.external_contributions.time.sleep"):
+            with self.assertRaisesRegex(CollectionError, "incomplete"):
+                _partitioned_search(StaticAPI([issue()], incomplete=True), CONFIG["profile"],
+                                    date(2026, 10, 11), date(2026, 10, 11))
         previous = collect(CONFIG, StaticAPI([issue()]), NOW)
         with self.assertRaisesRegex(CollectionError, "disappeared"):
             collect(CONFIG, StaticAPI([]), NOW, previous)

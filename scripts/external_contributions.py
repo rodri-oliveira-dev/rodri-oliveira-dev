@@ -26,12 +26,17 @@ LOGIN_PATTERN = re.compile(r"[A-Za-z0-9-]+")
 TIMESTAMP_PATTERN = re.compile(r"\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z")
 PAGE_SIZE = 100
 MAX_SEARCH_RESULTS = 1000
+INCOMPLETE_SEARCH_RETRY_DELAYS = (1.0, 2.0)
 GITHUB_EPOCH = date(2008, 1, 1)
 SCOPE = "All public PRs authored by this profile in repositories owned by others"
 
 
 class CollectionError(Exception):
     """Expected failure: callers must preserve the last valid catalog."""
+
+
+class IncompleteSearchError(CollectionError):
+    """Search remained incomplete after bounded retries; split by date if possible."""
 
 
 class GitHubAPI:
@@ -204,40 +209,78 @@ def _query(profile: str, start: date, end: date) -> str:
     return f"is:pr is:public author:{profile} -user:{profile} created:{start.isoformat()}..{end.isoformat()}"
 
 
+def _search_page(api: GitHubAPI, profile: str, start: date, end: date,
+                 page: int) -> dict:
+    """Retry incomplete HTTP 200 search responses without accepting partial data."""
+    params = {"q": _query(profile, start, end), "per_page": PAGE_SIZE, "page": page,
+              "sort": "created", "order": "asc"}
+    window = f"{start.isoformat()}..{end.isoformat()}"
+    for attempt in range(1, len(INCOMPLETE_SEARCH_RETRY_DELAYS) + 2):
+        payload = api.get("/search/issues", params)
+        count, items = payload.get("total_count"), payload.get("items")
+        incomplete = payload.get("incomplete_results")
+        item_count = len(items) if isinstance(items, list) else "invalid"
+        details = (f"window={window}, page={page}, total_count={count!r}, "
+                   f"items_count={item_count}, incomplete_results={incomplete!r}")
+        if (type(count) is not int or count < 0 or not isinstance(items, list)
+                or type(incomplete) is not bool):
+            raise CollectionError(f"GitHub search returned invalid results ({details})")
+        if not incomplete:
+            return payload
+        if attempt > len(INCOMPLETE_SEARCH_RETRY_DELAYS):
+            raise IncompleteSearchError(
+                f"GitHub search remained incomplete after {attempt} attempts ({details})")
+        delay = INCOMPLETE_SEARCH_RETRY_DELAYS[attempt - 1]
+        print(f"GitHub search incomplete ({details}); retry {attempt + 1}/"
+              f"{len(INCOMPLETE_SEARCH_RETRY_DELAYS) + 1} in {delay:g}s", file=sys.stderr)
+        time.sleep(delay)
+    raise AssertionError("Unreachable search retry state")
+
+
 def _fetch_window(api: GitHubAPI, profile: str, start: date, end: date) -> tuple[int, list[dict]]:
-    query = _query(profile, start, end)
-    first = api.get("/search/issues", {"q": query, "per_page": PAGE_SIZE, "page": 1,
-                                       "sort": "created", "order": "asc"})
-    count, items = first.get("total_count"), first.get("items")
-    if (type(count) is not int or count < 0 or first.get("incomplete_results") is not False
-            or not isinstance(items, list)):
-        raise CollectionError("GitHub search returned incomplete or invalid results")
+    first = _search_page(api, profile, start, end, 1)
+    count, items = first["total_count"], first["items"]
     if count > MAX_SEARCH_RESULTS:
         return count, []
     found = list(items)
     pages = (count + PAGE_SIZE - 1) // PAGE_SIZE
     for page in range(2, pages + 1):
-        payload = api.get("/search/issues", {"q": query, "per_page": PAGE_SIZE, "page": page,
-                                             "sort": "created", "order": "asc"})
-        if (payload.get("total_count") != count or payload.get("incomplete_results") is not False
-                or not isinstance(payload.get("items"), list)):
-            raise CollectionError("GitHub search changed or became incomplete during pagination")
+        payload = _search_page(api, profile, start, end, page)
+        if payload["total_count"] != count:
+            raise CollectionError(
+                f"GitHub pagination changed result count (window={start}..{end}, "
+                f"page={page}, expected={count}, received={payload['total_count']})")
         found.extend(payload["items"])
     if len(found) != count:
-        raise CollectionError("GitHub pagination did not return the declared result count")
+        raise CollectionError(
+            f"GitHub pagination returned {len(found)} of {count} declared results "
+            f"(window={start}..{end})")
     return count, found
 
 
 def _partitioned_search(api: GitHubAPI, profile: str, start: date, end: date) -> list[dict]:
-    count, items = _fetch_window(api, profile, start, end)
-    if count <= MAX_SEARCH_RESULTS:
-        return items
-    if start == end:
-        raise CollectionError(f"More than 1000 PRs match {start}; interval cannot be safely split")
+    try:
+        count, items = _fetch_window(api, profile, start, end)
+    except IncompleteSearchError as error:
+        # The incomplete parent's total_count cannot validate child totals.
+        # Disjoint, fully validated date windows still cover the entire range.
+        if start == end:
+            raise CollectionError(
+                f"GitHub search incomplete for a single day; cannot safely split: {error}"
+            ) from error
+        print(f"GitHub search incomplete for {start}..{end}; "
+              "retrying via smaller date windows", file=sys.stderr)
+        expected_count = None
+    else:
+        if count <= MAX_SEARCH_RESULTS:
+            return items
+        if start == end:
+            raise CollectionError(f"More than 1000 PRs match {start}; interval cannot be safely split")
+        expected_count = count
     midpoint = start + timedelta(days=(end - start).days // 2)
     left = _partitioned_search(api, profile, start, midpoint)
     right = _partitioned_search(api, profile, midpoint + timedelta(days=1), end)
-    if len(left) + len(right) != count:
+    if expected_count is not None and len(left) + len(right) != expected_count:
         raise CollectionError("Temporal partitions disagree with their parent result count")
     return left + right
 
