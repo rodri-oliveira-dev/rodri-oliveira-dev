@@ -16,7 +16,7 @@ Este catálogo reúne Pull Requests públicos que abri em projetos de terceiros.
 
 **81%** dos PRs integrados · `▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▱▱▱▱` · **1** PR fechado sem integração
 
-**Última sincronização bem-sucedida:** 21/10/2026
+**Última sincronização bem-sucedida:** 23/10/2026
 
 _A data acima corresponde à sincronização que produziu a versão publicada atual; consultas sem mudança factual não geram commit._
 
@@ -81,7 +81,7 @@ _A data acima corresponde à sincronização que produziu a versão publicada at
 
 | Pull request | Situação | Aberto em | Integrado em |
 | --- | --- | --- | --- |
-| [#2421](https://github.com/ThreeMammals/Ocelot/pull/2421) — test: cover multipart/form-data rerouting for #714 | Aberto | 31/08/2026 | — |
+| [#2421](https://github.com/ThreeMammals/Ocelot/pull/2421) — #714 Acceptance testing for MIME type \`multipart/form-data\` as HTTP \`Content‑Type\` | Aberto | 31/08/2026 | — |
 | [#2420](https://github.com/ThreeMammals/Ocelot/pull/2420) — #1687 Return 504 Gateway Timeout for downstream request timeouts according to RFC 9110 | Integrado | 29/08/2026 | 31/08/2026 |
 
 </details>
