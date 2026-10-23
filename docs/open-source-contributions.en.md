@@ -16,7 +16,7 @@ This catalog lists public pull requests I opened in third-party projects. Titles
 
 **81%** of PRs merged · `▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▱▱▱▱` · **1** PR closed without merge
 
-**Last successful synchronization:** 2026-10-21
+**Last successful synchronization:** 2026-10-23
 
 _The date above is the synchronization that produced the current published version; queries with no factual changes create no commit._
 
@@ -81,7 +81,7 @@ _The date above is the synchronization that produced the current published versi
 
 | Pull request | Status | Opened | Merged |
 | --- | --- | --- | --- |
-| [#2421](https://github.com/ThreeMammals/Ocelot/pull/2421) — test: cover multipart/form-data rerouting for #714 | Open | 2026-08-31 | — |
+| [#2421](https://github.com/ThreeMammals/Ocelot/pull/2421) — #714 Acceptance testing for MIME type \`multipart/form-data\` as HTTP \`Content‑Type\` | Open | 2026-08-31 | — |
 | [#2420](https://github.com/ThreeMammals/Ocelot/pull/2420) — #1687 Return 504 Gateway Timeout for downstream request timeouts according to RFC 9110 | Merged | 2026-08-29 | 2026-08-31 |
 
 </details>
