@@ -3,7 +3,8 @@
   "language": "en-US",
   "useGitignore": true,
   "import": [
-    "./node_modules/@cspell/dict-pt-br/cspell-ext.json"
+    "./node_modules/@cspell/dict-pt-br/cspell-ext.json",
+    "./node_modules/@cspell/dict-es-es/cspell-ext.json"
   ],
   "dictionaryDefinitions": [
     {
@@ -44,6 +45,14 @@
       "filename": "*.en.md",
       "language": "en-US",
       "dictionaries": [
+        "profile-terms"
+      ]
+    },
+    {
+      "filename": "README.es.md",
+      "language": "es,en-US",
+      "dictionaries": [
+        "es-es",
         "profile-terms"
       ]
     },

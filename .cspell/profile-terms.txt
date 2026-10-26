@@ -4,15 +4,18 @@ Arquitetura
 ciclomática
 CNPJ
 CodeQL
+configurables
 código
 CrispyWaffle
 Dapper
 dotnet
 DotNetRepoInspector
+extensibilidad
 FluentMap
 HANA
 Henk
 HMAC
+idempotente
 Inbox
 Kafka
 mensageria
@@ -22,6 +25,7 @@ NuGet
 Ocelot
 OIDC
 Oliveira
+observabilidad
 OpenTelemetry
 Outbox
 Português
