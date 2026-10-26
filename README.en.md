@@ -23,43 +23,47 @@ Here I share tools, libraries, and experiments that help turn architectural deci
 
 ---
 
-## Tools and libraries
+## Selected projects
 
-Projects I maintain to support technical decisions, documentation, software development, and operations.
+Tools, libraries, and labs that connect architecture decisions with implementation and operations.
 
 ### [ADR Guard](https://github.com/rodri-oliveira-dev/adr-guard)
 
-*Architecture Decision Records · CLI · GitHub Actions · VS Code*
+*Architecture governance tool*
 
-A tool for creating, validating, and organizing ADRs during development and in CI. Includes a [VS Code extension](https://marketplace.visualstudio.com/items?itemName=rodrioliveira.adr-guard) and optional AI features with human review.
-
-### [Repo2C4](https://github.com/rodri-oliveira-dev/Repo2C4)
-
-*C4 · LikeC4 · CLI · MCP*
-
-Generates architecture documentation from code evidence. Includes an optional agent and a review step before writing changes, keeping observed facts separate from architectural hypotheses.
+Helps teams keep decision records consistent and traceable. Its .NET CLI creates, validates, and indexes ADRs, with CI and [VS Code](https://marketplace.visualstudio.com/items?itemName=rodrioliveira.adr-guard) integrations that demonstrate governance as code without replacing architectural review.
 
 ### [Dapper.FluentMap](https://github.com/rodri-oliveira-dev/Dapper-FluentMap)
 
-*.NET · Dapper · Libraries · NuGet*
+*.NET library*
 
-A Dapper mapping library I maintain and evolve, focusing on compatibility with existing applications, testing, versioning, and .NET modernization.
+Handles mappings between .NET objects and database columns when Dapper's conventions are not enough, without adding attributes to domain models. Its evolution balances a fluent API, extensibility, and compatibility with existing applications, showing long-term public API stewardship and incremental modernization.
 
-### [Repo Control Center](https://github.com/rodri-oliveira-dev/repo-status-dashboard)
+### [Repo2C4](https://github.com/rodri-oliveira-dev/Repo2C4)
 
-*Angular · GitHub Actions · CI · Security*
+*Architecture documentation tool*
 
-A dashboard for tracking CI, releases, security, and repository health. Uses automation-generated static snapshots and includes a [technology radar](https://rodri-oliveira-dev.github.io/repo-status-dashboard/#/technology-radar).
-
-## Architecture lab
+Reduces drift between code and diagrams by turning bounded evidence from .NET repositories into reviewable C4/LikeC4 documentation. Its workflow separates observations from hypotheses and requires explicit writes, demonstrating static analysis, deterministic generation, and MCP-based agent integration.
 
 ### [POC Arquitetura](https://github.com/rodri-oliveira-dev/poc-arquitetura)
 
-*DDD · Kafka · Outbox/Inbox · Sagas · Idempotency*
+*Distributed-systems lab*
 
-A distributed-systems lab exploring eventual consistency, failures, and traceability through implementations, tests, and runbooks.
+Makes decisions around eventual consistency, failure handling, and traceability reproducible in a .NET microservices foundation. It implements DDD, asynchronous Kafka integration with Outbox, tests, and runbooks while keeping proposals without code evidence explicitly marked as pending.
 
-[Explore all repositories →](https://github.com/rodri-oliveira-dev?tab=repositories)
+### [ReliableWebhooks](https://github.com/rodri-oliveira-dev/ReliableWebhooks)
+
+*.NET integration library*
+
+Addresses failure, concurrency, and duplication in outbound webhook delivery. It provides extensible contracts for enqueueing, leasing, retries, HMAC signing, and observability, demonstrating reliability and security patterns without claiming exactly-once delivery or bundling a production durable store.
+
+### [ComplexityAnalysis.Analyzers](https://github.com/rodri-oliveira-dev/complexity-analyzers)
+
+*Static analysis tool*
+
+Surfaces costly patterns and complexity regressions before runtime. The Roslyn analyzer estimates Big-O when evidence is sufficient and enforces configurable metrics in builds and IDEs, demonstrating compiler API expertise, semantic analysis, and conservative diagnostic design.
+
+Other work remains available through [Repo Control Center](https://github.com/rodri-oliveira-dev/repo-status-dashboard), a dashboard for repository CI, releases, security, and health, and the [full repository list](https://github.com/rodri-oliveira-dev?tab=repositories).
 
 ---
 

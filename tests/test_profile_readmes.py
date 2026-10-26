@@ -5,10 +5,11 @@ from pathlib import Path
 
 PROJECTS = (
     "adr-guard",
-    "Repo2C4",
     "Dapper-FluentMap",
-    "repo-status-dashboard",
+    "Repo2C4",
     "poc-arquitetura",
+    "ReliableWebhooks",
+    "complexity-analyzers",
 )
 BOARD_URL = "https://github.com/users/rodri-oliveira-dev/projects/1/views/1"
 
