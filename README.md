@@ -1,4 +1,4 @@
-**Português** | [English](README.en.md)
+**Português** | [English](README.en.md) | [Español (Latinoamérica)](README.es.md)
 
 <p align="left">
   <a href="https://rodri-oliveira-dev.github.io/" aria-label="Portfólio profissional">
