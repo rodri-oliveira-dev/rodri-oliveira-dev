@@ -1,4 +1,6 @@
 [Português](README.md) | [English](README.en.md) | **Español (Latinoamérica)**
+<!-- cspell:words Español Latinoamérica -->
+<!-- cspell:disable -->
 
 <p align="left">
   <a href="https://rodri-oliveira-dev.github.io/" aria-label="Portafolio profesional">
@@ -92,3 +94,4 @@ Primero busco comprender el contexto, las dependencias y las restricciones opera
 Escribo sobre arquitectura de software, DDD y desarrollo .NET, principalmente acerca de decisiones y problemas encontrados en la práctica.
 
 - **[Café com código](https://www.linkedin.com/newsletters/caf%C3%A9-com-c%C3%B3digo-6880618748047314945)** — boletín sobre arquitectura e ingeniería de software.
+<!-- cspell:enable -->
