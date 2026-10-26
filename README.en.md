@@ -31,13 +31,13 @@ Tools, libraries, and labs that connect architecture decisions with implementati
 
 *Architecture governance tool*
 
-Helps teams keep decision records consistent and traceable. Its .NET CLI creates, validates, and indexes ADRs, with CI and [VS Code](https://marketplace.visualstudio.com/items?itemName=rodrioliveira.adr-guard) integrations that demonstrate governance as code without replacing architectural review.
+Helps teams keep decision records consistent and traceable. Its .NET CLI creates, validates, and indexes ADRs; optional impact and drift analysis works from bounded evidence without replacing architectural judgment. The [case study](https://rodri-oliveira-dev.github.io/en/case-studies/adr-guard/) examines the underlying decisions and trade-offs.
 
 ### [Dapper.FluentMap](https://github.com/rodri-oliveira-dev/Dapper-FluentMap)
 
 *.NET library*
 
-Handles mappings between .NET objects and database columns when Dapper's conventions are not enough, without adding attributes to domain models. Its evolution balances a fluent API, extensibility, and compatibility with existing applications, showing long-term public API stewardship and incremental modernization.
+Handles mappings between .NET objects and database columns when Dapper's conventions are not enough, without adding attributes to domain models. Its evolution balances a fluent API, extensibility, and compatibility with existing applications, showing long-term public API stewardship and incremental modernization. The [case study](https://rodri-oliveira-dev.github.io/en/case-studies/dapper-fluentmap/) discusses the boundaries of that abstraction.
 
 ### [Repo2C4](https://github.com/rodri-oliveira-dev/Repo2C4)
 
@@ -55,13 +55,13 @@ Makes decisions around eventual consistency, failure handling, and traceability 
 
 *.NET integration library*
 
-Addresses failure, concurrency, and duplication in outbound webhook delivery. It provides extensible contracts for enqueueing, leasing, retries, HMAC signing, and observability, demonstrating reliability and security patterns without claiming exactly-once delivery or bundling a production durable store.
+Addresses failure, concurrency, and duplication in outbound webhook delivery. Stable IDs make enqueueing idempotent, while leases and retries support at-least-once delivery with a durable store supplied by the application; receivers must still tolerate duplicates. The [case study](https://rodri-oliveira-dev.github.io/en/case-studies/reliable-webhooks/) examines these guarantees and their limits.
 
 ### [ComplexityAnalysis.Analyzers](https://github.com/rodri-oliveira-dev/complexity-analyzers)
 
 *Static analysis tool*
 
-Surfaces costly patterns and complexity regressions before runtime. The Roslyn analyzer estimates Big-O when evidence is sufficient and enforces configurable metrics in builds and IDEs, demonstrating compiler API expertise, semantic analysis, and conservative diagnostic design.
+Surfaces costly patterns and complexity regressions before runtime. The Roslyn analyzer estimates Big-O when evidence is sufficient, enforces configurable metrics in builds and IDEs, and reports an unknown result rather than inferring beyond what the code can support.
 
 Other work remains available through [Repo Control Center](https://github.com/rodri-oliveira-dev/repo-status-dashboard), a dashboard for repository CI, releases, security, and health, and the [full repository list](https://github.com/rodri-oliveira-dev?tab=repositories).
 
@@ -69,9 +69,13 @@ Other work remains available through [Repo Control Center](https://github.com/ro
 
 ## Open-source contributions
 
-I also contribute fixes, tests, and documentation to third-party projects, including LikeC4, OpenCNPJ, and Ocelot.
+Selected merged contributions that demonstrate correction, maintenance, and security work in existing codebases:
 
-I maintain an [open-source contribution catalog](docs/open-source-contributions.en.md) with public Pull Requests and their automatically reconciled statuses.
+- **Ocelot — [PR #2420](https://github.com/ThreeMammals/Ocelot/pull/2420):** corrected downstream timeout mapping to HTTP 504 under RFC 9110 while preserving client cancellation and QoS behavior, with unit and acceptance tests.
+- **MySqlConnector — [PR #1675](https://github.com/mysql-net/MySqlConnector/pull/1675):** removed retired Azure MySQL Single Server detection while preserving the AWS RDS Proxy path and simplifying connection logic.
+- **OpenCNPJ — [PR #75](https://github.com/Hitmasu/OpenCNPJ/pull/75):** centralized external downloads behind timeouts, size limits, temporary files, and failure cleanup, backed by tests and CI validation.
+
+The [full open-source contribution catalog](docs/open-source-contributions.en.md) keeps the remaining Pull Requests and their statuses automatically reconciled.
 
 ## Governance as code
 
