@@ -10,9 +10,11 @@
 
 **Arquiteto de Software · Sistemas Distribuídos · .NET · Cloud**
 
+*Software architect working hands-on with .NET, distributed systems, cloud, architecture governance, and open-source developer tooling.*
+
 Há mais de 20 anos, trabalho no desenvolvimento e na evolução de sistemas corporativos, com foco em arquitetura de software, integrações e modernização de aplicações. Procuro equilibrar necessidades de negócio, decisões técnicas e a realidade operacional dos sistemas.
 
-Aqui compartilho ferramentas, bibliotecas e experimentos que ajudam a transformar decisões de arquitetura em código, testes e automação.
+Aqui compartilho ferramentas, bibliotecas e laboratórios open source que ajudam a transformar decisões de arquitetura e governança em código, testes e automação.
 
 **Links profissionais**
 
@@ -31,7 +33,7 @@ Ferramentas, bibliotecas e laboratórios que conectam decisões de arquitetura �
 
 *Ferramenta de governança arquitetural*
 
-Ajuda equipes a manter registros de decisão consistentes e rastreáveis. A CLI em .NET cria, valida e indexa ADRs; análises opcionais de impacto e drift trabalham com evidências delimitadas, sem substituir o julgamento arquitetural. O [estudo de caso](https://rodri-oliveira-dev.github.io/case-studies/adr-guard/) detalha decisões e trade-offs.
+Ajuda equipes a manter registros de decisão consistentes e rastreáveis. A CLI em .NET cria, valida e indexa ADRs; análises opcionais de impacto e desvios arquiteturais trabalham com evidências delimitadas, sem substituir o julgamento humano. O [estudo de caso](https://rodri-oliveira-dev.github.io/case-studies/adr-guard/) detalha decisões e trade-offs.
 
 ### [Dapper.FluentMap](https://github.com/rodri-oliveira-dev/Dapper-FluentMap)
 
@@ -55,7 +57,7 @@ Torna decisões sobre consistência eventual, falhas e rastreabilidade reproduz�
 
 *Biblioteca .NET para integração*
 
-Trata falhas, concorrência e duplicidade na entrega de webhooks de saída. IDs estáveis tornam o enfileiramento idempotente, enquanto leases e retries sustentam entrega at-least-once com um store durável fornecido pela aplicação; o destinatário ainda precisa tolerar duplicatas. O [estudo de caso](https://rodri-oliveira-dev.github.io/case-studies/reliable-webhooks/) examina essas garantias e seus limites.
+Trata falhas, concorrência e duplicidade na entrega de webhooks de saída. IDs estáveis tornam o enfileiramento idempotente, enquanto concessões temporárias e novas tentativas sustentam entrega at-least-once com armazenamento durável fornecido pela aplicação; o destinatário ainda precisa tolerar duplicatas. O [estudo de caso](https://rodri-oliveira-dev.github.io/case-studies/reliable-webhooks/) examina essas garantias e seus limites.
 
 ### [ComplexityAnalysis.Analyzers](https://github.com/rodri-oliveira-dev/complexity-analyzers)
 
@@ -71,7 +73,7 @@ Outros trabalhos: [Repo Control Center](https://github.com/rodri-oliveira-dev/re
 
 Algumas contribuições integradas que representam correção, manutenção e segurança em bases existentes:
 
-- **Ocelot — [PR #2420](https://github.com/ThreeMammals/Ocelot/pull/2420):** corrigiu o mapeamento de timeouts downstream para HTTP 504 conforme a RFC 9110, preservando cancelamento do cliente e comportamento de QoS, com testes unitários e de aceitação.
+- **Ocelot — [PR #2420](https://github.com/ThreeMammals/Ocelot/pull/2420):** corrigiu o mapeamento de timeouts do serviço de destino para HTTP 504 conforme a RFC 9110, preservando cancelamento do cliente e comportamento de QoS, com testes unitários e de aceitação.
 - **MySqlConnector — [PR #1675](https://github.com/mysql-net/MySqlConnector/pull/1675):** removeu a detecção obsoleta do Azure MySQL Single Server, preservando o caminho do AWS RDS Proxy e simplificando a lógica de conexão.
 - **OpenCNPJ — [PR #75](https://github.com/Hitmasu/OpenCNPJ/pull/75):** centralizou downloads externos em um fluxo com timeouts, limites de tamanho, arquivos temporários e limpeza em falhas, acompanhado por testes e validação em CI.
 

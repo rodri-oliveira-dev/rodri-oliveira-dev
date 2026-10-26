@@ -10,9 +10,9 @@
 
 **Software Architect · Distributed Systems · .NET · Cloud**
 
-I have more than 20 years of experience developing and evolving enterprise systems, with a focus on software architecture, integrations, and application modernization. I aim to balance business needs, technical decisions, and the operational realities of existing systems.
+I am a software architect with more than 20 years of experience evolving enterprise systems. I work hands-on with .NET, distributed systems, and cloud platforms, balancing business needs, technical trade-offs, and operational constraints.
 
-Here I share tools, libraries, and experiments that help turn architectural decisions into code, tests, and automation.
+This profile brings together open-source tools, libraries, and labs focused on architecture governance, integration reliability, and developer workflows.
 
 **Professional links**
 
