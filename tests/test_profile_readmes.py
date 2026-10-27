@@ -1,4 +1,4 @@
-"""Keep the bilingual profile presentation usable in GitHub's mobile Markdown viewer."""
+"""Keep the localized profile presentation usable in GitHub's mobile Markdown viewer."""
 
 import unittest
 from pathlib import Path
@@ -20,9 +20,10 @@ class ProfileReadmeTests(unittest.TestCase):
         cls.documents = {
             "pt": Path("README.md").read_text(encoding="utf-8"),
             "en": Path("README.en.md").read_text(encoding="utf-8"),
+            "es": Path("README.es.md").read_text(encoding="utf-8"),
         }
 
-    def test_both_versions_use_a_single_column_project_layout(self):
+    def test_localized_versions_use_a_single_column_project_layout(self):
         for language, content in self.documents.items():
             with self.subTest(language=language):
                 self.assertNotIn("| --- |", content)
@@ -40,11 +41,19 @@ class ProfileReadmeTests(unittest.TestCase):
                 ]
                 self.assertEqual(positions, sorted(positions))
 
-    def test_each_language_links_to_its_own_external_contributions_catalog(self):
+    def test_each_language_links_to_an_available_contributions_catalog(self):
         self.assertIn("(docs/open-source-contributions.md)", self.documents["pt"])
         self.assertIn("(docs/open-source-contributions.en.md)", self.documents["en"])
+        self.assertIn("(docs/open-source-contributions.en.md)", self.documents["es"])
         self.assertIn("[English](README.en.md)", self.documents["pt"])
         self.assertIn("[Português](README.md)", self.documents["en"])
+
+    def test_spanish_readme_links_to_spanish_case_studies(self):
+        for slug in ("adr-guard", "dapper-fluentmap", "reliable-webhooks"):
+            self.assertIn(
+                f"https://rodri-oliveira-dev.github.io/es/case-studies/{slug}/",
+                self.documents["es"],
+            )
 
     def test_professional_links_and_governance_remain_available(self):
         common = (

@@ -33,13 +33,13 @@ Herramientas, bibliotecas y laboratorios que conectan las decisiones de arquitec
 
 *Herramienta de gobernanza de arquitectura*
 
-Ayuda a los equipos a mantener registros de decisiones consistentes y trazables. La CLI en .NET crea, valida e indexa ADRs; los análisis opcionales de impacto y desviaciones arquitectónicas se basan en evidencia acotada, sin sustituir el criterio humano. El [estudio de caso](https://rodri-oliveira-dev.github.io/case-studies/adr-guard/) detalla las decisiones y sus implicaciones.
+Ayuda a los equipos a mantener registros de decisiones consistentes y trazables. La CLI en .NET crea, valida e indexa ADRs; los análisis opcionales de impacto y desviaciones arquitectónicas se basan en evidencia acotada, sin sustituir el criterio humano. El [estudio de caso](https://rodri-oliveira-dev.github.io/es/case-studies/adr-guard/) detalla las decisiones y sus implicaciones.
 
 ### [Dapper.FluentMap](https://github.com/rodri-oliveira-dev/Dapper-FluentMap)
 
 *Biblioteca .NET*
 
-Resuelve el mapeo entre objetos .NET y columnas cuando las convenciones de Dapper no son suficientes, sin agregar atributos a los modelos. La evolución de la biblioteca combina una API fluida, extensibilidad y compatibilidad con aplicaciones existentes, y demuestra el mantenimiento responsable de APIs públicas y la modernización incremental. El [estudio de caso](https://rodri-oliveira-dev.github.io/case-studies/dapper-fluentmap/) analiza los límites de esta abstracción.
+Resuelve el mapeo entre objetos .NET y columnas cuando las convenciones de Dapper no son suficientes, sin agregar atributos a los modelos. La evolución de la biblioteca combina una API fluida, extensibilidad y compatibilidad con aplicaciones existentes, y demuestra el mantenimiento responsable de APIs públicas y la modernización incremental. El [estudio de caso](https://rodri-oliveira-dev.github.io/es/case-studies/dapper-fluentmap/) analiza los límites de esta abstracción.
 
 ### [Repo2C4](https://github.com/rodri-oliveira-dev/Repo2C4)
 
@@ -57,7 +57,7 @@ Permite reproducir decisiones sobre consistencia eventual, manejo de fallas y tr
 
 *Biblioteca .NET para integraciones*
 
-Aborda las fallas, la concurrencia y la duplicación en la entrega de webhooks salientes. Los IDs estables hacen que la puesta en cola sea idempotente, mientras que las concesiones temporales y los reintentos permiten una entrega at-least-once con almacenamiento duradero proporcionado por la aplicación; el destinatario aún debe tolerar duplicados. El [estudio de caso](https://rodri-oliveira-dev.github.io/case-studies/reliable-webhooks/) examina estas garantías y sus límites.
+Aborda las fallas, la concurrencia y la duplicación en la entrega de webhooks salientes. Los IDs estables hacen que la puesta en cola sea idempotente, mientras que las concesiones temporales y los reintentos permiten una entrega at-least-once con almacenamiento duradero proporcionado por la aplicación; el destinatario aún debe tolerar duplicados. El [estudio de caso](https://rodri-oliveira-dev.github.io/es/case-studies/reliable-webhooks/) examina estas garantías y sus límites.
 
 ### [ComplexityAnalysis.Analyzers](https://github.com/rodri-oliveira-dev/complexity-analyzers)
 
@@ -77,7 +77,7 @@ Algunas contribuciones integradas que representan correcciones, mantenimiento y 
 - **MySqlConnector — [PR #1675](https://github.com/mysql-net/MySqlConnector/pull/1675):** eliminó la detección obsoleta de Azure MySQL Single Server, mantuvo la ruta de AWS RDS Proxy y simplificó la lógica de conexión.
 - **OpenCNPJ — [PR #75](https://github.com/Hitmasu/OpenCNPJ/pull/75):** centralizó las descargas externas en un flujo con tiempos de espera, límites de tamaño, archivos temporales y limpieza en caso de fallas, acompañado de pruebas y validación en CI.
 
-El [catálogo completo de contribuciones de código abierto](docs/open-source-contributions.md) mantiene actualizados automáticamente los demás Pull Requests y sus estados.
+El [catálogo completo de contribuciones de código abierto (en inglés)](docs/open-source-contributions.en.md) mantiene actualizados automáticamente los demás Pull Requests y sus estados.
 
 ## Gobernanza como código
 
