@@ -13,6 +13,8 @@ on:
       - "**/*.md"
       - ".cspell.json"
       - ".cspell/**"
+      - "package.json"
+      - "package-lock.json"
       - ".github/workflows/spell-check.yml"
   workflow_dispatch:
 
@@ -37,8 +39,8 @@ jobs:
           node-version: 22
           package-manager-cache: false
 
-      - name: Install Brazilian Portuguese dictionary
-        run: npm install --no-save --ignore-scripts @cspell/dict-pt-br@2.4.2
+      - name: Install language dictionaries
+        run: npm ci --ignore-scripts
 
       - name: Check spelling
         uses: streetsidesoftware/cspell-action@e0668cf020899e887ee8ad4d173c31738a79eae8 # v9.0.1

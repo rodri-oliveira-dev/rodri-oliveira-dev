@@ -1,0 +1,8 @@
+{
+  "name": "rodri-oliveira-dev-profile",
+  "private": true,
+  "devDependencies": {
+    "@cspell/dict-es-es": "3.0.9",
+    "@cspell/dict-pt-br": "2.4.2"
+  }
+}

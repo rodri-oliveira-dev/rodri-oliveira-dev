@@ -1,4 +1,5 @@
-**Português** | [English](README.en.md)
+**Português** | [English](README.en.md) | [Español (Latinoamérica)](README.es.md)
+<!-- cspell:words Español Latinoamérica -->
 
 <p align="left">
   <a href="https://rodri-oliveira-dev.github.io/" aria-label="Portfólio profissional">
@@ -10,9 +11,11 @@
 
 **Arquiteto de Software · Sistemas Distribuídos · .NET · Cloud**
 
+*Software architect working hands-on with .NET, distributed systems, cloud, architecture governance, and open-source developer tooling.*
+
 Há mais de 20 anos, trabalho no desenvolvimento e na evolução de sistemas corporativos, com foco em arquitetura de software, integrações e modernização de aplicações. Procuro equilibrar necessidades de negócio, decisões técnicas e a realidade operacional dos sistemas.
 
-Aqui compartilho ferramentas, bibliotecas e experimentos que ajudam a transformar decisões de arquitetura em código, testes e automação.
+Aqui compartilho ferramentas, bibliotecas e laboratórios open source que ajudam a transformar decisões de arquitetura e governança em código, testes e automação.
 
 **Links profissionais**
 
@@ -23,51 +26,59 @@ Aqui compartilho ferramentas, bibliotecas e experimentos que ajudam a transforma
 
 ---
 
-## Ferramentas e bibliotecas
+## Projetos selecionados
 
-Projetos que mantenho para apoiar decisões técnicas, documentação, desenvolvimento e operação de software.
+Ferramentas, bibliotecas e laboratórios que conectam decisões de arquitetura à implementação e à operação.
 
 ### [ADR Guard](https://github.com/rodri-oliveira-dev/adr-guard)
 
-*Architecture Decision Records · CLI · GitHub Actions · VS Code*
+*Ferramenta de governança arquitetural*
 
-Ferramenta para criar, validar e organizar ADRs durante o desenvolvimento e na CI. Inclui uma [extensão para VS Code](https://marketplace.visualstudio.com/items?itemName=rodrioliveira.adr-guard) e recursos opcionais de IA com revisão humana.
-
-### [Repo2C4](https://github.com/rodri-oliveira-dev/Repo2C4)
-
-*C4 · LikeC4 · CLI · MCP*
-
-Gera documentação de arquitetura a partir de evidências do código. Inclui um agente opcional e uma etapa de revisão antes de gravar alterações, distinguindo fatos observados de hipóteses arquiteturais.
+Ajuda equipes a manter registros de decisão consistentes e rastreáveis. A CLI em .NET cria, valida e indexa ADRs; análises opcionais de impacto e desvios arquiteturais trabalham com evidências delimitadas, sem substituir o julgamento humano. O [estudo de caso](https://rodri-oliveira-dev.github.io/case-studies/adr-guard/) detalha decisões e trade-offs.
 
 ### [Dapper.FluentMap](https://github.com/rodri-oliveira-dev/Dapper-FluentMap)
 
-*.NET · Dapper · Bibliotecas · NuGet*
+*Biblioteca .NET*
 
-Biblioteca de mapeamento para Dapper que mantenho e evoluo, com atenção à compatibilidade com aplicações existentes, testes, versionamento e modernização do .NET.
+Resolve mapeamentos entre objetos .NET e colunas quando as convenções do Dapper não bastam, sem adicionar atributos aos modelos. A evolução da biblioteca combina API fluente, extensibilidade e compatibilidade com aplicações existentes, evidenciando manutenção de APIs públicas e modernização incremental. O [estudo de caso](https://rodri-oliveira-dev.github.io/case-studies/dapper-fluentmap/) discute os limites dessa abstração.
 
-### [Repo Control Center](https://github.com/rodri-oliveira-dev/repo-status-dashboard)
+### [Repo2C4](https://github.com/rodri-oliveira-dev/Repo2C4)
 
-*Angular · GitHub Actions · CI · Segurança*
+*Ferramenta de documentação arquitetural*
 
-Painel para acompanhar CI, releases, segurança e saúde dos repositórios. Utiliza snapshots estáticos gerados por automações e oferece um [radar de tecnologias](https://rodri-oliveira-dev.github.io/repo-status-dashboard/#/technology-radar).
-
-## Laboratório de arquitetura
+Reduz a divergência entre código e diagramas ao transformar evidências delimitadas de repositórios .NET em documentação C4/LikeC4 revisável. O fluxo separa observações de hipóteses e exige aplicação explícita, demonstrando análise estática, geração determinística e integração com agentes via MCP.
 
 ### [POC Arquitetura](https://github.com/rodri-oliveira-dev/poc-arquitetura)
 
-*DDD · Kafka · Outbox/Inbox · Sagas · Idempotência*
+*Laboratório de sistemas distribuídos*
 
-Laboratório de sistemas distribuídos para explorar consistência eventual, falhas e rastreabilidade por meio de implementações, testes e runbooks.
+Torna decisões sobre consistência eventual, falhas e rastreabilidade reproduzíveis em uma base de serviços distribuídos em .NET. Implementa DDD, integração assíncrona com Kafka e Outbox, testes e runbooks, deixando propostas sem evidência marcadas explicitamente como pendentes.
 
-[Explorar todos os repositórios →](https://github.com/rodri-oliveira-dev?tab=repositories)
+### [ReliableWebhooks](https://github.com/rodri-oliveira-dev/ReliableWebhooks)
+
+*Biblioteca .NET para integração*
+
+Trata falhas, concorrência e duplicidade na entrega de webhooks de saída. IDs estáveis tornam o enfileiramento idempotente, enquanto concessões temporárias e novas tentativas sustentam entrega at-least-once com armazenamento durável fornecido pela aplicação; o destinatário ainda precisa tolerar duplicatas. O [estudo de caso](https://rodri-oliveira-dev.github.io/case-studies/reliable-webhooks/) examina essas garantias e seus limites.
+
+### [ComplexityAnalysis.Analyzers](https://github.com/rodri-oliveira-dev/complexity-analyzers)
+
+*Ferramenta de análise estática*
+
+Identifica padrões de custo e regressões de complexidade antes que cheguem à execução. O analisador Roslyn estima Big-O quando há evidência suficiente, aplica métricas configuráveis no build e na IDE e retorna resultado indeterminado em vez de inferir além do que o código permite.
+
+Outros trabalhos: [Repo Control Center](https://github.com/rodri-oliveira-dev/repo-status-dashboard), painel de CI, releases, segurança e saúde dos repositórios, e a [lista completa de repositórios](https://github.com/rodri-oliveira-dev?tab=repositories).
 
 ---
 
 ## Contribuições open source
 
-Também contribuo com correções, testes e documentação em projetos de terceiros, incluindo LikeC4, OpenCNPJ e Ocelot.
+Algumas contribuições integradas que representam correção, manutenção e segurança em bases existentes:
 
-Mantenho um [catálogo de contribuições open source](docs/open-source-contributions.md) com Pull Requests públicos e seus estados atualizados automaticamente.
+- **Ocelot — [PR #2420](https://github.com/ThreeMammals/Ocelot/pull/2420):** corrigiu o mapeamento de timeouts do serviço de destino para HTTP 504 conforme a RFC 9110, preservando cancelamento do cliente e comportamento de QoS, com testes unitários e de aceitação.
+- **MySqlConnector — [PR #1675](https://github.com/mysql-net/MySqlConnector/pull/1675):** removeu a detecção obsoleta do Azure MySQL Single Server, preservando o caminho do AWS RDS Proxy e simplificando a lógica de conexão.
+- **OpenCNPJ — [PR #75](https://github.com/Hitmasu/OpenCNPJ/pull/75):** centralizou downloads externos em um fluxo com timeouts, limites de tamanho, arquivos temporários e limpeza em falhas, acompanhado por testes e validação em CI.
+
+O [catálogo completo de contribuições open source](docs/open-source-contributions.md) mantém os demais Pull Requests e seus estados atualizados automaticamente.
 
 ## Governança como código
 
