@@ -12,8 +12,10 @@ on:
       - tests/**
       - docs/open-source-contributions.md
       - docs/open-source-contributions.en.md
+      - docs/open-source-contributions.es.md
       - README.md
       - README.en.md
+      - README.es.md
   schedule:
     - cron: "0 9 * * *"
   workflow_dispatch:
@@ -96,22 +98,26 @@ jobs:
             --previous .github/external-contributions-catalog.json \
             --output preview/.github/external-contributions-catalog.json
 
-      - name: Render and verify both languages
+      - name: Render and verify all three languages
         run: |
           python3 scripts/render_external_contributions.py \
             --snapshot preview/.github/external-contributions-catalog.json \
             --output-pt preview/docs/open-source-contributions.md \
             --output-en preview/docs/open-source-contributions.en.md \
+            --output-es preview/docs/open-source-contributions.es.md \
             --write
           cp preview/docs/open-source-contributions.md "$RUNNER_TEMP/catalog.pt.first.md"
           cp preview/docs/open-source-contributions.en.md "$RUNNER_TEMP/catalog.en.first.md"
+          cp preview/docs/open-source-contributions.es.md "$RUNNER_TEMP/catalog.es.first.md"
           python3 scripts/render_external_contributions.py \
             --snapshot preview/.github/external-contributions-catalog.json \
             --output-pt preview/docs/open-source-contributions.md \
             --output-en preview/docs/open-source-contributions.en.md \
+            --output-es preview/docs/open-source-contributions.es.md \
             --write
           cmp preview/docs/open-source-contributions.md "$RUNNER_TEMP/catalog.pt.first.md"
           cmp preview/docs/open-source-contributions.en.md "$RUNNER_TEMP/catalog.en.first.md"
+          cmp preview/docs/open-source-contributions.es.md "$RUNNER_TEMP/catalog.es.first.md"
 
       - name: Summarize verified collection
         run: |

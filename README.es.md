@@ -77,7 +77,7 @@ Algunas contribuciones integradas que representan correcciones, mantenimiento y 
 - **MySqlConnector — [PR #1675](https://github.com/mysql-net/MySqlConnector/pull/1675):** eliminó la detección obsoleta de Azure MySQL Single Server, mantuvo la ruta de AWS RDS Proxy y simplificó la lógica de conexión.
 - **OpenCNPJ — [PR #75](https://github.com/Hitmasu/OpenCNPJ/pull/75):** centralizó las descargas externas en un flujo con tiempos de espera, límites de tamaño, archivos temporales y limpieza en caso de fallas, acompañado de pruebas y validación en CI.
 
-El [catálogo completo de contribuciones de código abierto (en inglés)](docs/open-source-contributions.en.md) mantiene actualizados automáticamente los demás Pull Requests y sus estados.
+El [catálogo completo de contribuciones de código abierto](docs/open-source-contributions.es.md) mantiene actualizados automáticamente los demás Pull Requests y sus estados.
 
 ## Gobernanza como código
 

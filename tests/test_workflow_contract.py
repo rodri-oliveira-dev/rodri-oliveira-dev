@@ -23,6 +23,12 @@ class WorkflowContractTests(unittest.TestCase):
         self.assertNotIn("external-contributions-review.json", self.source)
         self.assertIn("include-hidden-files: true", self.source)
 
+    def test_spanish_catalog_is_rendered_and_checked_twice(self):
+        self.assertIn("--output-es preview/docs/open-source-contributions.es.md", self.source)
+        self.assertIn("cmp preview/docs/open-source-contributions.es.md", self.source)
+        self.assertIn("- docs/open-source-contributions.es.md", self.source)
+        self.assertIn("- README.es.md", self.source)
+
     def test_concurrency_and_main_gate_are_present(self):
         self.assertIn("concurrency:", self.source)
         self.assertIn("github.ref == 'refs/heads/main'", self.source)

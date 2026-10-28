@@ -4,7 +4,7 @@ from pathlib import Path
 from unittest.mock import patch
 
 from scripts.render_external_contributions import (
-    RenderError, _anchor, load_snapshot, render_catalog, validate_snapshot, write_updates,
+    RenderError, _anchor, load_snapshot, prepare_updates, render_catalog, validate_snapshot, write_updates,
 )
 
 
@@ -30,16 +30,18 @@ class RendererTests(unittest.TestCase):
         self.assertEqual(dotted, _anchor("OWNER/A.B"))
         self.assertRegex(dotted, r"^repository-[0-9a-f]+$")
 
-    def test_bilingual_catalogs_share_facts_but_not_interface_text(self):
+    def test_multilingual_catalogs_share_facts_but_not_interface_text(self):
         data = snapshot("Original PR title")
-        pt, en = render_catalog(data, "pt"), render_catalog(data, "en")
-        for rendered in (pt, en):
+        pt, en, es = (render_catalog(data, language) for language in ("pt", "en", "es"))
+        for rendered in (pt, en, es):
             self.assertIn("Original PR title", rendered)
             self.assertIn("https://github.com/acme/widget/pull/7", rendered)
         self.assertIn("Integrado", pt)
         self.assertIn("Merged", en)
         self.assertIn("Índice de projetos", pt)
         self.assertIn("Project index", en)
+        self.assertIn("Contribuciones por repositorio", es)
+        self.assertIn("Integrado", es)
 
     def test_closed_state_uses_consistent_portuguese_terminology(self):
         data = snapshot()
@@ -56,11 +58,12 @@ class RendererTests(unittest.TestCase):
         self.assertIn(r"Fix \[unsafe\] \*markdown\* &lt;tag&gt;", rendered)
         self.assertNotIn("<tag>", rendered)
 
-    def test_repository_prs_are_rendered_as_a_table_in_both_languages(self):
+    def test_repository_prs_are_rendered_as_a_table_in_all_languages(self):
         data = snapshot("Fix a | b")
         for language, status, date_opened, date_merged in (
                 ("pt", "Integrado", "01/01/2026", "02/01/2026"),
-                ("en", "Merged", "2026-01-01", "2026-01-02")):
+                ("en", "Merged", "2026-01-01", "2026-01-02"),
+                ("es", "Integrado", "01/01/2026", "02/01/2026")):
             rendered = render_catalog(data, language)
             self.assertIn("| --- | --- | --- | --- |", rendered)
             self.assertIn(
@@ -91,23 +94,23 @@ class RendererTests(unittest.TestCase):
 
     def test_failure_writing_second_language_restores_both_files(self):
         with tempfile.TemporaryDirectory() as directory:
-            first, second = Path(directory) / "pt.md", Path(directory) / "en.md"
-            first.write_text("old pt", encoding="utf-8")
-            second.write_text("old en", encoding="utf-8")
+            first, second, third = (Path(directory) / name for name in ("pt.md", "en.md", "es.md"))
+            for path, old in ((first, "old pt"), (second, "old en"), (third, "old es")):
+                path.write_text(old, encoding="utf-8")
             real_replace = __import__("os").replace
             stage_replacements = 0
             def failing_replace(source, destination):
                 nonlocal stage_replacements
                 if ".stage-" in str(source):
                     stage_replacements += 1
-                    if stage_replacements == 2:
+                    if stage_replacements == 3:
                         raise OSError("disk failure")
                 return real_replace(source, destination)
             with patch("scripts.render_external_contributions.os.replace", side_effect=failing_replace):
                 with self.assertRaisesRegex(RenderError, "rollback"):
-                    write_updates({first: "new pt", second: "new en"})
-            self.assertEqual(first.read_text(encoding="utf-8"), "old pt")
-            self.assertEqual(second.read_text(encoding="utf-8"), "old en")
+                    write_updates({first: "new pt", second: "new en", third: "new es"})
+            for path, old in ((first, "old pt"), (second, "old en"), (third, "old es")):
+                self.assertEqual(path.read_text(encoding="utf-8"), old)
 
 
     def test_dashboard_sections_navigation_and_collapsible_history(self):
@@ -115,6 +118,7 @@ class RendererTests(unittest.TestCase):
         for language, titles in (
             ("pt", ("Projetos em destaque", "Atividade recente", "Índice de projetos", "Contribuições por repositório")),
             ("en", ("Featured projects", "Recent activity", "Project index", "Contributions by repository")),
+            ("es", ("Proyectos destacados", "Actividad reciente", "Índice de proyectos", "Contribuciones por repositorio")),
         ):
             with self.subTest(language=language):
                 rendered = render_catalog(data, language)
@@ -161,7 +165,7 @@ class RendererTests(unittest.TestCase):
             "repositories": 0, "pull_requests": 0, "merged": 0,
             "open": 0, "closed_unmerged": 0,
         }
-        for language in ("pt", "en"):
+        for language in ("pt", "en", "es"):
             with self.subTest(language=language):
                 rendered = render_catalog(data, language)
                 self.assertIn("**0%**", rendered)
@@ -185,6 +189,13 @@ class RendererTests(unittest.TestCase):
                 "Contributions by repository",
                 "Track issues and work in progress",
             )),
+            ("es", (
+                "Proyectos destacados",
+                "Actividad reciente",
+                "Índice de proyectos",
+                "Contribuciones por repositorio",
+                "Seguir issues y trabajo en curso",
+            )),
         ):
             with self.subTest(language=language):
                 rendered = render_catalog(snapshot(), language)
@@ -197,21 +208,31 @@ class RendererTests(unittest.TestCase):
                 self.assertEqual(rendered.count(board_url), 1)
                 self.assertNotIn(" · [", nav)
 
-    def test_board_link_only_lives_in_bilingual_catalogs(self):
+    def test_board_link_only_lives_in_localized_catalogs(self):
         board_url = "https://github.com/users/rodri-oliveira-dev/projects/1/views/1"
-        for readme in ("README.md", "README.en.md"):
+        for readme in ("README.md", "README.en.md", "README.es.md"):
             self.assertNotIn(board_url, Path(readme).read_text(encoding="utf-8"))
-        for catalog in ("docs/open-source-contributions.md", "docs/open-source-contributions.en.md"):
+        for catalog in ("docs/open-source-contributions.md", "docs/open-source-contributions.en.md", "docs/open-source-contributions.es.md"):
             self.assertEqual(Path(catalog).read_text(encoding="utf-8").count(board_url), 1)
 
-    def test_published_bilingual_catalogs_match_the_renderer(self):
+    def test_published_localized_catalogs_match_the_renderer(self):
         data = load_snapshot(Path(".github/external-contributions-catalog.json"))
         for language, path in (
             ("pt", Path("docs/open-source-contributions.md")),
             ("en", Path("docs/open-source-contributions.en.md")),
+            ("es", Path("docs/open-source-contributions.es.md")),
         ):
             with self.subTest(language=language):
                 self.assertEqual(path.read_text(encoding="utf-8"), render_catalog(data, language))
+
+    def test_prepare_updates_requires_three_distinct_paths(self):
+        data = snapshot()
+        paths = {"pt": Path("a"), "en": Path("b"), "es": Path("c")}
+        self.assertEqual(len(prepare_updates(data, paths)), 3)
+        for invalid in ({"pt": Path("a"), "en": Path("b")},
+                        {"pt": Path("a"), "en": Path("b"), "es": Path("a")}):
+            with self.assertRaisesRegex(RenderError, "Distinct"):
+                prepare_updates(data, invalid)
 
     def test_same_snapshot_renders_identically(self):
         data = snapshot()

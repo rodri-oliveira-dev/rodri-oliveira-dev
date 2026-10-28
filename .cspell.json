@@ -57,6 +57,14 @@
       ]
     },
     {
+      "filename": "docs/open-source-contributions.es.md",
+      "language": "es,en-US",
+      "dictionaries": [
+        "es-es",
+        "profile-terms"
+      ]
+    },
+    {
       "filename": "docs/open-source-contributions.md",
       "language": "pt_BR,en-US",
       "dictionaries": [

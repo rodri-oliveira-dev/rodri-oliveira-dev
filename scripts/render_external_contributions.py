@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate one structured snapshot and render the PT-BR and English catalogs."""
+"""Validate one snapshot and render the PT-BR, English, and Spanish catalogs."""
 
 from __future__ import annotations
 
@@ -48,6 +48,19 @@ TEXT = {
         "states": {"merged": "Merged", "open": "Open", "closed_unmerged": "Closed without merge"},
         "date": "%Y-%m-%d", "note": "The date above is the synchronization that produced the current published version; queries with no factual changes create no commit.",
     },
+    "es": {
+        "title": "Contribuciones de código abierto",
+        "intro": "Este catálogo reúne los pull requests públicos que abrí en proyectos de terceros. Los títulos se conservan tal como aparecen en GitHub y los estados se actualizan automáticamente.",
+        "metrics": "Indicadores generales", "projects": "Índice de proyectos",
+        "by_repo": "Contribuciones por repositorio", "repos": "Repositorios externos",
+        "prs": "PRs encontrados", "merged": "PRs integrados", "open": "PRs abiertos",
+        "closed_unmerged": "PRs cerrados sin integración", "sync": "Última sincronización correcta",
+        "total": "Total", "pr_label": "Pull request", "status_label": "Estado",
+        "opened": "Abierto el", "merged_on": "Integrado el",
+        "states": {"merged": "Integrado", "open": "Abierto", "closed_unmerged": "Cerrado sin integrar"},
+        "date": "%d/%m/%Y",
+        "note": "La fecha corresponde a la sincronización que produjo la versión publicada actual; las consultas sin cambios en los datos no generan commits.",
+    },
 }
 
 
@@ -86,6 +99,23 @@ DASHBOARD_TEXT = {
         "closed_short": "closed without merge",
         "closed_one": "closed without merge",
     },
+    "es": {
+        "highlights": "Proyectos destacados",
+        "work_in_progress": "Seguir issues y trabajo en curso",
+        "recent": "Actividad reciente",
+        "merge_rate": "de los PRs integrados",
+        "recent_repo": "Repositorio",
+        "empty": "No se encontraron contribuciones.",
+        "project_link": "Ver repositorio",
+        "counts": "Contribuciones",
+        "compact_prs": "PRs",
+        "merged_short": "integrados",
+        "merged_one": "integrado",
+        "open_short": "abiertos",
+        "open_one": "abierto",
+        "closed_short": "cerrados sin integrar",
+        "closed_one": "cerrado sin integrar",
+    },
 }
 
 FEATURED_ORDER = (
@@ -99,18 +129,22 @@ FEATURED_DESCRIPTIONS = {
     "likec4/likec4": {
         "pt": "Documentação e localização",
         "en": "Documentation and localization",
+        "es": "Documentación y localización",
     },
     "hitmasu/opencnpj": {
         "pt": "Segurança, performance e APIs",
         "en": "Security, performance and APIs",
+        "es": "Seguridad, rendimiento y APIs",
     },
     "threemammals/ocelot": {
         "pt": "API Gateway e testes",
         "en": "API gateway and testing",
+        "es": "Gateway de API y pruebas",
     },
     "guibranco/crispywaffle": {
         "pt": "Serialização de dados",
         "en": "Data serialization",
+        "es": "Serialización de datos",
     },
 }
 
@@ -374,9 +408,9 @@ def render_catalog(snapshot: dict, language: str) -> str:
 
 def prepare_updates(snapshot: dict, paths: dict[str, Path]) -> dict[Path, str]:
     validate_snapshot(snapshot)
-    if set(paths) != set(TEXT) or len(set(paths.values())) != 2:
-        raise RenderError("Two distinct PT-BR and English output paths are required")
-    return {paths[language]: render_catalog(snapshot, language) for language in ("pt", "en")}
+    if set(paths) != set(TEXT) or len(set(paths.values())) != len(TEXT):
+        raise RenderError("Distinct PT-BR, English, and Spanish output paths are required")
+    return {paths[language]: render_catalog(snapshot, language) for language in TEXT}
 
 
 def write_updates(updates: dict[Path, str]) -> None:
@@ -426,10 +460,11 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--snapshot", type=Path, required=True)
     parser.add_argument("--output-pt", type=Path, default=Path("docs/open-source-contributions.md"))
     parser.add_argument("--output-en", type=Path, default=Path("docs/open-source-contributions.en.md"))
+    parser.add_argument("--output-es", type=Path, default=Path("docs/open-source-contributions.es.md"))
     parser.add_argument("--write", action="store_true")
     args = parser.parse_args(argv)
     try:
-        updates = prepare_updates(load_snapshot(args.snapshot), {"pt": args.output_pt, "en": args.output_en})
+        updates = prepare_updates(load_snapshot(args.snapshot), {"pt": args.output_pt, "en": args.output_en, "es": args.output_es})
         changed = [str(path) for path, content in updates.items()
                    if not path.exists() or path.read_text(encoding="utf-8") != content]
         if args.write:
