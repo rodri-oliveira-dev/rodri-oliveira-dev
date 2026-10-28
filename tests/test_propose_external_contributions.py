@@ -5,9 +5,12 @@ import unittest
 from pathlib import Path
 from unittest.mock import patch
 
+from scripts.render_external_contributions import load_snapshot, render_catalog
+
 from scripts.propose_external_contributions import (
-    BOT_EMAIL, BOT_NAME, BRANCH, ProposalError, _ensure_managed_branch_absent,
+    BOT_EMAIL, BOT_NAME, BRANCH, MANAGED_FILES, ProposalError, _ensure_managed_branch_absent,
     _same_catalog_facts, _verify_existing_head, eligible, existing_proposal, propose,
+    verified_preview,
 )
 
 MAIN_SHA = "a" * 40
@@ -37,6 +40,23 @@ def trusted_pr():
 
 
 class ProposalTests(unittest.TestCase):
+    def test_preview_verifies_spanish_content_and_managed_files(self):
+        self.assertEqual(MANAGED_FILES[3], "docs/open-source-contributions.es.md")
+        data = load_snapshot(Path(".github/external-contributions-catalog.json"))
+        with tempfile.TemporaryDirectory() as directory:
+            preview = Path(directory)
+            for name, content in ((MANAGED_FILES[0], Path(MANAGED_FILES[0]).read_bytes()),
+                                  (MANAGED_FILES[1], render_catalog(data, "pt").encode()),
+                                  (MANAGED_FILES[2], render_catalog(data, "en").encode()),
+                                  (MANAGED_FILES[3], render_catalog(data, "es").encode())):
+                path = preview / name
+                path.parent.mkdir(parents=True, exist_ok=True)
+                path.write_bytes(content)
+            self.assertEqual(set(verified_preview(preview)), set(MANAGED_FILES))
+            (preview / MANAGED_FILES[3]).write_text("stale", encoding="utf-8")
+            with self.assertRaisesRegex(ProposalError, "inconsistent"):
+                verified_preview(preview)
+
     def test_only_explicit_main_runs_are_eligible(self):
         self.assertTrue(eligible("schedule", "refs/heads/main", "false"))
         self.assertTrue(eligible("workflow_dispatch", "refs/heads/main", "true"))

@@ -24,7 +24,8 @@ except ModuleNotFoundError:
 
 MANAGED_FILES = (".github/external-contributions-catalog.json",
                  "docs/open-source-contributions.md",
-                 "docs/open-source-contributions.en.md")
+                 "docs/open-source-contributions.en.md",
+                 "docs/open-source-contributions.es.md")
 BRANCH = "automation/external-contributions"
 BOT_LOGIN = "github-actions[bot]"
 BOT_NAME = "github-actions[bot]"
@@ -72,7 +73,8 @@ def verified_preview(preview_dir: Path) -> dict[str, bytes]:
     snapshot = load_snapshot(snapshot_path)
     expected = {MANAGED_FILES[0]: snapshot_path.read_bytes(),
                 MANAGED_FILES[1]: render_catalog(snapshot, "pt").encode(),
-                MANAGED_FILES[2]: render_catalog(snapshot, "en").encode()}
+                MANAGED_FILES[2]: render_catalog(snapshot, "en").encode(),
+                MANAGED_FILES[3]: render_catalog(snapshot, "es").encode()}
     for name, content in expected.items():
         path = preview_dir / name
         if not path.is_file() or path.stat().st_size > 8_000_000 or path.read_bytes() != content:
@@ -221,7 +223,7 @@ def propose(command: Commands, *, preview_dir: Path, repository: str, sha: str,
     result = command.run("gh", "pr", "create", "--repo", repository, "--base", "main",
                          "--head", BRANCH,
                          "--title", "docs: refresh complete external contributions catalog",
-                         "--body", "Automated, complete refresh of public external pull requests. The collection is validated and rendered in PT-BR and English. Please review links, states, catalog integrity, and required checks before merging.")
+                         "--body", "Automated, complete refresh of public external pull requests. The collection is validated and rendered in PT-BR, English, and Latin American Spanish. Please review links, states, catalog integrity, and required checks before merging.")
     if result.returncode:
         raise ProposalError("Pull-request creation failed; the pushed branch was preserved")
     return ("created" if _dispatch_checks(command, repository) else "checks_unavailable"), BRANCH
