@@ -44,7 +44,7 @@ class ProfileReadmeTests(unittest.TestCase):
     def test_each_language_links_to_an_available_contributions_catalog(self):
         self.assertIn("(docs/open-source-contributions.md)", self.documents["pt"])
         self.assertIn("(docs/open-source-contributions.en.md)", self.documents["en"])
-        self.assertIn("(docs/open-source-contributions.en.md)", self.documents["es"])
+        self.assertIn("(docs/open-source-contributions.es.md)", self.documents["es"])
         self.assertIn("[English](README.en.md)", self.documents["pt"])
         self.assertIn("[Português](README.md)", self.documents["en"])
 
