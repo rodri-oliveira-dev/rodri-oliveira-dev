@@ -2,7 +2,7 @@
   "schema_version": 2,
   "profile": "rodri-oliveira-dev",
   "scope": "All public PRs authored by this profile in repositories owned by others",
-  "last_successful_sync": "2026-10-27T15:16:15Z",
+  "last_successful_sync": "2026-10-28T15:53:04Z",
   "totals": {
     "repositories": 21,
     "pull_requests": 37,
@@ -11,6 +11,29 @@
     "closed_unmerged": 1
   },
   "projects": [
+    {
+      "repository": "zzzprojects/docs",
+      "url": "https://github.com/zzzprojects/docs",
+      "activity_at": "2026-10-27T16:44:30Z",
+      "pull_requests": [
+        {
+          "id": 5951922267,
+          "number": 113,
+          "url": "https://github.com/zzzprojects/docs/pull/113",
+          "title": "docs: update Dapper.FluentMap maintenance status and documentation",
+          "status": "merged",
+          "created_at": "2026-10-21T00:20:23Z",
+          "updated_at": "2026-10-27T16:44:30Z",
+          "merged_at": "2026-10-21T04:39:51Z"
+        }
+      ],
+      "totals": {
+        "pull_requests": 1,
+        "merged": 1,
+        "open": 0,
+        "closed_unmerged": 0
+      }
+    },
     {
       "repository": "ThreeMammals/Ocelot",
       "url": "https://github.com/ThreeMammals/Ocelot",
@@ -58,29 +81,6 @@
           "created_at": "2026-10-21T00:28:05Z",
           "updated_at": "2026-10-21T06:55:24Z",
           "merged_at": "2026-10-21T06:55:24Z"
-        }
-      ],
-      "totals": {
-        "pull_requests": 1,
-        "merged": 1,
-        "open": 0,
-        "closed_unmerged": 0
-      }
-    },
-    {
-      "repository": "zzzprojects/docs",
-      "url": "https://github.com/zzzprojects/docs",
-      "activity_at": "2026-10-21T04:40:47Z",
-      "pull_requests": [
-        {
-          "id": 5951922267,
-          "number": 113,
-          "url": "https://github.com/zzzprojects/docs/pull/113",
-          "title": "docs: update Dapper.FluentMap maintenance status and documentation",
-          "status": "merged",
-          "created_at": "2026-10-21T00:20:23Z",
-          "updated_at": "2026-10-21T04:40:47Z",
-          "merged_at": "2026-10-21T04:39:51Z"
         }
       ],
       "totals": {
