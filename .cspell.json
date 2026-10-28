@@ -71,6 +71,14 @@
         "pt-br",
         "profile-terms"
       ]
+    },
+    {
+      "filename": "docs/tag-retention.md",
+      "language": "pt_BR,en-US",
+      "dictionaries": [
+        "pt-br",
+        "profile-terms"
+      ]
     }
   ],
   "ignoreRegExpList": [
