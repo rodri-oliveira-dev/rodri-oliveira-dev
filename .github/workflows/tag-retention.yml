@@ -1,0 +1,52 @@
+name: Prune old profile tags
+
+on:
+  schedule:
+    - cron: "17 4 * * 1"
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: Preview tags without deleting them
+        type: boolean
+        required: true
+        default: true
+
+permissions:
+  contents: read
+
+concurrency:
+  group: profile-tag-retention
+  cancel-in-progress: false
+
+jobs:
+  prune:
+    name: Retain only recent release tags
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-26.04
+    timeout-minutes: 10
+    permissions:
+      contents: write
+    env:
+      GH_TOKEN: ${{ github.token }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+        with:
+          persist-credentials: false
+
+      - name: Test retention policy
+        run: python3 -m unittest discover -s tests -p 'test_tag_retention.py' -v
+
+      - name: Prune tags older than three months
+        shell: bash
+        env:
+          DRY_RUN: ${{ inputs.dry_run }}
+          EVENT_NAME: ${{ github.event_name }}
+        run: |
+          set -euo pipefail
+          args=()
+          if [[ "$EVENT_NAME" == "workflow_dispatch" && "$DRY_RUN" == "true" ]]; then
+            args+=(--dry-run)
+          fi
+          python3 scripts/tag_retention.py "${args[@]}"
