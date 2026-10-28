@@ -5,6 +5,7 @@ multi-ecosystem-groups:
   monthly-dependencies:
     schedule:
       interval: "monthly"
+    open-pull-requests-limit: 1
 
 updates:
   - package-ecosystem: "github-actions"
@@ -12,11 +13,9 @@ updates:
     patterns:
       - "*"
     multi-ecosystem-group: "monthly-dependencies"
-    open-pull-requests-limit: 1
 
   - package-ecosystem: "npm"
     directory: "/"
     patterns:
       - "*"
     multi-ecosystem-group: "monthly-dependencies"
-    open-pull-requests-limit: 1
