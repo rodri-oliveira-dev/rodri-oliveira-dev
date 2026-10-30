@@ -2,7 +2,7 @@
   "schema_version": 2,
   "profile": "rodri-oliveira-dev",
   "scope": "All public PRs authored by this profile in repositories owned by others",
-  "last_successful_sync": "2026-10-28T15:53:04Z",
+  "last_successful_sync": "2026-10-30T15:46:37Z",
   "totals": {
     "repositories": 21,
     "pull_requests": 37,
@@ -11,6 +11,39 @@
     "closed_unmerged": 1
   },
   "projects": [
+    {
+      "repository": "ThreeMammals/Ocelot",
+      "url": "https://github.com/ThreeMammals/Ocelot",
+      "activity_at": "2026-10-29T22:57:54Z",
+      "pull_requests": [
+        {
+          "id": 5302925579,
+          "number": 2421,
+          "url": "https://github.com/ThreeMammals/Ocelot/pull/2421",
+          "title": "#714 Acceptance testing for MIME type `multipart/form-data` as HTTP `Content‑Type`",
+          "status": "open",
+          "created_at": "2026-08-31T17:18:05Z",
+          "updated_at": "2026-10-29T22:57:54Z",
+          "merged_at": null
+        },
+        {
+          "id": 5288532773,
+          "number": 2420,
+          "url": "https://github.com/ThreeMammals/Ocelot/pull/2420",
+          "title": "#1687 Return 504 Gateway Timeout for downstream request timeouts according to RFC 9110",
+          "status": "merged",
+          "created_at": "2026-08-29T19:50:39Z",
+          "updated_at": "2026-08-31T16:26:18Z",
+          "merged_at": "2026-08-31T15:56:12Z"
+        }
+      ],
+      "totals": {
+        "pull_requests": 2,
+        "merged": 1,
+        "open": 1,
+        "closed_unmerged": 0
+      }
+    },
     {
       "repository": "zzzprojects/docs",
       "url": "https://github.com/zzzprojects/docs",
@@ -31,39 +64,6 @@
         "pull_requests": 1,
         "merged": 1,
         "open": 0,
-        "closed_unmerged": 0
-      }
-    },
-    {
-      "repository": "ThreeMammals/Ocelot",
-      "url": "https://github.com/ThreeMammals/Ocelot",
-      "activity_at": "2026-10-26T17:48:58Z",
-      "pull_requests": [
-        {
-          "id": 5302925579,
-          "number": 2421,
-          "url": "https://github.com/ThreeMammals/Ocelot/pull/2421",
-          "title": "#714 Acceptance testing for MIME type `multipart/form-data` as HTTP `Content‑Type`",
-          "status": "open",
-          "created_at": "2026-08-31T17:18:05Z",
-          "updated_at": "2026-10-26T17:48:58Z",
-          "merged_at": null
-        },
-        {
-          "id": 5288532773,
-          "number": 2420,
-          "url": "https://github.com/ThreeMammals/Ocelot/pull/2420",
-          "title": "#1687 Return 504 Gateway Timeout for downstream request timeouts according to RFC 9110",
-          "status": "merged",
-          "created_at": "2026-08-29T19:50:39Z",
-          "updated_at": "2026-08-31T16:26:18Z",
-          "merged_at": "2026-08-31T15:56:12Z"
-        }
-      ],
-      "totals": {
-        "pull_requests": 2,
-        "merged": 1,
-        "open": 1,
         "closed_unmerged": 0
       }
     },
