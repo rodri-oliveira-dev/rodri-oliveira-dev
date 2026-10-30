@@ -16,7 +16,7 @@ Este catálogo reúne los pull requests públicos que abrí en proyectos de terc
 
 **81%** de los PRs integrados · `▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▱▱▱▱` · **1** PR cerrado sin integrar
 
-**Última sincronización correcta:** 28/10/2026
+**Última sincronización correcta:** 30/10/2026
 
 _La fecha corresponde a la sincronización que produjo la versión publicada actual; las consultas sin cambios en los datos no generan commits._
 
@@ -54,7 +54,7 @@ _La fecha corresponde a la sincronización que produjo la versión publicada act
 
 | | |
 | --- | --- |
-| [zzzprojects/docs](#repository-7a7a7a70726f6a656374732f646f6373) | [ThreeMammals/Ocelot](#repository-74687265656d616d6d616c732f6f63656c6f74) |
+| [ThreeMammals/Ocelot](#repository-74687265656d616d6d616c732f6f63656c6f74) | [zzzprojects/docs](#repository-7a7a7a70726f6a656374732f646f6373) |
 | [mjebrahimi/Awesome-Nuget-Packages](#repository-6d6a6562726168696d692f617765736f6d652d6e756765742d7061636b61676573) | [ModerRAS/star-vault](#repository-6d6f6465727261732f737461722d7661756c74) |
 | [mysql-net/MySqlConnector](#repository-6d7973716c2d6e65742f6d7973716c636f6e6e6563746f72) | [likec4/likec4](#repository-6c696b6563342f6c696b656334) |
 | [guibranco/CrispyWaffle](#repository-6775696272616e636f2f637269737079776166666c65) | [thangchung/awesome-dotnet-core](#repository-7468616e676368756e672f617765736f6d652d646f746e65742d636f7265) |
@@ -70,21 +70,6 @@ _La fecha corresponde a la sincronización que produjo la versión publicada act
 
 ## Contribuciones por repositorio
 
-<a id="repository-7a7a7a70726f6a656374732f646f6373"></a>
-
-<details>
-<summary><strong>zzzprojects/docs</strong> · 1 PR · 1 integrado</summary>
-
-[Ver repositorio](https://github.com/zzzprojects/docs)
-
-**Total:** 1 · **PRs integrados:** 1 · **PRs abiertos:** 0 · **PRs cerrados sin integración:** 0
-
-| Pull request | Estado | Abierto el | Integrado el |
-| --- | --- | --- | --- |
-| [#113](https://github.com/zzzprojects/docs/pull/113) — docs: update Dapper.FluentMap maintenance status and documentation | Integrado | 21/10/2026 | 21/10/2026 |
-
-</details>
-
 <a id="repository-74687265656d616d6d616c732f6f63656c6f74"></a>
 
 <details>
@@ -98,6 +83,21 @@ _La fecha corresponde a la sincronización que produjo la versión publicada act
 | --- | --- | --- | --- |
 | [#2421](https://github.com/ThreeMammals/Ocelot/pull/2421) — #714 Acceptance testing for MIME type \`multipart/form-data\` as HTTP \`Content‑Type\` | Abierto | 31/08/2026 | — |
 | [#2420](https://github.com/ThreeMammals/Ocelot/pull/2420) — #1687 Return 504 Gateway Timeout for downstream request timeouts according to RFC 9110 | Integrado | 29/08/2026 | 31/08/2026 |
+
+</details>
+
+<a id="repository-7a7a7a70726f6a656374732f646f6373"></a>
+
+<details>
+<summary><strong>zzzprojects/docs</strong> · 1 PR · 1 integrado</summary>
+
+[Ver repositorio](https://github.com/zzzprojects/docs)
+
+**Total:** 1 · **PRs integrados:** 1 · **PRs abiertos:** 0 · **PRs cerrados sin integración:** 0
+
+| Pull request | Estado | Abierto el | Integrado el |
+| --- | --- | --- | --- |
+| [#113](https://github.com/zzzprojects/docs/pull/113) — docs: update Dapper.FluentMap maintenance status and documentation | Integrado | 21/10/2026 | 21/10/2026 |
 
 </details>
 
