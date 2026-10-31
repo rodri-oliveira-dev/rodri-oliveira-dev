@@ -2,7 +2,7 @@
   "schema_version": 2,
   "profile": "rodri-oliveira-dev",
   "scope": "All public PRs authored by this profile in repositories owned by others",
-  "last_successful_sync": "2026-10-30T15:46:37Z",
+  "last_successful_sync": "2026-10-31T15:14:26Z",
   "totals": {
     "repositories": 21,
     "pull_requests": 37,
@@ -14,7 +14,7 @@
     {
       "repository": "ThreeMammals/Ocelot",
       "url": "https://github.com/ThreeMammals/Ocelot",
-      "activity_at": "2026-10-29T22:57:54Z",
+      "activity_at": "2026-10-30T21:47:24Z",
       "pull_requests": [
         {
           "id": 5302925579,
@@ -23,7 +23,7 @@
           "title": "#714 Acceptance testing for MIME type `multipart/form-data` as HTTP `Content‑Type`",
           "status": "open",
           "created_at": "2026-08-31T17:18:05Z",
-          "updated_at": "2026-10-29T22:57:54Z",
+          "updated_at": "2026-10-30T21:47:24Z",
           "merged_at": null
         },
         {
