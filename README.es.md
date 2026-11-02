@@ -83,9 +83,13 @@ El [catálogo completo de contribuciones de código abierto](docs/open-source-co
 
 En el repositorio **[.github](https://github.com/rodri-oliveira-dev/.github)** reúno políticas y automatizaciones reutilizables: estándares de contribución y seguridad, inventario de proyectos .NET, detección de secretos y distribución controlada de skills para agentes. Los cambios pasan por Pull Request y cada repositorio conserva la autonomía para adoptar sus propias reglas.
 
-## Cómo trabajo
+## Mi visión de la arquitectura
 
-Primero busco comprender el contexto, las dependencias y las restricciones operativas. Analizo alternativas y sus implicaciones con los equipos, documento las decisiones relevantes en ADRs y acompaño la implementación mediante pruebas, observabilidad y automatización.
+Mi forma de entender la arquitectura de software se fue construyendo a lo largo de más de dos décadas trabajando en desarrollo. Esa experiencia me enseñó que no basta con que una solución sea técnicamente correcta. También tiene que responder a las necesidades del negocio, adaptarse a la realidad de la organización y funcionar para las personas que la van a construir y mantener.
+
+No creo que la arquitectura deba definirse de manera aislada y luego imponerse a los equipos. Para tomar buenas decisiones, primero hay que conocer cómo trabaja la empresa, la experiencia de los equipos, las limitaciones que enfrentan y los objetivos que buscan alcanzar. A partir de ese contexto, prefiero construir las decisiones en conjunto, atendiendo las necesidades actuales sin perder de vista la evolución futura.
+
+Para mí, el trabajo del arquitecto no se limita a diseñar soluciones. También consiste en acompañar a los equipos en sus decisiones técnicas, compartir conocimiento y crear las condiciones para que los sistemas puedan evolucionar de manera sostenible.
 
 ## Publicaciones y contenido técnico
 
