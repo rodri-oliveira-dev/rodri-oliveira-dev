@@ -84,9 +84,13 @@ O [catálogo completo de contribuições open source](docs/open-source-contribut
 
 No repositório **[.github](https://github.com/rodri-oliveira-dev/.github)**, reúno políticas e automações compartilháveis: padrões de contribuição e segurança, inventário de projetos .NET, verificação de segredos e distribuição controlada de skills para agentes. As mudanças passam por Pull Request e cada repositório mantém autonomia para adotar suas regras.
 
-## Como trabalho
+## Como vejo a arquitetura
 
-Procuro entender o contexto, as dependências e os limites operacionais antes de propor uma solução. Discuto alternativas e trade-offs com os times, registro decisões relevantes em ADRs e acompanho a implementação por meio de testes, observabilidade e automação.
+Minha visão de arquitetura foi construída ao longo de mais de duas décadas trabalhando com desenvolvimento de software. Essa experiência me ensinou que uma solução não precisa apenas ser tecnicamente adequada. Ela também precisa fazer sentido para o negócio, para a organização e para as pessoas que vão construí-la e mantê-la.
+
+Não vejo a arquitetura como algo definido isoladamente por um arquiteto e depois imposto às equipes. Acredito em compreender o contexto da empresa, a maturidade dos times, as limitações existentes e os objetivos que se pretende alcançar. A partir disso, construir decisões em conjunto, equilibrando necessidades atuais e possibilidades de evolução.
+
+Para mim, o papel do arquiteto não é apenas desenhar soluções, mas ajudar as equipes a tomar boas decisões técnicas, compartilhar conhecimento e criar condições para que os sistemas possam evoluir de maneira sustentável.
 
 ## Publicações e conteúdo técnico
 
