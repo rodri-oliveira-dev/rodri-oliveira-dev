@@ -15,6 +15,14 @@ I am a software architect with more than 20 years of experience evolving enterpr
 
 This profile brings together open-source tools, libraries, and labs focused on architecture governance, integration reliability, and developer workflows.
 
+<p align="center">
+  <img
+    src="assets/profile/software-architecture-in-practice.en.png"
+    alt="Software architecture in practice: business, teams, organization, and evolution shape architectural decisions, supported by code, tests, observability, and automation. Featured projects: ADR Guard, Repo2C4, Complexity Analyzers, Dapper.FluentMap, and POC Arquitetura."
+    width="100%"
+  />
+</p>
+
 **Professional links**
 
 - [Professional portfolio](https://rodri-oliveira-dev.github.io/)
@@ -82,9 +90,13 @@ The [full open-source contribution catalog](docs/open-source-contributions.en.md
 
 The **[.github](https://github.com/rodri-oliveira-dev/.github)** repository brings together reusable policies and automation: contribution and security standards, a .NET project inventory, secret scanning, and controlled distribution of agent skills. Changes go through Pull Requests, and individual repositories retain control over their own rules.
 
-## How I work
+## How I think about architecture
 
-I start by understanding context, dependencies, and operational constraints. I discuss alternatives and trade-offs with teams, document significant decisions in ADRs, and stay close to implementation through tests, observability, and automation.
+My perspective on software architecture has been shaped by more than two decades in software development. That experience taught me that a technically sound design isn't enough. It also has to make sense for the business, fit the way an organization works, and serve the people who will build and maintain it.
+
+I don't see architecture as something one person defines in isolation and then hands down to a team. I try to understand the company's context, the team's experience, the constraints they're working within, and what they're trying to achieve. From there, the goal is to make decisions together, meeting today's needs without losing sight of how the system and the team can grow.
+
+For me, being an architect is about more than designing solutions. It's also about helping teams make sound technical decisions, sharing knowledge, and making it easier for systems to evolve sustainably.
 
 ## Writing and technical content
 
