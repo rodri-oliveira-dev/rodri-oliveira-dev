@@ -16,6 +16,14 @@ Desde hace más de 20 años trabajo en el desarrollo y la evolución de sistemas
 
 Aquí comparto herramientas, bibliotecas y laboratorios de código abierto que ayudan a convertir decisiones de arquitectura y gobernanza en código, pruebas y automatización.
 
+<p align="center">
+  <img
+    src="assets/profile/software-architecture-in-practice.es.png"
+    alt="Arquitectura de software en la práctica: negocio, equipos, organización y evolución orientan las decisiones arquitectónicas, apoyadas en código, pruebas, observabilidad y automatización. Proyectos destacados: ADR Guard, Repo2C4, Complexity Analyzers, Dapper.FluentMap y POC Arquitectura."
+    width="100%"
+  />
+</p>
+
 **Enlaces profesionales**
 
 - [Portafolio profesional](https://rodri-oliveira-dev.github.io/)
