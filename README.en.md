@@ -15,6 +15,14 @@ I am a software architect with more than 20 years of experience evolving enterpr
 
 This profile brings together open-source tools, libraries, and labs focused on architecture governance, integration reliability, and developer workflows.
 
+<p align="center">
+  <img
+    src="assets/profile/software-architecture-in-practice.en.png"
+    alt="Software architecture in practice: business, teams, organization, and evolution shape architectural decisions, supported by code, tests, observability, and automation. Featured projects: ADR Guard, Repo2C4, Complexity Analyzers, Dapper.FluentMap, and POC Arquitetura."
+    width="100%"
+  />
+</p>
+
 **Professional links**
 
 - [Professional portfolio](https://rodri-oliveira-dev.github.io/)
