@@ -2,19 +2,19 @@
   "schema_version": 2,
   "profile": "rodri-oliveira-dev",
   "scope": "All public PRs authored by this profile in repositories owned by others",
-  "last_successful_sync": "2026-11-03T16:57:03Z",
+  "last_successful_sync": "2026-11-04T17:00:51Z",
   "totals": {
-    "repositories": 21,
-    "pull_requests": 37,
+    "repositories": 22,
+    "pull_requests": 38,
     "merged": 30,
-    "open": 6,
+    "open": 7,
     "closed_unmerged": 1
   },
   "projects": [
     {
       "repository": "ThreeMammals/Ocelot",
       "url": "https://github.com/ThreeMammals/Ocelot",
-      "activity_at": "2026-11-03T15:46:06Z",
+      "activity_at": "2026-11-04T16:56:26Z",
       "pull_requests": [
         {
           "id": 5302925579,
@@ -23,7 +23,7 @@
           "title": "#714 Acceptance testing for MIME type `multipart/form-data` as HTTP `Content‑Type`",
           "status": "open",
           "created_at": "2026-08-31T17:18:05Z",
-          "updated_at": "2026-11-03T15:46:06Z",
+          "updated_at": "2026-11-04T16:56:26Z",
           "merged_at": null
         },
         {
@@ -40,6 +40,52 @@
       "totals": {
         "pull_requests": 2,
         "merged": 1,
+        "open": 1,
+        "closed_unmerged": 0
+      }
+    },
+    {
+      "repository": "architecture-decision-record/architecture-decision-record",
+      "url": "https://github.com/architecture-decision-record/architecture-decision-record",
+      "activity_at": "2026-11-04T01:49:43Z",
+      "pull_requests": [
+        {
+          "id": 5116398022,
+          "number": 115,
+          "url": "https://github.com/architecture-decision-record/architecture-decision-record/pull/115",
+          "title": "Add Brazilian Portuguese translation",
+          "status": "open",
+          "created_at": "2026-08-11T03:33:20Z",
+          "updated_at": "2026-11-04T01:49:43Z",
+          "merged_at": null
+        }
+      ],
+      "totals": {
+        "pull_requests": 1,
+        "merged": 0,
+        "open": 1,
+        "closed_unmerged": 0
+      }
+    },
+    {
+      "repository": "punkpeye/awesome-mcp-servers",
+      "url": "https://github.com/punkpeye/awesome-mcp-servers",
+      "activity_at": "2026-11-03T19:46:42Z",
+      "pull_requests": [
+        {
+          "id": 6189949808,
+          "number": 18508,
+          "url": "https://github.com/punkpeye/awesome-mcp-servers/pull/18508",
+          "title": "Add ADR Guard MCP server to Architecture & Design",
+          "status": "open",
+          "created_at": "2026-11-03T19:46:12Z",
+          "updated_at": "2026-11-03T19:46:42Z",
+          "merged_at": null
+        }
+      ],
+      "totals": {
+        "pull_requests": 1,
+        "merged": 0,
         "open": 1,
         "closed_unmerged": 0
       }
@@ -365,29 +411,6 @@
         "pull_requests": 7,
         "merged": 7,
         "open": 0,
-        "closed_unmerged": 0
-      }
-    },
-    {
-      "repository": "architecture-decision-record/architecture-decision-record",
-      "url": "https://github.com/architecture-decision-record/architecture-decision-record",
-      "activity_at": "2026-10-14T21:55:26Z",
-      "pull_requests": [
-        {
-          "id": 5116398022,
-          "number": 115,
-          "url": "https://github.com/architecture-decision-record/architecture-decision-record/pull/115",
-          "title": "Add Brazilian Portuguese translation",
-          "status": "open",
-          "created_at": "2026-08-11T03:33:20Z",
-          "updated_at": "2026-10-14T21:55:26Z",
-          "merged_at": null
-        }
-      ],
-      "totals": {
-        "pull_requests": 1,
-        "merged": 0,
-        "open": 1,
         "closed_unmerged": 0
       }
     },
