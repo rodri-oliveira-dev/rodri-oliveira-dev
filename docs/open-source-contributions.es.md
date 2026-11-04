@@ -12,11 +12,11 @@ Este catálogo reúne los pull requests públicos que abrí en proyectos de terc
 
 | PRs encontrados | PRs integrados | PRs abiertos | Repositorios externos |
 | :---: | :---: | :---: | :---: |
-| **37** | **30** | **6** | **21** |
+| **38** | **30** | **7** | **22** |
 
-**81%** de los PRs integrados · `▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▱▱▱▱` · **1** PR cerrado sin integrar
+**78%** de los PRs integrados · `▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▱▱▱▱` · **1** PR cerrado sin integrar
 
-**Última sincronización correcta:** 03/11/2026
+**Última sincronización correcta:** 04/11/2026
 
 _La fecha corresponde a la sincronización que produjo la versión publicada actual; las consultas sin cambios en los datos no generan commits._
 
@@ -54,17 +54,17 @@ _La fecha corresponde a la sincronización que produjo la versión publicada act
 
 | | |
 | --- | --- |
-| [ThreeMammals/Ocelot](#repository-74687265656d616d6d616c732f6f63656c6f74) | [zzzprojects/docs](#repository-7a7a7a70726f6a656374732f646f6373) |
+| [ThreeMammals/Ocelot](#repository-74687265656d616d6d616c732f6f63656c6f74) | [architecture-decision-record/architecture-decision-record](#repository-6172636869746563747572652d6465636973696f6e2d7265636f72642f6172636869746563747572652d6465636973696f6e2d7265636f7264) |
+| [punkpeye/awesome-mcp-servers](#repository-70756e6b706579652f617765736f6d652d6d63702d73657276657273) | [zzzprojects/docs](#repository-7a7a7a70726f6a656374732f646f6373) |
 | [mjebrahimi/Awesome-Nuget-Packages](#repository-6d6a6562726168696d692f617765736f6d652d6e756765742d7061636b61676573) | [ModerRAS/star-vault](#repository-6d6f6465727261732f737461722d7661756c74) |
 | [mysql-net/MySqlConnector](#repository-6d7973716c2d6e65742f6d7973716c636f6e6e6563746f72) | [likec4/likec4](#repository-6c696b6563342f6c696b656334) |
 | [guibranco/CrispyWaffle](#repository-6775696272616e636f2f637269737079776166666c65) | [thangchung/awesome-dotnet-core](#repository-7468616e676368756e672f617765736f6d652d646f746e65742d636f7265) |
-| [Hitmasu/OpenCNPJ](#repository-6869746d6173752f6f70656e636e706a) | [architecture-decision-record/architecture-decision-record](#repository-6172636869746563747572652d6465636973696f6e2d7265636f72642f6172636869746563747572652d6465636973696f6e2d7265636f7264) |
-| [ddd-crew/eventstorming-glossary-cheat-sheet](#repository-6464642d637265772f6576656e7473746f726d696e672d676c6f73736172792d63686561742d7368656574) | [ddd-crew/ddd-starter-modelling-process](#repository-6464642d637265772f6464642d737461727465722d6d6f64656c6c696e672d70726f63657373) |
-| [ddd-crew/bounded-context-canvas](#repository-6464642d637265772f626f756e6465642d636f6e746578742d63616e766173) | [ddd-crew/context-mapping](#repository-6464642d637265772f636f6e746578742d6d617070696e67) |
-| [ddd-crew/aggregate-design-canvas](#repository-6464642d637265772f6167677265676174652d64657369676e2d63616e766173) | [ddd-crew/domain-message-flow-modelling](#repository-6464642d637265772f646f6d61696e2d6d6573736167652d666c6f772d6d6f64656c6c696e67) |
-| [ddd-crew/core-domain-charts](#repository-6464642d637265772f636f72652d646f6d61696e2d636861727473) | [StefanTheCode/dotnet\_interview\_questions](#repository-73746566616e746865636f64652f646f746e65745f696e746572766965775f7175657374696f6e73) |
-| [donnemartin/system-design-primer](#repository-646f6e6e656d617274696e2f73797374656d2d64657369676e2d7072696d6572) | [egoughnour/complexity-hints](#repository-65676f7567686e6f75722f636f6d706c65786974792d68696e7473) |
-| [ddd-crew/welcome-to-ddd](#repository-6464642d637265772f77656c636f6d652d746f2d646464) | &nbsp; |
+| [Hitmasu/OpenCNPJ](#repository-6869746d6173752f6f70656e636e706a) | [ddd-crew/eventstorming-glossary-cheat-sheet](#repository-6464642d637265772f6576656e7473746f726d696e672d676c6f73736172792d63686561742d7368656574) |
+| [ddd-crew/ddd-starter-modelling-process](#repository-6464642d637265772f6464642d737461727465722d6d6f64656c6c696e672d70726f63657373) | [ddd-crew/bounded-context-canvas](#repository-6464642d637265772f626f756e6465642d636f6e746578742d63616e766173) |
+| [ddd-crew/context-mapping](#repository-6464642d637265772f636f6e746578742d6d617070696e67) | [ddd-crew/aggregate-design-canvas](#repository-6464642d637265772f6167677265676174652d64657369676e2d63616e766173) |
+| [ddd-crew/domain-message-flow-modelling](#repository-6464642d637265772f646f6d61696e2d6d6573736167652d666c6f772d6d6f64656c6c696e67) | [ddd-crew/core-domain-charts](#repository-6464642d637265772f636f72652d646f6d61696e2d636861727473) |
+| [StefanTheCode/dotnet\_interview\_questions](#repository-73746566616e746865636f64652f646f746e65745f696e746572766965775f7175657374696f6e73) | [donnemartin/system-design-primer](#repository-646f6e6e656d617274696e2f73797374656d2d64657369676e2d7072696d6572) |
+| [egoughnour/complexity-hints](#repository-65676f7567686e6f75722f636f6d706c65786974792d68696e7473) | [ddd-crew/welcome-to-ddd](#repository-6464642d637265772f77656c636f6d652d746f2d646464) |
 
 <a id="contribution-history"></a>
 
@@ -83,6 +83,36 @@ _La fecha corresponde a la sincronización que produjo la versión publicada act
 | --- | --- | --- | --- |
 | [#2421](https://github.com/ThreeMammals/Ocelot/pull/2421) — #714 Acceptance testing for MIME type \`multipart/form-data\` as HTTP \`Content‑Type\` | Abierto | 31/08/2026 | — |
 | [#2420](https://github.com/ThreeMammals/Ocelot/pull/2420) — #1687 Return 504 Gateway Timeout for downstream request timeouts according to RFC 9110 | Integrado | 29/08/2026 | 31/08/2026 |
+
+</details>
+
+<a id="repository-6172636869746563747572652d6465636973696f6e2d7265636f72642f6172636869746563747572652d6465636973696f6e2d7265636f7264"></a>
+
+<details>
+<summary><strong>architecture-decision-record/architecture-decision-record</strong> · 1 PR · 1 abierto</summary>
+
+[Ver repositorio](https://github.com/architecture-decision-record/architecture-decision-record)
+
+**Total:** 1 · **PRs integrados:** 0 · **PRs abiertos:** 1 · **PRs cerrados sin integración:** 0
+
+| Pull request | Estado | Abierto el | Integrado el |
+| --- | --- | --- | --- |
+| [#115](https://github.com/architecture-decision-record/architecture-decision-record/pull/115) — Add Brazilian Portuguese translation | Abierto | 11/08/2026 | — |
+
+</details>
+
+<a id="repository-70756e6b706579652f617765736f6d652d6d63702d73657276657273"></a>
+
+<details>
+<summary><strong>punkpeye/awesome-mcp-servers</strong> · 1 PR · 1 abierto</summary>
+
+[Ver repositorio](https://github.com/punkpeye/awesome-mcp-servers)
+
+**Total:** 1 · **PRs integrados:** 0 · **PRs abiertos:** 1 · **PRs cerrados sin integración:** 0
+
+| Pull request | Estado | Abierto el | Integrado el |
+| --- | --- | --- | --- |
+| [#18508](https://github.com/punkpeye/awesome-mcp-servers/pull/18508) — Add ADR Guard MCP server to Architecture & Design | Abierto | 03/11/2026 | — |
 
 </details>
 
@@ -217,21 +247,6 @@ _La fecha corresponde a la sincronización que produjo la versión publicada act
 | [#75](https://github.com/Hitmasu/OpenCNPJ/pull/75) — security: protege downloads externos com limites e timeout | Integrado | 06/09/2026 | 29/09/2026 |
 | [#74](https://github.com/Hitmasu/OpenCNPJ/pull/74) — \`perf: otimiza validação pós-upload do rclone\` | Integrado | 30/08/2026 | 03/09/2026 |
 | [#71](https://github.com/Hitmasu/OpenCNPJ/pull/71) — feat: improve rclone configuration and config documentation | Integrado | 28/08/2026 | 30/08/2026 |
-
-</details>
-
-<a id="repository-6172636869746563747572652d6465636973696f6e2d7265636f72642f6172636869746563747572652d6465636973696f6e2d7265636f7264"></a>
-
-<details>
-<summary><strong>architecture-decision-record/architecture-decision-record</strong> · 1 PR · 1 abierto</summary>
-
-[Ver repositorio](https://github.com/architecture-decision-record/architecture-decision-record)
-
-**Total:** 1 · **PRs integrados:** 0 · **PRs abiertos:** 1 · **PRs cerrados sin integración:** 0
-
-| Pull request | Estado | Abierto el | Integrado el |
-| --- | --- | --- | --- |
-| [#115](https://github.com/architecture-decision-record/architecture-decision-record/pull/115) — Add Brazilian Portuguese translation | Abierto | 11/08/2026 | — |
 
 </details>
 
