@@ -23,9 +23,9 @@ Aquí comparto herramientas, bibliotecas y laboratorios de código abierto que a
       srcset="assets/profile/software-architecture-in-practice.es.mobile.png"
     />
     <img
-    src="assets/profile/software-architecture-in-practice.es.png"
-    alt="Arquitectura de software en la práctica: negocio, equipos, organización y evolución orientan las decisiones arquitectónicas, apoyadas en código, pruebas, observabilidad y automatización. Proyectos destacados: ADR Guard, Repo2C4, Complexity Analyzers, Dapper.FluentMap y POC Arquitectura."
-    width="100%"
+      src="assets/profile/software-architecture-in-practice.es.png"
+      alt="Arquitectura de software en la práctica: negocio, equipos, organización y evolución orientan las decisiones arquitectónicas, apoyadas en código, pruebas, observabilidad y automatización. Proyectos destacados: ADR Guard, Repo2C4, Complexity Analyzers, Dapper.FluentMap y POC Arquitectura."
+      width="100%"
     />
   </picture>
 </p>

@@ -22,9 +22,9 @@ This profile brings together open-source tools, libraries, and labs focused on a
       srcset="assets/profile/software-architecture-in-practice.en.mobile.png"
     />
     <img
-    src="assets/profile/software-architecture-in-practice.en.png"
-    alt="Software architecture in practice: business, teams, organization, and evolution shape architectural decisions, supported by code, tests, observability, and automation. Featured projects: ADR Guard, Repo2C4, Complexity Analyzers, Dapper.FluentMap, and POC Arquitetura."
-    width="100%"
+      src="assets/profile/software-architecture-in-practice.en.png"
+      alt="Software architecture in practice: business, teams, organization, and evolution shape architectural decisions, supported by code, tests, observability, and automation. Featured projects: ADR Guard, Repo2C4, Complexity Analyzers, Dapper.FluentMap, and POC Arquitetura."
+      width="100%"
     />
   </picture>
 </p>
