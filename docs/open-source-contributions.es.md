@@ -12,11 +12,11 @@ Este catálogo reúne los pull requests públicos que abrí en proyectos de terc
 
 | PRs encontrados | PRs integrados | PRs abiertos | Repositorios externos |
 | :---: | :---: | :---: | :---: |
-| **38** | **30** | **7** | **22** |
+| **38** | **31** | **6** | **22** |
 
-**78%** de los PRs integrados · `▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▱▱▱▱` · **1** PR cerrado sin integrar
+**81%** de los PRs integrados · `▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▱▱▱▱` · **1** PR cerrado sin integrar
 
-**Última sincronización correcta:** 05/11/2026
+**Última sincronización correcta:** 06/11/2026
 
 _La fecha corresponde a la sincronización que produjo la versión publicada actual; las consultas sin cambios en los datos no generan commits._
 
@@ -34,7 +34,7 @@ _La fecha corresponde a la sincronización que produjo la versión publicada act
 | **[ThreeMammals/Ocelot](https://github.com/ThreeMammals/Ocelot)** | **[guibranco/CrispyWaffle](https://github.com/guibranco/CrispyWaffle)** |
 | --- | --- |
 | Gateway de API y pruebas | Serialización de datos |
-| **2 PRs** · 1 integrado | **2 PRs** · 2 integrados |
+| **2 PRs** · 2 integrados | **2 PRs** · 2 integrados |
 
 <a id="recent-activity"></a>
 
@@ -42,11 +42,11 @@ _La fecha corresponde a la sincronización que produjo la versión publicada act
 
 | Repositorio | Pull request | Integrado el |
 | --- | --- | --- |
+| [ThreeMammals/Ocelot](https://github.com/ThreeMammals/Ocelot) | [#2421](https://github.com/ThreeMammals/Ocelot/pull/2421) — #714 #792 #1485 #1685 Thorough testing for MIME type \`multipart/form-data\` as HTTP \`Content‑Type\` aka RFC 7578 | 05/11/2026 |
 | [mjebrahimi/Awesome-Nuget-Packages](https://github.com/mjebrahimi/Awesome-Nuget-Packages) | [#10](https://github.com/mjebrahimi/Awesome-Nuget-Packages/pull/10) — docs: update Dapper.FluentMap repository and maintenance details | 21/10/2026 |
 | [zzzprojects/docs](https://github.com/zzzprojects/docs) | [#113](https://github.com/zzzprojects/docs/pull/113) — docs: update Dapper.FluentMap maintenance status and documentation | 21/10/2026 |
 | [mysql-net/MySqlConnector](https://github.com/mysql-net/MySqlConnector) | [#1675](https://github.com/mysql-net/MySqlConnector/pull/1675) — Remove retired Azure MySQL Single Server proxy detection | 19/10/2026 |
 | [likec4/likec4](https://github.com/likec4/likec4) | [#3379](https://github.com/likec4/likec4/pull/3379) — docs(pt-br): align translation with v1.60.0 features | 16/10/2026 |
-| [guibranco/CrispyWaffle](https://github.com/guibranco/CrispyWaffle) | [#981](https://github.com/guibranco/CrispyWaffle/pull/981) — Add TOML serializer support +semver: minor | 16/10/2026 |
 
 <a id="project-index"></a>
 
@@ -73,15 +73,15 @@ _La fecha corresponde a la sincronización que produjo la versión publicada act
 <a id="repository-74687265656d616d6d616c732f6f63656c6f74"></a>
 
 <details>
-<summary><strong>ThreeMammals/Ocelot</strong> · 2 PRs · 1 integrado · 1 abierto</summary>
+<summary><strong>ThreeMammals/Ocelot</strong> · 2 PRs · 2 integrados</summary>
 
 [Ver repositorio](https://github.com/ThreeMammals/Ocelot)
 
-**Total:** 2 · **PRs integrados:** 1 · **PRs abiertos:** 1 · **PRs cerrados sin integración:** 0
+**Total:** 2 · **PRs integrados:** 2 · **PRs abiertos:** 0 · **PRs cerrados sin integración:** 0
 
 | Pull request | Estado | Abierto el | Integrado el |
 | --- | --- | --- | --- |
-| [#2421](https://github.com/ThreeMammals/Ocelot/pull/2421) — #714 Acceptance testing for MIME type \`multipart/form-data\` as HTTP \`Content‑Type\` | Abierto | 31/08/2026 | — |
+| [#2421](https://github.com/ThreeMammals/Ocelot/pull/2421) — #714 #792 #1485 #1685 Thorough testing for MIME type \`multipart/form-data\` as HTTP \`Content‑Type\` aka RFC 7578 | Integrado | 31/08/2026 | 05/11/2026 |
 | [#2420](https://github.com/ThreeMammals/Ocelot/pull/2420) — #1687 Return 504 Gateway Timeout for downstream request timeouts according to RFC 9110 | Integrado | 29/08/2026 | 31/08/2026 |
 
 </details>
