@@ -10,11 +10,11 @@
 
 **Arquitecto de Software · Sistemas Distribuidos · .NET · Cloud**
 
-*Arquitecto de software con participación directa en .NET, sistemas distribuidos, cloud, gobernanza de arquitectura y herramientas de código abierto para desarrolladores.*
+*Experiencia práctica en .NET, sistemas distribuidos, plataformas en la nube, gobernanza de arquitectura y herramientas de código abierto.*
 
-Desde hace más de 20 años trabajo en el desarrollo y la evolución de sistemas empresariales, con foco en arquitectura de software, integraciones y modernización de aplicaciones. Busco equilibrar las necesidades del negocio, las decisiones técnicas y la realidad operativa de los sistemas.
+Mi trayectoria comenzó en el desarrollo de software y, a lo largo de más de 20 años, me llevó a trabajar en integraciones y modernización de sistemas empresariales hasta llegar a la arquitectura. Hoy busco equilibrar las necesidades del negocio, las decisiones técnicas y las condiciones reales de implementación y operación.
 
-Aquí comparto herramientas, bibliotecas y laboratorios de código abierto que ayudan a convertir decisiones de arquitectura y gobernanza en código, pruebas y automatización.
+Aquí comparto bibliotecas, herramientas y laboratorios de código abierto que desarrollo para explorar cómo las decisiones de arquitectura se reflejan en el código, las pruebas y la automatización.
 
 <p align="center">
   <picture>
@@ -47,66 +47,66 @@ Herramientas, bibliotecas y laboratorios que conectan las decisiones de arquitec
 
 *Herramienta de gobernanza de arquitectura*
 
-Ayuda a los equipos a mantener registros de decisiones consistentes y trazables. La CLI en .NET crea, valida e indexa ADRs; los análisis opcionales de impacto y desviaciones arquitectónicas se basan en evidencia acotada, sin sustituir el criterio humano. El [estudio de caso](https://rodri-oliveira-dev.github.io/es/case-studies/adr-guard/) detalla las decisiones y sus implicaciones.
+Ayuda a los equipos a mantener registros de decisiones arquitectónicas (ADR) consistentes y rastreables. Su CLI en .NET permite crear, validar e indexar estos registros. Los análisis opcionales de impacto y desviaciones arquitectónicas se basan en evidencia verificable, sin reemplazar el criterio profesional. El [estudio de caso](https://rodri-oliveira-dev.github.io/es/case-studies/adr-guard/) explica las decisiones tomadas y sus implicaciones.
 
 ### [Dapper.FluentMap](https://github.com/rodri-oliveira-dev/Dapper-FluentMap)
 
 *Biblioteca .NET*
 
-Resuelve el mapeo entre objetos .NET y columnas cuando las convenciones de Dapper no son suficientes, sin agregar atributos a los modelos. La evolución de la biblioteca combina una API fluida, extensibilidad y compatibilidad con aplicaciones existentes, y demuestra el mantenimiento responsable de APIs públicas y la modernización incremental. El [estudio de caso](https://rodri-oliveira-dev.github.io/es/case-studies/dapper-fluentmap/) analiza los límites de esta abstracción.
+Resuelve el mapeo entre objetos .NET y columnas de bases de datos cuando las convenciones de Dapper no son suficientes, sin agregar atributos a los modelos. Su evolución busca combinar una API fluida y extensible con la compatibilidad de las aplicaciones existentes, preservando los contratos públicos durante una modernización gradual. El [estudio de caso](https://rodri-oliveira-dev.github.io/es/case-studies/dapper-fluentmap/) analiza los límites de esta abstracción.
 
 ### [Repo2C4](https://github.com/rodri-oliveira-dev/Repo2C4)
 
 *Herramienta de documentación de arquitectura*
 
-Reduce la divergencia entre el código y los diagramas al transformar evidencia acotada de repositorios .NET en documentación C4/LikeC4 que puede revisarse. El flujo separa las observaciones de las hipótesis y exige aplicar los cambios de forma explícita, lo que demuestra análisis estático, generación determinista e integración con agentes mediante MCP.
+Reduce el riesgo de que el código y los diagramas pierdan consistencia al convertir evidencia verificable de repositorios .NET en documentación C4/LikeC4 que se puede revisar. El proceso distingue las observaciones de las hipótesis y requiere aplicar los cambios de forma explícita. Combina análisis estático, generación determinista e integración con agentes mediante MCP.
 
 ### [POC Arquitetura](https://github.com/rodri-oliveira-dev/poc-arquitetura)
 
 *Laboratorio de sistemas distribuidos*
 
-Permite reproducir decisiones sobre consistencia eventual, manejo de fallas y trazabilidad en una base de servicios distribuidos en .NET. Implementa DDD, integración asíncrona con Kafka y Outbox, pruebas y runbooks, y mantiene las propuestas sin evidencia marcadas explícitamente como pendientes.
+Permite explorar decisiones sobre consistencia eventual, manejo de fallas y trazabilidad mediante escenarios reproducibles con servicios distribuidos en .NET. Reúne DDD, integración asíncrona con Kafka y el patrón Outbox, pruebas y guías operativas (runbooks). Las propuestas que todavía no cuentan con evidencia en el código se identifican como pendientes.
 
 ### [ReliableWebhooks](https://github.com/rodri-oliveira-dev/ReliableWebhooks)
 
 *Biblioteca .NET para integraciones*
 
-Aborda las fallas, la concurrencia y la duplicación en la entrega de webhooks salientes. Los IDs estables hacen que la puesta en cola sea idempotente, mientras que las concesiones temporales y los reintentos permiten una entrega at-least-once con almacenamiento duradero proporcionado por la aplicación; el destinatario aún debe tolerar duplicados. El [estudio de caso](https://rodri-oliveira-dev.github.io/es/case-studies/reliable-webhooks/) examina estas garantías y sus límites.
+Aborda las fallas, la concurrencia y las entregas duplicadas de webhooks salientes. Los identificadores estables permiten agregar eventos a la cola de forma idempotente. La asignación temporal del trabajo (leases) y los reintentos respaldan una entrega de al menos una vez (at-least-once), siempre que la aplicación proporcione almacenamiento duradero y que el sistema receptor tolere duplicados. El [estudio de caso](https://rodri-oliveira-dev.github.io/es/case-studies/reliable-webhooks/) examina estas garantías y sus límites.
 
 ### [ComplexityAnalysis.Analyzers](https://github.com/rodri-oliveira-dev/complexity-analyzers)
 
 *Herramienta de análisis estático*
 
-Identifica patrones costosos y regresiones de complejidad antes de la ejecución. El analizador Roslyn estima Big-O cuando existe evidencia suficiente, aplica métricas configurables durante la compilación y en el IDE, e informa un resultado indeterminado en lugar de inferir más de lo que permite el código.
+Identifica patrones de alto costo computacional y posibles regresiones de complejidad antes de ejecutar el código. El analizador basado en Roslyn estima la complejidad Big-O cuando hay suficiente evidencia, aplica métricas configurables durante la compilación y en el IDE, y devuelve un resultado indeterminado cuando el código no permite una conclusión fundamentada.
 
-Otros trabajos: [Repo Control Center](https://github.com/rodri-oliveira-dev/repo-status-dashboard), un panel de CI, versiones publicadas, seguridad y estado de los repositorios, y la [lista completa de repositorios](https://github.com/rodri-oliveira-dev?tab=repositories).
+Otros proyectos incluyen [Repo Control Center](https://github.com/rodri-oliveira-dev/repo-status-dashboard), un panel para consultar la integración continua (CI), las versiones publicadas, la seguridad y el estado general de los repositorios. También puedes explorar la [lista completa de repositorios](https://github.com/rodri-oliveira-dev?tab=repositories).
 
 ---
 
 ## Contribuciones de código abierto
 
-Algunas contribuciones integradas que representan correcciones, mantenimiento y seguridad en bases de código existentes:
+Estas son algunas de mis contribuciones incorporadas en proyectos de terceros, centradas en correcciones, mantenimiento y seguridad:
 
-- **Ocelot — [PR #2420](https://github.com/ThreeMammals/Ocelot/pull/2420):** corrigió el mapeo de tiempos de espera del servicio de destino a HTTP 504 según la RFC 9110, manteniendo la cancelación del cliente y el comportamiento de QoS, con pruebas unitarias y de aceptación.
-- **MySqlConnector — [PR #1675](https://github.com/mysql-net/MySqlConnector/pull/1675):** eliminó la detección obsoleta de Azure MySQL Single Server, mantuvo la ruta de AWS RDS Proxy y simplificó la lógica de conexión.
-- **OpenCNPJ — [PR #75](https://github.com/Hitmasu/OpenCNPJ/pull/75):** centralizó las descargas externas en un flujo con tiempos de espera, límites de tamaño, archivos temporales y limpieza en caso de fallas, acompañado de pruebas y validación en CI.
+- **Ocelot — [PR #2420](https://github.com/ThreeMammals/Ocelot/pull/2420):** corrigió el mapeo de los tiempos de espera del servicio de destino a HTTP 504, conforme a la RFC 9110, sin alterar la cancelación del cliente ni el comportamiento de QoS. Incluyó pruebas unitarias y de aceptación.
+- **MySqlConnector — [PR #1675](https://github.com/mysql-net/MySqlConnector/pull/1675):** eliminó la detección obsoleta de Azure MySQL Single Server, conservó la compatibilidad con AWS RDS Proxy y simplificó la lógica de conexión.
+- **OpenCNPJ — [PR #75](https://github.com/Hitmasu/OpenCNPJ/pull/75):** centralizó las descargas externas e incorporó tiempos de espera, límites de tamaño, archivos temporales y limpieza ante errores, con pruebas y validación en CI.
 
-El [catálogo completo de contribuciones de código abierto](docs/open-source-contributions.es.md) mantiene actualizados automáticamente los demás Pull Requests y sus estados.
+El [catálogo completo de contribuciones de código abierto](docs/open-source-contributions.es.md) reúne los demás pull requests y actualiza automáticamente sus estados.
 
 ## Gobernanza como código
 
-En el repositorio **[.github](https://github.com/rodri-oliveira-dev/.github)** reúno políticas y automatizaciones reutilizables: estándares de contribución y seguridad, inventario de proyectos .NET, detección de secretos y distribución controlada de skills para agentes. Los cambios pasan por Pull Request y cada repositorio conserva la autonomía para adoptar sus propias reglas.
+En el repositorio **[.github](https://github.com/rodri-oliveira-dev/.github)** reúno políticas y automatizaciones reutilizables: estándares de contribución y seguridad, inventario de proyectos .NET, detección de secretos y distribución controlada de skills para agentes. Los cambios se revisan mediante pull requests y cada repositorio conserva la autonomía para adoptar sus propias reglas.
 
 ## Mi visión de la arquitectura
 
-Mi forma de entender la arquitectura de software se fue construyendo a lo largo de más de dos décadas trabajando en desarrollo. Esa experiencia me enseñó que no basta con que una solución sea técnicamente correcta. También tiene que responder a las necesidades del negocio, adaptarse a la realidad de la organización y funcionar para las personas que la van a construir y mantener.
+Mi manera de entender la arquitectura se formó a lo largo de más de dos décadas trabajando en desarrollo de software. Esa experiencia me enseñó que no basta con que una solución sea técnicamente correcta. También debe tener sentido para el negocio, adaptarse a la forma de trabajar de la organización y servir a quienes van a construirla y mantenerla.
 
-No creo que la arquitectura deba definirse de manera aislada y luego imponerse a los equipos. Para tomar buenas decisiones, primero hay que conocer cómo trabaja la empresa, la experiencia de los equipos, las limitaciones que enfrentan y los objetivos que buscan alcanzar. A partir de ese contexto, prefiero construir las decisiones en conjunto, atendiendo las necesidades actuales sin perder de vista la evolución futura.
+No creo en una arquitectura que se define de manera aislada y luego se impone a los equipos. Prefiero comprender primero el contexto de la empresa, la experiencia de los equipos, las limitaciones que enfrentan y los objetivos que buscan alcanzar. A partir de ahí, busco construir las decisiones en conjunto, atendiendo las necesidades actuales sin perder de vista la evolución futura.
 
-Para mí, el trabajo del arquitecto no se limita a diseñar soluciones. También consiste en acompañar a los equipos en sus decisiones técnicas, compartir conocimiento y crear las condiciones para que los sistemas puedan evolucionar de manera sostenible.
+Para mí, ser arquitecto no consiste solo en diseñar soluciones. También implica ayudar a los equipos a tomar buenas decisiones técnicas, compartir conocimiento y facilitar que los sistemas evolucionen de manera sostenible.
 
 ## Publicaciones y contenido técnico
 
-Escribo sobre arquitectura de software, DDD y desarrollo .NET, principalmente acerca de decisiones y problemas encontrados en la práctica.
+Escribo sobre arquitectura de software, DDD y desarrollo .NET, a partir de decisiones y problemas que surgen en la práctica.
 
 - **[Café com código](https://www.linkedin.com/newsletters/caf%C3%A9-com-c%C3%B3digo-6880618748047314945)** — boletín sobre arquitectura e ingeniería de software.
