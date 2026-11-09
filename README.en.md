@@ -11,9 +11,9 @@
 
 **Software Architect · Distributed Systems · .NET · Cloud**
 
-I am a software architect with more than 20 years of experience evolving enterprise systems. I work hands-on with .NET, distributed systems, and cloud platforms, balancing business needs, technical trade-offs, and operational constraints.
+I'm a software architect with more than 20 years of experience designing and evolving enterprise systems. I work hands-on with .NET, distributed systems, and cloud platforms, balancing business goals, technical trade-offs, and operational constraints.
 
-This profile brings together open-source tools, libraries, and labs focused on architecture governance, integration reliability, and developer workflows.
+This profile highlights open-source tools, libraries, and hands-on labs focused on architecture governance, reliable integrations, and developer workflows.
 
 <p align="center">
   <picture>
@@ -40,72 +40,72 @@ This profile brings together open-source tools, libraries, and labs focused on a
 
 ## Selected projects
 
-Tools, libraries, and labs that connect architecture decisions with implementation and operations.
+Tools, libraries, and labs that connect architectural decisions to implementation and day-to-day operations.
 
 ### [ADR Guard](https://github.com/rodri-oliveira-dev/adr-guard)
 
 *Architecture governance tool*
 
-Helps teams keep decision records consistent and traceable. Its .NET CLI creates, validates, and indexes ADRs; optional impact and drift analysis works from bounded evidence without replacing architectural judgment. The [case study](https://rodri-oliveira-dev.github.io/en/case-studies/adr-guard/) examines the underlying decisions and trade-offs.
+Helps teams keep architecture decision records (ADRs) consistent and traceable. Its .NET CLI creates, validates, and indexes ADRs. Optional impact and drift analyses rely on clearly scoped evidence and support, rather than replace, architectural judgment. The [case study](https://rodri-oliveira-dev.github.io/en/case-studies/adr-guard/) explores the decisions and trade-offs behind the tool.
 
 ### [Dapper.FluentMap](https://github.com/rodri-oliveira-dev/Dapper-FluentMap)
 
 *.NET library*
 
-Handles mappings between .NET objects and database columns when Dapper's conventions are not enough, without adding attributes to domain models. Its evolution balances a fluent API, extensibility, and compatibility with existing applications, showing long-term public API stewardship and incremental modernization. The [case study](https://rodri-oliveira-dev.github.io/en/case-studies/dapper-fluentmap/) discusses the boundaries of that abstraction.
+Maps .NET objects to database columns when Dapper's default conventions fall short, without adding attributes to domain models. Its ongoing development balances a fluent API and extensibility with compatibility for existing applications. The [case study](https://rodri-oliveira-dev.github.io/en/case-studies/dapper-fluentmap/) explores the benefits and limits of this abstraction.
 
 ### [Repo2C4](https://github.com/rodri-oliveira-dev/Repo2C4)
 
 *Architecture documentation tool*
 
-Reduces drift between code and diagrams by turning bounded evidence from .NET repositories into reviewable C4/LikeC4 documentation. Its workflow separates observations from hypotheses and requires explicit writes, demonstrating static analysis, deterministic generation, and MCP-based agent integration.
+Helps keep architecture diagrams aligned with code by generating reviewable C4/LikeC4 documentation from clearly scoped evidence in .NET repositories. Its workflow separates observations from hypotheses and writes files only when explicitly requested. It demonstrates static analysis, deterministic generation, and MCP-based agent integration.
 
 ### [POC Arquitetura](https://github.com/rodri-oliveira-dev/poc-arquitetura)
 
 *Distributed-systems lab*
 
-Makes decisions around eventual consistency, failure handling, and traceability reproducible in a .NET microservices foundation. It implements DDD, asynchronous Kafka integration with Outbox, tests, and runbooks while keeping proposals without code evidence explicitly marked as pending.
+Provides a reproducible .NET microservices environment for exploring eventual consistency, failure handling, and traceability. It uses DDD and asynchronous Kafka integration with the Outbox pattern, alongside tests and runbooks. Proposals not yet supported by code are clearly marked as pending.
 
 ### [ReliableWebhooks](https://github.com/rodri-oliveira-dev/ReliableWebhooks)
 
 *.NET integration library*
 
-Addresses failure, concurrency, and duplication in outbound webhook delivery. Stable IDs make enqueueing idempotent, while leases and retries support at-least-once delivery with a durable store supplied by the application; receivers must still tolerate duplicates. The [case study](https://rodri-oliveira-dev.github.io/en/case-studies/reliable-webhooks/) examines these guarantees and their limits.
+Addresses failures, concurrent processing, and duplicate requests in outbound webhook delivery. Stable IDs make enqueue operations idempotent. Leases and retries support at-least-once delivery through an application-provided durable store, so receivers still need to handle duplicates. The [case study](https://rodri-oliveira-dev.github.io/en/case-studies/reliable-webhooks/) explains these guarantees and their limits.
 
 ### [ComplexityAnalysis.Analyzers](https://github.com/rodri-oliveira-dev/complexity-analyzers)
 
 *Static analysis tool*
 
-Surfaces costly patterns and complexity regressions before runtime. The Roslyn analyzer estimates Big-O when evidence is sufficient, enforces configurable metrics in builds and IDEs, and reports an unknown result rather than inferring beyond what the code can support.
+Flags potentially costly patterns and complexity regressions during development. When there is enough evidence, the Roslyn analyzer estimates Big-O complexity. It also enforces configurable metrics in builds and IDEs, and reports an unknown result when the code does not support a reliable estimate.
 
-Other work remains available through [Repo Control Center](https://github.com/rodri-oliveira-dev/repo-status-dashboard), a dashboard for repository CI, releases, security, and health, and the [full repository list](https://github.com/rodri-oliveira-dev?tab=repositories).
+For a broader view, see [Repo Control Center](https://github.com/rodri-oliveira-dev/repo-status-dashboard), a dashboard for repository CI, releases, security, and health, or browse the [full repository list](https://github.com/rodri-oliveira-dev?tab=repositories).
 
 ---
 
 ## Open-source contributions
 
-Selected merged contributions that demonstrate correction, maintenance, and security work in existing codebases:
+Selected merged pull requests showing bug fixes, maintenance, and security improvements in established codebases:
 
-- **Ocelot — [PR #2420](https://github.com/ThreeMammals/Ocelot/pull/2420):** corrected downstream timeout mapping to HTTP 504 under RFC 9110 while preserving client cancellation and QoS behavior, with unit and acceptance tests.
-- **MySqlConnector — [PR #1675](https://github.com/mysql-net/MySqlConnector/pull/1675):** removed retired Azure MySQL Single Server detection while preserving the AWS RDS Proxy path and simplifying connection logic.
-- **OpenCNPJ — [PR #75](https://github.com/Hitmasu/OpenCNPJ/pull/75):** centralized external downloads behind timeouts, size limits, temporary files, and failure cleanup, backed by tests and CI validation.
+- **Ocelot — [PR #2420](https://github.com/ThreeMammals/Ocelot/pull/2420):** fixed downstream timeout mapping to HTTP 504 in line with RFC 9110, while preserving client cancellation and QoS behavior, with unit and acceptance tests.
+- **MySqlConnector — [PR #1675](https://github.com/mysql-net/MySqlConnector/pull/1675):** removed detection for the retired Azure MySQL Single Server service while preserving AWS RDS Proxy support and simplifying connection logic.
+- **OpenCNPJ — [PR #75](https://github.com/Hitmasu/OpenCNPJ/pull/75):** added safeguards for external downloads, including timeouts, size limits, temporary files, and cleanup on failure, backed by tests and CI validation.
 
-The [full open-source contribution catalog](docs/open-source-contributions.en.md) keeps the remaining Pull Requests and their statuses automatically reconciled.
+The [full open-source contribution catalog](docs/open-source-contributions.en.md) automatically tracks other pull requests and their current statuses.
 
 ## Governance as code
 
-The **[.github](https://github.com/rodri-oliveira-dev/.github)** repository brings together reusable policies and automation: contribution and security standards, a .NET project inventory, secret scanning, and controlled distribution of agent skills. Changes go through Pull Requests, and individual repositories retain control over their own rules.
+The **[.github](https://github.com/rodri-oliveira-dev/.github)** repository brings together reusable policies and automation, including contribution and security standards, a .NET project inventory, secret scanning, and controlled distribution of agent skills. Changes go through pull requests, and each repository retains control over its own rules.
 
 ## How I think about architecture
 
-My perspective on software architecture has been shaped by more than two decades in software development. That experience taught me that a technically sound design isn't enough. It also has to make sense for the business, fit the way an organization works, and serve the people who will build and maintain it.
+More than two decades in software development have taught me that a technically sound design isn't enough. It also needs to serve business goals, fit the way an organization works, and support the people who build and maintain it.
 
-I don't see architecture as something one person defines in isolation and then hands down to a team. I try to understand the company's context, the team's experience, the constraints they're working within, and what they're trying to achieve. From there, the goal is to make decisions together, meeting today's needs without losing sight of how the system and the team can grow.
+I don't believe architecture should be defined in isolation and handed down to a team. I start by understanding the business context, the team's experience, the constraints they face, and what they're trying to achieve. From there, the goal is to make decisions together, addressing today's needs while leaving room for the system and the team to grow.
 
-For me, being an architect is about more than designing solutions. It's also about helping teams make sound technical decisions, sharing knowledge, and making it easier for systems to evolve sustainably.
+For me, being an architect means more than designing solutions. It also means helping teams make sound technical decisions, sharing knowledge, and making it easier for systems to evolve sustainably.
 
 ## Writing and technical content
 
-I write about software architecture, DDD, and .NET development, focusing on decisions and problems encountered in practice.
+I write about software architecture, DDD, and .NET development, drawing on real-world engineering decisions and challenges.
 
 - **[DEV.to](https://dev.to/rodri-oliveira-dev)** — articles about software architecture and engineering.
