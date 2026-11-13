@@ -35,7 +35,7 @@ Aquí comparto bibliotecas, herramientas y laboratorios de código abierto que d
 **Enlaces profesionales**
 
 - [Portafolio profesional](https://rodri-oliveira-dev.github.io/)
-- [Currículum (en portugués)](https://rodri-oliveira-dev.github.io/curriculo/)
+- [Currículum](https://rodri-oliveira-dev.github.io/es/curriculo/)
 - [Servicios de consultoría](https://rodri-oliveira-dev.github.io/es/servicios/)
 - [LinkedIn](https://www.linkedin.com/in/rodri-oliveira-dev)
 - [Café com código](https://www.linkedin.com/newsletters/caf%C3%A9-com-c%C3%B3digo-6880618748047314945)
