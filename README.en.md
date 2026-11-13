@@ -11,7 +11,9 @@
 
 **Software Architect · Distributed Systems · .NET · Cloud**
 
-I'm a software architect with more than 20 years of experience designing and evolving enterprise systems. I work hands-on with .NET, distributed systems, and cloud platforms, balancing business goals, technical trade-offs, and operational constraints.
+I'm a software architect with more than 20 years of experience building and modernizing enterprise systems, with a background in .NET, distributed systems, and cloud platforms. Today, I work on solution architecture for financial services and insurance, with architectural responsibility for two engineering teams and close collaboration with product owners, tech leads, and other architects.
+
+I've helped modernize legacy functionality into microservices, from initial discovery through production deployment, and contribute to technical reviews and engineering practices through the Architecture Center of Excellence. I've also served as a technical lead and Career Advisor, mentoring engineers and supporting their development, and participated in adopting AI tools for developing new systems.
 
 This profile highlights open-source tools, libraries, and hands-on labs focused on architecture governance, reliable integrations, and developer workflows.
 
@@ -32,6 +34,8 @@ This profile highlights open-source tools, libraries, and hands-on labs focused 
 **Professional links**
 
 - [Professional portfolio](https://rodri-oliveira-dev.github.io/)
+- [Resume (in Brazilian Portuguese)](https://rodri-oliveira-dev.github.io/curriculo/)
+- [Consulting services](https://rodri-oliveira-dev.github.io/en/services/)
 - [LinkedIn](https://www.linkedin.com/in/rodri-oliveira-dev)
 - [DEV.to](https://dev.to/rodri-oliveira-dev)
 - [NuGet](https://www.nuget.org/profiles/rodri-oliveira-dev)
@@ -46,7 +50,7 @@ Tools, libraries, and labs that connect architectural decisions to implementatio
 
 *Architecture governance tool*
 
-Helps teams keep architecture decision records (ADRs) consistent and traceable. Its .NET CLI creates, validates, and indexes ADRs. Optional impact and drift analyses rely on clearly scoped evidence and support, rather than replace, architectural judgment. The [case study](https://rodri-oliveira-dev.github.io/en/case-studies/adr-guard/) explores the decisions and trade-offs behind the tool.
+Helps teams keep architecture decision records (ADRs) consistent and traceable. Its .NET CLI creates, validates, and indexes ADRs. Optional impact and drift analyses rely on clearly scoped evidence and support, rather than replace, architectural judgment. An independent [read-only MCP server](https://github.com/rodri-oliveira-dev/adr-guard/blob/main/docs/mcp.md) offers tools to compatible agents, while [Agent Skills](https://github.com/rodri-oliveira-dev/adr-guard/blob/main/docs/skills/README.md) guide their use without delegating architectural decisions. The [case study](https://rodri-oliveira-dev.github.io/en/case-studies/adr-guard/) explores the decisions and trade-offs behind the tool.
 
 ### [Dapper.FluentMap](https://github.com/rodri-oliveira-dev/Dapper-FluentMap)
 
