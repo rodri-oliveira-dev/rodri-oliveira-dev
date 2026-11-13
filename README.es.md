@@ -12,7 +12,9 @@
 
 *Experiencia práctica en .NET, sistemas distribuidos, plataformas en la nube, gobernanza de arquitectura y herramientas de código abierto.*
 
-Mi trayectoria comenzó en el desarrollo de software y, a lo largo de más de 20 años, me llevó a trabajar en integraciones y modernización de sistemas empresariales hasta llegar a la arquitectura. Hoy busco equilibrar las necesidades del negocio, las decisiones técnicas y las condiciones reales de implementación y operación.
+Mi trayectoria comenzó en el desarrollo de software y, a lo largo de más de 20 años, pasó por la integración y modernización de sistemas empresariales hasta llegar a la arquitectura. Actualmente trabajo en la arquitectura de soluciones para los sectores financiero y asegurador, con responsabilidad arquitectónica sobre dos equipos de ingeniería y en colaboración con responsables de producto, líderes técnicos y otros arquitectos.
+
+He participado en la modernización de funcionalidades heredadas hacia microservicios, desde el análisis inicial hasta su puesta en producción, y contribuyo a la gobernanza mediante revisiones técnicas en el Centro de Excelencia de Arquitectura. También he ejercido el liderazgo técnico y he trabajado como Career Advisor, acompañando el desarrollo profesional de colegas, además de participar en la adopción de herramientas de IA para desarrollar nuevos sistemas.
 
 Aquí comparto bibliotecas, herramientas y laboratorios de código abierto que desarrollo para explorar cómo las decisiones de arquitectura se reflejan en el código, las pruebas y la automatización.
 
@@ -33,6 +35,8 @@ Aquí comparto bibliotecas, herramientas y laboratorios de código abierto que d
 **Enlaces profesionales**
 
 - [Portafolio profesional](https://rodri-oliveira-dev.github.io/)
+- [Currículum (en portugués)](https://rodri-oliveira-dev.github.io/curriculo/)
+- [Servicios de consultoría](https://rodri-oliveira-dev.github.io/es/servicios/)
 - [LinkedIn](https://www.linkedin.com/in/rodri-oliveira-dev)
 - [Café com código](https://www.linkedin.com/newsletters/caf%C3%A9-com-c%C3%B3digo-6880618748047314945)
 - [NuGet](https://www.nuget.org/profiles/rodri-oliveira-dev)
@@ -47,7 +51,7 @@ Herramientas, bibliotecas y laboratorios que conectan las decisiones de arquitec
 
 *Herramienta de gobernanza de arquitectura*
 
-Ayuda a los equipos a mantener registros de decisiones arquitectónicas (ADR) consistentes y rastreables. Su CLI en .NET permite crear, validar e indexar estos registros. Los análisis opcionales de impacto y desviaciones arquitectónicas se basan en evidencia verificable, sin reemplazar el criterio profesional. El [estudio de caso](https://rodri-oliveira-dev.github.io/es/case-studies/adr-guard/) explica las decisiones tomadas y sus implicaciones.
+Ayuda a los equipos a mantener registros de decisiones arquitectónicas (ADR) consistentes y rastreables. Su CLI en .NET permite crear, validar e indexar estos registros. Los análisis opcionales de impacto y desviaciones arquitectónicas se basan en evidencia verificable, sin reemplazar el criterio profesional. Un [servidor MCP independiente y de solo lectura](https://github.com/rodri-oliveira-dev/adr-guard/blob/main/docs/mcp.md) ofrece herramientas a agentes compatibles, mientras que las [Agent Skills](https://github.com/rodri-oliveira-dev/adr-guard/blob/main/docs/skills/README.md) orientan su uso sin delegar decisiones arquitectónicas. El [estudio de caso](https://rodri-oliveira-dev.github.io/es/case-studies/adr-guard/) explica las decisiones tomadas y sus implicaciones.
 
 ### [Dapper.FluentMap](https://github.com/rodri-oliveira-dev/Dapper-FluentMap)
 
