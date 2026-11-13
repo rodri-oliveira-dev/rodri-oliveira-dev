@@ -34,7 +34,7 @@ This profile highlights open-source tools, libraries, and hands-on labs focused 
 **Professional links**
 
 - [Professional portfolio](https://rodri-oliveira-dev.github.io/)
-- [Resume (in Brazilian Portuguese)](https://rodri-oliveira-dev.github.io/curriculo/)
+- [Resume](https://rodri-oliveira-dev.github.io/en/resume/)
 - [Consulting services](https://rodri-oliveira-dev.github.io/en/services/)
 - [LinkedIn](https://www.linkedin.com/in/rodri-oliveira-dev)
 - [DEV.to](https://dev.to/rodri-oliveira-dev)
