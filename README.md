@@ -10,14 +10,13 @@
 # Rodrigo de Oliveira
 
 **Arquiteto de Software · Sistemas Distribuídos · .NET · Cloud**
+Comecei minha carreira desenvolvendo software, principalmente com .NET. Depois de mais de 20 anos trabalhando com sistemas corporativos, integrações e modernização de aplicações, hoje atuo como arquiteto de software na CI&T. Meu trabalho atual é voltado a soluções de crédito e empréstimos. Apoio dois times de engenharia e trabalho com profissionais de produto, lideranças técnicas e outros arquitetos.
 
-*Experiência prática com .NET, sistemas distribuídos, plataformas em nuvem, governança arquitetural e ferramentas open source.*
+Uma experiência importante na minha trajetória foi a modernização de um sistema do setor de seguros. Defini a arquitetura para levar regras de negócio antes concentradas em stored procedures para microsserviços, estabeleci as responsabilidades entre os serviços e acompanhei a implantação em produção. O monitoramento mostrou uma redução na quantidade de transações com erro após a mudança.
 
-Minha trajetória começou no desenvolvimento de software e, ao longo de mais de 20 anos, passou por integrações e modernização de sistemas corporativos até chegar à arquitetura. Hoje, atuo na arquitetura de soluções para os setores financeiro e segurador, com responsabilidade arquitetural por dois times de engenharia e colaboração com profissionais de produto, lideranças técnicas e outros arquitetos.
+Também trabalhei com sistemas críticos de alto volume transacional, investiguei falhas de integração em produção e participei de correções em contratos e na comunicação entre APIs. Minha experiência inclui implementar aplicações e serviços na Google Cloud e colaborar com o Centro de Excelência de Arquitetura na definição de padrões de APIs e integrações. Atuei ainda como líder técnico e Career Advisor, acompanhei o desenvolvimento de outros profissionais e participei da adoção de ferramentas de IA no desenvolvimento de software.
 
-Participei da modernização de funcionalidades legadas para microsserviços, do levantamento inicial à implantação em produção, e contribuo para revisões técnicas e padrões no Centro de Excelência de Arquitetura. Também atuei como liderança técnica e Career Advisor, apoiando a mentoria e o desenvolvimento de profissionais, e participei da adoção de ferramentas de IA no desenvolvimento de novos sistemas.
-
-Aqui compartilho bibliotecas, ferramentas e laboratórios open source que desenvolvo para explorar como decisões de arquitetura se refletem em código, testes e automação.
+Aqui compartilho bibliotecas, ferramentas e laboratórios que mantenho para experimentar ideias e dividir o que aprendo. Gosto de continuar próximo do código, porque isso ajuda a tomar decisões que funcionem também na prática.
 
 <p align="center">
   <picture>
@@ -104,11 +103,11 @@ No repositório **[.github](https://github.com/rodri-oliveira-dev/.github)**, re
 
 ## Como vejo a arquitetura
 
-Minha forma de pensar arquitetura vem de mais de duas décadas atuando no desenvolvimento de software. Essa experiência me ensinou que não basta uma solução ser tecnicamente adequada. Ela também precisa fazer sentido para o negócio, para a organização e para as pessoas que vão construí-la e mantê-la.
+Trabalhar muitos anos com desenvolvimento me ensinou que uma decisão de arquitetura precisa funcionar também depois da implantação. Ela afeta quem desenvolve, quem opera e quem precisa evoluir o sistema.
 
-Não vejo a arquitetura como algo definido isoladamente por um arquiteto e depois imposto às equipes. Por isso, procuro compreender o contexto da empresa, a maturidade dos times, as limitações existentes e os objetivos a alcançar. A partir dessa compreensão, busco construir decisões em conjunto, equilibrando as necessidades atuais e as possibilidades de evolução.
+Por isso, prefiro começar pelo problema e pelas restrições reais. Discuto alternativas com os times, avalio os trade-offs e tento evitar complexidade que não traga benefício. Não acredito em arquitetura decidida isoladamente e entregue como uma regra pronta.
 
-Para mim, o papel do arquiteto não é apenas desenhar soluções, mas ajudar as equipes a tomar boas decisões técnicas, compartilhar conhecimento e criar condições para que os sistemas possam evoluir de maneira sustentável.
+Gosto de continuar próximo do código e das pessoas que o mantêm. É assim que consigo revisar minhas decisões e aprender com o que acontece em produção.
 
 ## Publicações e conteúdo técnico
 

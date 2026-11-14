@@ -10,12 +10,13 @@
 # Rodrigo de Oliveira
 
 **Software Architect · Distributed Systems · .NET · Cloud**
+I started out as a software developer, mostly working with .NET. Over more than 20 years, I've worked with enterprise systems, integrations, and legacy modernization. Today I'm a software architect at CI&T, focused on lending and credit solutions. I support two engineering teams and work closely with product, tech leads, and fellow architects.
 
-I'm a software architect with more than 20 years of experience building and modernizing enterprise systems, with a background in .NET, distributed systems, and cloud platforms. Today, I work on solution architecture for financial services and insurance, with architectural responsibility for two engineering teams and close collaboration with product owners, tech leads, and other architects.
+One project that shaped my approach was modernizing a system in the insurance sector. I defined the architecture for moving business rules out of stored procedures and into microservices, established the boundaries between services, and followed the implementation through production rollout. Monitoring showed fewer transactions ending in errors after the change.
 
-I've helped modernize legacy functionality into microservices, from initial discovery through production deployment, and contribute to technical reviews and engineering practices through the Architecture Center of Excellence. I've also served as a technical lead and Career Advisor, mentoring engineers and supporting their development, and participated in adopting AI tools for developing new systems.
+I've also worked on high-volume, business-critical systems, investigated production integration issues, and helped fix problems with API contracts and communication. My experience includes implementing applications and services on Google Cloud and contributing to shared API and integration standards through the Architecture Center of Excellence. I've also served as a tech lead and Career Advisor, supported other engineers' growth, and taken part in adopting AI tools for software development.
 
-This profile highlights open-source tools, libraries, and hands-on labs focused on architecture governance, reliable integrations, and developer workflows.
+This profile brings together the libraries, tools, and hands-on labs I maintain to test ideas and share what I learn. I like staying close to the code; it keeps architectural decisions grounded in real implementation.
 
 <p align="center">
   <picture>
@@ -102,11 +103,11 @@ The **[.github](https://github.com/rodri-oliveira-dev/.github)** repository brin
 
 ## How I think about architecture
 
-More than two decades in software development have taught me that a technically sound design isn't enough. It also needs to serve business goals, fit the way an organization works, and support the people who build and maintain it.
+Years of software development have taught me that an architectural decision needs to work after deployment, too. It affects the people building, operating, and evolving the system.
 
-I don't believe architecture should be defined in isolation and handed down to a team. I start by understanding the business context, the team's experience, the constraints they face, and what they're trying to achieve. From there, the goal is to make decisions together, addressing today's needs while leaving room for the system and the team to grow.
+That's why I prefer to start with the problem and the actual constraints. I discuss options with the teams, weigh trade-offs, and try to avoid complexity that doesn't bring value. I don't believe in designing architecture in isolation and handing it down as a set of rules.
 
-For me, being an architect means more than designing solutions. It also means helping teams make sound technical decisions, sharing knowledge, and making it easier for systems to evolve sustainably.
+I like staying close to the code and the people who maintain it. It helps me revisit my decisions and learn from what happens in production.
 
 ## Writing and technical content
 
