@@ -9,14 +9,13 @@
 # Rodrigo de Oliveira
 
 **Arquitecto de Software · Sistemas Distribuidos · .NET · Cloud**
+Empecé mi carrera desarrollando software, principalmente con .NET. Durante más de 20 años he trabajado con sistemas empresariales, integraciones y modernización de aplicaciones heredadas. Hoy soy arquitecto de software en CI&T y trabajo en soluciones de crédito y préstamos. Acompaño a dos equipos de ingeniería y colaboro con producto, líderes técnicos y otros arquitectos.
 
-*Experiencia práctica en .NET, sistemas distribuidos, plataformas en la nube, gobernanza de arquitectura y herramientas de código abierto.*
+Una experiencia importante en mi trayectoria fue la modernización de un sistema del sector asegurador. Definí la arquitectura para trasladar reglas de negocio que estaban en procedimientos almacenados a microservicios, establecí las responsabilidades de cada servicio y acompañé la implementación hasta su puesta en producción. El monitoreo mostró una disminución en la cantidad de transacciones con errores después del cambio.
 
-Mi trayectoria comenzó en el desarrollo de software y, a lo largo de más de 20 años, pasó por la integración y modernización de sistemas empresariales hasta llegar a la arquitectura. Actualmente trabajo en la arquitectura de soluciones para los sectores financiero y asegurador, con responsabilidad arquitectónica sobre dos equipos de ingeniería y en colaboración con responsables de producto, líderes técnicos y otros arquitectos.
+También he trabajado con sistemas críticos de alto volumen transaccional, investigado incidentes de integración en producción y participado en la corrección de contratos y comunicación entre APIs. Mi experiencia incluye implementar aplicaciones y servicios en Google Cloud y colaborar con el Centro de Excelencia de Arquitectura en estándares compartidos de APIs e integraciones. También ejercí como líder técnico y Career Advisor, acompañé el desarrollo de otros profesionales y participé en la adopción de herramientas de IA para el desarrollo de software.
 
-He participado en la modernización de funcionalidades heredadas hacia microservicios, desde el análisis inicial hasta su puesta en producción, y contribuyo a la gobernanza mediante revisiones técnicas en el Centro de Excelencia de Arquitectura. También he ejercido el liderazgo técnico y he trabajado como Career Advisor, acompañando el desarrollo profesional de colegas, además de participar en la adopción de herramientas de IA para desarrollar nuevos sistemas.
-
-Aquí comparto bibliotecas, herramientas y laboratorios de código abierto que desarrollo para explorar cómo las decisiones de arquitectura se reflejan en el código, las pruebas y la automatización.
+En este perfil comparto bibliotecas, herramientas y laboratorios que mantengo para probar ideas y compartir lo que aprendo. Me gusta seguir cerca del código, porque ayuda a que las decisiones arquitectónicas tengan sentido en la práctica.
 
 <p align="center">
   <picture>
@@ -103,11 +102,11 @@ En el repositorio **[.github](https://github.com/rodri-oliveira-dev/.github)** r
 
 ## Mi visión de la arquitectura
 
-Mi manera de entender la arquitectura se formó a lo largo de más de dos décadas trabajando en desarrollo de software. Esa experiencia me enseñó que no basta con que una solución sea técnicamente correcta. También debe tener sentido para el negocio, adaptarse a la forma de trabajar de la organización y servir a quienes van a construirla y mantenerla.
+Después de tantos años desarrollando software, aprendí que una decisión de arquitectura también tiene que funcionar después de su puesta en producción. Afecta a quienes desarrollan, operan y mantienen el sistema.
 
-No creo en una arquitectura que se define de manera aislada y luego se impone a los equipos. Prefiero comprender primero el contexto de la empresa, la experiencia de los equipos, las limitaciones que enfrentan y los objetivos que buscan alcanzar. A partir de ahí, busco construir las decisiones en conjunto, atendiendo las necesidades actuales sin perder de vista la evolución futura.
+Por eso, prefiero empezar por el problema y las limitaciones reales. Converso sobre alternativas con los equipos, evalúo los trade-offs y trato de evitar complejidad que no aporte valor. No creo en una arquitectura diseñada de forma aislada y entregada como un conjunto de reglas.
 
-Para mí, ser arquitecto no consiste solo en diseñar soluciones. También implica ayudar a los equipos a tomar buenas decisiones técnicas, compartir conocimiento y facilitar que los sistemas evolucionen de manera sostenible.
+Me gusta seguir cerca del código y de las personas que lo mantienen. Eso me ayuda a revisar mis decisiones y aprender de lo que pasa en producción.
 
 ## Publicaciones y contenido técnico
 
