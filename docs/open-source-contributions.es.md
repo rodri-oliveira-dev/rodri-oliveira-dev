@@ -16,7 +16,7 @@ Este catálogo reúne los pull requests públicos que abrí en proyectos de terc
 
 **81%** de los PRs integrados · `▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▱▱▱▱` · **1** PR cerrado sin integrar
 
-**Última sincronización correcta:** 06/11/2026
+**Última sincronización correcta:** 17/11/2026
 
 _La fecha corresponde a la sincronización que produjo la versión publicada actual; las consultas sin cambios en los datos no generan commits._
 
@@ -54,8 +54,8 @@ _La fecha corresponde a la sincronización que produjo la versión publicada act
 
 | | |
 | --- | --- |
-| [ThreeMammals/Ocelot](#repository-74687265656d616d6d616c732f6f63656c6f74) | [architecture-decision-record/architecture-decision-record](#repository-6172636869746563747572652d6465636973696f6e2d7265636f72642f6172636869746563747572652d6465636973696f6e2d7265636f7264) |
-| [punkpeye/awesome-mcp-servers](#repository-70756e6b706579652f617765736f6d652d6d63702d73657276657273) | [zzzprojects/docs](#repository-7a7a7a70726f6a656374732f646f6373) |
+| [punkpeye/awesome-mcp-servers](#repository-70756e6b706579652f617765736f6d652d6d63702d73657276657273) | [ThreeMammals/Ocelot](#repository-74687265656d616d6d616c732f6f63656c6f74) |
+| [architecture-decision-record/architecture-decision-record](#repository-6172636869746563747572652d6465636973696f6e2d7265636f72642f6172636869746563747572652d6465636973696f6e2d7265636f7264) | [zzzprojects/docs](#repository-7a7a7a70726f6a656374732f646f6373) |
 | [mjebrahimi/Awesome-Nuget-Packages](#repository-6d6a6562726168696d692f617765736f6d652d6e756765742d7061636b61676573) | [ModerRAS/star-vault](#repository-6d6f6465727261732f737461722d7661756c74) |
 | [mysql-net/MySqlConnector](#repository-6d7973716c2d6e65742f6d7973716c636f6e6e6563746f72) | [likec4/likec4](#repository-6c696b6563342f6c696b656334) |
 | [guibranco/CrispyWaffle](#repository-6775696272616e636f2f637269737079776166666c65) | [thangchung/awesome-dotnet-core](#repository-7468616e676368756e672f617765736f6d652d646f746e65742d636f7265) |
@@ -69,6 +69,21 @@ _La fecha corresponde a la sincronización que produjo la versión publicada act
 <a id="contribution-history"></a>
 
 ## Contribuciones por repositorio
+
+<a id="repository-70756e6b706579652f617765736f6d652d6d63702d73657276657273"></a>
+
+<details>
+<summary><strong>punkpeye/awesome-mcp-servers</strong> · 1 PR · 1 abierto</summary>
+
+[Ver repositorio](https://github.com/punkpeye/awesome-mcp-servers)
+
+**Total:** 1 · **PRs integrados:** 0 · **PRs abiertos:** 1 · **PRs cerrados sin integración:** 0
+
+| Pull request | Estado | Abierto el | Integrado el |
+| --- | --- | --- | --- |
+| [#18508](https://github.com/punkpeye/awesome-mcp-servers/pull/18508) — Add ADR Guard MCP server to Architecture & Design | Abierto | 03/11/2026 | — |
+
+</details>
 
 <a id="repository-74687265656d616d6d616c732f6f63656c6f74"></a>
 
@@ -98,21 +113,6 @@ _La fecha corresponde a la sincronización que produjo la versión publicada act
 | Pull request | Estado | Abierto el | Integrado el |
 | --- | --- | --- | --- |
 | [#115](https://github.com/architecture-decision-record/architecture-decision-record/pull/115) — Add Brazilian Portuguese translation | Abierto | 11/08/2026 | — |
-
-</details>
-
-<a id="repository-70756e6b706579652f617765736f6d652d6d63702d73657276657273"></a>
-
-<details>
-<summary><strong>punkpeye/awesome-mcp-servers</strong> · 1 PR · 1 abierto</summary>
-
-[Ver repositorio](https://github.com/punkpeye/awesome-mcp-servers)
-
-**Total:** 1 · **PRs integrados:** 0 · **PRs abiertos:** 1 · **PRs cerrados sin integración:** 0
-
-| Pull request | Estado | Abierto el | Integrado el |
-| --- | --- | --- | --- |
-| [#18508](https://github.com/punkpeye/awesome-mcp-servers/pull/18508) — Add ADR Guard MCP server to Architecture & Design | Abierto | 03/11/2026 | — |
 
 </details>
 
