@@ -34,12 +34,12 @@ This profile brings together the libraries, tools, and hands-on labs I maintain 
 
 **Professional links**
 
-- [Professional portfolio](https://rodri-oliveira-dev.github.io/)
-- [Resume](https://rodri-oliveira-dev.github.io/en/resume/)
-- [Consulting services](https://rodri-oliveira-dev.github.io/en/services/)
-- [LinkedIn](https://www.linkedin.com/in/rodri-oliveira-dev)
-- [DEV.to](https://dev.to/rodri-oliveira-dev)
-- [NuGet](https://www.nuget.org/profiles/rodri-oliveira-dev)
+- 🧭 [Professional portfolio](https://rodri-oliveira-dev.github.io/)
+- 📄 [Resume](https://rodri-oliveira-dev.github.io/en/resume/)
+- 🤝 [Consulting services](https://rodri-oliveira-dev.github.io/en/services/)
+- 💼 [LinkedIn](https://www.linkedin.com/in/rodri-oliveira-dev)
+- ✍️ [DEV.to](https://dev.to/rodri-oliveira-dev)
+- 📦 [NuGet](https://www.nuget.org/profiles/rodri-oliveira-dev)
 
 ---
 

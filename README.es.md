@@ -33,12 +33,12 @@ En este perfil comparto bibliotecas, herramientas y laboratorios que mantengo pa
 
 **Enlaces profesionales**
 
-- [Portafolio profesional](https://rodri-oliveira-dev.github.io/)
-- [Currículum](https://rodri-oliveira-dev.github.io/es/curriculo/)
-- [Servicios de consultoría](https://rodri-oliveira-dev.github.io/es/servicios/)
-- [LinkedIn](https://www.linkedin.com/in/rodri-oliveira-dev)
-- [Café com código](https://www.linkedin.com/newsletters/caf%C3%A9-com-c%C3%B3digo-6880618748047314945)
-- [NuGet](https://www.nuget.org/profiles/rodri-oliveira-dev)
+- 🧭 [Portafolio profesional](https://rodri-oliveira-dev.github.io/)
+- 📄 [Currículum](https://rodri-oliveira-dev.github.io/es/curriculo/)
+- 🤝 [Servicios de consultoría](https://rodri-oliveira-dev.github.io/es/servicios/)
+- 💼 [LinkedIn](https://www.linkedin.com/in/rodri-oliveira-dev)
+- ☕ [Café com código](https://www.linkedin.com/newsletters/caf%C3%A9-com-c%C3%B3digo-6880618748047314945)
+- 📦 [NuGet](https://www.nuget.org/profiles/rodri-oliveira-dev)
 
 ---
 
