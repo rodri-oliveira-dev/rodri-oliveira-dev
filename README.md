@@ -35,7 +35,7 @@ Aqui compartilho bibliotecas, ferramentas e laboratórios que mantenho para expe
 **Links profissionais**
 
 - 🧭 [Portfólio profissional](https://rodri-oliveira-dev.github.io/)
-- 📄 [Currículo (em português)](https://rodri-oliveira-dev.github.io/curriculo/)
+- 📄 [Currículo](https://rodri-oliveira-dev.github.io/curriculo/)
 - 🤝 [Serviços de consultoria](https://rodri-oliveira-dev.github.io/servicos/)
 - 💼 [LinkedIn](https://www.linkedin.com/in/rodri-oliveira-dev)
 - ☕ [Café com código](https://www.linkedin.com/newsletters/caf%C3%A9-com-c%C3%B3digo-6880618748047314945)
