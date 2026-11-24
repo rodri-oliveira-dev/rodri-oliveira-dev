@@ -2,7 +2,7 @@
   "schema_version": 2,
   "profile": "rodri-oliveira-dev",
   "scope": "All public PRs authored by this profile in repositories owned by others",
-  "last_successful_sync": "2026-11-17T09:14:08Z",
+  "last_successful_sync": "2026-11-24T09:14:27Z",
   "totals": {
     "repositories": 22,
     "pull_requests": 38,
@@ -14,7 +14,7 @@
     {
       "repository": "punkpeye/awesome-mcp-servers",
       "url": "https://github.com/punkpeye/awesome-mcp-servers",
-      "activity_at": "2026-11-17T03:33:43Z",
+      "activity_at": "2026-11-24T01:21:20Z",
       "pull_requests": [
         {
           "id": 6189949808,
@@ -23,7 +23,30 @@
           "title": "Add ADR Guard MCP server to Architecture & Design",
           "status": "open",
           "created_at": "2026-11-03T19:46:12Z",
-          "updated_at": "2026-11-17T03:33:43Z",
+          "updated_at": "2026-11-24T01:21:20Z",
+          "merged_at": null
+        }
+      ],
+      "totals": {
+        "pull_requests": 1,
+        "merged": 0,
+        "open": 1,
+        "closed_unmerged": 0
+      }
+    },
+    {
+      "repository": "architecture-decision-record/architecture-decision-record",
+      "url": "https://github.com/architecture-decision-record/architecture-decision-record",
+      "activity_at": "2026-11-23T16:48:52Z",
+      "pull_requests": [
+        {
+          "id": 5116398022,
+          "number": 115,
+          "url": "https://github.com/architecture-decision-record/architecture-decision-record/pull/115",
+          "title": "Add Brazilian Portuguese translation",
+          "status": "open",
+          "created_at": "2026-08-11T03:33:20Z",
+          "updated_at": "2026-11-23T16:48:52Z",
           "merged_at": null
         }
       ],
@@ -64,29 +87,6 @@
         "pull_requests": 2,
         "merged": 2,
         "open": 0,
-        "closed_unmerged": 0
-      }
-    },
-    {
-      "repository": "architecture-decision-record/architecture-decision-record",
-      "url": "https://github.com/architecture-decision-record/architecture-decision-record",
-      "activity_at": "2026-11-04T01:49:43Z",
-      "pull_requests": [
-        {
-          "id": 5116398022,
-          "number": 115,
-          "url": "https://github.com/architecture-decision-record/architecture-decision-record/pull/115",
-          "title": "Add Brazilian Portuguese translation",
-          "status": "open",
-          "created_at": "2026-08-11T03:33:20Z",
-          "updated_at": "2026-11-04T01:49:43Z",
-          "merged_at": null
-        }
-      ],
-      "totals": {
-        "pull_requests": 1,
-        "merged": 0,
-        "open": 1,
         "closed_unmerged": 0
       }
     },
