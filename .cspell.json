@@ -18,6 +18,15 @@
   ],
   "overrides": [
     {
+      "filename": "ACCESSIBILITY.md",
+      "language": "pt_BR,es,en-US",
+      "dictionaries": [
+        "pt-br",
+        "es-es",
+        "profile-terms"
+      ]
+    },
+    {
       "filename": "README.md",
       "language": "pt_BR,en-US",
       "dictionaries": [

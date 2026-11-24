@@ -3,7 +3,7 @@
 
 <p align="left">
   <a href="https://rodri-oliveira-dev.github.io/" aria-label="Professional portfolio">
-    <img src="assets/brand/ro-architect-mark.png" alt="RO Architect" width="64" />
+    <img src="assets/brand/ro-architect-mark.png" alt="Rodrigo de Oliveira's professional portfolio" width="64" />
   </a>
 </p>
 
@@ -31,6 +31,8 @@ This profile brings together the libraries, tools, and hands-on labs I maintain 
     />
   </picture>
 </p>
+
+**Software architecture in practice:** decisions shaped by business needs, teams, organization and system evolution, supported by code, testing, observability and automation. The illustrated projects are ADR Guard, Repo2C4, Complexity Analyzers, Dapper.FluentMap and POC Arquitetura.
 
 **Professional links**
 
@@ -114,3 +116,5 @@ I like staying close to the code and the people who maintain it. It helps me rev
 I write about software architecture, DDD, and .NET development, drawing on real-world engineering decisions and challenges.
 
 - **[DEV.to](https://dev.to/rodri-oliveira-dev)** — articles about software architecture and engineering.
+
+[Accessibility statement](ACCESSIBILITY.md#english)
