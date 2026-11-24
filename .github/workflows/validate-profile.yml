@@ -7,6 +7,8 @@ on:
     paths:
       - "**/*.md"
       - "assets/brand/**"
+      - "assets/profile/**"
+      - ".github/scripts/check-profile-accessibility.py"
       - ".github/workflows/**"
       - ".markdownlint.jsonc"
   pull_request:
@@ -34,6 +36,9 @@ jobs:
           config: .markdownlint.jsonc
           globs: |
             **/*.md
+
+      - name: Validate profile accessibility conventions
+        run: python3 .github/scripts/check-profile-accessibility.py
 
       - name: Validate links
         uses: lycheeverse/lychee-action@v2
