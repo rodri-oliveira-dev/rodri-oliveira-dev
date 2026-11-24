@@ -113,3 +113,5 @@ Me gusta seguir cerca del código y de las personas que lo mantienen. Eso me ayu
 Escribo sobre arquitectura de software, DDD y desarrollo .NET, a partir de decisiones y problemas que surgen en la práctica.
 
 - **[Café com código](https://www.linkedin.com/newsletters/caf%C3%A9-com-c%C3%B3digo-6880618748047314945)** — boletín sobre arquitectura e ingeniería de software.
+
+[Declaración de accesibilidad](ACCESSIBILITY.md#español)
