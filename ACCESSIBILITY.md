@@ -10,7 +10,7 @@ Este repositório mantém o conteúdo do perfil profissional no GitHub em portug
 - Manter as informações essenciais disponíveis em texto, sem depender exclusivamente de imagens, cores ou emojis.
 - Manter navegação consistente entre idiomas e revisar a acessibilidade quando o conteúdo mudar.
 
-Os READMEs já incluem texto alternativo para os infográficos e rótulos textuais nos links. Não foi realizada uma avaliação completa com tecnologias assistivas; esta declaração não comprova conformidade. A interface e a renderização do GitHub, assim como sites externos e outros repositórios, não fazem parte deste escopo.
+Os READMEs incluem texto alternativo e uma descrição textual visível dos infográficos, além de rótulos textuais nos links. A [validação automatizada](.github/workflows/validate-profile.yml) verifica convenções de texto alternativo, hierarquia de títulos, referências aos recursos e presença das descrições. A equivalência integral das imagens, seu contraste e a experiência com leitores de tela ainda precisam de avaliação manual. Não foi realizada uma avaliação completa com tecnologias assistivas; esta declaração não comprova conformidade. A interface e a renderização do GitHub, assim como sites externos e outros repositórios, não fazem parte deste escopo.
 
 Para relatar barreiras, utilize os canais de contato do [portfólio](https://rodri-oliveira-dev.github.io/). Indique o documento, idioma e dificuldade encontrada, sem compartilhar dados pessoais sensíveis.
 
@@ -22,7 +22,7 @@ This repository maintains the professional GitHub profile content in Portuguese,
 - Keep essential information available as text rather than relying solely on images, colors or emojis.
 - Maintain consistent language navigation and review accessibility when content changes.
 
-The READMEs already include alternative text for infographics and text labels for links. A complete assistive technology assessment has not been performed; this statement does not establish conformance. GitHub's interface and rendering, external websites and other repositories are outside its scope.
+The READMEs include alternative text and visible textual descriptions of the infographics, as well as text labels for links. [Automated validation](.github/workflows/validate-profile.yml) checks alternative text conventions, heading hierarchy, asset references and the presence of descriptions. Full equivalence of the images, their contrast and the screen reader experience still require manual assessment. A complete assistive technology assessment has not been performed; this statement does not establish conformance. GitHub's interface and rendering, external websites and other repositories are outside its scope.
 
 Report barriers through the contact channels on the [portfolio](https://rodri-oliveira-dev.github.io/en/). Include the document, language and difficulty encountered, without sharing sensitive personal data.
 
@@ -34,7 +34,7 @@ Este repositorio mantiene el contenido del perfil profesional de GitHub en portu
 - Mantener la información esencial disponible en texto, sin depender exclusivamente de imágenes, colores o emojis.
 - Mantener una navegación coherente entre idiomas y revisar la accesibilidad cuando cambie el contenido.
 
-Los README ya incluyen texto alternativo para las infografías y etiquetas textuales en los enlaces. No se ha realizado una evaluación completa con tecnologías de asistencia; esta declaración no demuestra conformidad. La interfaz y la renderización de GitHub, los sitios externos y otros repositorios quedan fuera de su alcance.
+Los README incluyen texto alternativo y descripciones textuales visibles de las infografías, además de etiquetas textuales en los enlaces. La [validación automatizada](.github/workflows/validate-profile.yml) comprueba las convenciones de texto alternativo, la jerarquía de títulos, las referencias a los recursos y la presencia de las descripciones. La equivalencia completa de las imágenes, su contraste y la experiencia con lectores de pantalla aún requieren una evaluación manual. No se ha realizado una evaluación completa con tecnologías de asistencia; esta declaración no demuestra conformidad. La interfaz y la renderización de GitHub, los sitios externos y otros repositorios quedan fuera de su alcance.
 
 Para informar sobre barreras, utiliza los canales de contacto del [portafolio](https://rodri-oliveira-dev.github.io/es/). Indica el documento, el idioma y la dificultad encontrada, sin compartir datos personales sensibles.
 
