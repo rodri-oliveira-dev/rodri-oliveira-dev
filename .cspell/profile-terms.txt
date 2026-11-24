@@ -43,3 +43,6 @@ stdio
 Terraform
 Tomlyn
 YamlDotNet
+infographics
+infografías
+renderización
