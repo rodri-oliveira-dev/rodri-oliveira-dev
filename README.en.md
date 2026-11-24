@@ -114,3 +114,5 @@ I like staying close to the code and the people who maintain it. It helps me rev
 I write about software architecture, DDD, and .NET development, drawing on real-world engineering decisions and challenges.
 
 - **[DEV.to](https://dev.to/rodri-oliveira-dev)** — articles about software architecture and engineering.
+
+[Accessibility statement](ACCESSIBILITY.md#english)
