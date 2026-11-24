@@ -114,3 +114,5 @@ Gosto de continuar próximo do código e das pessoas que o mantêm. É assim que
 Escrevo sobre arquitetura de software, DDD e desenvolvimento .NET, com foco nas decisões e nos problemas encontrados na prática.
 
 - **[Café com código](https://www.linkedin.com/newsletters/caf%C3%A9-com-c%C3%B3digo-6880618748047314945)** — newsletter sobre arquitetura e engenharia de software.
+
+[Declaração de acessibilidade](ACCESSIBILITY.md#português)
