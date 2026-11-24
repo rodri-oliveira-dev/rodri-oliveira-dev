@@ -47,7 +47,7 @@ def check(path, anchor, language):
         asset = f"assets/profile/software-architecture-in-practice.{language}{suffix}"
         if not (ROOT / asset).is_file() or asset not in content:
             errors.append(f"Missing infographic variant: {asset}")
-    if not re.search(r"</picture>\s*</p>\s*\n\s*\*\*[^\n]+\*\*:", content):
+    if not re.search(r"</picture>\s*</p>\s*\n\s*\*\*[^*\n]+:\*\*[ \t]+\S", content):
         errors.append("Missing visible infographic description")
     return errors
 
