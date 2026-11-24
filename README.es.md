@@ -2,7 +2,7 @@
 
 <p align="left">
   <a href="https://rodri-oliveira-dev.github.io/" aria-label="Portafolio profesional">
-    <img src="assets/brand/ro-architect-mark.png" alt="RO Architect" width="64" />
+    <img src="assets/brand/ro-architect-mark.png" alt="Portafolio profesional de Rodrigo de Oliveira" width="64" />
   </a>
 </p>
 
@@ -30,6 +30,8 @@ En este perfil comparto bibliotecas, herramientas y laboratorios que mantengo pa
     />
   </picture>
 </p>
+
+**Arquitectura de software en la práctica:** decisiones orientadas por el negocio, los equipos, la organización y la evolución de los sistemas, respaldadas por código, pruebas, observabilidad y automatización. Los proyectos ilustrados son ADR Guard, Repo2C4, Complexity Analyzers, Dapper.FluentMap y POC Arquitetura.
 
 **Enlaces profesionales**
 
