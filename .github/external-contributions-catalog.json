@@ -2,7 +2,7 @@
   "schema_version": 2,
   "profile": "rodri-oliveira-dev",
   "scope": "All public PRs authored by this profile in repositories owned by others",
-  "last_successful_sync": "2026-11-24T09:14:27Z",
+  "last_successful_sync": "2026-11-25T09:14:18Z",
   "totals": {
     "repositories": 22,
     "pull_requests": 38,
@@ -14,7 +14,7 @@
     {
       "repository": "punkpeye/awesome-mcp-servers",
       "url": "https://github.com/punkpeye/awesome-mcp-servers",
-      "activity_at": "2026-11-24T01:21:20Z",
+      "activity_at": "2026-11-25T02:03:34Z",
       "pull_requests": [
         {
           "id": 6189949808,
@@ -23,7 +23,7 @@
           "title": "Add ADR Guard MCP server to Architecture & Design",
           "status": "open",
           "created_at": "2026-11-03T19:46:12Z",
-          "updated_at": "2026-11-24T01:21:20Z",
+          "updated_at": "2026-11-25T02:03:34Z",
           "merged_at": null
         }
       ],
