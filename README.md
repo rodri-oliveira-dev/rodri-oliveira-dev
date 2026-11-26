@@ -115,6 +115,17 @@ Gosto de continuar próximo do código e das pessoas que o mantêm. É assim que
 
 Escrevo sobre arquitetura de software, DDD e desenvolvimento .NET, com foco nas decisões e nos problemas encontrados na prática.
 
+**[Engenharia .NET](https://github.com/rodri-oliveira-dev/engenharia-dotnet)**
+
+Repositório de estudos e referência técnica em português, que conecta os fundamentos de C# e .NET às decisões de engenharia e arquitetura de software. Reúne capítulos temáticos, exemplos de código, laboratórios e estudos de caso sobre sistemas distribuídos, qualidade, segurança e operação. O conteúdo evolui continuamente e pode ser consultado por assunto, com foco nas alternativas, nos riscos e nas consequências de cada decisão técnica.
+
+O conteúdo também está disponível gratuitamente em formato de livro digital.
+
+- [Consultar o índice de estudos](https://github.com/rodri-oliveira-dev/engenharia-dotnet/blob/main/docs/indice.md)
+- [Baixar livro em PDF](https://github.com/rodri-oliveira-dev/engenharia-dotnet/releases/download/livro-091c81bc3a62ab274b8b60828bd247be9ef9f5f2/engenharia-dotnet.pdf)
+- [Baixar livro em EPUB](https://github.com/rodri-oliveira-dev/engenharia-dotnet/releases/download/livro-091c81bc3a62ab274b8b60828bd247be9ef9f5f2/engenharia-dotnet.epub)
+- [Consultar edições publicadas](https://github.com/rodri-oliveira-dev/engenharia-dotnet/releases)
+
 - **[Café com código](https://www.linkedin.com/newsletters/caf%C3%A9-com-c%C3%B3digo-6880618748047314945)** — newsletter sobre arquitetura e engenharia de software.
 
 [Declaração de acessibilidade](ACCESSIBILITY.md#português)
