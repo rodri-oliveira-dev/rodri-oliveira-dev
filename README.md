@@ -115,10 +115,13 @@ Gosto de continuar próximo do código e das pessoas que o mantêm. É assim que
 
 Escrevo sobre arquitetura de software, DDD e desenvolvimento .NET, com foco nas decisões e nos problemas encontrados na prática.
 
-**[Engenharia .NET: Da linguagem à arquitetura de software](https://github.com/rodri-oliveira-dev/engenharia-dotnet)**
+**[Engenharia .NET](https://github.com/rodri-oliveira-dev/engenharia-dotnet)**
 
-Livro técnico gratuito em português, de minha autoria, que reúne fundamentos de C#, .NET e engenharia de software, arquitetura, sistemas distribuídos, qualidade e operação. A proposta é conectar conceitos e exemplos de código às decisões técnicas do dia a dia.
+Repositório de estudos e referência técnica em português, que conecta os fundamentos de C# e .NET às decisões de engenharia e arquitetura de software. Reúne capítulos temáticos, exemplos de código, laboratórios e estudos de caso sobre sistemas distribuídos, qualidade, segurança e operação. O conteúdo evolui continuamente e pode ser consultado por assunto, com foco nas alternativas, nos riscos e nas consequências de cada decisão técnica.
 
+O conteúdo também está disponível gratuitamente em formato de livro digital.
+
+- [Consultar o índice de estudos](https://github.com/rodri-oliveira-dev/engenharia-dotnet/blob/main/docs/indice.md)
 - [Baixar livro em PDF](https://github.com/rodri-oliveira-dev/engenharia-dotnet/releases/download/livro-091c81bc3a62ab274b8b60828bd247be9ef9f5f2/engenharia-dotnet.pdf)
 - [Baixar livro em EPUB](https://github.com/rodri-oliveira-dev/engenharia-dotnet/releases/download/livro-091c81bc3a62ab274b8b60828bd247be9ef9f5f2/engenharia-dotnet.epub)
 - [Consultar edições publicadas](https://github.com/rodri-oliveira-dev/engenharia-dotnet/releases)
