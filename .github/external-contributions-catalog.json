@@ -2,15 +2,38 @@
   "schema_version": 2,
   "profile": "rodri-oliveira-dev",
   "scope": "All public PRs authored by this profile in repositories owned by others",
-  "last_successful_sync": "2026-11-25T09:14:18Z",
+  "last_successful_sync": "2026-11-28T09:12:25Z",
   "totals": {
-    "repositories": 22,
-    "pull_requests": 38,
-    "merged": 31,
+    "repositories": 23,
+    "pull_requests": 39,
+    "merged": 32,
     "open": 6,
     "closed_unmerged": 1
   },
   "projects": [
+    {
+      "repository": "onyks-os/USBGuardGUI",
+      "url": "https://github.com/onyks-os/USBGuardGUI",
+      "activity_at": "2026-11-27T16:49:22Z",
+      "pull_requests": [
+        {
+          "id": 6648338867,
+          "number": 71,
+          "url": "https://github.com/onyks-os/USBGuardGUI/pull/71",
+          "title": "feat(i18n): add Brazilian Portuguese (pt_BR) translation",
+          "status": "merged",
+          "created_at": "2026-11-27T14:25:26Z",
+          "updated_at": "2026-11-27T16:49:22Z",
+          "merged_at": "2026-11-27T16:49:22Z"
+        }
+      ],
+      "totals": {
+        "pull_requests": 1,
+        "merged": 1,
+        "open": 0,
+        "closed_unmerged": 0
+      }
+    },
     {
       "repository": "punkpeye/awesome-mcp-servers",
       "url": "https://github.com/punkpeye/awesome-mcp-servers",
