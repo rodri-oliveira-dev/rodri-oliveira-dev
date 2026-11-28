@@ -12,11 +12,11 @@ This catalog lists public pull requests I opened in third-party projects. Titles
 
 | PRs found | Merged PRs | Open PRs | External repositories |
 | :---: | :---: | :---: | :---: |
-| **38** | **31** | **6** | **22** |
+| **39** | **32** | **6** | **23** |
 
-**81%** of PRs merged · `▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▱▱▱▱` · **1** PR closed without merge
+**82%** of PRs merged · `▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▱▱▱▱` · **1** PR closed without merge
 
-**Last successful synchronization:** 2026-11-25
+**Last successful synchronization:** 2026-11-28
 
 _The date above is the synchronization that produced the current published version; queries with no factual changes create no commit._
 
@@ -42,11 +42,11 @@ _The date above is the synchronization that produced the current published versi
 
 | Repository | Pull request | Merged |
 | --- | --- | --- |
+| [onyks-os/USBGuardGUI](https://github.com/onyks-os/USBGuardGUI) | [#71](https://github.com/onyks-os/USBGuardGUI/pull/71) — feat(i18n): add Brazilian Portuguese (pt\_BR) translation | 2026-11-27 |
 | [ThreeMammals/Ocelot](https://github.com/ThreeMammals/Ocelot) | [#2421](https://github.com/ThreeMammals/Ocelot/pull/2421) — #714 #792 #1485 #1685 Thorough testing for MIME type \`multipart/form-data\` as HTTP \`Content‑Type\` aka RFC 7578 | 2026-11-05 |
 | [mjebrahimi/Awesome-Nuget-Packages](https://github.com/mjebrahimi/Awesome-Nuget-Packages) | [#10](https://github.com/mjebrahimi/Awesome-Nuget-Packages/pull/10) — docs: update Dapper.FluentMap repository and maintenance details | 2026-10-21 |
 | [zzzprojects/docs](https://github.com/zzzprojects/docs) | [#113](https://github.com/zzzprojects/docs/pull/113) — docs: update Dapper.FluentMap maintenance status and documentation | 2026-10-21 |
 | [mysql-net/MySqlConnector](https://github.com/mysql-net/MySqlConnector) | [#1675](https://github.com/mysql-net/MySqlConnector/pull/1675) — Remove retired Azure MySQL Single Server proxy detection | 2026-10-19 |
-| [likec4/likec4](https://github.com/likec4/likec4) | [#3379](https://github.com/likec4/likec4/pull/3379) — docs(pt-br): align translation with v1.60.0 features | 2026-10-16 |
 
 <a id="project-index"></a>
 
@@ -54,21 +54,37 @@ _The date above is the synchronization that produced the current published versi
 
 | | |
 | --- | --- |
-| [punkpeye/awesome-mcp-servers](#repository-70756e6b706579652f617765736f6d652d6d63702d73657276657273) | [architecture-decision-record/architecture-decision-record](#repository-6172636869746563747572652d6465636973696f6e2d7265636f72642f6172636869746563747572652d6465636973696f6e2d7265636f7264) |
-| [ThreeMammals/Ocelot](#repository-74687265656d616d6d616c732f6f63656c6f74) | [zzzprojects/docs](#repository-7a7a7a70726f6a656374732f646f6373) |
-| [mjebrahimi/Awesome-Nuget-Packages](#repository-6d6a6562726168696d692f617765736f6d652d6e756765742d7061636b61676573) | [ModerRAS/star-vault](#repository-6d6f6465727261732f737461722d7661756c74) |
-| [mysql-net/MySqlConnector](#repository-6d7973716c2d6e65742f6d7973716c636f6e6e6563746f72) | [likec4/likec4](#repository-6c696b6563342f6c696b656334) |
-| [guibranco/CrispyWaffle](#repository-6775696272616e636f2f637269737079776166666c65) | [thangchung/awesome-dotnet-core](#repository-7468616e676368756e672f617765736f6d652d646f746e65742d636f7265) |
-| [Hitmasu/OpenCNPJ](#repository-6869746d6173752f6f70656e636e706a) | [ddd-crew/eventstorming-glossary-cheat-sheet](#repository-6464642d637265772f6576656e7473746f726d696e672d676c6f73736172792d63686561742d7368656574) |
-| [ddd-crew/ddd-starter-modelling-process](#repository-6464642d637265772f6464642d737461727465722d6d6f64656c6c696e672d70726f63657373) | [ddd-crew/bounded-context-canvas](#repository-6464642d637265772f626f756e6465642d636f6e746578742d63616e766173) |
-| [ddd-crew/context-mapping](#repository-6464642d637265772f636f6e746578742d6d617070696e67) | [ddd-crew/aggregate-design-canvas](#repository-6464642d637265772f6167677265676174652d64657369676e2d63616e766173) |
-| [ddd-crew/domain-message-flow-modelling](#repository-6464642d637265772f646f6d61696e2d6d6573736167652d666c6f772d6d6f64656c6c696e67) | [ddd-crew/core-domain-charts](#repository-6464642d637265772f636f72652d646f6d61696e2d636861727473) |
-| [StefanTheCode/dotnet\_interview\_questions](#repository-73746566616e746865636f64652f646f746e65745f696e746572766965775f7175657374696f6e73) | [donnemartin/system-design-primer](#repository-646f6e6e656d617274696e2f73797374656d2d64657369676e2d7072696d6572) |
-| [egoughnour/complexity-hints](#repository-65676f7567686e6f75722f636f6d706c65786974792d68696e7473) | [ddd-crew/welcome-to-ddd](#repository-6464642d637265772f77656c636f6d652d746f2d646464) |
+| [onyks-os/USBGuardGUI](#repository-6f6e796b732d6f732f7573626775617264677569) | [punkpeye/awesome-mcp-servers](#repository-70756e6b706579652f617765736f6d652d6d63702d73657276657273) |
+| [architecture-decision-record/architecture-decision-record](#repository-6172636869746563747572652d6465636973696f6e2d7265636f72642f6172636869746563747572652d6465636973696f6e2d7265636f7264) | [ThreeMammals/Ocelot](#repository-74687265656d616d6d616c732f6f63656c6f74) |
+| [zzzprojects/docs](#repository-7a7a7a70726f6a656374732f646f6373) | [mjebrahimi/Awesome-Nuget-Packages](#repository-6d6a6562726168696d692f617765736f6d652d6e756765742d7061636b61676573) |
+| [ModerRAS/star-vault](#repository-6d6f6465727261732f737461722d7661756c74) | [mysql-net/MySqlConnector](#repository-6d7973716c2d6e65742f6d7973716c636f6e6e6563746f72) |
+| [likec4/likec4](#repository-6c696b6563342f6c696b656334) | [guibranco/CrispyWaffle](#repository-6775696272616e636f2f637269737079776166666c65) |
+| [thangchung/awesome-dotnet-core](#repository-7468616e676368756e672f617765736f6d652d646f746e65742d636f7265) | [Hitmasu/OpenCNPJ](#repository-6869746d6173752f6f70656e636e706a) |
+| [ddd-crew/eventstorming-glossary-cheat-sheet](#repository-6464642d637265772f6576656e7473746f726d696e672d676c6f73736172792d63686561742d7368656574) | [ddd-crew/ddd-starter-modelling-process](#repository-6464642d637265772f6464642d737461727465722d6d6f64656c6c696e672d70726f63657373) |
+| [ddd-crew/bounded-context-canvas](#repository-6464642d637265772f626f756e6465642d636f6e746578742d63616e766173) | [ddd-crew/context-mapping](#repository-6464642d637265772f636f6e746578742d6d617070696e67) |
+| [ddd-crew/aggregate-design-canvas](#repository-6464642d637265772f6167677265676174652d64657369676e2d63616e766173) | [ddd-crew/domain-message-flow-modelling](#repository-6464642d637265772f646f6d61696e2d6d6573736167652d666c6f772d6d6f64656c6c696e67) |
+| [ddd-crew/core-domain-charts](#repository-6464642d637265772f636f72652d646f6d61696e2d636861727473) | [StefanTheCode/dotnet\_interview\_questions](#repository-73746566616e746865636f64652f646f746e65745f696e746572766965775f7175657374696f6e73) |
+| [donnemartin/system-design-primer](#repository-646f6e6e656d617274696e2f73797374656d2d64657369676e2d7072696d6572) | [egoughnour/complexity-hints](#repository-65676f7567686e6f75722f636f6d706c65786974792d68696e7473) |
+| [ddd-crew/welcome-to-ddd](#repository-6464642d637265772f77656c636f6d652d746f2d646464) | &nbsp; |
 
 <a id="contribution-history"></a>
 
 ## Contributions by repository
+
+<a id="repository-6f6e796b732d6f732f7573626775617264677569"></a>
+
+<details>
+<summary><strong>onyks-os/USBGuardGUI</strong> · 1 PR · 1 merged</summary>
+
+[View repository](https://github.com/onyks-os/USBGuardGUI)
+
+**Total:** 1 · **Merged PRs:** 1 · **Open PRs:** 0 · **PRs closed without merge:** 0
+
+| Pull request | Status | Opened | Merged |
+| --- | --- | --- | --- |
+| [#71](https://github.com/onyks-os/USBGuardGUI/pull/71) — feat(i18n): add Brazilian Portuguese (pt\_BR) translation | Merged | 2026-11-27 | 2026-11-27 |
+
+</details>
 
 <a id="repository-70756e6b706579652f617765736f6d652d6d63702d73657276657273"></a>
 
